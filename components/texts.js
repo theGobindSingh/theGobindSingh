@@ -22,13 +22,12 @@ export const my_linkedin = "theGobindSingh"; // can be null
 //HOME PAGE
 export const home_hello = "Hi, my name is"; //cannot be null
 export const home_sub_heading = "I build things for the web."; //can be null
-export const home_desc =
-  "I'm a software engineer specializing in building exceptional digital experiences."; // can be null
+export const home_desc = "I'm a software engineer specializing in building exceptional digital experiences."; // can be null
 export const home_links = [
   {
     text: "exceptional digital experiences",
-    link: "https://youtu.be/dQw4w9WgXcQ?t=43",
-  },
+    link: "https://youtu.be/dQw4w9WgXcQ?t=43"
+  }
 ]; // can be null
 //format: an array of objects [{}, {},...], each object will have 2 properties text and link -> {text:"", link: ""}
 //    text property will tell what text you want to be selected (every occurance will be selected)
@@ -43,18 +42,12 @@ Apart from nerdy stuff, I love having a different perspective for seeing things 
 export const about_me_links = [
   { text: "Bajaj Finserv Health", link: "https://bajajfinservhealth.in" },
   { text: "startup", link: "https://takemycar.us" },
-  { text: "software development company", link: "https://iraitech.com" },
+  { text: "software development company", link: "https://iraitech.com" }
 ]; //can be null
 //format: an array of objects [{}, {},...], each object will have 2 properties text and link -> {text:"", link: ""}
 //    text property will tell what text you want to be selected (every occurance will be selected)
 //    link property will tell the hyperlink you want to add to that text
-export const about_me_exp = [
-  "JavaScript (ES6+)",
-  "React",
-  "TypeScript",
-  "Next.js",
-  "Node.js",
-];
+export const about_me_exp = ["JavaScript (ES6+)", "React", "TypeScript", "Next.js", "Node.js"];
 // about_me_exp is an array of technologies you have worked with
 // can only contain maximum of 10 elements
 export const about_photo_name = "me.jpg";
@@ -68,17 +61,14 @@ export const experiences = [
     company: "Bajaj Finserv Health",
     duration: "January 2023 - June 2023",
     website: "https://www.bajajfinservhealth.in/", // can be null
-    list: ["--- Still to join the office ---"],
+    list: ["Maintain the existing codebase.", "Develop new features."]
   },
   {
     role: "Freelance Web Developer",
     company: "TakeMyCar",
     duration: "May 2022",
     website: "https://takemycar.us", // can be null
-    list: [
-      "Developed an introductory website for the company.",
-      "Static website made with Next.js and Lottie Files.",
-    ],
+    list: ["Developed an introductory website for the company.", "Static website made with Next.js and Lottie Files."]
   },
   {
     role: "Front-End Developer - Intern",
@@ -87,9 +77,9 @@ export const experiences = [
     website: "https://iraitech.com", // can be null
     list: [
       "Write modern, performant, maintainable code for a diverse array of client and internal projects",
-      "Worked closely with designers and management team to develop, document, and manage the projects.",
-    ],
-  },
+      "Worked closely with designers and management team to develop, document, and manage the projects."
+    ]
+  }
 ]; // cannot be null
 //format: an array of objects [{}, {},...], each object will have 5 properties as follows:
 //    role property - your job title/role
@@ -104,18 +94,22 @@ export const work_projects = [
   {
     title: "Vintageinkk",
     desc: "A blog type website for a small business Vintageinkk. It is a dynamic website made with Next.js and Contentful.",
-    tech_stack: [
-      "Next.JS",
-      "React-Query",
-      "GraphQL",
-      "Contentful",
-      "TypeScript",
-    ],
+    tech_stack: ["Next.JS", "React-Query", "GraphQL", "Contentful", "TypeScript"],
     picture: "vintageinkk.jpeg",
     links: {
       github: "https://github.com/theGobindSingh/vintageinkk",
-      website: "https://vintageinkk.vercel.app/",
-    },
+      website: "https://vintageinkk.vercel.app/"
+    }
+  },
+  {
+    title: "Sketch Club's Website",
+    desc: "A website for my college club. It is a dynamic website made with Next.js and Contentful.",
+    tech_stack: ["Next.JS", "React-Query", "GraphQL", "Contentful", "TypeScript"],
+    picture: "sketch.jpg",
+    links: {
+      github: "https://github.com/SketchClub/website",
+      website: "https://sketchclub.dev"
+    }
   },
   {
     title: "Portfolio Website",
@@ -124,8 +118,8 @@ export const work_projects = [
     picture: "portfolio.png",
     links: {
       github: "https://github.com/theGobindSingh/theGobindSingh",
-      website: "https://portfolio-gobindsingh.vercel.app/",
-    },
+      website: "https://portfolio-gobindsingh.vercel.app/"
+    }
   },
   {
     title: "Expense Tracker",
@@ -134,9 +128,9 @@ export const work_projects = [
     picture: "expense_tracker.png",
     links: {
       github: "https://github.com/theGobindSingh/Expense-Tracker",
-      website: "https://expense-tracker-eta-six.vercel.app/",
-    },
-  },
+      website: "https://expense-tracker-eta-six.vercel.app/"
+    }
+  }
 ];
 
 //EXTRA-CURRICULAR PAGE
