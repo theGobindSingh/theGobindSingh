@@ -13,12 +13,6 @@
 >  ⠀
 
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=theGobindSingh)](https://github.com/anuraghazra/github-readme-stats)
-
-
-![GitHub stats](https://github-readme-stats.vercel.app/api?username=theGobindSingh&show_icons=true)  
-
-
 [![GitHub Streak](https://streak-stats.demolab.com?user=theGobindSingh)](https://git.io/streak-stats)    
 
 
