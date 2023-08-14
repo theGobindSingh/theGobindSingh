@@ -3,7 +3,7 @@
   
 ![Gobind Singh](/public/images/forBanner.jpg)
 
- I enjoy creating things that live on the internet; A developer & geek from India, who loves MCU and Anime. I'm currently an intern in Bajaj Finserv Health as a Web Developer. I have previously worked with a startup and a software development company. I try my best to pour life into ideas and bring them to the relm of reality. In the digital world, knowledge is infinite. I wish to keep on learning and practice everyday, but most importantly, I love working with diverse people.  
+ I enjoy creating things that live on the internet; A developer & geek from India, who loves MCU and Anime. I'm currently a Software ( Frontend ) Developer ( SDE1 ) at Bajaj Finserv Health. I have previously worked with a startup and a software development company. I try my best to pour life into ideas and bring them to the relm of reality. In the digital world, knowledge is infinite. I wish to keep on learning and practice everyday, but most importantly, I love working with diverse people.  
    
  If you're here to folk my portfolio website and make it your own, please feel free to. You can go to [/components/texts.js](https://github.com/theGobindSingh/theGobindSingh/blob/main/components/texts.js) and change stuff according to you ❤️.  
  Also, don't forget to give credits to me ( @theGobindSingh ) as well as Brittany ( @bchiang7 ) ; 
