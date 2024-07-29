@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json.schemastore.org/eslintrc",
+  "root": true,
+  "env": { "browser": true, "es2020": true },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:node/recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
+    "airbnb",
+    "airbnb/hooks",
+    "airbnb-typescript",
+    "prettier"
+  ],
+  "ignorePatterns": ["dist", "node_modules", "**/*.js"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react-refresh", "prettier"],
+  "parserOptions": {
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "max-len": ["error", 120],
+    "camelcase": "error",
+    "react/jsx-indent-props": ["warn", 2],
+    "import/no-unresolved": "error",
+    "import/order": [
+      "warn",
+      {
+        "newlines-between": "never",
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "next",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "next/**",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@material-ui",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "~/**",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@src/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "@pages/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "@layouts/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "@components/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "@assets/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "~/styles/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "~/*.css",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off",
+    "react-refresh/only-export-components": ["warn", { "allowConstantExport": true }],
+    "prettier/prettier": "error",
+    "no-console": "warn",
+    "consistent-return": "off",
+    "object-shorthand": "off",
+    "no-process-exit": "off",
+    "no-underscore-dangle": "off",
+    "class-methods-use-this": "off",
+    "prefer-destructuring": ["error", { "object": true, "array": false }],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "req|res|next|val" }],
+    "node/no-unsupported-features/es-syntax": [
+      "error",
+      {
+        "version": ">=13.0.0",
+        "ignores": ["modules"]
+      }
+    ],
+    "import/extensions": ["off", "never"],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "node/no-missing-import": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unsafe-argument": "warn",
+    "@typescript-eslint/no-unsafe-call": "warn",
+    "@typescript-eslint/no-unsafe-return": "warn",
+    "import/prefer-default-export": "off",
+    "react/require-default-props": "off",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
+}

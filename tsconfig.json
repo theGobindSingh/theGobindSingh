@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": ["@tsconfig/strictest/tsconfig.json", "@tsconfig/next/tsconfig.json"],
+  "compilerOptions": {
+    "target": "ES5",
+    "forceConsistentCasingInFileNames": true,
+    "jsxImportSource": "@emotion/react",
+    "paths": {
+      "@public/*": ["./public/*"],
+      "@publicAssets/*": ["./public/assets/*"],
+      "@publicImages/*": ["./public/assets/images/*"],
+      "@assets/*": ["./assets/*"],
+      "@images/*": ["./assets/images/*"],
+      "@components/*": ["./components/*"],
+      "@modules/*": ["./modules/*"],
+      "@pages/*": ["./pages/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@styles/*": ["./styles/*"],
+      "@/*": ["./*"]
+    },
+    "noPropertyAccessFromIndexSignature": false,
+    "ignoreDeprecations": "5.0",
+    "verbatimModuleSyntax": false
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}
