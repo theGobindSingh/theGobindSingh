@@ -1,5 +1,5 @@
-import HomeModule from '@modules/home';
+import { Home } from '@modules/v2';
 
-export default function HomePage() {
-  return <HomeModule />;
-}
+const HomePage = () => <Home />;
+
+export default HomePage;

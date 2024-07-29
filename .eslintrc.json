@@ -23,7 +23,6 @@
   },
   "rules": {
     "max-len": ["error", 120],
-    "camelcase": "error",
     "react/jsx-indent-props": ["warn", 2],
     "import/no-unresolved": "error",
     "import/order": [
@@ -126,7 +125,14 @@
     "@typescript-eslint/no-unsafe-return": "warn",
     "import/prefer-default-export": "off",
     "react/require-default-props": "off",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ]
   },
   "settings": {
     "import/resolver": {
