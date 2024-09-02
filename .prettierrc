@@ -4,5 +4,6 @@
   "tabWidth": 2,
   "endOfLine": "auto",
   "bracketSpacing": true,
-  "useTabs": false
+  "useTabs": false,
+  "plugins": ["prettier-plugin-organize-imports"]
 }

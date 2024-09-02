@@ -1,13 +1,14 @@
-import { PropsWithChildren } from 'react';
+import Header from '@components/v2/header';
 import { ThemeProvider } from '@kami-ui/next-theme';
-import { ReactLenis, useLenis } from 'lenis/react';
 import Grainy from '@modules/v2/home/grainy';
 import { HomeWrapper } from '@modules/v2/home/styles';
 import { HomeProps } from '@modules/v2/home/types';
 import { theme } from '@modules/v2/theme';
+import { ReactLenis, useLenis } from 'lenis/react';
+import { PropsWithChildren } from 'react';
 
 const HomeWrapperWithComponents = ({ children, ...props }: PropsWithChildren<HomeProps>) => (
-  <ThemeProvider theme={theme}>
+  <ThemeProvider disableOnAmp={false} theme={theme}>
     <Grainy />
     <ReactLenis root options={{ duration: 1 }}>
       <HomeWrapper {...props}>{children}</HomeWrapper>
@@ -16,11 +17,13 @@ const HomeWrapperWithComponents = ({ children, ...props }: PropsWithChildren<Hom
 );
 
 const Home = ({ className }: HomeProps) => {
+  console.log('hello');
   useLenis(() => {
-    console.log(window.scrollY);
+    // console.log(window.scrollY);
   }, []);
   return (
     <HomeWrapperWithComponents className={className} css={{ height: '200vh' }}>
+      <Header />
       hello
     </HomeWrapperWithComponents>
   );

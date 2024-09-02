@@ -16,7 +16,7 @@
       "@pages/*": ["./pages/*"],
       "@hooks/*": ["./hooks/*"],
       "@styles/*": ["./styles/*"],
-      "@data/*": ["./data"],
+      "@data": ["./data"],
       "@/*": ["./*"]
     },
     "noPropertyAccessFromIndexSignature": false,

@@ -1,4 +1,4 @@
-import { ThemeObject } from '@kami-ui/next-theme';
+import type { ThemeObject } from '@kami-ui/types';
 
 export const theme: ThemeObject = {
   colors: {

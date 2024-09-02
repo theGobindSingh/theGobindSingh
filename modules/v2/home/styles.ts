@@ -4,4 +4,7 @@ export const GrainySvg = styled.svg`
   display: none;
 `;
 
-export const HomeWrapper = styled.div``;
+export const HomeWrapper = styled.div`
+  z-index: 1;
+  position: relative;
+`;
