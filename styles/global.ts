@@ -1,8 +1,31 @@
 import { css } from '@emotion/react';
 
+export const breakpoints = {
+  phone: {
+    min: 0,
+    max: 640,
+  },
+  tablet: {
+    min: 641,
+    max: 900,
+  },
+  desktop: {
+    min: 901,
+    max: 9999,
+  },
+};
+
+export const mediaQuery = {
+  phone: `@media (min-width: ${breakpoints.phone.min}px) and (max-width: ${breakpoints.phone.max}px)`,
+  tablet: `@media (min-width: ${breakpoints.tablet.min}px) and (max-width: ${breakpoints.tablet.max}px)`,
+  desktop: `@media (min-width: ${breakpoints.desktop.min}px)`,
+};
+
 const globalStyles = css`
   body {
-    color: var(--color-black);
+    color: var(--color-text-900);
+    font-size: var(--fs-2xs);
+    font-family: var(--font-sans);
     padding: 0;
     margin: 0;
     box-sizing: border-box;

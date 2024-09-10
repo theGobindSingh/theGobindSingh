@@ -2,7 +2,7 @@ export const firstName = 'Gobind';
 export const lastName = 'Singh';
 export const fullName = `${firstName} ${lastName}`;
 
-export const designation = 'Web Developer | Software Developer Engineer';
+export const designation = 'Web Developer | SDE';
 
 export const email = 'android.gobind@gmail.com';
 
