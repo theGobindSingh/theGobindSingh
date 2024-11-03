@@ -7,10 +7,8 @@
     "jsxImportSource": "@emotion/react",
     "paths": {
       "@public/*": ["./public/*"],
-      "@publicAssets/*": ["./public/assets/*"],
-      "@publicImages/*": ["./public/assets/images/*"],
-      "@assets/*": ["./assets/*"],
-      "@images/*": ["./assets/images/*"],
+      "@assets/*": ["./public/assets/*"],
+      "@images/*": ["./public/assets/images/*"],
       "@components/*": ["./components/*"],
       "@modules/*": ["./modules/*"],
       "@pages/*": ["./pages/*"],

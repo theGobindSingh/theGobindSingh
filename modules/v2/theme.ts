@@ -1,4 +1,6 @@
+/* eslint-disable */
 import type { ThemeObject } from '@kami-ui/types';
+import { breakpoints } from '@styles/global';
 import { DM_Mono, DM_Sans, DM_Serif_Display } from 'next/font/google';
 
 const fontSansSerif = DM_Serif_Display({
@@ -34,17 +36,44 @@ export const theme: ThemeObject = {
   },
   typography: {
     fontSizes: [
-      '0.75rem', // 12px
-      '0.875rem', // 14px
-      '1rem', // 16px
-      '1.125rem', // 18px
-      '1.25rem', // 20px
-      '1.5rem', // 24px
-      '1.875rem', // 30px
-      '2.25rem', // 36px
-      '3rem', // 48px
-      '4rem', // 64px
-      '5rem', // 80px
+      {
+        breakpoint: {
+          min: `${breakpoints.desktop.min}px`,
+          max: `${breakpoints.desktop.max}px`,
+        },
+        size: [
+          '0.75rem', // 12px
+          '0.875rem', // 14px
+          '1rem', // 16px
+          '1.125rem', // 18px
+          '1.25rem', // 20px
+          '1.5rem', // 24px
+          '1.875rem', // 30px
+          '2.25rem', // 36px
+          '3rem', // 48px
+          '4rem', // 64px
+          '5rem', // 80px
+        ],
+      },
+      {
+        breakpoint: {
+          min: `0px`,
+          max: `${breakpoints.tablet.max}px`,
+        },
+        size: [
+          '0.68rem', // 11px
+          '0.75rem', // 12px
+          '0.875rem', // 14px
+          '1rem', // 16px
+          '1.125rem', // 18px
+          '1.25rem', // 20px
+          '1.5rem', // 24px
+          '1.875rem', // 30px
+          '2.25rem', // 36px
+          '3rem', // 48px
+          '4rem', // 64px
+        ],
+      },
     ],
     fontFamilies: {
       serif: fontSansSerif.style.fontFamily,

@@ -1,3 +1,5 @@
+import myPhoto from '@images/me2.jpg';
+
 export const firstName = 'Gobind';
 export const lastName = 'Singh';
 export const fullName = `${firstName} ${lastName}`;
@@ -15,7 +17,7 @@ export const headerAndNavData: {
   };
   links: {
     text: string;
-    url: string;
+    targetClassName: string;
   }[];
   bottomLinks?: {
     text: string;
@@ -27,15 +29,15 @@ export const headerAndNavData: {
   links: [
     {
       text: 'Home',
-      url: '/',
+      targetClassName: 'hero',
     },
     {
       text: 'About',
-      url: '/about',
+      targetClassName: 'about',
     },
     {
       text: 'Contact',
-      url: '/contact',
+      targetClassName: 'contact',
     },
   ],
   bottomPrimaryLink: {
@@ -56,4 +58,14 @@ export const headerAndNavData: {
       url: 'https://www.twitter.com/theGobindSingh',
     },
   ],
+};
+
+export const homeHeroData = {
+  title: `${fullName}.`,
+  text: `I help growing brands and startups gain an unfair advantage through premium, results driven websites.`,
+  img: myPhoto,
+  dateText: 'Building exceptional websites since',
+  date: '2021',
+  buttonText: 'Contact ↗',
+  buttonTargetClassName: 'contact',
 };

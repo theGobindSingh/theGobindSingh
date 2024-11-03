@@ -7,13 +7,13 @@
     "prebuild": "yarn lint:fix",
     "build": "next build",
     "start": "next start",
-    "lint": "prettier --config .prettierrc \"{components,hooks,modules,pages,public}/**/*.{ts,js,tsx,jsx}\" --write && eslint \"{components,hooks,modules,pages,public}/**/*.{ts,js,tsx,jsx}\"",
-    "lint:fix": "prettier --config .prettierrc \"{components,hooks,modules,pages,public}/**/*.{ts,js,tsx,jsx}\" --write && eslint \"{components,hooks,modules,pages,public}/**/*.{ts,js,tsx,jsx}\" --fix"
+    "lint": "prettier --config .prettierrc \"{components,hooks,modules,pages,public,styles,icons}/**/*.{ts,js,tsx,jsx}\" --write && eslint \"{components,hooks,modules,pages,public,styles,icons}/**/*.{ts,js,tsx,jsx}\"",
+    "lint:fix": "prettier --config .prettierrc \"{components,hooks,modules,pages,public,styles,icons}/**/*.{ts,js,tsx,jsx}\" --write && eslint \"{components,hooks,modules,pages,public,styles,icons}/**/*.{ts,js,tsx,jsx}\" --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@kami-ui/next-theme": "^0.0.9",
+    "@kami-ui/next-theme": "^0.0.16",
     "@kami-ui/react-components": "^0.0.1",
     "@kami-ui/types": "^0.0.1",
     "@types/node": "^20.14.0",

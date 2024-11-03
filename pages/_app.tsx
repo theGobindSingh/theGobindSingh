@@ -10,6 +10,11 @@ const App = ({ Component, pageProps }: AppProps) => (
       <title>{fullName}</title>
       <meta name="description" content={`${fullName} | Portfolio`} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link
+        rel="shortcut icon"
+        href="/assets/images/among.png"
+        type="image/x-icon"
+      />
     </Head>
     <Global styles={globalStyles} />
     <Component {...pageProps} />

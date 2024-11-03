@@ -40,3 +40,5 @@ package-lock.json
 *.log
 *.css
 *.map
+
+*.tldr

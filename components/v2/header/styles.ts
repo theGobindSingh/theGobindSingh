@@ -1,12 +1,14 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { breakpoints } from '@styles/global';
+import { mediaQuery } from '@styles/global';
 
-export const HeaderWrapper = styled.header`
+export const headerContainerStyles = css`
   display: flex;
   position: relative;
   align-items: center;
-  @media (max-width: ${breakpoints.tablet.max}px) {
+  height: var(--header-height);
+  padding: 0.75rem 0;
+  ${mediaQuery.nonDesktop} {
     align-items: flex-start;
   }
 `;
@@ -29,58 +31,31 @@ export const DesignationText = styled.span`
 `;
 
 export const NavWrapper = styled.nav`
-  ul {
+  margin: auto 0;
+  .list-container {
     display: flex;
     list-style: none;
-    @media (max-width: ${breakpoints.tablet.max}px) {
+    align-items: flex-end;
+    gap: 0.5em;
+    .list-elem {
+      font-size: var(--fs-s);
+      font-weight: 500;
+      color: var(--color-text-600);
+      &::after {
+        content: ',';
+      }
+      &:last-of-type {
+        &::after {
+          content: none;
+        }
+      }
+    }
+    ${mediaQuery.nonDesktop} {
       flex-direction: column;
       margin: 0;
-    }
-    li {
-      height: 1.25em;
-      overflow: hidden;
-      a {
-        font-size: inherit;
-        color: inherit;
-        text-decoration: none;
-        display: inline-flex;
-        flex-direction: column;
-        transition: all 0.3s ease;
+      .list-elem {
+        font-size: var(--fs-2xs);
       }
-      &:hover {
-        a {
-          transform: translateY(-50%);
-        }
-      }
-    }
-  }
-  &.in-header {
-    ul {
-      gap: 0.5em;
-      li {
-        font-size: var(--fs-s);
-        font-weight: 500;
-        color: var(--color-text-600);
-        &::after {
-          content: ',';
-        }
-        &:last-of-type {
-          &::after {
-            content: none;
-          }
-        }
-      }
-      @media (max-width: ${breakpoints.tablet.max}px) {
-        gap: 0.25em;
-        li {
-          font-size: var(--fs-xs);
-        }
-      }
-    }
-  }
-  &.in-sidenav {
-    ul {
-      flex-direction: column;
     }
   }
 `;
@@ -90,7 +65,7 @@ export const LogoAndDesignation = styled.div`
   align-items: center;
   justify-content: flex-start;
   margin-right: auto;
-  @media (max-width: ${breakpoints.tablet.max}px) {
+  ${mediaQuery.nonDesktop} {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;

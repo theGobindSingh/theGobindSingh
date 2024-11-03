@@ -19,6 +19,7 @@ export const mediaQuery = {
   phone: `@media (min-width: ${breakpoints.phone.min}px) and (max-width: ${breakpoints.phone.max}px)`,
   tablet: `@media (min-width: ${breakpoints.tablet.min}px) and (max-width: ${breakpoints.tablet.max}px)`,
   desktop: `@media (min-width: ${breakpoints.desktop.min}px)`,
+  nonDesktop: `@media (max-width: ${breakpoints.tablet.max}px)`,
 };
 
 const globalStyles = css`
@@ -28,8 +29,10 @@ const globalStyles = css`
     font-family: var(--font-sans);
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
     &.v2 {
+      --header-height: 6rem;
+
+      background-color: var(--color-primary-100);
       &::before {
         content: '';
         filter: url(#grainy) opacity(20%);
@@ -38,8 +41,16 @@ const globalStyles = css`
         left: 0;
         width: 100%;
         height: 100%;
+        z-index: -1;
+      }
+
+      ${mediaQuery.nonDesktop} {
+        --header-height: 5rem;
       }
     }
+  }
+  * {
+    box-sizing: border-box;
   }
 `;
 
