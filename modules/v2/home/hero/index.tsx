@@ -33,8 +33,8 @@ const HomeHeroWithoutRef = (_: unknown, ref: Ref<HTMLDivElement>) => {
     const scrollPosition = window.scrollY;
     const percent = (scrollPosition * 100) / window.innerHeight;
     if (percent > 100) return;
-    elem.style.transform = `scale(${100 - percent / 20}%)`;
-    elem.style.opacity = `${100 - percent}%`;
+    elem.style.transform = `scale(${100 - percent / 10}%)`;
+    elem.style.opacity = `${100 - percent * 1.5}%`;
   }, []);
 
   return (

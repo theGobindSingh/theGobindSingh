@@ -64,7 +64,7 @@ export const homeHeroData = {
   title: `${fullName}.`,
   text: `I help growing brands and startups gain an unfair advantage through premium, results driven websites.`,
   img: myPhoto,
-  dateText: 'Building exceptional websites since',
+  dateText: 'Building exceptional digital experiences since',
   date: '2021',
   buttonText: 'Contact ↗',
   buttonTargetClassName: 'contact',

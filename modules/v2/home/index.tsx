@@ -57,7 +57,7 @@ const Home = () => {
         css={{
           height: '200vh',
           backgroundColor: 'rgba(123,234.321,0.75)',
-          marginTop: 'calc(100dvh - var(--header-height))',
+          marginTop: 'calc(100svh - var(--header-height))',
           zIndex: 1,
           position: 'relative',
           isolation: 'isolate',

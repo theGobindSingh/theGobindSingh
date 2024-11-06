@@ -5,24 +5,29 @@ import { mediaQuery } from '@styles/global';
 export const homeHeroWrapperStyles = css`
   position: fixed;
   transform-origin: bottom;
+  height: calc(100svh - var(--header-height));
+  justify-content: flex-end;
+  flex-direction: column;
 `;
 
 export const homeHeroContainerStyles = css`
-  width: 100%;
-  height: calc(100dvh - var(--header-height));
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  padding: 60% 1rem 1rem 1rem;
-  transform-origin: center bottom;
-  top: 0;
+  grid-template-rows: auto auto 10rem;
+  margin-bottom: 1rem;
+  ${mediaQuery.nonDesktop} {
+    row-gap: 1rem;
+  }
+  ${mediaQuery.tablet} {
+    grid-template-rows: auto auto 20rem;
+    padding: 25vw 1rem 1rem 1rem;
+  }
   ${mediaQuery.desktop} {
-    /* padding: 3.75% 0; */
+    height: 100%;
     padding: 0;
     padding-bottom: 3rem;
-    /* grid-template-columns: 2fr 1.5fr 2fr; */
+    margin-bottom: 0;
     grid-template-columns: 1fr 22.5rem 1fr;
-    /* grid-template-columns: 1fr max(20vw, 22.5rem) 1fr; */
     grid-template-rows: 35% 7.5% 35% 22.5%;
   }
 `;
@@ -35,6 +40,10 @@ export const homeHeroImgStyles = css`
   grid-row: 2 / -1;
   border-radius: 0.5rem;
   filter: grayscale(100%);
+  ${mediaQuery.nonDesktop} {
+    grid-row: 3 / 4;
+    grid-column: 1 / 2;
+  }
 `;
 
 export const HomeHeroTitle = styled.h1`
@@ -52,26 +61,40 @@ export const HomeHeroTitle = styled.h1`
   /* 
    * custom media queries because display text
    */
-  @media (min-width: 1180px) {
-  }
   @media (max-width: 1180px) {
     font-size: clamp(6.875rem, 12.2vw, 9rem);
+  }
+  ${mediaQuery.nonDesktop} {
+    font-size: var(--fs-4xl);
+    line-height: 0.8em;
+    max-width: 7ch;
+    align-self: flex-end;
+    /* margin-bottom: 0.25em; */
   }
 `;
 
 export const HomeHeroTextWrapper = styled.div`
   margin: 0;
   grid-row: 3 / 4;
-  font-size: 1.5rem;
+  font-size: var(--fs-m);
   width: 95%;
   max-width: 25ch;
   color: var(--color-text-600);
   font-weight: 500;
   & > .text {
     margin: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25em;
   }
   .button {
+  }
+  ${mediaQuery.phone} {
+    & > .text {
+      font-size: var(--fs-1xs);
+    }
+  }
+  ${mediaQuery.nonDesktop} {
+    grid-row: 2 / 3;
+    grid-column: 1 / -1;
   }
 `;
 
@@ -80,6 +103,9 @@ export const homeHeroArrowStyles = css`
   grid-column: 1 / 2;
   grid-row: 2 / 3;
   color: var(--color-text-500);
+  ${mediaQuery.nonDesktop} {
+    display: none;
+  }
 `;
 
 export const HomeHeroDateTextWrapper = styled.div`
@@ -96,12 +122,27 @@ export const HomeHeroDateTextWrapper = styled.div`
     font-family: var(--font-mono);
     font-size: var(--fs-2xs);
     text-transform: uppercase;
-    max-width: min(calc(100% - 1rem), 22ch);
+    max-width: min(calc(100% - 1rem), 25ch);
     font-weight: 500;
     color: var(--color-text-600);
   }
   .date {
     font-size: var(--fs-4xl);
     font-weight: 600;
+  }
+  ${mediaQuery.phone} {
+    .text {
+      font-size: var(--fs-3xs);
+    }
+  }
+  ${mediaQuery.nonDesktop} {
+    grid-row: 3 / 4;
+    grid-column: 2 / 4;
+    .text {
+      margin-bottom: 0.5em;
+    }
+    .date {
+      line-height: 0.8em;
+    }
   }
 `;
