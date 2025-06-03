@@ -40,6 +40,8 @@ const Home = () => {
           zIndex: 1,
           position: 'relative',
           isolation: 'isolate',
+          height: '200vh',
+          backgroundColor: 'gray',
         }}
       >
         <BlackSection />
