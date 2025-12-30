@@ -37,7 +37,6 @@ const LinkText = (props: LinkTextProps) => {
     (props as ButtonHTMLAttributes<HTMLButtonElement>).type ?? 'button';
   return (
     <button
-      // eslint-disable-next-line react/button-has-type
       type={btnType}
       aria-label={text}
       title={text}

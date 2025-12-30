@@ -5,7 +5,6 @@ import {
   TextContainer,
 } from '@components/v2/dual-button/style';
 
-/* eslint-disable react/button-has-type */
 interface DualButtonProps {
   text: string;
   onClick?: () => void;

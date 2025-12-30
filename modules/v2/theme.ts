@@ -1,6 +1,6 @@
-/* eslint-disable */
 import type { ThemeObject } from '@kami-ui/types';
 import { breakpoints } from '@styles/global';
+// eslint-disable-next-line camelcase -- ignore
 import { DM_Mono, DM_Sans, DM_Serif_Display } from 'next/font/google';
 
 const fontSansSerif = DM_Serif_Display({

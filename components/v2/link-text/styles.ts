@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { css } from '@emotion/react';
 
 export const linkTextWrapperStyles = css`
