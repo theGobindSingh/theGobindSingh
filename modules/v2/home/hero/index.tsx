@@ -1,9 +1,8 @@
-import HeroArrow from '@/icons/v2/hero-arrow';
+// import HeroArrow from '@/icons/v2/hero-arrow';
 import CommonFullWidthWrapper from '@components/v2/common-full-width-wrapper';
 import DualButton from '@components/v2/dual-button';
 import { homeHeroData } from '@data';
 import {
-  homeHeroArrowStyles,
   homeHeroContainerStyles,
   HomeHeroDateTextWrapper,
   homeHeroImgStyles,
@@ -48,7 +47,7 @@ const HomeHeroWithoutRef = (_: unknown, ref: Ref<HTMLDivElement>) => {
         <p className="text">{text}</p>
         <DualButton text={buttonText} onClick={clickHandler} />
       </HomeHeroTextWrapper>
-      <HeroArrow css={homeHeroArrowStyles} />
+      {/* <HeroArrow css={homeHeroArrowStyles} /> */}
       <HomeHeroDateTextWrapper>
         <span className="text">{dateText}</span>
         <span className="date">{date}</span>

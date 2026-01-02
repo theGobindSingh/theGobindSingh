@@ -1,5 +1,5 @@
-import { Home } from '@modules/v2';
+import HomeModule from '@modules/v1/home';
 
-const HomePage = () => <Home />;
+const HomePage = () => <HomeModule />;
 
 export default HomePage;

@@ -23,6 +23,7 @@ const Home = () => {
   const screenHeightForScroll = useRef<number>(900);
   const sideNavRef = useRef<HTMLDivElement>(null);
   const homeHeroRef = useRef<HTMLDivElement>(null);
+  const blackSectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const { innerHeight } = window;
@@ -34,7 +35,8 @@ const Home = () => {
       <Header />
       <SideNav ref={sideNavRef} />
       <HomeHero ref={homeHeroRef} />
-      <div
+      <BlackSection
+        ref={blackSectionRef}
         css={{
           marginTop: 'calc(100svh - var(--header-height))',
           zIndex: 1,
@@ -43,8 +45,17 @@ const Home = () => {
           height: '200vh',
           backgroundColor: 'gray',
         }}
+      />
+      <div
+        css={{
+          backgroundColor: 'black',
+          height: '100svh',
+          position: 'relative',
+          zIndex: 2,
+          isolation: 'isolate',
+        }}
       >
-        <BlackSection />
+        hello world
       </div>
     </HomeWrapperWithComponents>
   );

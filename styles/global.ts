@@ -1,4 +1,7 @@
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+
+export { styled };
 
 export const breakpoints = {
   phone: {
@@ -29,10 +32,15 @@ const globalStyles = css`
     font-family: var(--font-sans);
     padding: 0;
     margin: 0;
-    &.v2 {
-      --header-height: 6rem;
+    &.v1 {
+      --header-height: 5rem;
 
       background-color: var(--color-primary-100);
+    }
+    &.v2 {
+      --header-height: 6rem;
+      background-color: var(--color-primary-100);
+      counter-reset: pageNumberCounter;
       &::before {
         content: '';
         filter: url(#grainy) opacity(20%);
