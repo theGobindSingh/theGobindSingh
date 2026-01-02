@@ -60,18 +60,15 @@ const SideEasyAccessWrapper = styled.div`
   }
 `;
 
-const SideEasyAccess = () => {
-  const a = '';
-  return (
-    <Fragment>
-      <SideEasyAccessWrapper className="left">
-        <SocialIcons $dir="col" />
-      </SideEasyAccessWrapper>
-      <SideEasyAccessWrapper className="right">
-        <a href={socialLinks[SOCIAL_KEYS.EMAIL]?.url}>{email}</a>
-      </SideEasyAccessWrapper>
-    </Fragment>
-  );
-};
+const SideEasyAccess = () => (
+  <Fragment>
+    <SideEasyAccessWrapper className="left">
+      <SocialIcons $dir="col" />
+    </SideEasyAccessWrapper>
+    <SideEasyAccessWrapper className="right">
+      <a href={socialLinks[SOCIAL_KEYS.EMAIL]?.url}>{email}</a>
+    </SideEasyAccessWrapper>
+  </Fragment>
+);
 
 export default SideEasyAccess;

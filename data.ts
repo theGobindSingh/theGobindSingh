@@ -1,5 +1,5 @@
 import type { IconType } from '@icons-pack/react-simple-icons';
-import { SiGithub } from '@icons-pack/react-simple-icons';
+import { SiGithub, SiInstagram } from '@icons-pack/react-simple-icons';
 import type { LucideProps } from 'lucide-react';
 import { Linkedin, Mail } from 'lucide-react';
 
@@ -20,6 +20,7 @@ export enum SOCIAL_KEYS {
   LINKEDIN = 'LINKEDIN',
   GITHUB = 'GITHUB',
   EMAIL = 'EMAIL',
+  INSTAGRAM = 'INSTAGRAM',
 }
 
 export const socialLinks: {
@@ -47,6 +48,11 @@ export const socialLinks: {
     url: `mailto:${email}`,
     label: 'Email',
     logo: Mail,
+  },
+  [SOCIAL_KEYS.INSTAGRAM]: {
+    url: 'https://www.instagram.com/thegobindsingh',
+    label: 'Instagram',
+    logo: SiInstagram,
   },
 };
 
@@ -119,9 +125,17 @@ export const headerAndNavData: {
 };
 
 export const homeHeroData = {
+  titleSuffix: 'Hi, my name is ',
   title: `${fullName}.`,
-  text: `I help growing brands and startups gain an unfair advantage through premium, results driven websites.`,
+  titlePostfix: 'I build things for the web.',
   img: myPhoto,
+  text: `I engineer thoughtful web products built to last.\nExceptional digital experiences.`,
+  textReplacements: [
+    {
+      text: 'Exceptional digital experiences.',
+      url: 'https://youtu.be/dQw4w9WgXcQ?t=43',
+    },
+  ],
   dateText: 'Building exceptional digital experiences since',
   date: '2021',
   buttonText: 'Contact ↗',

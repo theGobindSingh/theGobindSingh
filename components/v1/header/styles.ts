@@ -37,6 +37,8 @@ export const StyledHeaderWrapper = styled.header`
   .header-container {
     display: flex;
     align-items: center;
+    width: 90%;
+    max-width: var(--max-content-width, 1800px);
 
     .home-link {
       transition: all 0.3s ease;

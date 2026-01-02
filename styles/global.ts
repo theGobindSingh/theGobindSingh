@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export { styled };
@@ -25,6 +25,28 @@ export const mediaQuery = {
   nonDesktop: `@media (max-width: ${breakpoints.tablet.max}px)`,
 };
 
+const underlineAnimation = keyframes`
+0% {
+    left: 0;
+    width: 0;
+    background-color: var(--anchorAni-one, #5a5a5a);
+}
+50% {
+    left: 12.5%;
+    width: 75%;
+    background-color: var(--anchorAni-two, #aaa);
+}
+75% {
+    left: 100%;
+    width: 0;
+    background-color: var(--anchorAni-one, #5a5a5a);
+}
+100% {
+    left: 0;
+    width: 0;
+}
+`;
+
 const globalStyles = css`
   body {
     color: var(--color-text-900);
@@ -36,6 +58,19 @@ const globalStyles = css`
       --header-height: 5rem;
 
       background-color: var(--color-primary-100);
+
+      .underline-animation {
+        position: relative;
+        display: inline-block;
+        &::after {
+          content: '';
+          position: absolute;
+          width: 0;
+          bottom: 0;
+          height: 1px;
+          animation: ${underlineAnimation} 2s ease 0s infinite normal forwards;
+        }
+      }
     }
     &.v2 {
       --header-height: 6rem;

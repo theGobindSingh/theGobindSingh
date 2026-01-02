@@ -1,6 +1,6 @@
 import CommonFullWidthWrapper from '@components/v1/common-full-width-wrapper';
 import { css } from '@emotion/react';
-import { styled } from '@styles/global';
+import { mediaQuery, styled } from '@styles/global';
 import { forwardRef, PropsWithChildren, Ref } from 'react';
 
 interface StyledSectionWrapperProps {
@@ -12,11 +12,18 @@ interface StyledSectionWrapperProps {
 const StyledSectionWrapper = styled(
   CommonFullWidthWrapper,
 )<StyledSectionWrapperProps>`
-  height: 100svh;
   display: flex;
   flex-direction: ${({ $fexDirection = 'column' }) => $fexDirection};
   align-items: ${({ $alignItems = 'center' }) => $alignItems};
   justify-content: ${({ $justifyContent = 'center' }) => $justifyContent};
+
+  &.fit-spacing {
+    width: fit-content !important;
+    padding: 0 7.5rem;
+    ${mediaQuery.nonDesktop} {
+      padding: 0 2rem;
+    }
+  }
 `;
 
 const wrapperCss = css`
@@ -25,6 +32,12 @@ const wrapperCss = css`
   background-color: var(--color-primary-100);
   &:nth-of-type(even) {
     background-color: var(--color-primary-200);
+  }
+  .section-wrapper {
+    height: 100dvh;
+  }
+  &:first-of-type .section-wrapper {
+    height: 100svh;
   }
 `;
 
@@ -43,7 +56,7 @@ const SectionWrapperWithoutRef = (
   <StyledSectionWrapper
     wrapperCss={wrapperCss}
     ref={ref}
-    className={className}
+    className={`section-wrapper ${className ?? ''}`.trim()}
     {...$styledProps}
   >
     {children}

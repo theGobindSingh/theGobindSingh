@@ -1,7 +1,7 @@
 import {
   containerSize,
   wrapperStyles,
-} from '@components/v2/common-full-width-wrapper/styles';
+} from '@components/v1/common-full-width-wrapper/styles';
 import {
   FullWidthWrapper,
   FullWidthWrapperProps,

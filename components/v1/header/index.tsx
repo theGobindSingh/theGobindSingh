@@ -1,4 +1,3 @@
-import CommonFullWidthWrapper from '@components/v1/common-full-width-wrapper';
 import {
   HamburgerButton,
   NavWrapper,
@@ -86,7 +85,7 @@ const Header = () => {
 
   return (
     <StyledHeaderWrapper ref={ref}>
-      <CommonFullWidthWrapper className="header-container" element="div">
+      <div className="header-container">
         <Link href="/" className="home-link">
           {headerAndNavData.logoText}
         </Link>
@@ -120,7 +119,7 @@ const Header = () => {
           </Link>
           <SocialIcons className="social-icons" />
         </NavWrapper>
-      </CommonFullWidthWrapper>
+      </div>
     </StyledHeaderWrapper>
   );
 };
