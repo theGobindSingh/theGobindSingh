@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 export { styled };
 
-export const breakpoints = {
+export const breakpoints = Object.freeze({
   phone: {
     min: 0,
     max: 640,
@@ -12,18 +12,23 @@ export const breakpoints = {
     min: 641,
     max: 900,
   },
+  smallDesktop: {
+    min: 901,
+    max: 1024,
+  },
   desktop: {
     min: 901,
     max: 9999,
   },
-};
+} as const);
 
-export const mediaQuery = {
+export const mediaQuery = Object.freeze({
   phone: `@media (min-width: ${breakpoints.phone.min}px) and (max-width: ${breakpoints.phone.max}px)`,
   tablet: `@media (min-width: ${breakpoints.tablet.min}px) and (max-width: ${breakpoints.tablet.max}px)`,
+  smallDesktop: `@media (min-width: ${breakpoints.smallDesktop.min}px) and (max-width: ${breakpoints.smallDesktop.max}px)`,
   desktop: `@media (min-width: ${breakpoints.desktop.min}px)`,
   nonDesktop: `@media (max-width: ${breakpoints.tablet.max}px)`,
-};
+} as const);
 
 const underlineAnimation = keyframes`
 0% {
@@ -54,9 +59,12 @@ const globalStyles = css`
     font-family: var(--font-sans);
     padding: 0;
     margin: 0;
+    ${mediaQuery.smallDesktop} {
+      font-size: var(--fs-3xs);
+    }
     &.v1 {
       --header-height: 5rem;
-
+      counter-reset: pageNumberCounter;
       background-color: var(--color-primary-100);
 
       .underline-animation {
@@ -75,7 +83,7 @@ const globalStyles = css`
     &.v2 {
       --header-height: 6rem;
       background-color: var(--color-primary-100);
-      counter-reset: pageNumberCounter;
+
       &::before {
         content: '';
         filter: url(#grainy) opacity(20%);

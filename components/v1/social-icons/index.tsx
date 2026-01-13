@@ -1,4 +1,4 @@
-import { socialLinks } from '@data';
+import { fullName, socialLinks } from '@data';
 import { styled } from '@styles/global';
 
 interface SocialIconsWrapperProps {
@@ -23,13 +23,13 @@ interface SocialIconsProps extends SocialIconsWrapperProps {
 }
 
 const icons = Object.values(socialLinks).map(
-  ({ label, url, logo: Logo }, index) => (
+  ({ label, url, logo: Logo, userName }, index) => (
     <a
       key={`social-icon-${index}`}
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={label}
+      aria-label={`${fullName} | Portfolio | ${label} | ${userName}`}
       title={label}
     >
       <Logo className="social-icon" css={{ height: '1em', width: '1em' }} />

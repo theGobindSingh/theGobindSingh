@@ -1,5 +1,5 @@
 import SocialIcons from '@components/v1/social-icons';
-import { email, SOCIAL_KEYS, socialLinks } from '@data';
+import { email, fullName, SOCIAL_KEYS, socialLinks } from '@data';
 import { mediaQuery, styled } from '@styles/global';
 import { Fragment } from 'react';
 
@@ -66,7 +66,13 @@ const SideEasyAccess = () => (
       <SocialIcons $dir="col" />
     </SideEasyAccessWrapper>
     <SideEasyAccessWrapper className="right">
-      <a href={socialLinks[SOCIAL_KEYS.EMAIL]?.url}>{email}</a>
+      <a
+        href={socialLinks[SOCIAL_KEYS.EMAIL]?.url}
+        aria-label={`${fullName} | Portfolio | email | ${email}`}
+        title={`${fullName} | Portfolio | email | ${email}`}
+      >
+        {email}
+      </a>
     </SideEasyAccessWrapper>
   </Fragment>
 );

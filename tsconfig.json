@@ -1,6 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": ["@tsconfig/strictest/tsconfig.json", "@tsconfig/next/tsconfig.json"],
+  "extends": [
+    "@tsconfig/strictest/tsconfig.json",
+    "@tsconfig/next/tsconfig.json"
+  ],
   "compilerOptions": {
     "target": "ES5",
     "forceConsistentCasingInFileNames": true,
@@ -14,6 +17,7 @@
       "@pages/*": ["./pages/*"],
       "@hooks/*": ["./hooks/*"],
       "@styles/*": ["./styles/*"],
+      "@utils/*": ["./utils/*"],
       "@data": ["./data"],
       "@/*": ["./*"]
     },

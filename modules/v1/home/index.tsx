@@ -1,8 +1,11 @@
 import Header from '@components/v1/header';
-import SectionWrapper from '@components/v1/section-wrapper';
 import SideEasyAccess from '@components/v1/side-easy-access';
 import { ThemeProvider } from '@kami-ui/next-theme';
+import HomeAboutSection from '@modules/v1/home/about';
+import HomeExperienceSection from '@modules/v1/home/experience';
+import HomeExtracurricularSection from '@modules/v1/home/extra';
 import HomeHeroSection from '@modules/v1/home/hero';
+import { HomePageProps } from '@modules/v1/home/types';
 import { theme } from '@modules/v1/theme';
 import { ReactLenis } from 'lenis/react';
 import { PropsWithChildren } from 'react';
@@ -12,23 +15,20 @@ const HomeWrapperWithComponents = ({
 }: PropsWithChildren<unknown>) => (
   <ThemeProvider theme={theme}>
     <ReactLenis root options={{ duration: 1 }}>
-      {children}
+      <main>{children}</main>
     </ReactLenis>
   </ThemeProvider>
 );
 
-const HomeModule = () => {
-  const a = '';
+const HomeModule = ({ imageData }: HomePageProps) => {
   return (
     <HomeWrapperWithComponents>
       <Header />
       <SideEasyAccess />
       <HomeHeroSection />
-      {Array.from({ length: 5 }).map((_, index) => (
-        <SectionWrapper key={index}>
-          Section {index + 1} - {a}
-        </SectionWrapper>
-      ))}
+      <HomeAboutSection />
+      <HomeExperienceSection />
+      <HomeExtracurricularSection imageData={imageData} />
     </HomeWrapperWithComponents>
   );
 };

@@ -1,14 +1,19 @@
-import { fullName } from '@data';
+import { fullName, homeHeroData } from '@data';
 import { Global } from '@emotion/react';
 import globalStyles from '@styles/global';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
+const { titlePostfix, text } = homeHeroData;
+
 const App = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
-      <title>{fullName}</title>
-      <meta name="description" content={`${fullName} | Portfolio`} />
+      <title>{`${fullName} | Portfolio`}</title>
+      <meta
+        name="description"
+        content={`${fullName} | Portfolio | ${titlePostfix} ${text}`}
+      />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link
         rel="shortcut icon"

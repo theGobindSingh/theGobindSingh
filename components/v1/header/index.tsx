@@ -9,19 +9,14 @@ import { breakpoints } from '@styles/global';
 
 import { useLenis } from 'lenis/react';
 import Link from 'next/link';
-import { ChangeEventHandler, useCallback, useEffect, useRef } from 'react';
-
-const links = headerAndNavData.links
-  .filter((link) => !link.isHiddenInV1)
-  .map((link, index) => (
-    <Link
-      key={`header-nav-link-${index}`}
-      href={link.url ?? `#${link.targetId ?? ''}`}
-      className="nav-link with-hover-effect"
-    >
-      {link.text}
-    </Link>
-  ));
+import {
+  ChangeEventHandler,
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react';
 
 const Header = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -81,6 +76,33 @@ const Header = () => {
       }
     },
     [toggleBodyScroll],
+  );
+
+  const links = useMemo(
+    () =>
+      headerAndNavData.links
+        .filter((link) => !link.isHiddenInV1)
+        .map(({ text, targetId, url }, index) => {
+          const href = url ?? `#${targetId ?? ''}`;
+          const clickHandler: MouseEventHandler<HTMLAnchorElement> = (e) => {
+            if (!targetId) return;
+            e.preventDefault();
+            toggleBodyScroll({ isScrollEnabled: true });
+            lenis?.scrollTo(window.innerHeight * (index + 1));
+            window.history.replaceState(null, '', `#${targetId}`);
+          };
+          return (
+            <Link
+              key={`header-nav-link-${index}`}
+              href={href}
+              className="nav-link with-hover-effect"
+              onClick={clickHandler}
+            >
+              {text}
+            </Link>
+          );
+        }),
+    [lenis],
   );
 
   return (

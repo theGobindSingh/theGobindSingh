@@ -1,28 +1,50 @@
 import CommonFullWidthWrapper from '@components/v1/common-full-width-wrapper';
 import { css } from '@emotion/react';
 import { mediaQuery, styled } from '@styles/global';
-import { forwardRef, PropsWithChildren, Ref } from 'react';
+import { forwardRef, HTMLAttributes, PropsWithChildren, Ref } from 'react';
 
 interface StyledSectionWrapperProps {
-  $fexDirection?: 'row' | 'column';
+  $flexDirection?: 'row' | 'column';
   $alignItems?: 'center' | 'flex-start' | 'flex-end';
   $justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between';
+  $mobileFlexDirection?: 'row' | 'column';
+  $gap?: string;
+  $width?: string;
+  $mobileWidth?: string;
 }
 
 const StyledSectionWrapper = styled(
   CommonFullWidthWrapper,
 )<StyledSectionWrapperProps>`
   display: flex;
-  flex-direction: ${({ $fexDirection = 'column' }) => $fexDirection};
+  flex-direction: ${({ $flexDirection = 'column' }) => $flexDirection};
   align-items: ${({ $alignItems = 'center' }) => $alignItems};
   justify-content: ${({ $justifyContent = 'center' }) => $justifyContent};
+  gap: ${({ $gap = 'unset' }) => $gap};
 
   &.fit-spacing {
-    width: fit-content !important;
+    width: ${({ $width = 'fit-content' }) => $width} !important;
     padding: 0 7.5rem;
     ${mediaQuery.nonDesktop} {
+      width: ${({ $mobileWidth = 'fit-content' }) => $mobileWidth} !important;
       padding: 0 2rem;
     }
+  }
+
+  &.full-width {
+    width: 100% !important;
+    padding: 0;
+    max-width: 100% !important;
+    ${mediaQuery.nonDesktop} {
+      width: 100% !important;
+      padding: 0;
+      max-width: 100% !important;
+    }
+  }
+
+  ${mediaQuery.nonDesktop} {
+    flex-direction: ${({ $mobileFlexDirection, $flexDirection = 'column' }) =>
+      $mobileFlexDirection ?? $flexDirection};
   }
 `;
 
@@ -35,6 +57,7 @@ const wrapperCss = css`
   }
   .section-wrapper {
     height: 100dvh;
+    overflow-y: hidden;
   }
   &:first-of-type .section-wrapper {
     height: 100svh;
@@ -43,12 +66,14 @@ const wrapperCss = css`
 
 interface SectionWrapperProps extends StyledSectionWrapperProps {
   className?: string;
+  wrapperProps?: HTMLAttributes<HTMLElement>;
 }
 
 const SectionWrapperWithoutRef = (
   {
     children,
     className,
+    wrapperProps = {},
     ...$styledProps
   }: PropsWithChildren<SectionWrapperProps>,
   ref: Ref<HTMLDivElement>,
@@ -57,6 +82,7 @@ const SectionWrapperWithoutRef = (
     wrapperCss={wrapperCss}
     ref={ref}
     className={`section-wrapper ${className ?? ''}`.trim()}
+    wrapperProps={wrapperProps}
     {...$styledProps}
   >
     {children}
