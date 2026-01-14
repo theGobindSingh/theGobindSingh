@@ -29,6 +29,10 @@ const Header = () => {
       elem.classList.remove('hide-header');
       return;
     }
+    if (scrollPosition >= lenis.limit - 5) {
+      elem.classList.remove('hide-header');
+      return;
+    }
     if (lenis.direction === 1) {
       elem.classList.add('hide-header');
     } else {

@@ -260,3 +260,11 @@ export const projectData:
     },
   },
 ];
+
+export const contactData = {
+  titleUpper: "What's next?",
+  titleLower: 'Get In Touch',
+  text: `I'm currently exploring new opportunities and open to both full-time roles and freelance projects. If you think I'd be a good fit, feel free to reach out. My inbox is always open, whether you have a role in mind, a project to discuss, or just want to say hi.`,
+  ctaText: 'Say Hello',
+  ctaLink: socialLinks.EMAIL?.url!,
+};

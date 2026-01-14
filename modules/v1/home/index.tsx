@@ -2,6 +2,7 @@ import Header from '@components/v1/header';
 import SideEasyAccess from '@components/v1/side-easy-access';
 import { ThemeProvider } from '@kami-ui/next-theme';
 import HomeAboutSection from '@modules/v1/home/about';
+import HomeContactSection from '@modules/v1/home/contact';
 import HomeExperienceSection from '@modules/v1/home/experience';
 import HomeExtracurricularSection from '@modules/v1/home/extra';
 import HomeHeroSection from '@modules/v1/home/hero';
@@ -29,6 +30,7 @@ const HomeModule = ({ imageData }: HomePageProps) => {
       <HomeAboutSection />
       <HomeExperienceSection />
       <HomeExtracurricularSection imageData={imageData} />
+      <HomeContactSection />
     </HomeWrapperWithComponents>
   );
 };

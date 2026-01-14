@@ -45,11 +45,15 @@ const HomeExperienceSection = () => {
           {experienceData.map(({ company }, index) => {
             const clickHandler: MouseEventHandler<HTMLButtonElement> = (e) => {
               setSelectedTab(index);
-              if (window.innerWidth < breakpoints.desktop.min) {
-                const target = (e.currentTarget ??
-                  e.target) as HTMLButtonElement;
-                target.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-              }
+              if (window.innerWidth >= breakpoints.desktop.min) return;
+              const target = (e.currentTarget ?? e.target) as HTMLButtonElement;
+              const container = experienceTabBtnsWrapperRef.current;
+              if (!container) return;
+              const scrollLeft =
+                target.offsetLeft -
+                container.clientWidth / 2 +
+                target.offsetWidth / 2;
+              container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
             };
 
             return (

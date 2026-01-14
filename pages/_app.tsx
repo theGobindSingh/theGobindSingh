@@ -1,13 +1,15 @@
+import { queryClient } from '@/clients/query';
 import { fullName, homeHeroData } from '@data';
 import { Global } from '@emotion/react';
 import globalStyles from '@styles/global';
+import { QueryClientProvider } from '@tanstack/react-query';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
 const { titlePostfix, text } = homeHeroData;
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <>
+  <QueryClientProvider client={queryClient}>
     <Head>
       <title>{`${fullName} | Portfolio`}</title>
       <meta
@@ -23,7 +25,7 @@ const App = ({ Component, pageProps }: AppProps) => (
     </Head>
     <Global styles={globalStyles} />
     <Component {...pageProps} />
-  </>
+  </QueryClientProvider>
 );
 
 export default App;

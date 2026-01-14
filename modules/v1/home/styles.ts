@@ -220,7 +220,18 @@ export const ImageContainer = styled.div`
     transform: translateY(-10%);
   }
   ${mediaQuery.nonDesktop} {
+    margin: auto 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     .img-container {
+      margin: auto 0;
+      height: 80%;
+      width: auto;
+      max-width: 90%;
+      aspect-ratio: 4 / 3;
       filter: none;
       border-color: var(--color-text-800);
     }
@@ -436,7 +447,7 @@ export const HomeExtracurricularH2 = styled.h2`
     text-align: center;
   }
   .upper {
-    font-size: var(--fs-1xs);
+    font-size: var(--fs-s);
     color: var(--color-text-700);
     font-weight: 500;
     &::before {
@@ -617,5 +628,91 @@ export const ExtracurricularCarouselNavButton = styled.div`
   }
   ${mediaQuery.nonDesktop} {
     bottom: 20%;
+  }
+`;
+
+export const HomeContactH2 = styled.h2`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: var(--fs-3xl);
+  font-family: var(--font-mono);
+  margin: 0;
+  .upper {
+    font-size: var(--fs-s);
+    color: var(--color-text-700);
+    font-weight: 500;
+    counter-increment: pageNumberCounter;
+    &::before {
+      content: '0' counter(pageNumberCounter) '. ';
+      flex-shrink: 0;
+    }
+  }
+`;
+
+export const HomeContactPara = styled.p`
+  font-size: var(--fs-2xs);
+  color: var(--color-text-800);
+  max-width: 550px;
+  line-height: 1.75;
+  text-align: justify;
+  text-align-last: center;
+  margin: 1.5rem 0 2.5rem 0;
+`;
+
+export const HomeContactCta = styled.a`
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: 2px solid var(--color-text-700);
+  color: var(--color-text-800);
+  font-size: var(--fs-3xs);
+  font-family: var(--font-mono);
+  padding: 0.75em 1.25em;
+  font-weight: 500;
+  &:hover {
+    border-color: var(--color-text-200);
+    background-color: var(--color-text-800);
+    color: var(--color-text-200);
+  }
+`;
+
+export const HomeContactFooterWrapper = styled.footer`
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text-800);
+  font-size: var(--fs-3xs);
+  font-family: var(--font-mono);
+
+  a {
+    color: inherit;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .attribution {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    letter-spacing: 0.1em;
+  }
+
+  .repo-stats {
+    display: flex;
+    gap: 3rem;
+    & > * {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
   }
 `;

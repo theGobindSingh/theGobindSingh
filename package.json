@@ -17,6 +17,7 @@
     "@kami-ui/next-theme": "^0.0.22",
     "@kami-ui/react-components": "^0.0.3",
     "@kami-ui/types": "^0.0.3",
+    "@tanstack/react-query": "^5.90.17",
     "@types/node": "^25.0.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
