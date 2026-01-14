@@ -38,7 +38,7 @@ const HomeExperienceSection = () => {
       css={homeExperienceTabContentWrapperStyles}
     >
       <CommonH2 $margin="6.25rem 0 0 0" className="small">
-        Where I've Worked
+        {`Where I've Worked`}
       </CommonH2>
       <ExperienceWrapper>
         <ExperienceTabBtnsWrapper ref={experienceTabBtnsWrapperRef}>
@@ -98,13 +98,12 @@ const HomeExperienceSection = () => {
                 </h3>
                 <span className="date-range">{dateRange}</span>
                 <div className="other-positions">
-                  {otherPositions &&
-                    otherPositions.map((otherPosition, index) => (
-                      <span key={`other-position-${company}-${index}`}>
-                        {otherPosition}
-                        {index < otherPositions.length - 1 && ' → '}
-                      </span>
-                    ))}
+                  {otherPositions?.map((otherPosition, index) => (
+                    <span key={`other-position-${company}-${index}`}>
+                      {otherPosition}
+                      {index < otherPositions.length - 1 && ' → '}
+                    </span>
+                  ))}
                 </div>
               </div>
               <ul>

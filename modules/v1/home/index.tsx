@@ -21,18 +21,16 @@ const HomeWrapperWithComponents = ({
   </ThemeProvider>
 );
 
-const HomeModule = ({ imageData }: HomePageProps) => {
-  return (
-    <HomeWrapperWithComponents>
-      <Header />
-      <SideEasyAccess />
-      <HomeHeroSection />
-      <HomeAboutSection />
-      <HomeExperienceSection />
-      <HomeExtracurricularSection imageData={imageData} />
-      <HomeContactSection />
-    </HomeWrapperWithComponents>
-  );
-};
+const HomeModule = ({ imageData }: HomePageProps) => (
+  <HomeWrapperWithComponents>
+    <Header />
+    <SideEasyAccess />
+    <HomeHeroSection />
+    <HomeAboutSection />
+    <HomeExperienceSection />
+    <HomeExtracurricularSection imageData={imageData} />
+    <HomeContactSection />
+  </HomeWrapperWithComponents>
+);
 
 export default HomeModule;

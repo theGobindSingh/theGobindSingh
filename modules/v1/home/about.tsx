@@ -25,33 +25,31 @@ const ImageWrapper = () => (
   </ImageContainer>
 );
 
-const HomeAboutSection = () => {
-  return (
-    <SectionWrapper
-      className="fit-spacing"
-      $flexDirection="row"
-      $mobileFlexDirection="column"
-      $gap="2rem"
-      wrapperProps={{
-        id: 'about',
-      }}
-    >
-      <HomeAboutLeftWrapper>
-        <CommonH2>{title}</CommonH2>
-        <HomeAboutP>
-          {formattedParagraph}
-          <ImageWrapper />
-        </HomeAboutP>
-        <div className="skills-section">
-          <span>{skillsTitle}</span>
-          <ul className="list-wrapper">{skillsList}</ul>
-        </div>
-      </HomeAboutLeftWrapper>
-      <HomeAboutRightWrapper>
+const HomeAboutSection = () => (
+  <SectionWrapper
+    className="fit-spacing"
+    $flexDirection="row"
+    $mobileFlexDirection="column"
+    $gap="2rem"
+    wrapperProps={{
+      id: 'about',
+    }}
+  >
+    <HomeAboutLeftWrapper>
+      <CommonH2>{title}</CommonH2>
+      <HomeAboutP>
+        {formattedParagraph}
         <ImageWrapper />
-      </HomeAboutRightWrapper>
-    </SectionWrapper>
-  );
-};
+      </HomeAboutP>
+      <div className="skills-section">
+        <span>{skillsTitle}</span>
+        <ul className="list-wrapper">{skillsList}</ul>
+      </div>
+    </HomeAboutLeftWrapper>
+    <HomeAboutRightWrapper>
+      <ImageWrapper />
+    </HomeAboutRightWrapper>
+  </SectionWrapper>
+);
 
 export default HomeAboutSection;

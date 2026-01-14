@@ -106,7 +106,7 @@ const Header = () => {
             </Link>
           );
         }),
-    [lenis],
+    [lenis, toggleBodyScroll],
   );
 
   return (

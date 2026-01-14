@@ -14,13 +14,13 @@ import { forwardRef, Ref } from 'react';
 const HeaderWithoutRef = (_: unknown, ref: Ref<HTMLDivElement>) => {
   const { links, logoText, middleText } = headerAndNavData;
 
-  const primaryLinksMapper = ({ text, targetClassName }: (typeof links)[0]) => {
+  const primaryLinksMapper = ({ text, targetId }: (typeof links)[0]) => {
     const clickHandler = () => {
-      const target = document.querySelector(`.${targetClassName}`);
+      const target = document.querySelector(`#${targetId}`);
       target?.scrollIntoView({ behavior: 'smooth' });
     };
     return (
-      <li key={`nav-link-${targetClassName}`} className="list-elem">
+      <li key={`nav-link-${targetId}`} className="list-elem">
         <LinkText text={text} onClick={clickHandler} />
       </li>
     );

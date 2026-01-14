@@ -3,7 +3,7 @@ import config from '@kami-ui/eslint-config/next';
 export default [
   ...config,
   {
-    ignorePatterns: [
+    ignores: [
       '**/node_modules/**',
       '**/dist/**',
       '**/.next/**',

@@ -73,25 +73,23 @@ const Footer = () => {
   );
 };
 
-const HomeContactSection = () => {
-  return (
-    <SectionWrapper
-      className="fit-spacing"
-      wrapperProps={{
-        id: 'contact',
-      }}
-    >
-      <HomeContactH2>
-        <span className="upper">{titleUpper}</span>
-        <span className="lower">{titleLower}</span>
-      </HomeContactH2>
-      <HomeContactPara>{text}</HomeContactPara>
-      <HomeContactCta href={ctaLink} target="_blank" rel="noopener noreferrer">
-        {ctaText}
-      </HomeContactCta>
-      <Footer />
-    </SectionWrapper>
-  );
-};
+const HomeContactSection = () => (
+  <SectionWrapper
+    className="fit-spacing"
+    wrapperProps={{
+      id: 'contact',
+    }}
+  >
+    <HomeContactH2>
+      <span className="upper">{titleUpper}</span>
+      <span className="lower">{titleLower}</span>
+    </HomeContactH2>
+    <HomeContactPara>{text}</HomeContactPara>
+    <HomeContactCta href={ctaLink} target="_blank" rel="noopener noreferrer">
+      {ctaText}
+    </HomeContactCta>
+    <Footer />
+  </SectionWrapper>
+);
 
 export default HomeContactSection;

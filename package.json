@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "yarn lint:fix",
+    "prebuild": "pnpm lint:fix",
     "build": "next build",
     "start": "next start",
     "lint": "prettier --config .prettierrc \"{components,hooks,modules,pages,public,styles,icons}/**/*.{ts,js,tsx,jsx}\" --write && eslint \"{components,hooks,modules,pages,public,styles,icons}/**/*.{ts,js,tsx,jsx}\"",
