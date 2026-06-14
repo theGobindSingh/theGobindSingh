@@ -1,15 +1,18 @@
-import config from '@kami-ui/eslint-config/next';
+import config from "@kami-ui/eslint-config/next";
 
 export default [
   ...config,
   {
-    ignores: [
-      '**/node_modules/**',
-      '**/dist/**',
-      '**/.next/**',
-      '**/out/**',
-      '**/build/**',
-      'next.config.js',
-    ],
+    files: ["**/*.ts", "**/*.tsx"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "/^_[A-Za-z0-9]+$/" },
+      ],
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true, allowExportNames: ["metadata"] },
+      ],
+    },
   },
 ];

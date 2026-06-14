@@ -5,26 +5,33 @@
     "@tsconfig/next/tsconfig.json"
   ],
   "compilerOptions": {
-    "target": "ES5",
+    "target": "es2017",
     "forceConsistentCasingInFileNames": true,
-    "jsxImportSource": "@emotion/react",
     "paths": {
-      "@public/*": ["./public/*"],
       "@assets/*": ["./public/assets/*"],
       "@images/*": ["./public/assets/images/*"],
-      "@components/*": ["./components/*"],
-      "@modules/*": ["./modules/*"],
-      "@pages/*": ["./pages/*"],
-      "@hooks/*": ["./hooks/*"],
-      "@styles/*": ["./styles/*"],
-      "@utils/*": ["./utils/*"],
-      "@data": ["./data"],
-      "@/*": ["./*"]
+      "@public/*": ["./public/*"],
+      "@components/*": ["./src/components/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@icons": ["./src/icons/index.ts"],
+      "@icons/*": ["./src/icons/*"],
+      "@/*": ["./src/*"]
     },
     "noPropertyAccessFromIndexSignature": false,
     "ignoreDeprecations": "5.0",
-    "verbatimModuleSyntax": false
+    "verbatimModuleSyntax": false,
+    "allowUnusedLabels": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "./scripts/**/*.*",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "eslint.config.mjs",
+    "next.config.js"
+  ],
   "exclude": ["node_modules"]
 }

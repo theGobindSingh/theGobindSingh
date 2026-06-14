@@ -39,9 +39,10 @@ yarn.lock
 package-lock.json
 *.log
 *.css
+!src/app/globals.css
 *.map
 
-*.tldr
+pnpm-lock.yaml
 
-*.env
-!.env.sample
+docs/superpowers
+.claude/skills

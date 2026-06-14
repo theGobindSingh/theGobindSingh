@@ -2,12 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    // domains: ['res.cloudinary.com'],
-    remotePatterns: [new URL('https://res.cloudinary.com/**')],
-  },
-  compiler: {
-    emotion: true,
+    remotePatterns: [],
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
