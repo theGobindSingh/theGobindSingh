@@ -1,6 +1,9 @@
 "use client";
 
+import { clientCookies } from "@utils/cookies";
 import { useCallback, useEffect, useState } from "react";
+
+const COOKIE = "theme";
 
 const ThemeToggle = () => {
   const [mounted, setMounted] = useState(false);
@@ -14,23 +17,23 @@ const ThemeToggle = () => {
   const toggle = useCallback(() => {
     const next = !dark;
     setDark(next);
+    const theme = next ? "dark" : "light";
     document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
+    document.documentElement.classList.toggle("light", !next);
+    clientCookies.set(COOKIE, theme, {
+      days: 365,
+      path: "/",
+      sameSite: "Lax",
+    });
   }, [dark]);
 
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   return (
     <button
       onClick={toggle}
-      className=""
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
     >
-      {/* 
-      This is a simple example of a theme toggle button.
-      */}
       {dark ? "switch to light" : "switch to dark"}
     </button>
   );
