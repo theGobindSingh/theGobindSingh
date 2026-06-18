@@ -1,4 +1,5 @@
 import ThemeSetter from "@/app/theme-setter";
+import Header from "@components/header";
 import type { Metadata } from "next";
 import {
   Anton,
@@ -60,12 +61,21 @@ const getTheme = async () => {
 const RootLayout = async ({ children }: PropsWithChildren<unknown>) => {
   const theme = await getTheme();
   return (
-    <html lang="en" className={theme === "dark" ? "dark" : "light"}>
+    <html
+      lang="en"
+      className={[
+        theme === "dark" ? "dark" : "light",
+        fontDisplay.variable,
+        fontSans.variable,
+        fontMono.variable,
+        fontSerif.variable,
+        fontCursive.variable,
+      ].join(" ")}
+    >
       <head />
-      <body
-        className={`${fontDisplay.variable} ${fontSans.variable} ${fontMono.variable} ${fontSerif.variable} ${fontCursive.variable}`}
-      >
+      <body>
         <ThemeSetter />
+        <Header />
         {children}
       </body>
     </html>

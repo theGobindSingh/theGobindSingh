@@ -1,10 +1,13 @@
 @import "tailwindcss";
+@import "./defaults.css";
 
 /*
  * ═══════════════════════════════════════════════════════════════════════════════
  *  TOKEN ARCHITECTURE — globals.css is the single source of truth for this project.
  *  Every color, spacing, radius, type scale, z-index, and motion value lives here.
- *  Do not add ad-hoc colors or magic numbers in components.
+ *  Do not add ad-hoc colors or magic numbers in components. The defaults.css file 
+ *  on the other hand, contains the base styles for the project, for example the 
+ *  body, scrollbar, and noise grain.
  * ═══════════════════════════════════════════════════════════════════════════════
  *
  *  LAYERS (top to bottom):
@@ -89,11 +92,11 @@
   --color-grey-800: hsl(var(--color-grey-800-base));
   --color-grey-900-base: 195, 4%, 22%;
   --color-grey-900: hsl(var(--color-grey-900-base));
-  --color-grey-950-base: 15, 7%, 11%;
+  --color-grey-950-base: 15, 7%, 3%;
   --color-grey-950: hsl(var(--color-grey-950-base));
 
   /* primary */
-  --color-primary-50-base: 0, 0%, 95%;
+  --color-primary-50-base: 0, 1%, 95%;
   --color-primary-50: hsl(var(--color-primary-50-base));
   --color-primary-100-base: 0, 0%, 91%;
   --color-primary-100: hsl(var(--color-primary-100-base));
@@ -353,7 +356,7 @@
   --shadow-hsl: 16 100% 50%;
 
   /* grey */
-  --color-grey-50-base: 15, 7%, 11%;
+  --color-grey-50-base: 15, 7%, 3%;
   --color-grey-100-base: 195, 4%, 22%;
   --color-grey-200-base: 195, 2%, 44%;
   --color-grey-300-base: 195, 3%, 73%;
@@ -366,7 +369,7 @@
   --color-grey-950-base: 0, 0%, 95%;
 
   /* primary */
-  --color-primary-50-base: 0, 0%, 0%;
+  --color-primary-50-base: 15, 7%, 2%;
   --color-primary-100-base: 0, 0%, 5%;
   --color-primary-200-base: 0, 0%, 11%;
   --color-primary-300-base: 180, 1%, 23%;
@@ -609,81 +612,18 @@
 
   --text-headline: var(--fs-1xl);
   --text-title: var(--fs-m);
-}
 
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-}
-
-html {
-  color-scheme: dark;
-}
-
-html.light {
-  color-scheme: light;
-}
-
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.65;
-  position: relative;
-}
-
-a {
-  text-decoration: none;
-}
-
-/* ─── Noise Grain ─── */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
-}
-
-html.dark body::before {
-  opacity: 0.05;
-}
-
-/* ─── Desktop Scrollbar ─── */
-@media (hover: hover) and (pointer: fine) {
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-grey-600);
-    border-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-grey-700);
-  }
-
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-grey-600) transparent;
-  }
+  --text-xs: 0.625rem;
+  --text-sm: 0.6875rem;
+  --text-base: 0.75rem;
+  --text-lg: 0.875rem;
+  --text-xl: 1rem;
+  --text-2xl: 1.125rem;
+  --text-3xl: 1.25rem;
+  --text-4xl: 1.5rem;
+  --text-5xl: 1.875rem;
+  --text-6xl: 2.25rem;
+  --text-7xl: 3rem;
+  --text-8xl: 3.75rem;
+  --text-9xl: 4.5rem;
 }
