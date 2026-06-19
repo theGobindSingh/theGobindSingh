@@ -12,18 +12,23 @@ const Hero = () => {
       <div className="grid grid-cols-12 gap-x-8">
         <div className="col-span-4 flex flex-col gap-6">
           <div className="flex flex-col gap-2">
-            <span className="font-mono text-xs uppercase tracking-wider text-(--color-text-subtle)">
+            <span
+              className="
+                font-mono text-xs tracking-wider text-(--color-text-subtle)
+                uppercase
+              "
+            >
               Available for work
             </span>
             <div className="flex items-center gap-2">
-              <Circle className="h-2 w-2 fill-accent-500 text-accent-500" />
+              <Circle className="size-2 fill-accent-500 text-accent-500" />
               <span className="font-mono text-xs text-(--color-text-muted)">
                 Punjab, India · IST
               </span>
             </div>
           </div>
 
-          <div className="flex gap-3 mt-4">
+          <div className="mt-4 flex gap-3">
             {[SOCIAL_KEYS.GITHUB, SOCIAL_KEYS.LINKEDIN, SOCIAL_KEYS.EMAIL].map(
               (key) => {
                 const link = socialLinks[key];
@@ -35,9 +40,13 @@ const Hero = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={link.label}
-                    className="text-(--color-text-subtle) hover:text-(--color-text) transition-colors duration-(--dur-fast)"
+                    className="
+                      text-(--color-text-subtle) transition-colors
+                      duration-(--dur-fast)
+                      hover:text-(--color-text)
+                    "
                   >
-                    <link.logo className="h-5 w-5" />
+                    <link.logo className="size-5" />
                   </a>
                 );
               },
@@ -47,19 +56,35 @@ const Hero = () => {
 
         <div className="col-span-8 flex flex-col gap-8">
           <div>
-            <p className="font-sans text-(--fs-s) text-(--color-text-muted) leading-relaxed">
+            <p
+              className="
+                font-sans text-(size:--fs-s) leading-relaxed
+                text-(--color-text-muted)
+              "
+            >
               {homeHeroData.titleSuffix}
             </p>
-            <h1 className="font-display text-(--fs-display-hero) leading-(--leading-display) tracking-(--tracking-display) text-(--color-text) uppercase">
+            <h1
+              className="
+                font-display text-(size:--fs-display-hero)
+                leading-(--leading-display) tracking-(--tracking-display)
+                text-(--color-text) uppercase
+              "
+            >
               {fullName}
             </h1>
           </div>
 
-          <p className="font-sans text-(--fs-l) text-(--color-text-muted) leading-snug max-w-2xl">
+          <p
+            className="
+              max-w-2xl font-sans text-(size:--fs-l) leading-snug
+              text-(--color-text-muted)
+            "
+          >
             {homeHeroData.text}
           </p>
 
-          <div className="flex items-center gap-4 mt-4">
+          <div className="mt-4 flex items-center gap-4">
             <Link
               href="/contact"
               variant="filled"
@@ -67,7 +92,7 @@ const Hero = () => {
               className="font-medium"
             >
               Book a call
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="size-4" />
             </Link>
             <Link href="/work" variant="outlined" size="lg">
               See my work

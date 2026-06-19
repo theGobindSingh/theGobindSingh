@@ -53,8 +53,13 @@ const FontLabel = ({
   style,
 }: (typeof FONTS)[number]) => {
   return (
-    <div className="bg-[var(--color-bg)] p-8">
-      <span className="mb-5 block font-mono text-[10px] font-medium uppercase tracking-[0.12em] opacity-20">
+    <div className="bg-(--color-bg) p-8">
+      <span
+        className="
+          mb-5 block font-mono text-[10px] font-medium tracking-[0.12em]
+          uppercase opacity-20
+        "
+      >
         {label}
       </span>
       <p
@@ -95,15 +100,26 @@ const TempPage = () => {
     <FullWidthWrapper element="main" className="pt-24">
       {/* ── Hero ── */}
       <header className="mb-24">
-        <span className="mb-6 block font-mono text-[10px] font-semibold uppercase tracking-[0.18em] opacity-20">
+        <span
+          className="
+            mb-6 block font-mono text-[10px] font-semibold tracking-[0.18em]
+            uppercase opacity-20
+          "
+        >
           globals.css Reference
         </span>
-        <h1 className="overflow-hidden font-display text-[72px] leading-[0.95] tracking-[-0.02em] lg:text-[112px]">
+        <h1
+          className="
+            overflow-hidden font-display text-[72px] leading-[0.95]
+            tracking-[-0.02em]
+            lg:text-[112px]
+          "
+        >
           Design
           <br />
           Tokens
         </h1>
-        <p className="mt-10 font-mono text-sm leading-relaxed opacity-30">
+        <p className="mt-10 font-mono text-sm/relaxed opacity-30">
           Every color, type scale, spacing step, radius, z-index, and motion
           value defined in the project. Hover any swatch to inspect &middot;
           click to copy its CSS variable.
@@ -117,7 +133,12 @@ const TempPage = () => {
               return setQuery(e.target.value);
             }}
             placeholder="Search tokens (e.g. accent, 500, grey, radius, ease)..."
-            className="w-full border border-[var(--color-border-strong)] bg-transparent px-5 py-3 font-mono text-sm text-[var(--color-text)] placeholder:opacity-25 focus:outline-2 focus:outline-[var(--color-focus)]"
+            className="
+              w-full border border-(--color-border-strong) bg-transparent px-5
+              py-3 font-mono text-sm text-(--color-text)
+              placeholder:opacity-25
+              focus:outline-2 focus:outline-(--color-focus)
+            "
           />
           {query && (
             <p className="mt-2 font-mono text-[11px] opacity-25">
@@ -147,7 +168,13 @@ const TempPage = () => {
           <SectionHead label="03 &mdash; Typography" id="typography" />
 
           {filteredFonts.length > 0 && (
-            <div className="mb-14 grid gap-px bg-[var(--color-border)] sm:grid-cols-2 lg:grid-cols-5">
+            <div
+              className="
+                mb-14 grid gap-px bg-(--color-border)
+                sm:grid-cols-2
+                lg:grid-cols-5
+              "
+            >
               {filteredFonts.map((font) => {
                 return <FontLabel key={font.label} {...font} />;
               })}
@@ -162,7 +189,12 @@ const TempPage = () => {
                     key={cssVar}
                     className="group border-b border-(--color-border) py-6"
                   >
-                    <div className="mb-2 flex items-baseline gap-4 font-mono text-[12px] text-grey-300">
+                    <div
+                      className="
+                        mb-2 flex items-baseline gap-4 font-mono text-[12px]
+                        text-grey-300
+                      "
+                    >
                       <span className="w-12 text-right font-medium">
                         {label}
                       </span>
@@ -193,7 +225,10 @@ const TempPage = () => {
               return (
                 <div
                   key={label}
-                  className="flex items-center gap-4 border-b border-[var(--color-border)] py-3.5 font-mono text-[13px]"
+                  className="
+                    flex items-center gap-4 border-b border-(--color-border)
+                    py-3.5 font-mono text-[13px]
+                  "
                 >
                   <span className="w-36 shrink-0 font-medium">{label}</span>
                   <div className="flex flex-1 items-center">
@@ -221,11 +256,22 @@ const TempPage = () => {
             label="05 &mdash; Radii, Z-Index, Motion, Borders &amp; Layout"
             id="misc"
           />
-          <div className="grid gap-x-16 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 w-full">
+          <div
+            className="
+              grid w-full gap-x-16 gap-y-12
+              sm:grid-cols-2
+              lg:grid-cols-3
+            "
+          >
             {filteredMisc.map((group) => {
               return (
                 <div key={group.title}>
-                  <h3 className="mb-5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] opacity-20">
+                  <h3
+                    className="
+                      mb-5 font-mono text-[10px] font-semibold tracking-[0.14em]
+                      uppercase opacity-20
+                    "
+                  >
                     {group.title}
                   </h3>
                   {group.rows.map(([l, r]) => {
@@ -239,8 +285,12 @@ const TempPage = () => {
       )}
 
       {/* ── Footer ── */}
-      <div className="mt-32 border-t-2 border-[var(--color-border-strong)] pt-8">
-        <span className="font-mono text-[10px] uppercase tracking-[0.18em] opacity-10">
+      <div className="mt-32 border-t-2 border-(--color-border-strong) pt-8">
+        <span
+          className="
+            font-mono text-[10px] tracking-[0.18em] uppercase opacity-10
+          "
+        >
           &mdash; end of token reference &mdash;
         </span>
       </div>

@@ -1,7 +1,10 @@
 import config from "@kami-ui/eslint-config/next";
+import betterTailwindcss from "eslint-plugin-better-tailwindcss";
 
+/** @type {import("eslint").Linter.Config[]}*/
 export default [
   ...config,
+  betterTailwindcss.configs["recommended"],
   {
     files: ["**/*.ts", "**/*.tsx"],
     rules: {
@@ -13,6 +16,18 @@ export default [
         "warn",
         { allowConstantExport: true, allowExportNames: ["metadata"] },
       ],
+      "better-tailwindcss/enforce-consistent-line-wrapping": "off",
+      "better-tailwindcss/no-unknown-classes": [
+        "warn",
+        {
+          ignore: ["^custom:[A-Za-z0-9]+$"],
+        },
+      ],
+    },
+    settings: {
+      "better-tailwindcss": {
+        entryPoint: "src/app/globals.css",
+      },
     },
   },
 ];

@@ -9,18 +9,33 @@ const AboutSection = () => {
     >
       <div className="grid grid-cols-12 gap-x-8">
         <div className="col-span-4">
-          <span className="font-mono text-xs uppercase tracking-wider text-(--color-text-subtle)">
+          <span
+            className="
+              font-mono text-xs tracking-wider text-(--color-text-subtle)
+              uppercase
+            "
+          >
             About
           </span>
         </div>
 
         <div className="col-span-8 flex flex-col gap-6">
-          <h2 className="font-display text-(--fs-4xl) tracking-(--tracking-display) text-(--color-text) uppercase leading-tight">
+          <h2
+            className="
+              font-display text-(size:--fs-4xl) leading-tight
+              tracking-(--tracking-display) text-(--color-text) uppercase
+            "
+          >
             I build, rebuild, and integrate web products that hold up in
             production.
           </h2>
 
-          <div className="flex flex-col gap-4 font-sans text-(--fs-2xs) text-(--color-text-muted) leading-relaxed max-w-3xl">
+          <div
+            className="
+              flex max-w-3xl flex-col gap-4 font-sans text-(size:--fs-2xs)
+              leading-relaxed text-(--color-text-muted)
+            "
+          >
             <p>
               {fullName} — full stack developer based in Punjab, India. I ship
               polished, performant web apps for startups, agencies, and
@@ -29,30 +44,45 @@ const AboutSection = () => {
               them.
             </p>
 
-            <div className="grid grid-cols-3 gap-4 mt-4">
+            <div className="mt-4 grid grid-cols-3 gap-4">
               <div className="border border-(--color-border) p-6">
-                <h3 className="font-mono text-xs uppercase tracking-wider text-(--color-text-subtle) mb-2">
+                <h3
+                  className="
+                    mb-2 font-mono text-xs tracking-wider
+                    text-(--color-text-subtle) uppercase
+                  "
+                >
                   Build
                 </h3>
-                <p className="font-sans text-sm text-(--color-text) leading-snug">
+                <p className="font-sans text-sm/snug text-(--color-text)">
                   New products from zero. Architecture, design systems, APIs,
                   and deployment — end to end.
                 </p>
               </div>
               <div className="border border-(--color-border) p-6">
-                <h3 className="font-mono text-xs uppercase tracking-wider text-(--color-text-subtle) mb-2">
+                <h3
+                  className="
+                    mb-2 font-mono text-xs tracking-wider
+                    text-(--color-text-subtle) uppercase
+                  "
+                >
                   Rebuild
                 </h3>
-                <p className="font-sans text-sm text-(--color-text) leading-snug">
+                <p className="font-sans text-sm/snug text-(--color-text)">
                   Modernize legacy frontends, consolidate codebases, and fix
                   performance at scale.
                 </p>
               </div>
               <div className="border border-(--color-border) p-6">
-                <h3 className="font-mono text-xs uppercase tracking-wider text-(--color-text-subtle) mb-2">
+                <h3
+                  className="
+                    mb-2 font-mono text-xs tracking-wider
+                    text-(--color-text-subtle) uppercase
+                  "
+                >
                   Integrate
                 </h3>
-                <p className="font-sans text-sm text-(--color-text) leading-snug">
+                <p className="font-sans text-sm/snug text-(--color-text)">
                   Connect systems, build APIs, and unify data layers so
                   everything talks to everything else.
                 </p>

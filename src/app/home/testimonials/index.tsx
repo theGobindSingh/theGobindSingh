@@ -15,7 +15,12 @@ const Testimonials = () => {
     >
       <div className="grid grid-cols-12 gap-x-8">
         <div className="col-span-4">
-          <span className="font-mono text-xs uppercase tracking-wider text-(--color-text-subtle)">
+          <span
+            className="
+              font-mono text-xs tracking-wider text-(--color-text-subtle)
+              uppercase
+            "
+          >
             Testimonials
           </span>
         </div>
@@ -27,11 +32,20 @@ const Testimonials = () => {
                 key={t.authorName}
                 className="border-l-2 border-(--color-accent-500) pl-6"
               >
-                <blockquote className="font-sans text-(--fs-s) text-(--color-text) leading-relaxed italic">
+                <blockquote
+                  className="
+                    font-sans text-(size:--fs-s) leading-relaxed text-(--color-text)
+                    italic
+                  "
+                >
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
-                <div className="flex items-center gap-2 mt-4">
-                  <span className="font-sans text-sm text-(--color-text) font-medium">
+                <div className="mt-4 flex items-center gap-2">
+                  <span
+                    className="
+                      font-sans text-sm font-medium text-(--color-text)
+                    "
+                  >
                     {t.authorName}
                   </span>
                   <span className="font-mono text-xs text-(--color-text-subtle)">

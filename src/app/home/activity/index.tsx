@@ -15,24 +15,39 @@ const Activity = () => {
     >
       <div className="grid grid-cols-12 gap-x-8">
         <div className="col-span-4">
-          <span className="font-mono text-xs uppercase tracking-wider text-(--color-text-subtle)">
+          <span
+            className="
+              font-mono text-xs tracking-wider text-(--color-text-subtle)
+              uppercase
+            "
+          >
             Open Source
           </span>
         </div>
 
         <div className="col-span-8 flex flex-col gap-6">
-          <h2 className="font-display text-(--fs-4xl) tracking-(--tracking-display) text-(--color-text) uppercase leading-tight">
+          <h2
+            className="
+              font-display text-(size:--fs-4xl) leading-tight
+              tracking-(--tracking-display) text-(--color-text) uppercase
+            "
+          >
             Code in public.
           </h2>
 
-          <p className="font-sans text-(--fs-2xs) text-(--color-text-muted) leading-relaxed max-w-2xl">
+          <p
+            className="
+              max-w-2xl font-sans text-(size:--fs-2xs) leading-relaxed
+              text-(--color-text-muted)
+            "
+          >
             I contribute to open source and share what I build. My GitHub
             profile reflects real work — side projects, experiments, and
             contributions across the React and TypeScript ecosystem.
           </p>
 
-          <div className="border border-(--color-border) p-8 mt-2">
-            <div className="flex items-center justify-between mb-6">
+          <div className="mt-2 border border-(--color-border) p-8">
+            <div className="mb-6 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <span className="font-mono text-lg text-(--color-text)">
                   @{username}
@@ -46,32 +61,44 @@ const Activity = () => {
                 rel="noopener noreferrer"
               >
                 View GitHub
-                <ArrowRight className="h-3 w-3" />
+                <ArrowRight className="size-3" />
               </Link>
             </div>
 
-            <div className="grid grid-cols-3 gap-4 mb-6">
+            <div className="mb-6 grid grid-cols-3 gap-4">
               <div className="border border-(--color-border) p-4 text-center">
-                <div className="font-mono text-(--fs-m) text-(--color-accent-500)">
+                <div
+                  className="
+                    font-mono text-(size:--fs-m) text-(--color-accent-500)
+                  "
+                >
                   —
                 </div>
-                <div className="font-mono text-xs text-(--color-text-subtle) mt-1">
+                <div className="mt-1 font-mono text-xs text-(--color-text-subtle)">
                   Repositories
                 </div>
               </div>
               <div className="border border-(--color-border) p-4 text-center">
-                <div className="font-mono text-(--fs-m) text-(--color-accent-500)">
+                <div
+                  className="
+                    font-mono text-(size:--fs-m) text-(--color-accent-500)
+                  "
+                >
                   —
                 </div>
-                <div className="font-mono text-xs text-(--color-text-subtle) mt-1">
+                <div className="mt-1 font-mono text-xs text-(--color-text-subtle)">
                   Contributions
                 </div>
               </div>
               <div className="border border-(--color-border) p-4 text-center">
-                <div className="font-mono text-(--fs-m) text-(--color-accent-500)">
+                <div
+                  className="
+                    font-mono text-(size:--fs-m) text-(--color-accent-500)
+                  "
+                >
                   —
                 </div>
-                <div className="font-mono text-xs text-(--color-text-subtle) mt-1">
+                <div className="mt-1 font-mono text-xs text-(--color-text-subtle)">
                   Stars
                 </div>
               </div>

@@ -64,16 +64,26 @@ const ColorShowcase = ({ filter }: { filter: string | undefined }) => {
 
   return (
     <div>
-      <div className="overflow-hidden border border-[var(--color-border-strong)]">
+      <div className="overflow-hidden border border-(--color-border-strong)">
         {visibleRamps.map(({ family, stops }, i) => {
           return (
             <div
               key={family}
-              className={i > 0 ? "border-t border-[var(--color-border)]" : ""}
+              className={i > 0 ? "border-t border-(--color-border)" : ""}
             >
               <div className="flex">
-                <div className="flex w-20 shrink-0 items-center border-r border-[var(--color-border)] px-4 py-3">
-                  <span className="font-mono text-[10px] font-medium uppercase tracking-[0.12em] opacity-35">
+                <div
+                  className="
+                    flex w-20 shrink-0 items-center border-r
+                    border-(--color-border) px-4 py-3
+                  "
+                >
+                  <span
+                    className="
+                      font-mono text-[10px] font-medium tracking-[0.12em]
+                      uppercase opacity-35
+                    "
+                  >
                     {family}
                   </span>
                 </div>
@@ -95,11 +105,21 @@ const ColorShowcase = ({ filter }: { filter: string | undefined }) => {
                         onMouseLeave={() => {
                           return setHovered(null);
                         }}
-                        className="group relative flex-1 cursor-pointer border-0 bg-transparent p-0 outline-offset-[-2px] transition-[filter] hover:z-10 hover:brightness-110 focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-focus)]"
+                        className="
+                          group relative flex-1 cursor-pointer border-0
+                          bg-transparent p-0 -outline-offset-2
+                          transition-[filter]
+                          hover:z-10 hover:brightness-110
+                          focus-visible:z-10
+                          focus-visible:outline-2
+                          focus-visible:outline-(--color-focus)
+                        "
                         title={`${varName} — click to copy`}
                       >
                         <div
-                          className="flex h-14 w-full items-end justify-center pb-2"
+                          className="
+                            flex h-14 w-full items-end justify-center pb-2
+                          "
                           style={{
                             backgroundColor: `var(${varName})`,
                             outline: isHovered
@@ -111,7 +131,10 @@ const ColorShowcase = ({ filter }: { filter: string | undefined }) => {
                           }}
                         >
                           <span
-                            className="select-none font-mono text-[10px] font-semibold leading-none transition-all duration-150"
+                            className="
+                              font-mono text-[10px] leading-none font-semibold
+                              transition-all duration-150 select-none
+                            "
                             style={{
                               color: `var(${varName})`,
                               filter: "invert(1) grayscale(1) contrast(9)",
@@ -127,7 +150,7 @@ const ColorShowcase = ({ filter }: { filter: string | undefined }) => {
                 </div>
               </div>
               <div className="flex">
-                <div className="w-20 shrink-0 border-r border-[var(--color-border)]" />
+                <div className="w-20 shrink-0 border-r border-(--color-border)" />
                 <div className="flex flex-1">
                   {stops.map((stop) => {
                     const varName = `--color-${family}-${stop}`;
@@ -138,9 +161,11 @@ const ColorShowcase = ({ filter }: { filter: string | undefined }) => {
                         className="flex flex-1 justify-center py-1.5"
                       >
                         <span
-                          className={`select-none font-mono text-[8px] leading-none transition-opacity ${
-                            isHovered ? "opacity-60" : "opacity-15"
-                          }`}
+                          className={`
+                            font-mono text-[8px] leading-none transition-opacity
+                            select-none
+                            ${isHovered ? "opacity-60" : "opacity-15"}
+                          `}
                         >
                           {stop}
                         </span>
@@ -158,7 +183,7 @@ const ColorShowcase = ({ filter }: { filter: string | undefined }) => {
         {copied ? (
           <span>
             <span className="opacity-40">Copied to clipboard &rarr; </span>
-            <span className="font-medium text-[var(--color-accent-500)]">
+            <span className="font-medium text-(--color-accent-500)">
               {copied}
             </span>
           </span>

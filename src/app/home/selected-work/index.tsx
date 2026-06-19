@@ -19,7 +19,12 @@ const SelectedWork = () => {
     >
       <div className="grid grid-cols-12 gap-x-8">
         <div className="col-span-4">
-          <span className="font-mono text-xs uppercase tracking-wider text-(--color-text-subtle)">
+          <span
+            className="
+              font-mono text-xs tracking-wider text-(--color-text-subtle)
+              uppercase
+            "
+          >
             Selected Work
           </span>
         </div>
@@ -29,10 +34,18 @@ const SelectedWork = () => {
             return (
               <div
                 key={cs.slug}
-                className="flex flex-col gap-4 border-b border-(--color-border) pb-12 last:border-b-0 last:pb-0"
+                className="
+                  flex flex-col gap-4 border-b border-(--color-border) pb-12
+                  last:border-b-0 last:pb-0
+                "
               >
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs uppercase tracking-wider text-(--color-accent-500)">
+                  <span
+                    className="
+                      font-mono text-xs tracking-wider text-(--color-accent-500)
+                      uppercase
+                    "
+                  >
                     {cs.type}
                   </span>
                   <span className="font-mono text-xs text-(--color-text-subtle)">
@@ -40,20 +53,33 @@ const SelectedWork = () => {
                   </span>
                 </div>
 
-                <h3 className="font-display text-(--fs-2xl) tracking-(--tracking-display) text-(--color-text) uppercase leading-tight">
+                <h3
+                  className="
+                    font-display text-(size:--fs-2xl) leading-tight
+                    tracking-(--tracking-display) text-(--color-text) uppercase
+                  "
+                >
                   {cs.title}
                 </h3>
 
-                <p className="font-sans text-(--fs-2xs) text-(--color-text-muted) leading-relaxed max-w-2xl">
+                <p
+                  className="
+                    max-w-2xl font-sans text-(size:--fs-2xs)
+                    leading-relaxed text-(--color-text-muted)
+                  "
+                >
                   {cs.summary}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mt-1">
+                <div className="mt-1 flex flex-wrap gap-2">
                   {cs.stack.map((tech) => {
                     return (
                       <span
                         key={tech}
-                        className="font-mono text-xs px-2 py-0.5 border border-(--color-border) text-(--color-text-subtle)"
+                        className="
+                          border border-(--color-border) px-2 py-0.5 font-mono
+                          text-xs text-(--color-text-subtle)
+                        "
                       >
                         {tech}
                       </span>
@@ -61,7 +87,7 @@ const SelectedWork = () => {
                   })}
                 </div>
 
-                <div className="flex items-center gap-6 mt-2">
+                <div className="mt-2 flex items-center gap-6">
                   {cs.metrics.map((metric) => {
                     return (
                       <span
@@ -78,10 +104,10 @@ const SelectedWork = () => {
                   <Link
                     href={`/work/${cs.slug}`}
                     variant="text"
-                    className="font-mono text-xs uppercase tracking-wider"
+                    className="font-mono text-xs tracking-wider uppercase"
                   >
                     Read case study
-                    <ArrowRight className="h-3 w-3" />
+                    <ArrowRight className="size-3" />
                   </Link>
                 </div>
               </div>
@@ -92,7 +118,7 @@ const SelectedWork = () => {
             href="/work"
             variant="outlined"
             size="lg"
-            className="self-start mt-4"
+            className="mt-4 self-start"
           >
             View all work
           </Link>

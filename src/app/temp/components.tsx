@@ -2,9 +2,14 @@ export const SectionHead = ({ label, id }: { label: string; id?: string }) => {
   return (
     <div
       id={id}
-      className="mb-12 border-t-2 border-[var(--color-border-strong)] pt-6"
+      className="mb-12 border-t-2 border-(--color-border-strong) pt-6"
     >
-      <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.15em] opacity-30">
+      <span
+        className="
+          font-mono text-[11px] font-semibold tracking-[0.15em] uppercase
+          opacity-30
+        "
+      >
         {label}
       </span>
     </div>
@@ -21,7 +26,12 @@ export const Row = ({
   hint?: string;
 }) => {
   return (
-    <div className="flex items-baseline gap-4 border-b border-[var(--color-border)] py-2.5 font-mono text-[13px] w-full">
+    <div
+      className="
+        flex w-full items-baseline gap-4 border-b border-(--color-border) py-2.5
+        font-mono text-[13px]
+      "
+    >
       <span className="w-64 shrink-0 font-medium">{left}</span>
       <span className="opacity-45">{right}</span>
       {hint !== "" ? (
