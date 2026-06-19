@@ -1,4 +1,4 @@
-import type React from "react";
+import { CSSProperties } from "react";
 
 export type InteractionVariant = "filled" | "outlined" | "text";
 export type InteractionSize = "sm" | "md" | "lg";
@@ -57,8 +57,8 @@ export const colorStyleVars = ({
   textColorWeight?: ColorWeight | undefined;
   hoverTextColor?: ColorFamily | undefined;
   hoverTextColorWeight?: ColorWeight | undefined;
-}): React.CSSProperties => {
-  const defaultHoverWeight = Math.min(colorWeight + 100, 950) as ColorWeight;
+}): CSSProperties => {
+  const defaultHoverWeight = Math.min(colorWeight, 950) as ColorWeight;
 
   const vars: Record<string, string> = {
     "--c": `var(--color-${color}-${colorWeight})`,

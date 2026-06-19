@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 const RAMPS = [
   "grey",
@@ -15,7 +15,7 @@ const RAMPS = [
 
 const STOPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const;
 
-const ColorShowcase = () => {
+const ColorShowcase = ({ filter }: { filter: string | undefined }) => {
   const [hovered, setHovered] = useState<string | null>(null);
   const [copied, setCopied] = useState<string | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
@@ -33,10 +33,39 @@ const ColorShowcase = () => {
     }, 1600);
   }, []);
 
+  const q = (filter ?? "").toLowerCase();
+
+  const visibleRamps = useMemo(() => {
+    const words = q.split(/\s+/).filter(Boolean);
+    const matches = (s: string) => {
+      const lower = s.toLowerCase();
+      return words.every((w) => {
+        return lower.includes(w);
+      });
+    };
+
+    if (!q)
+      return RAMPS.map((family) => {
+        return { family, stops: [...STOPS] };
+      });
+
+    return RAMPS.map((family) => {
+      const familyMatch = matches(family);
+      const matchingStops = STOPS.filter((stop) => {
+        if (familyMatch) return true;
+        const varName = `--color-${family}-${stop}`;
+        return matches(varName);
+      });
+      return { family, stops: matchingStops };
+    }).filter((r) => {
+      return r.stops.length > 0;
+    });
+  }, [q]);
+
   return (
     <div>
       <div className="overflow-hidden border border-[var(--color-border-strong)]">
-        {RAMPS.map((family, i) => {
+        {visibleRamps.map(({ family, stops }, i) => {
           return (
             <div
               key={family}
@@ -49,7 +78,7 @@ const ColorShowcase = () => {
                   </span>
                 </div>
                 <div className="flex flex-1">
-                  {STOPS.map((stop) => {
+                  {stops.map((stop) => {
                     const varName = `--color-${family}-${stop}`;
                     const isHovered = hovered === varName;
                     const isCopied = copied === varName;
@@ -100,7 +129,7 @@ const ColorShowcase = () => {
               <div className="flex">
                 <div className="w-20 shrink-0 border-r border-[var(--color-border)]" />
                 <div className="flex flex-1">
-                  {STOPS.map((stop) => {
+                  {stops.map((stop) => {
                     const varName = `--color-${family}-${stop}`;
                     const isHovered = hovered === varName;
                     return (
