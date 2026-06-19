@@ -1,7 +1,4 @@
-import type {
-  InteractionSize,
-  InteractionVariant,
-} from "@/lib/interaction-styles";
+import type { InteractionSize, InteractionVariant } from "./styles";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: InteractionVariant;

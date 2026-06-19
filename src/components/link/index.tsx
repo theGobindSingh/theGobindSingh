@@ -1,4 +1,4 @@
-import { interactionStyles } from "@/lib/interaction-styles";
+import { interactionStyles } from "@components/button/styles";
 import NextLink from "next/link";
 import type { LinkProps } from "./types";
 

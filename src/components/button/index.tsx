@@ -1,4 +1,4 @@
-import { interactionStyles } from "@/lib/interaction-styles";
+import { interactionStyles } from "./styles";
 import type { ButtonProps } from "./types";
 
 export const Button = ({

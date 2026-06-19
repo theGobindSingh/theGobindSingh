@@ -1,7 +1,7 @@
 import type {
   InteractionSize,
   InteractionVariant,
-} from "@/lib/interaction-styles";
+} from "@components/button/styles";
 import type { MouseEventHandler, ReactNode } from "react";
 
 export interface LinkProps {
