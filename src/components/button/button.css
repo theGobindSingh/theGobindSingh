@@ -1,0 +1,98 @@
+/*
+ * Shared styles for Button and Link primitives.
+ *
+ * Two required CSS vars (set via inline style on the element):
+ *   --c        base color     e.g. var(--color-accent-500)
+ *   --c-hover  hover color    e.g. var(--color-accent-600)
+ *
+ * Two optional overrides (only added when the caller passes explicit props):
+ *   --c-text        resting text color
+ *   --c-hover-text  hover text color
+ *
+ * Each variant has sensible defaults for text / hover-text so neither
+ * optional var is needed for the typical case.
+ */
+
+@layer components {
+  /* ── Base ─────────────────────────────────────────────── */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    border-radius: var(--radius-none);
+    transition-property: all;
+    transition-duration: var(--dur-fast);
+    transition-timing-function: ease-out;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+    text-decoration: none;
+    font-size: var(--text-base);
+    padding: 0.5em 1em;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  /* ── Sizes (not applied to text variant) ─────────────── */
+
+  .btn-sm {
+    font-size: var(--text-sm);
+  }
+  .btn-lg {
+    font-size: var(--text-lg);
+  }
+
+  /* ── Filled ───────────────────────────────────────────── */
+
+  .btn-filled {
+    background-color: var(--c);
+    color: var(--c-text, var(--color-grey-50));
+    border: 1px solid transparent;
+  }
+
+  .btn-filled:hover {
+    background-color: var(--c-hover);
+  }
+
+  /* ── Outlined ─────────────────────────────────────────── */
+
+  .btn-outlined {
+    background-color: transparent;
+    color: var(--c-text, var(--c));
+    border: 1px solid var(--c);
+  }
+
+  .btn-outlined:hover {
+    background-color: var(--c-hover);
+    border-color: var(--c-hover);
+    color: var(--c-hover-text, var(--color-grey-50));
+  }
+
+  /* ── Text ─────────────────────────────────────────────── */
+
+  .btn-text {
+    background-color: transparent;
+    color: var(--c-text, var(--color-grey-950));
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+  }
+
+  .btn-text:hover {
+    color: var(--c-hover-text, var(--c-hover));
+    text-decoration-color: var(--c-hover-text, var(--c-hover));
+  }
+}

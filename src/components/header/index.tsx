@@ -40,7 +40,7 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      <Link href="/resume" variant="outlined">
+      <Link href="/resume" variant="outlined" color="accent">
         Resume
       </Link>
     </FullWidthWrapper>

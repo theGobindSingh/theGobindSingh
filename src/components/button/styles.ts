@@ -1,57 +1,77 @@
-import { tw } from "@utils/tailwind";
+import type React from "react";
 
 export type InteractionVariant = "filled" | "outlined" | "text";
 export type InteractionSize = "sm" | "md" | "lg";
-
-const base = tw`
-  inline-flex items-center justify-center gap-2
-  font-sans font-medium
-  rounded-(--radius-none)
-  transition-colors duration-(--dur-fast) ease-out
-  focus-visible:outline-2 focus-visible:outline-offset-2
-  focus-visible:outline-(--color-focus)
-  disabled:pointer-events-none disabled:opacity-50
-`;
-
-const sizeMap: Record<InteractionSize, string> = {
-  sm: tw`px-3 py-1.5 text-sm`,
-  md: tw`px-5 py-2.5 text-base`,
-  lg: tw`px-7 py-3.5 text-lg`,
-};
-
-const variantMap: Record<InteractionVariant, string> = {
-  filled: tw`
-    bg-accent-500 text-white
-    border border-transparent
-    hover:bg-accent-600
-  `,
-  outlined: tw`
-    bg-transparent text-grey-950
-    border border-grey-700
-    hover:border-accent-500 hover:text-accent-500
-  `,
-  text: tw`
-    bg-transparent text-grey-950
-    underline decoration-transparent underline-offset-4
-    hover:text-accent-500 hover:decoration-accent-500
-  `,
-};
-
-interface InteractionStylesOptions {
-  variant: InteractionVariant;
-  size?: InteractionSize;
-  className?: string | undefined;
-}
+export type ColorFamily =
+  | "grey"
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "success"
+  | "caution"
+  | "info"
+  | "error";
+export type ColorWeight =
+  | 50
+  | 100
+  | 200
+  | 300
+  | 400
+  | 500
+  | 600
+  | 700
+  | 800
+  | 900
+  | 950;
 
 export const interactionStyles = ({
   variant,
   size = "md",
   className,
-}: InteractionStylesOptions): string => {
-  return tw`
-    ${base}
-    ${variantMap[variant]}
-    ${variant !== "text" && sizeMap[size]}
-    ${className}
-  `;
+}: {
+  variant: InteractionVariant;
+  size?: InteractionSize | undefined;
+  className?: string | undefined;
+}): string => {
+  const parts = ["btn", `btn-${variant}`];
+  if (variant !== "text") parts.push(`btn-${size}`);
+  if (className) parts.push(className);
+  return parts.join(" ");
+};
+
+export const colorStyleVars = ({
+  color,
+  colorWeight,
+  hoverBgColor,
+  hoverBgColorWeight,
+  textColor,
+  textColorWeight,
+  hoverTextColor,
+  hoverTextColorWeight,
+}: {
+  color: ColorFamily;
+  colorWeight: ColorWeight;
+  hoverBgColor?: ColorFamily | undefined;
+  hoverBgColorWeight?: ColorWeight | undefined;
+  textColor?: ColorFamily | undefined;
+  textColorWeight?: ColorWeight | undefined;
+  hoverTextColor?: ColorFamily | undefined;
+  hoverTextColorWeight?: ColorWeight | undefined;
+}): React.CSSProperties => {
+  const defaultHoverWeight = Math.min(colorWeight + 100, 950) as ColorWeight;
+
+  const vars: Record<string, string> = {
+    "--c": `var(--color-${color}-${colorWeight})`,
+    "--c-hover": `var(--color-${hoverBgColor ?? color}-${hoverBgColorWeight ?? defaultHoverWeight})`,
+  };
+
+  if (textColor !== undefined && textColorWeight !== undefined) {
+    vars["--c-text"] = `var(--color-${textColor}-${textColorWeight})`;
+  }
+  if (hoverTextColor !== undefined && hoverTextColorWeight !== undefined) {
+    vars["--c-hover-text"] =
+      `var(--color-${hoverTextColor}-${hoverTextColorWeight})`;
+  }
+
+  return vars;
 };

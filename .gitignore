@@ -38,9 +38,6 @@ next-env.d.ts
 yarn.lock
 package-lock.json
 *.log
-*.css
-!src/app/globals.css
-!src/app/defaults.css
 *.map
 
 pnpm-lock.yaml
