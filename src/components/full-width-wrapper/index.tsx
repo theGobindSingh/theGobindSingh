@@ -1,5 +1,11 @@
 import { tw } from "@utils/tailwind";
-import type { JSX, PropsWithChildren, ReactNode, Ref } from "react";
+import type {
+  HTMLAttributes,
+  JSX,
+  PropsWithChildren,
+  ReactNode,
+  Ref,
+} from "react";
 import { forwardRef } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
 
@@ -12,6 +18,7 @@ export interface FullWidthWrapperProps extends PropsWithChildren {
   isContainerCenter?: boolean;
   containerSize?: string;
   maxContentWidth?: string;
+  wrapperProps?: HTMLAttributes<HTMLElement>;
 }
 
 const FullWidthWrapperWithoutRef = (
@@ -25,6 +32,7 @@ const FullWidthWrapperWithoutRef = (
     afterContainer = null,
     wrapperClassName,
     isContainerCenter = true,
+    wrapperProps = {},
   }: FullWidthWrapperProps,
   ref: Ref<HTMLElement>,
 ): JSX.Element => {
@@ -39,13 +47,14 @@ const FullWidthWrapperWithoutRef = (
 
   return jsxs(element, {
     className: tw`
-      w-full
-      flex
-      ${isContainerCenter && "justify-center items-center"}
-      ${wrapperClassName}
+    w-full
+    flex
+    ${isContainerCenter && "justify-center items-center"}
+    ${wrapperClassName}
     `,
     ref,
     children: [beforeContainer, innerElement, afterContainer],
+    ...wrapperProps,
   });
 };
 

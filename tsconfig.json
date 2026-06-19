@@ -18,6 +18,7 @@
       "@utils/*": ["./src/utils/*"],
       "@icons": ["./src/icons/index.ts"],
       "@icons/*": ["./src/icons/*"],
+      "@providers/*": ["./src/providers/*"],
       "@/*": ["./src/*"],
       "@data": ["./data.ts"]
     },

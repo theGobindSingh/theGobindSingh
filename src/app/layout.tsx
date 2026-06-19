@@ -1,5 +1,6 @@
 import ThemeSetter from "@app/theme-setter";
 import Header from "@components/header";
+import LenisProvider from "@providers/lenis";
 import type { Metadata } from "next";
 import {
   Anton,
@@ -96,7 +97,7 @@ const RootLayout = async ({ children }: PropsWithChildren<unknown>) => {
       <body>
         <ThemeSetter />
         <Header />
-        {children}
+        <LenisProvider>{children}</LenisProvider>
       </body>
     </html>
   );
