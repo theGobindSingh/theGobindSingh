@@ -8,6 +8,7 @@
     "target": "es2017",
     "forceConsistentCasingInFileNames": true,
     "paths": {
+      "@app/*": ["./src/app/*"],
       "@assets/*": ["./public/assets/*"],
       "@images/*": ["./public/assets/images/*"],
       "@public/*": ["./public/*"],
@@ -17,7 +18,8 @@
       "@utils/*": ["./src/utils/*"],
       "@icons": ["./src/icons/index.ts"],
       "@icons/*": ["./src/icons/*"],
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@data": ["./data.ts"]
     },
     "noPropertyAccessFromIndexSignature": false,
     "ignoreDeprecations": "5.0",
@@ -31,6 +33,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.js",
+    "data.ts",
     "eslint.config.mjs",
     "next.config.js"
   ],

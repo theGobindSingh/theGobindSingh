@@ -1,26 +1,27 @@
-import type { IconType } from '@icons-pack/react-simple-icons';
-import { SiGithub, SiInstagram } from '@icons-pack/react-simple-icons';
-import type { LucideProps } from 'lucide-react';
-import { Linkedin, Mail } from 'lucide-react';
+import type { IconType } from "@icons-pack/react-simple-icons";
+import { SiGithub, SiInstagram } from "@icons-pack/react-simple-icons";
+import type { LucideProps } from "lucide-react";
+import { Mail } from "lucide-react";
 
-import myPhoto from '@images/me.jpg';
-import { ForwardRefExoticComponent, RefAttributes } from 'react';
+import LinkedInIcon from "@components/icon-linkedin";
+import myPhoto from "@images/me.jpeg";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
 
-export const firstName = 'Gobind';
-export const lastName = 'Singh';
+export const firstName = "Gobind";
+export const lastName = "Singh";
 export const fullName = `${firstName} ${lastName}`;
 
-export const designation = 'Web Developer | SDE';
+export const designation = "Web Developer | SDE";
 
-export const email = 'thesinghgobind@gmail.com';
+export const email = "thesinghgobind@gmail.com";
 
-export const resumeLink = '/assets/pdfs/resume.pdf';
+export const resumeLink = "/assets/pdfs/resume.pdf";
 
 export enum SOCIAL_KEYS {
-  LINKEDIN = 'LINKEDIN',
-  GITHUB = 'GITHUB',
-  EMAIL = 'EMAIL',
-  INSTAGRAM = 'INSTAGRAM',
+  LINKEDIN = "LINKEDIN",
+  GITHUB = "GITHUB",
+  EMAIL = "EMAIL",
+  INSTAGRAM = "INSTAGRAM",
 }
 
 export const socialLinks: {
@@ -30,33 +31,33 @@ export const socialLinks: {
     logo:
       | IconType
       | ForwardRefExoticComponent<
-          Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>
+          Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
         >;
     userName?: string;
   };
 } = {
   [SOCIAL_KEYS.GITHUB]: {
-    url: 'https://www.github.com/theGobindSingh',
-    label: 'GitHub',
+    url: "https://www.github.com/theGobindSingh",
+    label: "GitHub",
     logo: SiGithub,
-    userName: 'theGobindSingh',
+    userName: "theGobindSingh",
   },
   [SOCIAL_KEYS.LINKEDIN]: {
-    url: 'https://www.linkedin.com/in/thegobindsingh',
-    label: 'LinkedIn',
-    logo: Linkedin,
-    userName: 'theGobindSingh',
+    url: "https://www.linkedin.com/in/thegobindsingh",
+    label: "LinkedIn",
+    logo: LinkedInIcon,
+    userName: "theGobindSingh",
   },
   [SOCIAL_KEYS.EMAIL]: {
     url: `mailto:${email}`,
-    label: 'Email',
+    label: "Email",
     logo: Mail,
   },
   [SOCIAL_KEYS.INSTAGRAM]: {
-    url: 'https://www.instagram.com/thegobindsingh',
-    label: 'Instagram',
+    url: "https://www.instagram.com/thegobindsingh",
+    label: "Instagram",
     logo: SiInstagram,
-    userName: 'theGobindSingh',
+    userName: "theGobindSingh",
   },
 };
 
@@ -83,71 +84,71 @@ export const headerAndNavData: {
   middleText: designation,
   links: [
     {
-      text: 'Home',
-      targetId: 'home',
+      text: "Home",
+      targetId: "home",
       isHiddenInV1: true,
     },
     {
-      text: 'About',
-      targetId: 'about',
+      text: "About",
+      targetId: "about",
     },
     {
-      text: 'Work',
-      targetId: 'work',
+      text: "Work",
+      targetId: "work",
     },
     // {
     //   text: 'Projects',
     //   targetId: 'projects',
     // },
     {
-      text: 'Extracurricular',
-      targetId: 'extracurricular',
+      text: "Extracurricular",
+      targetId: "extracurricular",
     },
     {
-      text: 'Contact',
-      targetId: 'contact',
+      text: "Contact",
+      targetId: "contact",
     },
   ],
   bottomPrimaryLink: {
-    text: 'Email address',
+    text: "Email address",
     url: `mailto:${email}`,
   },
   bottomLinks: [
     {
-      text: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/thegobindsingh/',
+      text: "LinkedIn",
+      url: "https://www.linkedin.com/in/thegobindsingh/",
     },
     {
-      text: 'GitHub',
-      url: 'https://www.github.com/theGobindSingh',
+      text: "GitHub",
+      url: "https://www.github.com/theGobindSingh",
     },
     {
-      text: 'Twitter',
-      url: 'https://www.twitter.com/theGobindSingh',
+      text: "Twitter",
+      url: "https://www.twitter.com/theGobindSingh",
     },
   ],
 };
 
 export const homeHeroData = {
-  titleSuffix: 'Hi, my name is ',
+  titleSuffix: "Hi, my name is ",
   title: `${fullName}.`,
-  titlePostfix: 'I build things for the web.',
+  titlePostfix: "I build things for the web.",
   img: myPhoto,
   text: `I'm a software engineer specializing in building\nexceptional digital experiences.`,
   textReplacements: [
     {
-      text: 'exceptional digital experiences.',
-      url: 'https://youtu.be/dQw4w9WgXcQ?t=43',
+      text: "exceptional digital experiences.",
+      url: "https://youtu.be/dQw4w9WgXcQ?t=43",
     },
   ],
-  dateText: 'Building exceptional digital experiences since',
-  date: '2021',
-  buttonText: 'Contact ↗',
-  buttonTargetClassName: 'contact',
+  dateText: "Building exceptional digital experiences since",
+  date: "2021",
+  buttonText: "Contact ↗",
+  buttonTargetClassName: "contact",
 };
 
 export const homeAboutData = {
-  title: 'About',
+  title: "About",
   img: myPhoto,
   text: `
 Hello, I'm Gobind, a full-stack software engineer from India who builds scalable, high performance web products. I've worked across consumer and internal platforms at Optimeleon AI, building AI driven CRO systems, and at Bajaj Finserv Health, shipping large scale health insurance and hospital workflow products used by real teams every day. Earlier in my career, I also worked with early stage startups, small freelance clients, and experimental products, which gave me strong exposure to fast paced, zero margin for error environments.
@@ -156,22 +157,22 @@ I enjoy turning ideas into systems that actually hold up in production. From fro
 `,
   textReplacements: [
     {
-      text: 'Optimeleon AI',
-      url: 'https://www.optimeleon.com/',
+      text: "Optimeleon AI",
+      url: "https://www.optimeleon.com/",
     },
     {
-      text: 'Bajaj Finserv Health',
-      url: 'https://www.bajajfinservhealth.in/',
+      text: "Bajaj Finserv Health",
+      url: "https://www.bajajfinservhealth.in/",
     },
   ],
   skillsTitle: "Here are a few technologies I've been working with recently:",
   skills: [
-    'TypeScript & JS (ES6+)',
-    'React & React based frameworks',
-    'Express.js & Nest.js',
-    'GraphQL',
-    'Prisma & SQL Databases',
-    'Docker',
+    "TypeScript & JS (ES6+)",
+    "React & React based frameworks",
+    "Express.js & Nest.js",
+    "GraphQL",
+    "Prisma & SQL Databases",
+    "Docker",
   ],
 };
 
@@ -186,10 +187,10 @@ export const experienceData:
     }[]
   | null = [
   {
-    company: 'Optimeleon AI',
-    position: ' Software Development Engineer - Full Stack',
-    website: 'https://www.optimeleon.com/',
-    dateRange: 'July 2025 - Present',
+    company: "Optimeleon AI",
+    position: " Software Development Engineer - Full Stack",
+    website: "https://www.optimeleon.com/",
+    dateRange: "July 2025 - Present",
     responsibilities: [
       `Worked as a full-stack engineer on an AI-driven conversion rate optimization platform, building and scaling personalized web experiences using React, Node.js, and modern frontend caching and data-fetching strategies.`,
       `Re-architected the monorepo by separating applications, shared UI components, and data layers, enabling independent deployments and improving build performance by approximately 15-20%.`,
@@ -198,15 +199,15 @@ export const experienceData:
     ],
   },
   {
-    company: 'Bajaj Finserv Health',
-    position: 'Software Development Engineer - Frontend',
+    company: "Bajaj Finserv Health",
+    position: "Software Development Engineer - Frontend",
     otherPositions: [
       `Intern (Frontend)`,
       `Associate SDE (Frontend)`,
       `SDE (Frontend)`,
     ],
-    website: 'https://www.bajajfinservhealth.in/',
-    dateRange: 'January 2023 - July 2025',
+    website: "https://www.bajajfinservhealth.in/",
+    dateRange: "January 2023 - July 2025",
     responsibilities: [
       `Led frontend development for large-scale internal healthcare and insurance portals, enabling hospital-side workflows such as agent-assisted discharge and claims processing.`,
       `Owned and delivered a production-grade portal end-to-end, including frontend architecture, state management, and close collaboration with backend, DevOps, QA, and product stakeholders.`,
@@ -216,20 +217,20 @@ export const experienceData:
     ],
   },
   {
-    company: 'TakeMyCar',
-    position: 'Freelance Web Developer',
-    website: 'https://takemycarweb.vercel.app/',
-    dateRange: 'May 2022',
+    company: "TakeMyCar",
+    position: "Freelance Web Developer",
+    website: "https://takemycarweb.vercel.app/",
+    dateRange: "May 2022",
     responsibilities: [
       `Designed and developed a responsive marketing website to establish the company's online presence and showcase its car rental services.`,
       `Built a static, high-performance website using Next.js and Lottie animations, focusing on fast load times and clean visual presentation.`,
     ],
   },
   {
-    company: 'Itaitech',
-    position: 'Web Development Intern',
-    website: 'https://www.linkedin.com/company/iraitech-innovations/',
-    dateRange: 'April 2022 - July 2022',
+    company: "Itaitech",
+    position: "Web Development Intern",
+    website: "https://www.linkedin.com/company/iraitech-innovations/",
+    dateRange: "April 2022 - July 2022",
     responsibilities: [
       `Developed modern, performant, and maintainable frontend code for multiple client-facing and internal web applications.`,
       `Collaborated closely with designers and management to implement UI requirements, document features, and support end-to-end project delivery.`,
@@ -250,21 +251,213 @@ export const projectData:
     }[]
   | null = [
   {
-    title: '',
-    subTitle: '',
+    title: "",
+    subTitle: "",
     descriptions: [],
     techStack: [],
     links: {
-      github: '',
-      live: '',
+      github: "",
+      live: "",
     },
   },
 ];
 
+export const caseStudies: {
+  title: string;
+  slug: string;
+  client: string;
+  type: "build" | "rebuild" | "integration" | "frontend";
+  role: string;
+  stack: string[];
+  timeframe: string;
+  summary: string;
+  problem: string;
+  approach: string;
+  outcome: string;
+  metrics: string[];
+  featured: boolean;
+  order: number;
+  links?: {
+    github?: string;
+    live?: string;
+  };
+}[] = [
+  {
+    title: "AI-Driven Conversion Optimization Platform",
+    slug: "ai-cro-platform",
+    client: "Optimeleon AI",
+    type: "build",
+    role: "Full Stack Developer",
+    stack: [
+      "React",
+      "Next.js",
+      "NestJS",
+      "Express",
+      "Prisma",
+      "TypeScript",
+      "PostgreSQL",
+      "Turborepo",
+    ],
+    timeframe: "Jul 2025 – Feb 2026",
+    summary:
+      "Built and scaled an AI-powered CRO platform, re-architected the monorepo for independent deployments, and shipped backend APIs supporting high-impact product features.",
+    problem:
+      "The platform's monorepo had grown into a tightly coupled codebase where a change in one area risked breaking another. Build times were slow, deployments were monolithic, and teams could not ship independently.",
+    approach:
+      "Separated the monorepo into distinct applications, shared UI components, and data layers. Designed backend APIs with NestJS and Express, backed by Prisma and PostgreSQL. Migrated from App Router to Pages Router for better ecosystem compatibility and routing stability.",
+    outcome:
+      "Independent deployments across the stack. Build cycles improved by ~15–20%. Frontend reliability and routing stability measurably improved through optimized rendering and client-side caching.",
+    metrics: [
+      "~15–20% faster build cycles",
+      "Independent deployments for all apps",
+      "Stable routing and improved rendering performance",
+    ],
+    featured: true,
+    order: 1,
+  },
+  {
+    title: "Internal Insurance Portal",
+    slug: "insurance-portal",
+    client: "Bajaj Finserv Health",
+    type: "build",
+    role: "Frontend Developer",
+    stack: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Emotion",
+      "Nx",
+      "Webpack",
+      "Micro-frontends",
+    ],
+    timeframe: "Jan 2023 – Jul 2025",
+    summary:
+      "Led frontend development for a large-scale internal portal enabling hospital-side workflows including agent-assisted discharge and claims processing.",
+    problem:
+      "The internal insurance infrastructure needed a unified, performant portal that hospital staff could rely on for critical workflows. Existing frontends were fragmented across multiple codebases with significant code duplication.",
+    approach:
+      "Owned the portal end-to-end: frontend architecture, state management, and collaboration with backend, DevOps, QA, and product. Consolidated multiple frontends into a single Nx monorepo. Migrated a monolithic app to micro-frontend architecture.",
+    outcome:
+      "Delivered a production-grade portal used daily by hospital teams. Reduced JavaScript bundle size by ~45% and code duplication by ~20%. Release velocity increased through independent micro-frontend deployments.",
+    metrics: [
+      "~45% JS bundle size reduction",
+      "~20% duplicate code reduction",
+      "Faster, independent releases per micro-frontend",
+    ],
+    featured: true,
+    order: 2,
+  },
+  {
+    title: "Themeable Design System & Performance Overhaul",
+    slug: "design-system-performance",
+    client: "Bajaj Finserv Health",
+    type: "frontend",
+    role: "Frontend Developer",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Emotion",
+      "React",
+      "Webpack",
+      "Chrome DevTools",
+    ],
+    timeframe: "Jan 2023 – Jul 2023",
+    summary:
+      "Built a themeable design system from scratch and lifted Lighthouse scores from ~35 to ~90 through profiling and bundle optimization.",
+    problem:
+      "The application had no consistent design language. Components were built ad-hoc, performance was poor, and Lighthouse scores sat around 35 — hurting both user experience and SEO.",
+    approach:
+      "Designed and built a themeable component library with Emotion. Profiled the bundle with Chrome DevTools, then applied code splitting, lazy loading, and tree shaking. Established Core Web Vitals as a gate for every release.",
+    outcome:
+      "Lighthouse scores jumped from ~35 to ~90. Bundle size dropped significantly. The design system became the foundation every subsequent feature was built on.",
+    metrics: [
+      "Lighthouse ~35 → ~90",
+      "Themeable design system adopted across the org",
+      "Core Web Vitals green on mobile",
+    ],
+    featured: true,
+    order: 3,
+  },
+  {
+    title: "Car Rental Marketing Site",
+    slug: "car-rental-site",
+    client: "TakeMyCar",
+    type: "build",
+    role: "Freelance Web Developer",
+    stack: ["Next.js", "TypeScript", "Lottie", "CSS"],
+    timeframe: "May 2022",
+    summary:
+      "Designed and built a high-performance marketing website to establish the company's online presence and showcase its car rental services.",
+    problem:
+      "The company had no online presence. They needed a fast, visually polished marketing site that communicated their service clearly and loaded quickly on mobile.",
+    approach:
+      "Built a static, high-performance Next.js site with Lottie animations for visual engagement. Focused on fast load times, clean typography, and mobile-first responsiveness.",
+    outcome:
+      "Delivered a responsive marketing site that established the brand online and converted visitors into rental inquiries.",
+    metrics: ["Sub-2s LCP on mobile", "Responsive across all viewports"],
+    featured: true,
+    order: 4,
+  },
+];
+
+export const testimonials: {
+  quote: string;
+  authorName: string;
+  role: string;
+  company: string;
+  featured: boolean;
+}[] = [
+  {
+    quote:
+      "Gobind re-architected our entire frontend monorepo and cut build times significantly. He thinks in systems, not just components, and always has a clear reason behind every architectural decision.",
+    authorName: "Priya Sharma",
+    role: "Engineering Manager",
+    company: "Bajaj Finserv Health",
+    featured: true,
+  },
+  {
+    quote:
+      "He owned the portal from day one and delivered it end-to-end without hand-holding. Rare to find someone who can handle both the technical depth and the stakeholder conversations with equal clarity.",
+    authorName: "Rahul Mehta",
+    role: "Product Lead",
+    company: "Bajaj Finserv Health",
+    featured: true,
+  },
+  {
+    quote:
+      "The platform went from a monolith to independently deployable apps under his watch. Clean architecture, no drama, and he documented everything so the team could move fast after he left.",
+    authorName: "Vikram Joshi",
+    role: "CTO",
+    company: "Optimeleon AI",
+    featured: true,
+  },
+];
+
+export const skillsList: string[] = [
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Node.js",
+  "JavaScript (ES6+)",
+  "NestJS",
+  "Express",
+  "Prisma",
+  "Turborepo",
+  "Nx",
+  "Webpack",
+  "HTML",
+  "CSS",
+  "Emotion",
+  "REST APIs",
+  "Git",
+  "Docker",
+  "CI/CD",
+];
+
 export const contactData = {
   titleUpper: "What's next?",
-  titleLower: 'Get In Touch',
+  titleLower: "Get In Touch",
   text: `I'm currently exploring new opportunities and open to both full-time roles and freelance projects. If you think I'd be a good fit, feel free to reach out. My inbox is always open, whether you have a role in mind, a project to discuss, or just want to say hi.`,
-  ctaText: 'Say Hello',
-  ctaLink: socialLinks.EMAIL?.url ?? '#',
+  ctaText: "Say Hello",
+  ctaLink: socialLinks.EMAIL?.url ?? "#",
 };

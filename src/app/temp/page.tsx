@@ -1,4 +1,4 @@
-import ColorShowcase from "@/app/temp/color-showcase";
+import ColorShowcase from "@app/temp/color-showcase";
 
 /* ── data ── */
 

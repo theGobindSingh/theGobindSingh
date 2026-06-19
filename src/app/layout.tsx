@@ -1,4 +1,4 @@
-import ThemeSetter from "@/app/theme-setter";
+import ThemeSetter from "@app/theme-setter";
 import Header from "@components/header";
 import type { Metadata } from "next";
 import {
@@ -44,9 +44,29 @@ const fontCursive = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "Next.js Starter Template",
+  title: {
+    default: "Gobind Singh — Full Stack Developer",
+    template: "%s — Gobind Singh",
+  },
   description:
-    "Starter template with Next.js, TypeScript, and Tailwind baseline.",
+    "Full stack developer who designs and ships polished, performant web apps. I build, rebuild, and integrate web products for startups and enterprises.",
+  openGraph: {
+    title: "Gobind Singh — Full Stack Developer",
+    description:
+      "Full stack developer who designs and ships polished, performant web apps. See the work, then let's talk.",
+    type: "website",
+    siteName: "Gobind Singh",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gobind Singh — Full Stack Developer",
+    description:
+      "Full stack developer who designs and ships polished, performant web apps.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 const getTheme = async () => {
