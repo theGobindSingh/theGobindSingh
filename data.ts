@@ -70,12 +70,10 @@ export const headerAndNavData: {
   };
   links: {
     text: string;
-    targetId?: string;
-    url?: string;
-    isHiddenInV1?: boolean;
-    isHiddenInV2?: boolean;
+    url: string;
   }[];
   bottomLinks?: {
+    id: SOCIAL_KEYS;
     text: string;
     url: string;
   }[];
@@ -85,28 +83,23 @@ export const headerAndNavData: {
   links: [
     {
       text: "Home",
-      targetId: "home",
-      isHiddenInV1: true,
+      url: "/",
     },
     {
       text: "About",
-      targetId: "about",
+      url: "/about",
     },
     {
       text: "Work",
-      targetId: "work",
+      url: "/work",
     },
-    // {
-    //   text: 'Projects',
-    //   targetId: 'projects',
-    // },
     {
       text: "Extracurricular",
-      targetId: "extracurricular",
+      url: "/extracurricular",
     },
     {
       text: "Contact",
-      targetId: "contact",
+      url: "/contact",
     },
   ],
   bottomPrimaryLink: {
@@ -115,16 +108,14 @@ export const headerAndNavData: {
   },
   bottomLinks: [
     {
+      id: SOCIAL_KEYS.LINKEDIN,
       text: "LinkedIn",
       url: "https://www.linkedin.com/in/thegobindsingh/",
     },
     {
+      id: SOCIAL_KEYS.GITHUB,
       text: "GitHub",
       url: "https://www.github.com/theGobindSingh",
-    },
-    {
-      text: "Twitter",
-      url: "https://www.twitter.com/theGobindSingh",
     },
   ],
 };

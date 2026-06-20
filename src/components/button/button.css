@@ -24,13 +24,12 @@
     font-weight: 500;
     border-radius: var(--radius-none);
     transition-property: all;
-    transition-duration: var(--dur-fast);
-    transition-timing-function: ease-out;
+    transition-duration: 300ms;
+    transition-timing-function: ease;
     cursor: pointer;
     white-space: nowrap;
     user-select: none;
     text-decoration: none;
-    font-size: var(--fs-2xs);
     padding: 0.5em 1.25em;
   }
 

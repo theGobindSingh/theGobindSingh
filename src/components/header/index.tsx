@@ -2,9 +2,21 @@ import FullWidthWrapper from "@components/full-width-wrapper";
 import Hamburger from "@components/header/hamburger";
 import HeaderScrollHandler from "@components/header/scroll-handler";
 import { Link } from "@components/link";
+import { headerAndNavData } from "@data";
 import { tw } from "@utils/tailwind";
 
 const Header = () => {
+  const linksMapper = (
+    { text, url }: (typeof headerAndNavData.links)[number],
+    index: number,
+  ) => {
+    const key = `header-link-${index}`;
+    return (
+      <li key={key} className="[text-shadow:0_0_4px_rgba(0,0,0,1)]">
+        <Link href={url}>{text}</Link>
+      </li>
+    );
+  };
   return (
     <FullWidthWrapper
       element="header"
@@ -20,28 +32,31 @@ const Header = () => {
         border-r-transparent
         transition-all
         overflow-hidden
+        md:hover:bg-[hsla(var(--color-grey-50-base),0.625)]!
         `}
       wrapperProps={{
         id: "app-header",
       }}
     >
-      <div className="custom:backdrop pointer-events-none absolute top-0 left-0 z-[-1] size-full backdrop-blur-[7px]"></div>
+      <div className="custom:backdrop pointer-events-none absolute top-0 left-0 z-[-1] size-full backdrop-blur-xs"></div>
       <HeaderScrollHandler />
-      <Link href="/" className="text-2xl font-bold">
-        Gobind Singh
+      <Link href="/" className="font-sans text-(size:--fs-2xs) font-medium">
+        {headerAndNavData.logoText}
       </Link>
       <nav
         className={tw`
-        font-mono
+        text-(size:--fs-3xs)
         transition-all
         duration-500
         not-md:fixed
         not-md:top-0
         not-md:right-0
-        not-md:h-screen not-md:w-screen
-        not-md:translate-x-full
+        not-md:h-screen
+        not-md:w-screen not-md:translate-x-full
         not-md:bg-[hsla(var(--color-accent-300-base),0.75)]
-        not-md:backdrop-blur-[15px]
+        not-md:text-(size:--fs-xs)
+        not-md:uppercase
+        not-md:backdrop-blur-[1rem]
         `}
       >
         <ul
@@ -53,19 +68,16 @@ const Header = () => {
           not-md:justify-center
           `}
         >
-          <li>
-            <Link href="/about">About</Link>
-          </li>
-          <li>
-            <Link href="/blog">Blog</Link>
-          </li>
-          <li>
-            <Link href="/contact">Contact</Link>
-          </li>
+          {headerAndNavData.links.map(linksMapper)}
         </ul>
       </nav>
       <div className="flex items-center gap-4">
-        <Link href="/resume" variant="outlined" color="accent">
+        <Link
+          href="/resume"
+          variant="outlined"
+          color="accent"
+          className="font-mono"
+        >
           Resume
         </Link>
         <Hamburger />

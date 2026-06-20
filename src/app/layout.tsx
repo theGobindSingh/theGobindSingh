@@ -5,9 +5,9 @@ import type { Metadata } from "next";
 import {
   Anton,
   Caveat,
-  DM_Mono as DMMono,
+  JetBrains_Mono as JetBrainsMono,
   Newsreader,
-  Space_Grotesk as SpaceGrotesk,
+  Poppins,
 } from "next/font/google";
 import { cookies } from "next/headers";
 import { type PropsWithChildren } from "react";
@@ -19,13 +19,13 @@ const fontDisplay = Anton({
   variable: "--ff-display",
   display: "swap",
 });
-const fontSans = SpaceGrotesk({
+const fontSans = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--ff-sans",
   display: "swap",
 });
-const fontMono = DMMono({
+const fontMono = JetBrainsMono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--ff-mono",
