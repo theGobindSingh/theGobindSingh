@@ -1,22 +1,20 @@
 import FullWidthWrapper from "@components/full-width-wrapper";
 import Hamburger from "@components/header/hamburger";
+import HeaderNavItem from "@components/header/nav-item";
 import HeaderScrollHandler from "@components/header/scroll-handler";
 import { Link } from "@components/link";
 import { headerAndNavData } from "@data";
 import { tw } from "@utils/tailwind";
 
+const linksMapper = (
+  props: (typeof headerAndNavData.links)[number],
+  index: number,
+) => {
+  const key = `header-link-${index}`;
+  return <HeaderNavItem key={key} {...props} />;
+};
+
 const Header = () => {
-  const linksMapper = (
-    { text, url }: (typeof headerAndNavData.links)[number],
-    index: number,
-  ) => {
-    const key = `header-link-${index}`;
-    return (
-      <li key={key} className="[text-shadow:0_0_4px_rgba(0,0,0,1)]">
-        <Link href={url}>{text}</Link>
-      </li>
-    );
-  };
   return (
     <FullWidthWrapper
       element="header"
@@ -45,7 +43,6 @@ const Header = () => {
       </Link>
       <nav
         className={tw`
-        text-(size:--fs-3xs)
         transition-all
         duration-500
         not-md:fixed
@@ -53,10 +50,8 @@ const Header = () => {
         not-md:right-0
         not-md:h-screen
         not-md:w-screen not-md:translate-x-full
-        not-md:bg-[hsla(var(--color-accent-300-base),0.75)]
-        not-md:text-(size:--fs-xs)
-        not-md:uppercase
-        not-md:backdrop-blur-[1rem]
+        not-md:bg-[hsla(var(--color-accent-200-base),0.75)]
+        not-md:backdrop-blur-lg
         `}
       >
         <ul

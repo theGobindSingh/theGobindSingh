@@ -357,17 +357,17 @@
   --shadow-hsl: 16 100% 50%;
 
   /* grey */
-  --color-grey-50-base: 15, 7%, 3%;
-  --color-grey-100-base: 195, 4%, 22%;
-  --color-grey-200-base: 195, 2%, 44%;
-  --color-grey-300-base: 195, 3%, 73%;
-  --color-grey-400-base: 0, 2%, 77%;
-  --color-grey-500-base: 0, 2%, 79%;
-  --color-grey-600-base: 0, 0%, 84%;
-  --color-grey-700-base: 0, 2%, 87%;
-  --color-grey-800-base: 0, 2%, 89%;
-  --color-grey-900-base: 0, 3%, 92%;
-  --color-grey-950-base: 0, 0%, 95%;
+  --color-grey-50-base: 204, 22%, 10%;
+  --color-grey-100-base: 210, 22%, 20%;
+  --color-grey-200-base: 209, 14%, 30%;
+  --color-grey-300-base: 209, 12%, 38%;
+  --color-grey-400-base: 209, 9%, 50%;
+  --color-grey-500-base: 211, 11%, 59%;
+  --color-grey-600-base: 211, 14%, 68%;
+  --color-grey-700-base: 208, 14%, 76%;
+  --color-grey-800-base: 210, 13%, 82%;
+  --color-grey-900-base: 210, 13%, 91%;
+  --color-grey-950-base: 210, 12%, 97%;
 
   /* primary */
   --color-primary-50-base: 15, 7%, 2%;

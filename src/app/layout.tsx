@@ -1,5 +1,6 @@
 import ThemeSetter from "@app/theme-setter";
 import Header from "@components/header";
+import ThemeSwitcher from "@components/theme-switcher";
 import LenisProvider from "@providers/lenis";
 import type { Metadata } from "next";
 import {
@@ -98,6 +99,7 @@ const RootLayout = async ({ children }: PropsWithChildren<unknown>) => {
         <ThemeSetter />
         <Header />
         <LenisProvider>{children}</LenisProvider>
+        <ThemeSwitcher />
       </body>
     </html>
   );
