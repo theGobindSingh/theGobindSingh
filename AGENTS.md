@@ -56,6 +56,31 @@ For case studies and projects, use placeholders based on the above experience an
 **Copy rules:** try to not fabricate a metric, quote, or outcome not in this list - unless necessary for a placeholder. Use first person
 ("I built", "I reduced"). Plain, direct language, no hype words. Outcomes before tech.
 
+## Claude Code automations (`.claude/`)
+
+Active hooks, skills, and subagents — understand these before acting so you don't duplicate work they already handle.
+
+**Hooks (`.claude/settings.json`)** — run automatically, no prompt needed:
+
+- **PostToolUse Edit|Write** → Prettier auto-formats the saved file. Do not run `pnpm lint:fix` manually after edits.
+- **PreToolUse Edit|Write** → Blocks any edit to `.env*` files. Do not attempt to edit them; ask the owner instead.
+
+**Skills** — invoke with `/skill-name` or Claude spawns them automatically:
+
+- `/new-section` — scaffolds a new App Router page + components + nav wiring. Use this instead of creating files by hand.
+- `/perf-check` — runs `pnpm build` and reports First Load JS per route. Run before declaring any task done if bundle size is relevant.
+- `/seo-audit` — checks every `page.tsx` for metadata, OG, Twitter, JSON-LD gaps.
+- `content-update` (Claude-only, not user-invocable) — enforces copy rules from this file before writing any portfolio copy.
+
+**Subagents** (`.claude/agents/`) — Claude spawns these for relevant tasks:
+
+- `ui-reviewer` — reviews component/CSS changes for a11y, responsive layout, Tailwind correctness, Lenis integration.
+- `seo-reviewer` — reviews new pages and copy for metadata completeness and keyword alignment.
+
+Full setup details and rationale: `docs/AUTOMATIONS.md`.
+
+---
+
 ## Read these before acting (in `/docs`)
 
 - **`docs/PRODUCT.md`** what the site is, audience, goals, IA/sitemap, page specs, conversion

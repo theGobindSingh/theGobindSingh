@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pnpm prettier --config .prettierrc --write \"$CLAUDE_TOOL_ARGUMENT_FILE_PATH\" 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [[ \"$CLAUDE_TOOL_ARGUMENT_FILE_PATH\" == *\".env\"* ]]; then echo 'Blocked: .env edit requires manual approval' >&2; exit 2; fi"
+          }
+        ]
+      }
+    ]
+  }
+}
