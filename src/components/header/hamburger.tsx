@@ -1,18 +1,19 @@
 "use client";
 
+import useGetHeader from "@components/header/use-get-header";
 import { tw } from "@utils/tailwind";
 import { useLenis } from "lenis/react";
 import { ChangeEventHandler, useCallback } from "react";
 
 const Hamburger = () => {
   const lenis = useLenis();
+  const { getHeader } = useGetHeader();
   const onChangeHandler: ChangeEventHandler<
     HTMLInputElement,
     HTMLInputElement
   > = useCallback(
     (e) => {
-      const header =
-        document.querySelector<HTMLDivElement>("header#app-header");
+      const header = getHeader();
       if (!header) return;
       const nav = header.querySelector<HTMLDivElement>("nav");
       if (!nav) return;
@@ -25,11 +26,19 @@ const Hamburger = () => {
         lenis?.start();
       }
     },
-    [lenis],
+    [lenis, getHeader],
   );
   return (
-    <label className="group z-2 cursor-pointer md:hidden">
-      <input type="checkbox" className="hidden" onChange={onChangeHandler} />
+    <label
+      className="group z-2 cursor-pointer md:hidden"
+      htmlFor="app-header-hamburger-toggle"
+    >
+      <input
+        type="checkbox"
+        className="hidden"
+        onChange={onChangeHandler}
+        id="app-header-hamburger-toggle"
+      />
       <svg
         viewBox="0 0 32 32"
         className={tw`

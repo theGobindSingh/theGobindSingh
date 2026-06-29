@@ -98,7 +98,11 @@ const RootLayout = async ({ children }: PropsWithChildren<unknown>) => {
       <body>
         <ThemeSetter />
         <Header />
-        <LenisProvider>{children}</LenisProvider>
+        <LenisProvider>
+          <div className="pt-[calc(16px*2+1px*2+7px*2+1px*2+1lh)] text-(size:--fs-2xs)">
+            {children}
+          </div>
+        </LenisProvider>
         <ThemeSwitcher />
       </body>
     </html>

@@ -4,7 +4,6 @@ import type { LucideProps } from "lucide-react";
 import { Mail } from "lucide-react";
 
 import LinkedInIcon from "@components/icon-linkedin";
-import myPhoto from "@images/me.jpeg";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 export const firstName = "Gobind";
@@ -86,6 +85,10 @@ export const headerAndNavData: {
       url: "/",
     },
     {
+      text: "Design",
+      url: "/temp",
+    },
+    {
       text: "About",
       url: "/about",
     },
@@ -117,53 +120,6 @@ export const headerAndNavData: {
       text: "GitHub",
       url: "https://www.github.com/theGobindSingh",
     },
-  ],
-};
-
-export const homeHeroData = {
-  titleSuffix: "Hi, my name is ",
-  title: `${fullName}.`,
-  titlePostfix: "I build things for the web.",
-  img: myPhoto,
-  text: `I'm a software engineer specializing in building\nexceptional digital experiences.`,
-  textReplacements: [
-    {
-      text: "exceptional digital experiences.",
-      url: "https://youtu.be/dQw4w9WgXcQ?t=43",
-    },
-  ],
-  dateText: "Building exceptional digital experiences since",
-  date: "2021",
-  buttonText: "Contact ↗",
-  buttonTargetClassName: "contact",
-};
-
-export const homeAboutData = {
-  title: "About",
-  img: myPhoto,
-  text: `
-Hello, I'm Gobind, a full-stack software engineer from India who builds scalable, high performance web products. I've worked across consumer and internal platforms at Optimeleon AI, building AI driven CRO systems, and at Bajaj Finserv Health, shipping large scale health insurance and hospital workflow products used by real teams every day. Earlier in my career, I also worked with early stage startups, small freelance clients, and experimental products, which gave me strong exposure to fast paced, zero margin for error environments.
-
-I enjoy turning ideas into systems that actually hold up in production. From frontend architecture, performance optimization, and design systems to backend APIs and database workflows, I care about clean structure, long term maintainability, and software that scales without becoming a mess. Outside engineering, I value different perspectives, continuous learning, and working with diverse people. I believe good software should reduce complexity, move fast, and age well.
-`,
-  textReplacements: [
-    {
-      text: "Optimeleon AI",
-      url: "https://www.optimeleon.com/",
-    },
-    {
-      text: "Bajaj Finserv Health",
-      url: "https://www.bajajfinservhealth.in/",
-    },
-  ],
-  skillsTitle: "Here are a few technologies I've been working with recently:",
-  skills: [
-    "TypeScript & JS (ES6+)",
-    "React & React based frameworks",
-    "Express.js & Nest.js",
-    "GraphQL",
-    "Prisma & SQL Databases",
-    "Docker",
   ],
 };
 
@@ -444,11 +400,3 @@ export const skillsList: string[] = [
   "Docker",
   "CI/CD",
 ];
-
-export const contactData = {
-  titleUpper: "What's next?",
-  titleLower: "Get In Touch",
-  text: `I'm currently exploring new opportunities and open to both full-time roles and freelance projects. If you think I'd be a good fit, feel free to reach out. My inbox is always open, whether you have a role in mind, a project to discuss, or just want to say hi.`,
-  ctaText: "Say Hello",
-  ctaLink: socialLinks.EMAIL?.url ?? "#",
-};

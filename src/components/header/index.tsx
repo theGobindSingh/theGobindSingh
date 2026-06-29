@@ -1,7 +1,6 @@
 import FullWidthWrapper from "@components/full-width-wrapper";
 import Hamburger from "@components/header/hamburger";
 import HeaderNavItem from "@components/header/nav-item";
-import HeaderScrollHandler from "@components/header/scroll-handler";
 import { Link } from "@components/link";
 import { headerAndNavData } from "@data";
 import { tw } from "@utils/tailwind";
@@ -37,7 +36,6 @@ const Header = () => {
       }}
     >
       <div className="custom:backdrop pointer-events-none absolute top-0 left-0 z-[-1] size-full backdrop-blur-xs"></div>
-      <HeaderScrollHandler />
       <Link href="/" className="font-sans text-(size:--fs-2xs) font-medium">
         {headerAndNavData.logoText}
       </Link>
@@ -68,7 +66,7 @@ const Header = () => {
       </nav>
       <div className="flex items-center gap-4">
         <Link
-          href="/resume"
+          href="/resume.pdf"
           variant="outlined"
           color="accent"
           className="font-mono"
@@ -77,6 +75,7 @@ const Header = () => {
         </Link>
         <Hamburger />
       </div>
+      {/* <HeaderScrollHandler /> */}
     </FullWidthWrapper>
   );
 };

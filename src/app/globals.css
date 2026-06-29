@@ -357,9 +357,9 @@
   --shadow-hsl: 16 100% 50%;
 
   /* grey */
-  --color-grey-50-base: 204, 22%, 10%;
-  --color-grey-100-base: 210, 22%, 20%;
-  --color-grey-200-base: 209, 14%, 30%;
+  --color-grey-50-base: 204, 17.5%, 5%;
+  --color-grey-100-base: 210, 22%, 15%;
+  --color-grey-200-base: 209, 14%, 25%;
   --color-grey-300-base: 209, 12%, 38%;
   --color-grey-400-base: 209, 9%, 50%;
   --color-grey-500-base: 211, 11%, 59%;

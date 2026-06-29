@@ -1,6 +1,7 @@
 "use client";
 
 import { clientCookies } from "@utils/cookies";
+import { tw } from "@utils/tailwind";
 import { Moon, Sun } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
@@ -34,13 +35,16 @@ const ThemeSwitcher = () => {
     <button
       onClick={toggle}
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-      className="fixed right-(--space-6) bottom-(--space-6) z-(--z-nav)
+      className={tw`
+        fixed
+        right-(--space-6) bottom-(--space-6) z-(--z-nav)
         flex size-11 cursor-pointer items-center justify-center overflow-hidden
-        border border-(--color-border) bg-(--color-bg) text-(--color-text)
-        transition-colors duration-(--dur-fast) ease-out
-        hover:border-(--color-focus) hover:text-(--color-focus)
-        focus-visible:border-(--color-focus) focus-visible:text-(--color-focus) focus-visible:outline-hidden
-        motion-reduce:transition-none"
+        rounded-xl border border-(--color-border)
+        text-(--color-text) transition-colors duration-(--dur-fast)
+        ease-out hover:border-(--color-focus)
+        hover:text-(--color-focus) focus-visible:border-(--color-focus) focus-visible:text-(--color-focus)
+        focus-visible:outline-hidden motion-reduce:transition-none
+        `}
     >
       <Sun
         className="absolute size-5 shrink-0 transition-all

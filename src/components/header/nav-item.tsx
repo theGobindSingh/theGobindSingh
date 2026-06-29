@@ -1,16 +1,30 @@
 "use client";
 
+import useGetHeader from "@components/header/use-get-header";
 import { Link } from "@components/link";
 import { headerAndNavData } from "@data";
 import { tw } from "@utils/tailwind";
 import { usePathname } from "next/navigation";
+import { MouseEventHandler } from "react";
 
 const HeaderNavItem = ({
   text,
   url,
 }: (typeof headerAndNavData.links)[number]) => {
   const pathname = usePathname();
-  console.log(pathname);
+  const { getHeader } = useGetHeader();
+  const clickHandler: MouseEventHandler<HTMLAnchorElement> = () => {
+    const header = getHeader();
+    if (!header) return;
+    const toggleInput = header.querySelector<HTMLInputElement>(
+      "#app-header-hamburger-toggle",
+    );
+    if (!toggleInput) return;
+    toggleInput.checked = false;
+    const nav = header.querySelector<HTMLDivElement>("nav");
+    if (!nav) return;
+    nav.classList.add("not-md:translate-x-full");
+  };
   return (
     <li
       className={tw`
@@ -33,7 +47,12 @@ const HeaderNavItem = ({
         hover:opacity-100
         `}
     >
-      <Link href={url} color="grey" hoverBgColorWeight={950}>
+      <Link
+        href={url}
+        color="grey"
+        hoverBgColorWeight={950}
+        onClick={clickHandler}
+      >
         {text}
       </Link>
     </li>
