@@ -1,4 +1,5 @@
 import { heroSection } from "@app/home/constants";
+import Hr from "@components/hr";
 import { fullName } from "@data";
 import image from "@images/garden-me.jpeg";
 import { tw } from "@utils/tailwind";
@@ -31,7 +32,7 @@ const RightSide = () => {
             object-cover
         `}
       />
-      <div className="custom:divider my-8 h-px w-full bg-grey-200" />
+      <Hr />
       <ul className="grid w-full grid-cols-2 justify-start gap-4">
         {heroSection.impactTags.map(mapper)}
       </ul>

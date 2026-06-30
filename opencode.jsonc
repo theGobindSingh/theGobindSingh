@@ -5,11 +5,7 @@
   "formatter": true,
 
   // Load project docs as instructions (alongside AGENTS.md which is read automatically)
-  "instructions": [
-    "docs/PRODUCT.md",
-    "docs/DESIGN.md",
-    "docs/CONVENTIONS.md",
-  ],
+  "instructions": ["docs/PRODUCT.md", "docs/DESIGN.md", "docs/CONVENTIONS.md"],
 
   // Block .env edits (migrated from .claude PreToolUse hook; reads are already denied by default)
   "permission": {

@@ -19,7 +19,7 @@ const Header = () => {
       element="header"
       className="flex items-center justify-between py-4"
       wrapperClassName={tw`
-        fixed
+        fixed z-(--z-nav)
         top-0
         left-0
         border 
@@ -36,7 +36,7 @@ const Header = () => {
       }}
     >
       <div className="custom:backdrop pointer-events-none absolute top-0 left-0 z-[-1] size-full backdrop-blur-xs"></div>
-      <Link href="/" className="font-sans text-(size:--fs-2xs) font-medium">
+      <Link href="/" className="font-display text-(size:--fs-s) font-medium">
         {headerAndNavData.logoText}
       </Link>
       <nav

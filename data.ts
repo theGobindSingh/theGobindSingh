@@ -23,17 +23,19 @@ export enum SOCIAL_KEYS {
   INSTAGRAM = "INSTAGRAM",
 }
 
+interface SocialLink {
+  url: string;
+  label: string;
+  logo:
+    | IconType
+    | ForwardRefExoticComponent<
+        Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+      >;
+  userName?: string | undefined;
+}
+
 export const socialLinks: {
-  [key in SOCIAL_KEYS]?: {
-    url: string;
-    label: string;
-    logo:
-      | IconType
-      | ForwardRefExoticComponent<
-          Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
-        >;
-    userName?: string;
-  };
+  [key in SOCIAL_KEYS]?: SocialLink;
 } = {
   [SOCIAL_KEYS.GITHUB]: {
     url: "https://www.github.com/theGobindSingh",
@@ -119,6 +121,29 @@ export const headerAndNavData: {
       id: SOCIAL_KEYS.GITHUB,
       text: "GitHub",
       url: "https://www.github.com/theGobindSingh",
+    },
+  ],
+};
+
+export const footerData: {
+  title: string;
+  description: string;
+  footNote: string;
+  links: SocialLink[];
+} = {
+  title: fullName,
+  description:
+    "Designing the infrastructure for the next generation of web-scale applications.",
+  footNote: "© 2024 SENIOR PRODUCT ARCHITECT. BUILT FOR SCALE.",
+  links: [
+    ...Object.values(socialLinks),
+    {
+      url: resumeLink,
+      label: "Resume",
+      logo: (() => {
+        return null;
+      }) as unknown as IconType,
+      userName: undefined,
     },
   ],
 };

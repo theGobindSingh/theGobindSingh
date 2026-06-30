@@ -102,6 +102,7 @@ description: Scaffold a new App Router section under src/app/<name>/ with page.t
 ---
 
 The user wants to create a new portfolio section. Follow the existing pattern in src/app/home/:
+
 - Create src/app/<name>/page.tsx with metadata export and a root section element
 - Create any needed components under src/components/<name>/
 - Wire up the new route in the header navigation (src/components/header/)
@@ -160,6 +161,7 @@ description: Audit all App Router pages for missing or weak SEO metadata
 ---
 
 Check every page.tsx under src/app/ for:
+
 - Exported `metadata` object with title and description
 - Open Graph tags (og:title, og:description, og:image)
 - Twitter card tags
@@ -178,6 +180,7 @@ Report missing or weak metadata per route and suggest fixes based on the owner c
 This project uses Next.js 16, React 19, and Tailwind v4 — all versions newer than most LLM training data. context7 fetches live docs so Claude gives accurate API advice instead of hallucinating old APIs.
 
 **Install**:
+
 ```bash
 claude mcp add context7 -- npx -y @upstash/context7-mcp
 ```
@@ -189,6 +192,7 @@ claude mcp add context7 -- npx -y @upstash/context7-mcp
 Useful for visual regression testing and verifying layout/animation changes in a real browser without leaving the terminal.
 
 **Install**:
+
 ```bash
 npx playwright install chromium
 claude mcp add playwright -- npx -y @playwright/mcp
@@ -211,6 +215,7 @@ description: Reviews UI/component changes for accessibility, responsive layout, 
 ---
 
 You review frontend code changes for:
+
 - Accessibility (semantic HTML, ARIA labels, keyboard nav, color contrast)
 - Responsive design (mobile-first, no hardcoded pixel widths)
 - Tailwind correctness (no arbitrary values where a scale value exists, consistent spacing)
@@ -231,6 +236,7 @@ description: Reviews new pages and copy changes for SEO completeness. Spawn when
 ---
 
 You review changes for SEO quality:
+
 - Metadata exports (title, description, openGraph, twitter) on every page.tsx
 - Keyword presence aligned with owner positioning (React, Next.js, TypeScript, full stack developer)
 - Heading hierarchy (one H1 per page, logical H2/H3 structure)

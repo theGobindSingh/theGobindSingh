@@ -1,4 +1,5 @@
 import { heroSection } from "@app/home/constants";
+import Hr from "@components/hr";
 import { tw } from "@utils/tailwind";
 
 const mapper = (line: string, index: number) => {
@@ -42,6 +43,7 @@ const LeftSide = () => {
             tracking-[-0.04em]
             text-grey-900
             not-md:max-w-full
+            not-md:text-[17.5vw]
             `}
         >
           {heroSection.title.split("\n").map(mapper)}
@@ -50,7 +52,7 @@ const LeftSide = () => {
           {heroSection.subtitle}
         </span>
       </h1>
-      <div className="custom:divider mt-16 mb-8 h-px w-full bg-grey-200" />
+      <Hr />
       <div className="flex justify-between gap-2">
         <p className="w-[60%] leading-loose">{heroSection.desc}</p>
         <ul

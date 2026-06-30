@@ -1,4 +1,5 @@
 import ThemeSetter from "@app/theme-setter";
+import Footer from "@components/footer";
 import Header from "@components/header";
 import ThemeSwitcher from "@components/theme-switcher";
 import LenisProvider from "@providers/lenis";
@@ -99,9 +100,12 @@ const RootLayout = async ({ children }: PropsWithChildren<unknown>) => {
         <ThemeSetter />
         <Header />
         <LenisProvider>
-          <div className="pt-(--header-height)">{children}</div>
+          <div className="relative h-auto w-full pt-(--header-height)">
+            {children}
+          </div>
         </LenisProvider>
         <ThemeSwitcher />
+        <Footer />
       </body>
     </html>
   );

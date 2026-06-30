@@ -32,43 +32,45 @@ const ThemeSwitcher = () => {
   if (!mounted) return null;
 
   return (
-    <button
-      onClick={toggle}
-      aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-      className={tw`
-        fixed
-        right-(--space-6) bottom-(--space-6) z-(--z-nav)
-        flex size-11 cursor-pointer items-center justify-center overflow-hidden
+    <div className="pointer-events-none sticky bottom-4 z-(--z-nav) mb-4 flex justify-end px-4">
+      <button
+        onClick={toggle}
+        aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+        className={tw`
+        pointer-events-auto
+        flex size-11 cursor-pointer items-center justify-center
         rounded-xl border border-(--color-border)
-        text-(--color-text) transition-colors duration-(--dur-fast)
+        text-(--color-text)
+        backdrop-blur-xs transition-colors duration-(--dur-fast)
         ease-out hover:border-(--color-focus)
         hover:text-(--color-focus) focus-visible:border-(--color-focus) focus-visible:text-(--color-focus)
         focus-visible:outline-hidden motion-reduce:transition-none
         `}
-    >
-      <Sun
-        className="absolute size-5 shrink-0 transition-all
+      >
+        <Sun
+          className="absolute size-5 shrink-0 transition-all
           duration-(--dur-slow) ease-out motion-reduce:transition-none"
-        style={{
-          opacity: dark ? 1 : 0,
-          transform: dark
-            ? "scale(1) rotate(0deg)"
-            : "scale(0.4) rotate(90deg)",
-          pointerEvents: dark ? "auto" : "none",
-        }}
-      />
-      <Moon
-        className="absolute size-5 shrink-0 transition-all
+          style={{
+            opacity: dark ? 1 : 0,
+            transform: dark
+              ? "scale(1) rotate(0deg)"
+              : "scale(0.4) rotate(90deg)",
+            pointerEvents: dark ? "auto" : "none",
+          }}
+        />
+        <Moon
+          className="absolute size-5 shrink-0 transition-all
           duration-(--dur-slow) ease-out motion-reduce:transition-none"
-        style={{
-          opacity: dark ? 0 : 1,
-          transform: dark
-            ? "scale(0.4) rotate(-90deg)"
-            : "scale(1) rotate(0deg)",
-          pointerEvents: dark ? "none" : "auto",
-        }}
-      />
-    </button>
+          style={{
+            opacity: dark ? 0 : 1,
+            transform: dark
+              ? "scale(0.4) rotate(-90deg)"
+              : "scale(1) rotate(0deg)",
+            pointerEvents: dark ? "none" : "auto",
+          }}
+        />
+      </button>
+    </div>
   );
 };
 
