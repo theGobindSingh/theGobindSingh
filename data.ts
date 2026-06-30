@@ -10,7 +10,7 @@ export const firstName = "Gobind";
 export const lastName = "Singh";
 export const fullName = `${firstName} ${lastName}`;
 
-export const designation = "Web Developer | SDE";
+export const designation = "Full Stack Software Engineer";
 
 export const email = "thesinghgobind@gmail.com";
 

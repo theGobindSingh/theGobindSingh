@@ -6,9 +6,9 @@ import type { Metadata } from "next";
 import {
   Anton,
   Caveat,
+  Epilogue,
   JetBrains_Mono as JetBrainsMono,
   Newsreader,
-  Poppins,
 } from "next/font/google";
 import { cookies } from "next/headers";
 import { type PropsWithChildren } from "react";
@@ -20,9 +20,9 @@ const fontDisplay = Anton({
   variable: "--ff-display",
   display: "swap",
 });
-const fontSans = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+const fontSans = Epilogue({
+  subsets: ["latin", "latin-ext"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   variable: "--ff-sans",
   display: "swap",
 });
@@ -99,9 +99,7 @@ const RootLayout = async ({ children }: PropsWithChildren<unknown>) => {
         <ThemeSetter />
         <Header />
         <LenisProvider>
-          <div className="pt-[calc(16px*2+1px*2+7px*2+1px*2+1lh)] text-(size:--fs-2xs)">
-            {children}
-          </div>
+          <div className="pt-(--header-height)">{children}</div>
         </LenisProvider>
         <ThemeSwitcher />
       </body>

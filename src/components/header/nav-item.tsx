@@ -29,8 +29,8 @@ const HeaderNavItem = ({
     <li
       className={tw`
         font-mono
-        text-(size:--fs-4xs)
-        font-medium
+        text-(size:--fs-3xs)
+        font-semibold
         
         transition-all
         duration-300
