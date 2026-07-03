@@ -20,7 +20,7 @@ const Header = () => {
       className="flex items-center justify-between py-4"
       wrapperClassName={tw`
         fixed z-(--z-nav)
-        top-0
+        -top-px
         left-0
         border 
         border-(--color-grey-100) 
@@ -35,7 +35,7 @@ const Header = () => {
         id: "app-header",
       }}
     >
-      <div className="custom:backdrop pointer-events-none absolute top-0 left-0 z-[-1] size-full backdrop-blur-xs"></div>
+      <div className="custom:backdrop pointer-events-none absolute top-0 left-0 z-[-1] size-full backdrop-blur-[6px]"></div>
       <Link href="/" className="font-display text-(size:--fs-s) font-medium">
         {headerAndNavData.logoText}
       </Link>

@@ -6,10 +6,10 @@ import LenisProvider from "@providers/lenis";
 import type { Metadata } from "next";
 import {
   Anton,
-  Caveat,
   Epilogue,
   JetBrains_Mono as JetBrainsMono,
   Newsreader,
+  Reenie_Beanie as ReenieBeanie,
 } from "next/font/google";
 import { cookies } from "next/headers";
 import { type PropsWithChildren } from "react";
@@ -39,9 +39,9 @@ const fontSerif = Newsreader({
   variable: "--ff-serif",
   display: "swap",
 });
-const fontCursive = Caveat({
+const fontCursive = ReenieBeanie({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400"],
   variable: "--ff-cursive",
   display: "swap",
 });

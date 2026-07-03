@@ -133,8 +133,8 @@ export const footerData: {
 } = {
   title: fullName,
   description:
-    "Designing the infrastructure for the next generation of web-scale applications.",
-  footNote: "© 2024 SENIOR PRODUCT ARCHITECT. BUILT FOR SCALE.",
+    "Full-stack engineer specializing in React, Next.js, and Node. Building fast, maintainable systems that ship and stay shipped.",
+  footNote: "DESIGNED AND BUILT BY GOBIND SINGH · 2026",
   links: [
     ...Object.values(socialLinks),
     {

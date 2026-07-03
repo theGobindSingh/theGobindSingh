@@ -1,19 +1,16 @@
-import { designation, fullName } from "@data";
-
 export const heroSection = {
   title: "Building\nsoftware\nis easy.",
   subtitle: "Keeping it reliable as complexity grows is where the work begins.",
-  desc: `I am ${fullName}, a ${designation}
-    focused on full-stack product development and performance optimization. 
-    I build things with Next.js and React that don't just look good, but actually work when users hit refresh too many times.`,
+  desc: `I'm a full-stack engineer who builds systems that hold up in production. From micro-frontend architectures at Bajaj Finserv Health to AI-driven platforms at Optimeleon, I work across whatever the web demands — UI, APIs, data, infrastructure — with a bias toward performance, clean architecture, and things that actually ship.`,
   tags: [
-    "NEXT.JS & REACT ECOSYSTEM",
-    "FULL-STACK ARCHITECTURE",
-    "PERFORMANCE OPTIMIZATION",
+    "MICRO-FRONTENDS & MONOREPOS",
+    "REACT / NEXT.JS / NODE.JS",
+    "PERFORMANCE & BUNDLE OPTIMIZATION",
   ],
   impactTags: [
-    ["45%", "Bundle Reduction"],
-    ["90+", "Lighthouse Score"],
-    ["AI", "Platform Scale"],
+    ["3+", "Years in Production"],
+    ["4", "Companies Shipped"],
+    ["18+", "Technologies"],
+    ["2", "Industry Domains"],
   ],
 };

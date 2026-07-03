@@ -26,6 +26,8 @@ const RightSide = () => {
       <Image
         src={image}
         alt={fullName}
+        priority
+        loading="eager"
         className={tw`
             aspect-3/4 h-auto
             w-full
