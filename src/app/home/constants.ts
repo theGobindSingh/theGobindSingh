@@ -1,4 +1,4 @@
-import { experienceData } from "@data";
+import { caseStudies, experienceData, projectData } from "@data";
 
 export const heroSection = {
   title: "Building\nsoftware\nis easy.",
@@ -53,6 +53,14 @@ export const manifestoSection = {
       description: "Systems must be observable to be production-ready.",
     },
   ],
+};
+
+export const projectsSection = {
+  title: "Engineering Challenges Solved",
+  description:
+    "Case studies and projects that reflect how I think about architecture, constraints, and shipping real systems.",
+  caseStudies,
+  projects: projectData,
 };
 
 export const skillsSection = {

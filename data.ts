@@ -208,27 +208,45 @@ export const experienceData: {
   },
 ];
 
-export const projectData:
-  | {
-      title: string;
-      subTitle: string;
-      descriptions: string[];
-      techStack: string[];
-      links?: {
-        github?: string;
-        live?: string;
-      };
-    }[]
-  | null = [
+export interface WorkItem {
+  type?: "case-study" | "project";
+
+  title: string;
+  description: string;
+  stack: string[];
+  timeframe: string;
+
+  links?: {
+    github?: string;
+    live?: string;
+  };
+
+  problem: string;
+  approach: string;
+  outcome: string;
+
+  slug?: string;
+}
+
+export const projectData: WorkItem[] = [
   {
     title: "Kami UI",
-    subTitle:
+    slug: "kami-ui",
+    description:
       "A minimalist, accessible component library designed for rapid high-fidelity prototyping. Focused on strict architectural precision and developer ergonomics.",
-    descriptions: [
-      "Built a themeable, accessible component library with strict architectural precision and developer ergonomics. Designed for rapid high-fidelity prototyping and production-ready applications.",
-      "Implemented a design system with reusable components, theming support, and accessibility best practices, enabling developers to create consistent and visually appealing user interfaces.",
-    ],
-    techStack: ["React", "TypeScript", "Next.js", "Emotion", "Storybook"],
+    stack: ["React", "TypeScript", "Next.js", "Emotion", "Storybook"],
+    timeframe: "2024",
+    problem:
+      "Most component libraries prioritize flexibility over consistency, leading to fragmented design systems and slow prototyping cycles.",
+    approach:
+      "Built a themeable, accessible component library with strict architectural precision. Implemented reusable components, theming support, and accessibility best practices from the ground up.",
+    outcome:
+      "A production-ready component library that enables rapid high-fidelity prototyping with consistent, accessible user interfaces.",
+    // metrics: [
+    //   "Themeable design system",
+    //   "Accessibility best practices baked in",
+    //   "Rapid prototyping workflow",
+    // ],
     links: {
       github: "https://github.com/webadeva/kami-ui",
       live: "https://webadeva.github.io/kami-ui/",
@@ -236,141 +254,90 @@ export const projectData:
   },
 ];
 
-export const caseStudies: {
-  title: string;
-  slug: string;
-  client: string;
-  type: "build" | "rebuild" | "integration" | "frontend";
-  role: string;
-  stack: string[];
-  timeframe: string;
-  summary: string;
-  problem: string;
-  approach: string;
-  outcome: string;
-  metrics: string[];
-  featured: boolean;
-  order: number;
-  links?: {
-    github?: string;
-    live?: string;
-  };
-}[] = [
+export const caseStudies: WorkItem[] = [
   {
     title: "AI-Driven Conversion Optimization Platform",
     slug: "ai-cro-platform",
-    client: "Optimeleon AI",
-    type: "build",
-    role: "Full Stack Developer",
-    stack: [
-      "React",
-      "Next.js",
-      "NestJS",
-      "Express",
-      "Prisma",
-      "TypeScript",
-      "PostgreSQL",
-      "Turborepo",
-    ],
-    timeframe: "Jul 2025 – Feb 2026",
-    summary:
+    type: "case-study",
+    description:
       "Built and scaled an AI-powered CRO platform, re-architected the monorepo for independent deployments, and shipped backend APIs supporting high-impact product features.",
+    // stack: [
+    //   "React",
+    //   "Next.js",
+    //   "NestJS",
+    //   "Express",
+    //   "Prisma",
+    //   "TypeScript",
+    //   "PostgreSQL",
+    //   "Turborepo",
+    // ],
+    timeframe: "Jul 2025 - Feb 2026",
     problem:
       "The platform's monorepo had grown into a tightly coupled codebase where a change in one area risked breaking another. Build times were slow, deployments were monolithic, and teams could not ship independently.",
     approach:
       "Separated the monorepo into distinct applications, shared UI components, and data layers. Designed backend APIs with NestJS and Express, backed by Prisma and PostgreSQL. Migrated from App Router to Pages Router for better ecosystem compatibility and routing stability.",
     outcome:
-      "Independent deployments across the stack. Build cycles improved by ~15–20%. Frontend reliability and routing stability measurably improved through optimized rendering and client-side caching.",
-    metrics: [
-      "~15–20% faster build cycles",
+      "Independent deployments across the stack. Build cycles improved by ~15-20%. Frontend reliability and routing stability measurably improved through optimized rendering and client-side caching.",
+    stack: [
+      "~15-20% faster build cycles",
       "Independent deployments for all apps",
       "Stable routing and improved rendering performance",
     ],
-    featured: true,
-    order: 1,
   },
   {
     title: "Internal Insurance Portal",
     slug: "insurance-portal",
-    client: "Bajaj Finserv Health",
-    type: "build",
-    role: "Frontend Developer",
-    stack: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Emotion",
-      "Nx",
-      "Webpack",
-      "Micro-frontends",
-    ],
-    timeframe: "Jan 2023 – Jul 2025",
-    summary:
+    type: "case-study",
+    description:
       "Led frontend development for a large-scale internal portal enabling hospital-side workflows including agent-assisted discharge and claims processing.",
+    // stack: [
+    //   "React",
+    //   "Next.js",
+    //   "TypeScript",
+    //   "Emotion",
+    //   "Nx",
+    //   "Webpack",
+    //   "Micro-frontends",
+    // ],
+    timeframe: "Jan 2023 - Jul 2025",
     problem:
       "The internal insurance infrastructure needed a unified, performant portal that hospital staff could rely on for critical workflows. Existing frontends were fragmented across multiple codebases with significant code duplication.",
     approach:
       "Owned the portal end-to-end: frontend architecture, state management, and collaboration with backend, DevOps, QA, and product. Consolidated multiple frontends into a single Nx monorepo. Migrated a monolithic app to micro-frontend architecture.",
     outcome:
       "Delivered a production-grade portal used daily by hospital teams. Reduced JavaScript bundle size by ~45% and code duplication by ~20%. Release velocity increased through independent micro-frontend deployments.",
-    metrics: [
+    stack: [
       "~45% JS bundle size reduction",
       "~20% duplicate code reduction",
       "Faster, independent releases per micro-frontend",
     ],
-    featured: true,
-    order: 2,
   },
   {
     title: "Themeable Design System & Performance Overhaul",
     slug: "design-system-performance",
-    client: "Bajaj Finserv Health",
-    type: "frontend",
-    role: "Frontend Developer",
-    stack: [
-      "Next.js",
-      "TypeScript",
-      "Emotion",
-      "React",
-      "Webpack",
-      "Chrome DevTools",
-    ],
-    timeframe: "Jan 2023 – Jul 2023",
-    summary:
+    type: "case-study",
+    description:
       "Built a themeable design system from scratch and lifted Lighthouse scores from ~35 to ~90 through profiling and bundle optimization.",
+    // stack: [
+    //   "Next.js",
+    //   "TypeScript",
+    //   "Emotion",
+    //   "React",
+    //   "Webpack",
+    //   "Chrome DevTools",
+    // ],
+    timeframe: "Jan 2023 - Jul 2023",
     problem:
       "The application had no consistent design language. Components were built ad-hoc, performance was poor, and Lighthouse scores sat around 35 — hurting both user experience and SEO.",
     approach:
       "Designed and built a themeable component library with Emotion. Profiled the bundle with Chrome DevTools, then applied code splitting, lazy loading, and tree shaking. Established Core Web Vitals as a gate for every release.",
     outcome:
       "Lighthouse scores jumped from ~35 to ~90. Bundle size dropped significantly. The design system became the foundation every subsequent feature was built on.",
-    metrics: [
+    stack: [
       "Lighthouse ~35 → ~90",
       "Themeable design system adopted across the org",
       "Core Web Vitals green on mobile",
     ],
-    featured: true,
-    order: 3,
-  },
-  {
-    title: "Car Rental Marketing Site",
-    slug: "car-rental-site",
-    client: "TakeMyCar",
-    type: "build",
-    role: "Freelance Web Developer",
-    stack: ["Next.js", "TypeScript", "Lottie", "CSS"],
-    timeframe: "May 2022",
-    summary:
-      "Designed and built a high-performance marketing website to establish the company's online presence and showcase its car rental services.",
-    problem:
-      "The company had no online presence. They needed a fast, visually polished marketing site that communicated their service clearly and loaded quickly on mobile.",
-    approach:
-      "Built a static, high-performance Next.js site with Lottie animations for visual engagement. Focused on fast load times, clean typography, and mobile-first responsiveness.",
-    outcome:
-      "Delivered a responsive marketing site that established the brand online and converted visitors into rental inquiries.",
-    metrics: ["Sub-2s LCP on mobile", "Responsive across all viewports"],
-    featured: true,
-    order: 4,
   },
 ];
 

@@ -58,6 +58,7 @@ const LeftSide = () => {
           {heroSection.desc}
         </p>
         <ul
+          aria-label="My Strongholds"
           className={tw`
             flex
             list-[square]
