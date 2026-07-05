@@ -13,7 +13,7 @@ import {
 } from "next/font/google";
 import { cookies } from "next/headers";
 import { type PropsWithChildren } from "react";
-import "./globals.css";
+import "./styles/globals.css";
 
 const fontDisplay = Anton({
   subsets: ["latin"],
