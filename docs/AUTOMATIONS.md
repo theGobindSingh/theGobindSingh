@@ -204,48 +204,6 @@ claude mcp add playwright -- npx -y @playwright/mcp
 
 Subagents live in `.claude/agents/<name>.md`. Claude spawns them automatically for relevant tasks.
 
-### `ui-reviewer`
-
-**Create** `.claude/agents/ui-reviewer.md`:
-
-```markdown
----
-name: ui-reviewer
-description: Reviews UI/component changes for accessibility, responsive layout, and Tailwind class correctness. Spawn when editing components or CSS.
----
-
-You review frontend code changes for:
-
-- Accessibility (semantic HTML, ARIA labels, keyboard nav, color contrast)
-- Responsive design (mobile-first, no hardcoded pixel widths)
-- Tailwind correctness (no arbitrary values where a scale value exists, consistent spacing)
-- Animation performance (prefer transform/opacity over layout-triggering props)
-- Lenis scroll integration correctness
-
-Report issues with file:line references. Be concise — one line per finding.
-```
-
-### `seo-reviewer`
-
-**Create** `.claude/agents/seo-reviewer.md`:
-
-```markdown
----
-name: seo-reviewer
-description: Reviews new pages and copy changes for SEO completeness. Spawn when adding pages or updating metadata.
----
-
-You review changes for SEO quality:
-
-- Metadata exports (title, description, openGraph, twitter) on every page.tsx
-- Keyword presence aligned with owner positioning (React, Next.js, TypeScript, full stack developer)
-- Heading hierarchy (one H1 per page, logical H2/H3 structure)
-- Image alt text
-- Internal linking opportunities
-
-Flag gaps with specific file references.
-```
-
 ---
 
 ## Putting It All Together

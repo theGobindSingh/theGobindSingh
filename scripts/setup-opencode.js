@@ -20,22 +20,7 @@ const CONFIG = {
       ".env.example": "allow",
     },
   },
-  agent: {
-    "seo-reviewer": {
-      description:
-        "Reviews new pages and copy changes for SEO completeness. Spawn when adding pages or updating metadata.",
-      mode: "subagent",
-      prompt: "{file:.claude/agents/seo-reviewer.md}",
-      permission: { edit: "deny", bash: "deny" },
-    },
-    "ui-reviewer": {
-      description:
-        "Reviews UI/component changes for accessibility, responsive layout, and Tailwind correctness. Spawn when editing components or CSS.",
-      mode: "subagent",
-      prompt: "{file:.claude/agents/ui-reviewer.md}",
-      permission: { edit: "deny", bash: "deny" },
-    },
-  },
+  agent: {},
   lsp: {},
   mcp: {
     playwright: {
@@ -49,12 +34,6 @@ const CONFIG = {
 const verifyPrerequisites = () => {
   const issues = [];
 
-  if (!fs.existsSync(path.join(root, ".claude", "agents", "seo-reviewer.md"))) {
-    issues.push("Missing .claude/agents/seo-reviewer.md");
-  }
-  if (!fs.existsSync(path.join(root, ".claude", "agents", "ui-reviewer.md"))) {
-    issues.push("Missing .claude/agents/ui-reviewer.md");
-  }
   if (!fs.existsSync(path.join(root, "node_modules", "prettier"))) {
     issues.push("prettier not installed — run pnpm install");
   }
@@ -101,9 +80,6 @@ console.log("📋 Setup summary:");
 console.log("   • Formatter: prettier (auto-formats on file write)");
 console.log("   • Instructions: docs/PRODUCT.md, DESIGN.md, CONVENTIONS.md");
 console.log("   • .env edits: blocked (reads blocked by default)");
-console.log(
-  "   • Agents: seo-reviewer, ui-reviewer (via .claude/agents/ files)",
-);
 console.log("   • MCP: Playwright");
 console.log("   • Skills: auto-discovered from .claude/skills/");
 console.log("");

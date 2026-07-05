@@ -74,11 +74,6 @@ Active hooks, skills, and subagents — understand these before acting so you do
 
 **Subagents** (`.claude/agents/`) — Claude spawns these for relevant tasks:
 
-- `ui-reviewer` — reviews component/CSS changes for a11y, responsive layout, Tailwind correctness, Lenis integration.
-- `seo-reviewer` — reviews new pages and copy for metadata completeness and keyword alignment.
-
-Full setup details and rationale: `docs/AUTOMATIONS.md`.
-
 ---
 
 ## Read these before acting (in `/docs`)
