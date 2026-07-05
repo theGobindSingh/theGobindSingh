@@ -221,13 +221,17 @@ export const projectData:
     }[]
   | null = [
   {
-    title: "",
-    subTitle: "",
-    descriptions: [],
-    techStack: [],
+    title: "Kami UI",
+    subTitle:
+      "A minimalist, accessible component library designed for rapid high-fidelity prototyping. Focused on strict architectural precision and developer ergonomics.",
+    descriptions: [
+      "Built a themeable, accessible component library with strict architectural precision and developer ergonomics. Designed for rapid high-fidelity prototyping and production-ready applications.",
+      "Implemented a design system with reusable components, theming support, and accessibility best practices, enabling developers to create consistent and visually appealing user interfaces.",
+    ],
+    techStack: ["React", "TypeScript", "Next.js", "Emotion", "Storybook"],
     links: {
-      github: "",
-      live: "",
+      github: "https://github.com/webadeva/kami-ui",
+      live: "https://webadeva.github.io/kami-ui/",
     },
   },
 ];
