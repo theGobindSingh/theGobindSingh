@@ -23,3 +23,64 @@ export const workSection = {
     "Complexity is inevitable. Confusion is optional. I structure systems that teams can actually understand and scale.",
   experienceData,
 };
+
+export const manifestoSection = {
+  title: "Engineering Manifesto",
+  items: [
+    {
+      title: "Performance",
+      subTitle: "Latency is a bug.",
+      description: "Optimizing for the edge is a requirement, not a luxury.",
+    },
+    {
+      title: "Reliability",
+      subTitle: "Boring Tech.",
+      description: "Prioritize stable infrastructure for core systems.",
+    },
+    {
+      title: "Culture",
+      subTitle: "Read > Write.",
+      description: "Clean code reduces cognitive load for the next engineer.",
+    },
+    {
+      title: "Deletion",
+      subTitle: "Remove Code.",
+      description: "If it doesn't serve a purpose, it shouldn't exist.",
+    },
+    {
+      title: "Context",
+      subTitle: "No Black Boxes.",
+      description: "Systems must be observable to be production-ready.",
+    },
+  ],
+};
+
+export const skillsSection = {
+  title: "Systems Directory",
+  skills: {
+    frontend: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "TailwindCSS",
+      "Storybook",
+      "Emotion / CSS",
+    ],
+    backend: ["Node.js", "Express", "NestJS", "PostgreSQL", "MongoDB", "Redis"],
+    Architecture: [
+      "Micro-Frontends",
+      "Monorepos",
+      "Event-Driven Systems",
+      "Serverless",
+    ],
+    "Dev Experience": [
+      "Turborepos",
+      "Nx",
+      "Vite",
+      "ESLint",
+      "Prettier",
+      "Husky",
+    ],
+    Infrastructure: ["Docker", "CI/CD Pipelines", "Performance Tuning"],
+  },
+};

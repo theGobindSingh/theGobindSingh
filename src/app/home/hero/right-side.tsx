@@ -15,7 +15,7 @@ const RightSide = () => {
         <span className="font-mono text-(size:--fs-1xs) font-bold text-grey-800">
           {tag[0]}
         </span>
-        <span className="text-(size:--fs-3xs) font-medium text-accent-500">
+        <span className="text-(size:--fs-3xs) font-medium text-accent-600">
           {tag[1]}
         </span>
       </li>

@@ -39,9 +39,14 @@ const Footer = () => {
       </span>
       <div className="flex w-full justify-between gap-8 text-(size:--fs-3xs) not-md:flex-col">
         <span className="max-w-[50ch]">{footerData.description}</span>
-        <nav className="flex gap-2 font-mono not-md:my-4">
-          {footerData.links.map(mapper)}
-        </nav>
+        <div className="flex flex-col items-end justify-center gap-2 not-md:my-4 not-md:items-start not-md:gap-1">
+          <span className="text-grey-900">
+            If your product has outgrown quick fixes, let's talk.
+          </span>
+          <nav className="flex gap-2 font-mono">
+            {footerData.links.map(mapper)}
+          </nav>
+        </div>
       </div>
       <Hr bgColor="bg-grey-200" marginTop="mt-8" />
       <span className="font-mono text-(size:--fs-3xs)">

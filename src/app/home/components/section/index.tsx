@@ -5,6 +5,8 @@ interface HomeSectionProps {
   title: string;
   description?: string | undefined;
   wrapper?: FC<PropsWithChildren<unknown>>;
+  className?: string | undefined;
+  wrapperClassName?: string | undefined;
 }
 
 const HomeSection = ({
@@ -12,11 +14,16 @@ const HomeSection = ({
   description,
   wrapper: Wrapper = Fragment,
   children,
+  className,
+  wrapperClassName,
 }: PropsWithChildren<HomeSectionProps>) => {
   return (
-    <FullWidthWrapper className="flex flex-col gap-4">
+    <FullWidthWrapper
+      className={`flex flex-col gap-4 py-12 ${className ?? ""}`.trim()}
+      wrapperClassName={wrapperClassName!}
+    >
       <Wrapper>
-        <h2 className="font-mono text-(size:--fs-2xs) font-medium text-accent-500">
+        <h2 className="font-mono text-(size:--fs-2xs) font-medium text-accent-600">
           {title}
         </h2>
         {description && (

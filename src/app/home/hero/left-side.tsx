@@ -21,7 +21,7 @@ const tagsMapper = (tag: string, index: number) => {
         font-medium
         text-grey-700
         before:size-[0.5em]
-        before:bg-accent-500
+        before:bg-accent-600
         `}
     >
       {tag}

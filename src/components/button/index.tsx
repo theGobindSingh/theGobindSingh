@@ -5,7 +5,7 @@ export const Button = ({
   variant = "outlined",
   size = "md",
   color = "accent",
-  colorWeight = 500,
+  colorWeight = 600,
   textColor,
   textColorWeight,
   hoverBgColor,

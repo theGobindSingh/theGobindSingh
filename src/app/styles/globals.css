@@ -157,7 +157,7 @@
   --color-accent-400: hsl(var(--color-accent-400-base));
   --color-accent-500-base: 16, 100%, 47%;
   --color-accent-500: hsl(var(--color-accent-500-base));
-  --color-accent-600-base: 14, 100%, 29%;
+  --color-accent-600-base: 15, 100%, 40.75%;
   --color-accent-600: hsl(var(--color-accent-600-base));
   --color-accent-700-base: 14, 100%, 19%;
   --color-accent-700: hsl(var(--color-accent-700-base));
