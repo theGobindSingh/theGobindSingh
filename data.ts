@@ -148,21 +148,19 @@ export const footerData: {
   ],
 };
 
-export const experienceData:
-  | {
-      company: string;
-      position: string;
-      website: string;
-      dateRange: string;
-      responsibilities: string[];
-      otherPositions?: string[];
-    }[]
-  | null = [
+export const experienceData: {
+  company: string;
+  position: string;
+  website: string;
+  dateRange: string;
+  responsibilities: string[];
+  otherPositions?: string[];
+}[] = [
   {
     company: "Optimeleon AI",
     position: " Software Development Engineer - Full Stack",
     website: "https://www.optimeleon.com/",
-    dateRange: "July 2025 - Present",
+    dateRange: "July 2025 - February 2026",
     responsibilities: [
       `Worked as a full-stack engineer on an AI-driven conversion rate optimization platform, building and scaling personalized web experiences using React, Node.js, and modern frontend caching and data-fetching strategies.`,
       `Re-architected the monorepo by separating applications, shared UI components, and data layers, enabling independent deployments and improving build performance by approximately 15-20%.`,
@@ -174,9 +172,9 @@ export const experienceData:
     company: "Bajaj Finserv Health",
     position: "Software Development Engineer - Frontend",
     otherPositions: [
-      `Intern (Frontend)`,
-      `Associate SDE (Frontend)`,
       `SDE (Frontend)`,
+      `Associate SDE (Frontend)`,
+      `Intern (Frontend)`,
     ],
     website: "https://www.bajajfinservhealth.in/",
     dateRange: "January 2023 - July 2025",

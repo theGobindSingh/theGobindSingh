@@ -1,4 +1,5 @@
 import Hero from "@app/home/hero";
+import HomeWorkSection from "@app/home/work";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,6 +18,7 @@ const HomePage = () => {
   return (
     <main>
       <Hero />
+      <HomeWorkSection titleNumber="02" />
     </main>
   );
 };

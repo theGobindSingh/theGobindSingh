@@ -1,3 +1,5 @@
+import { experienceData } from "@data";
+
 export const heroSection = {
   title: "Building\nsoftware\nis easy.",
   subtitle: "Keeping it reliable as complexity grows is where the work begins.",
@@ -13,4 +15,11 @@ export const heroSection = {
     ["18+", "Technologies"],
     ["2", "Industry Domains"],
   ],
+};
+
+export const workSection = {
+  title: "Track Record",
+  description:
+    "Complexity is inevitable. Confusion is optional. I structure systems that teams can actually understand and scale.",
+  experienceData,
 };

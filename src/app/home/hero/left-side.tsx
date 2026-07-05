@@ -53,8 +53,10 @@ const LeftSide = () => {
         </span>
       </h1>
       <Hr />
-      <div className="flex justify-between gap-2">
-        <p className="w-[60%] leading-loose">{heroSection.desc}</p>
+      <div className="flex justify-between gap-2 not-md:flex-col not-md:gap-8">
+        <p className="w-[60%] leading-loose not-md:w-full">
+          {heroSection.desc}
+        </p>
         <ul
           className={tw`
             flex

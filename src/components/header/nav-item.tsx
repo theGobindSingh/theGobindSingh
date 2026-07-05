@@ -30,7 +30,7 @@ const HeaderNavItem = ({
       className={tw`
         font-mono
         text-(size:--fs-3xs)
-        font-semibold
+        font-medium
         
         transition-all
         duration-300
