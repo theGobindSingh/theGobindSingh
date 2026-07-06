@@ -3,23 +3,117 @@ import HomeManifesto from "@app/home/manifesto";
 import HomeProjectsSection from "@app/home/projects";
 import HomeSkills from "@app/home/skills";
 import HomeWorkSection from "@app/home/work";
+import JsonLd from "@components/json-ld";
+import { email, fullName, SOCIAL_KEYS, socialLinks } from "@data";
+import { OG_IMAGE, SITE_URL } from "@lib/site-config";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Gobind Singh — Full Stack Developer",
+  title: "Gobind Singh — Full Stack Developer | React, Next.js & TypeScript",
   description:
-    "Full stack developer who designs and ships polished, performant web apps. See the work, then let's talk.",
+    "Full stack developer based in Punjab, India. I build, rebuild, and integrate performant web apps using React, Next.js, TypeScript, and Node.js. 3+ years shipping production systems for startups and enterprises.",
+  keywords: [
+    "full stack developer",
+    "React developer",
+    "Next.js developer",
+    "TypeScript developer",
+    "Node.js developer",
+    "frontend engineer",
+    "web developer India",
+    "freelance developer",
+    "Gobind Singh",
+    "micro-frontend architecture",
+    "monorepo",
+    "web performance optimization",
+  ],
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
-    title: "Gobind Singh — Full Stack Developer",
+    title: "Gobind Singh — Full Stack Developer | React, Next.js & TypeScript",
     description:
-      "Full stack developer who designs and ships polished, performant web apps.",
+      "I build, rebuild, and integrate performant web apps. React, Next.js, TypeScript, and Node.js specialist with 3+ years of production experience.",
     type: "website",
+    url: SITE_URL,
+    images: [
+      {
+        url: OG_IMAGE.url,
+        width: OG_IMAGE.width,
+        height: OG_IMAGE.height,
+        alt: OG_IMAGE.alt,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gobind Singh — Full Stack Developer | React, Next.js & TypeScript",
+    description:
+      "I build, rebuild, and integrate performant web apps. React, Next.js, TypeScript, and Node.js specialist.",
+    images: [OG_IMAGE.url],
+  },
+};
+
+const personSchema = {
+  "@type": "Person",
+  name: fullName,
+  url: SITE_URL,
+  email,
+  jobTitle: "Full Stack Developer",
+  description:
+    "Full stack developer who designs and ships polished, performant web apps using React, Next.js, TypeScript, and Node.js.",
+  image: `${SITE_URL}/assets/images/garden-me.jpeg`,
+  sameAs: [
+    socialLinks[SOCIAL_KEYS.LINKEDIN]?.url,
+    socialLinks[SOCIAL_KEYS.GITHUB]?.url,
+  ].filter(Boolean),
+  knowsAbout: [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "JavaScript",
+    "NestJS",
+    "Express",
+    "Prisma",
+    "Micro-frontends",
+    "Monorepos",
+    "Web Performance",
+    "Frontend Architecture",
+    "Full Stack Development",
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: "Punjab",
+    addressCountry: "IN",
+  },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "SRM Institute of Science and Technology",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Chennai",
+      addressCountry: "IN",
+    },
+  },
+};
+
+const websiteSchema = {
+  "@type": "WebSite",
+  name: "Gobind Singh",
+  url: SITE_URL,
+  description:
+    "Portfolio of Gobind Singh, a full stack developer specializing in React, Next.js, TypeScript, and Node.js.",
+  publisher: {
+    "@type": "Person",
+    name: fullName,
   },
 };
 
 const HomePage = () => {
   return (
     <main>
+      <JsonLd data={personSchema} />
+      <JsonLd data={websiteSchema} />
       <Hero />
       <HomeWorkSection titleNumber="02" />
       <HomeManifesto titleNumber="03" />

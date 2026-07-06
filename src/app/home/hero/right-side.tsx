@@ -1,6 +1,5 @@
 import { heroSection } from "@app/home/constants";
 import Hr from "@components/hr";
-import { fullName } from "@data";
 import image from "@images/garden-me.jpeg";
 import { tw } from "@utils/tailwind";
 import Image from "next/image";
@@ -25,7 +24,7 @@ const RightSide = () => {
     <div className="w-110 shrink-0 not-md:w-full">
       <Image
         src={image}
-        alt={fullName}
+        alt="Gobind Singh, full stack developer based in Punjab, India"
         priority
         loading="eager"
         className={tw`

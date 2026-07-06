@@ -26,6 +26,10 @@ const HomeManifesto = ({ titleNumber = "00" }: { titleNumber?: string }) => {
       title={`${titleNumber} // ${manifestoSection.title}`}
       wrapperClassName={tw`bg-[hsla(var(--color-grey-100-base),0.5)]`}
       className="py-20"
+      wrapperProps={{
+        "aria-label": "Engineering principles and development philosophy",
+        id: "manifesto",
+      }}
     >
       <ul className="grid w-full grid-cols-3 gap-8 gap-y-8">
         {manifestoSection.items.map(manifestoItemsMapper)}

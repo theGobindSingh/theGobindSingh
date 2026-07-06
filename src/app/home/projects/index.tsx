@@ -1,6 +1,7 @@
 import HomeSection from "@app/home/components/section";
 import { projectsSection } from "@app/home/constants";
 import WorkCard from "@app/home/projects/work-card";
+import { Link } from "@components/link";
 import { WorkItem } from "@data";
 import { Fragment } from "react";
 
@@ -47,6 +48,10 @@ const HomeProjectsSection = ({
     <HomeSection
       title={`${titleNumber} // ${projectsSection.title}`}
       description={projectsSection.description}
+      wrapperProps={{
+        "aria-label": "Case studies and engineering projects",
+        id: "projects",
+      }}
     >
       <div className="flex flex-col gap-4">
         {projectsSection.caseStudies &&
@@ -66,6 +71,9 @@ const HomeProjectsSection = ({
           />
         )}
       </div>
+      <Link href="/work" className="mt-4 font-mono">
+        See all case studies →
+      </Link>
     </HomeSection>
   );
 };

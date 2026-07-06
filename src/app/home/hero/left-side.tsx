@@ -1,5 +1,6 @@
 import { heroSection } from "@app/home/constants";
 import Hr from "@components/hr";
+import { fullName } from "@data";
 import { tw } from "@utils/tailwind";
 
 const mapper = (line: string, index: number) => {
@@ -33,6 +34,10 @@ const LeftSide = () => {
   return (
     <div className="w-full max-w-210 not-md:w-full">
       <h1 className="flex w-full flex-col gap-4 not-md:gap-2">
+        <span className="sr-only">
+          ${fullName} — Full Stack Developer specializing in React, Next.js,
+          TypeScript, and Node.js
+        </span>
         <span
           className={tw`
             flex

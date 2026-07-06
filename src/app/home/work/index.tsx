@@ -1,6 +1,7 @@
 import HomeSection from "@app/home/components/section";
 import { workSection } from "@app/home/constants";
 import HomeWorkCard from "@app/home/work/work-card";
+import { Link } from "@components/link";
 import { tw } from "@utils/tailwind";
 
 const HomeWorkSection = ({ titleNumber = "00" }: { titleNumber?: string }) => {
@@ -11,6 +12,10 @@ const HomeWorkSection = ({ titleNumber = "00" }: { titleNumber?: string }) => {
     <HomeSection
       title={`${titleNumber} // ${workSection.title}`}
       description={workSection.description}
+      wrapperProps={{
+        "aria-label": "Professional experience and work history",
+        id: "work",
+      }}
     >
       <ul
         className={tw`
@@ -27,6 +32,9 @@ const HomeWorkSection = ({ titleNumber = "00" }: { titleNumber?: string }) => {
       >
         {workSection.experienceData.map(expMapper)}
       </ul>
+      <Link href="/work" className="mt-4 font-mono">
+        View all work →
+      </Link>
     </HomeSection>
   );
 };

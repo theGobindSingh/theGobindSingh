@@ -19,6 +19,7 @@
       "@icons": ["./src/icons/index.ts"],
       "@icons/*": ["./src/icons/*"],
       "@providers/*": ["./src/providers/*"],
+      "@lib/*": ["./src/lib/*"],
       "@/*": ["./src/*"],
       "@data": ["./data.ts"]
     },

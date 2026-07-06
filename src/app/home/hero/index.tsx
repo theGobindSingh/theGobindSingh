@@ -7,6 +7,11 @@ const Hero = () => {
     <FullWidthWrapper
       element="section"
       className="flex justify-center gap-16 py-16 not-md:flex-col"
+      wrapperProps={{
+        "aria-label":
+          "Gobind Singh, full stack developer specializing in React, Next.js, TypeScript, and Node.js",
+        id: "hero",
+      }}
     >
       <LeftSide />
       <RightSide />

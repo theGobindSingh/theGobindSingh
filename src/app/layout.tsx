@@ -2,6 +2,8 @@ import ThemeSetter from "@app/theme-setter";
 import Footer from "@components/footer";
 import Header from "@components/header";
 import ThemeSwitcher from "@components/theme-switcher";
+import { fullName } from "@data";
+import { OG_IMAGE, SITE_NAME, SITE_URL } from "@lib/site-config";
 import LenisProvider from "@providers/lenis";
 import type { Metadata } from "next";
 import {
@@ -47,28 +49,49 @@ const fontCursive = ReenieBeanie({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Gobind Singh — Full Stack Developer",
     template: "%s — Gobind Singh",
   },
   description:
     "Full stack developer who designs and ships polished, performant web apps. I build, rebuild, and integrate web products for startups and enterprises.",
+  authors: [{ name: fullName, url: SITE_URL }],
+  creator: fullName,
+  publisher: fullName,
   openGraph: {
     title: "Gobind Singh — Full Stack Developer",
     description:
       "Full stack developer who designs and ships polished, performant web apps. See the work, then let's talk.",
     type: "website",
-    siteName: "Gobind Singh",
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    images: [
+      {
+        url: OG_IMAGE.url,
+        width: OG_IMAGE.width,
+        height: OG_IMAGE.height,
+        alt: OG_IMAGE.alt,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Gobind Singh — Full Stack Developer",
     description:
       "Full stack developer who designs and ships polished, performant web apps.",
+    images: [OG_IMAGE.url],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 

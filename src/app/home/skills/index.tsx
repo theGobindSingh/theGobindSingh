@@ -35,6 +35,11 @@ const HomeSkills = ({ titleNumber = "00" }: { titleNumber?: string }) => {
     <HomeSection
       title={`${titleNumber} // ${skillsSection.title}`}
       wrapper={Wrapper}
+      wrapperProps={{
+        "aria-label":
+          "Technical skills in React, Next.js, TypeScript, Node.js, and more",
+        id: "skills",
+      }}
     >
       <div className="grid grid-cols-5 gap-4 not-md:grid-cols-2">
         {Object.entries(skillsSection.skills).map(skillsMapper)}

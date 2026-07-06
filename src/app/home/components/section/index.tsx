@@ -1,4 +1,5 @@
 import FullWidthWrapper from "@components/full-width-wrapper";
+import type { HTMLAttributes } from "react";
 import { FC, Fragment, PropsWithChildren } from "react";
 
 interface HomeSectionProps {
@@ -7,6 +8,7 @@ interface HomeSectionProps {
   wrapper?: FC<PropsWithChildren<unknown>>;
   className?: string | undefined;
   wrapperClassName?: string | undefined;
+  wrapperProps?: HTMLAttributes<HTMLElement>;
 }
 
 const HomeSection = ({
@@ -16,11 +18,13 @@ const HomeSection = ({
   children,
   className,
   wrapperClassName,
+  wrapperProps,
 }: PropsWithChildren<HomeSectionProps>) => {
   return (
     <FullWidthWrapper
       className={`flex flex-col gap-4 py-12 ${className ?? ""}`.trim()}
       wrapperClassName={wrapperClassName!}
+      {...(wrapperProps ? { wrapperProps } : {})}
     >
       <Wrapper>
         <h2 className="font-mono text-(size:--fs-2xs) font-medium text-accent-600">
