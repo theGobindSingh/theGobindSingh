@@ -48,12 +48,12 @@ const HomeSection = ({
           {link?.href && link?.label && (
             <Link
               href={link.href}
-              className="flex items-end justify-center gap-1 p-0 font-mono tracking-wide text-grey-900 hover:text-accent-600"
+              className="group flex items-end justify-center gap-1 p-0 font-mono tracking-wide text-grey-900 hover:text-accent-600"
               variant="text"
             >
               <span className="text-(size:--fs-3xs)">{link.label}</span>
               <ArrowUpRight
-                className="text-(size:--fs-m)"
+                className="text-(size:--fs-m) transition-transform duration-(--dur-fast) ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 height={"1em"}
                 width={"1em"}
               />
