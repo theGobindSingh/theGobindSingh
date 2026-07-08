@@ -1,6 +1,8 @@
 # Claude Code Automations
 
-Automation recommendations for this repo. Implement any of these by creating the files described.
+What's actually automated in this repo, plus recommendations not yet adopted. Hooks and
+skills below are implemented and live; MCP servers and subagents are recommendations —
+implement by creating the files/config described.
 
 ---
 
@@ -87,89 +89,35 @@ Runs `tsc --noEmit` after TypeScript file edits. Skip if you find it too slow du
 
 ## Skills
 
-Skills live in `.claude/skills/<name>/SKILL.md`. Invoke them with `/<name>` in the Claude Code prompt.
+Skills live in `.claude/skills/<name>/SKILL.md` and are **implemented** (not just recipes).
+Invoke them with `/<name>` in the Claude Code prompt, or Claude spawns them automatically
+where noted.
 
 ### `new-section`
 
-Scaffolds a new portfolio section following the existing `src/app/home/` pattern.
-
-**Create** `.claude/skills/new-section/SKILL.md`:
-
-```markdown
----
-name: new-section
-description: Scaffold a new App Router section under src/app/<name>/ with page.tsx and wired navigation
----
-
-The user wants to create a new portfolio section. Follow the existing pattern in src/app/home/:
-
-- Create src/app/<name>/page.tsx with metadata export and a root section element
-- Create any needed components under src/components/<name>/
-- Wire up the new route in the header navigation (src/components/header/)
-- Use Tailwind for all styling, no inline styles
-- Export page metadata (title, description) for SEO
-```
+Scaffolds a new App Router route, or a new section within an existing route, matching this
+repo's real structure (route sections vs. route-local `components/`, global `@` aliases,
+`FullWidthWrapper`/`HomeSection` reuse, nav wiring). See
+`.claude/skills/new-section/SKILL.md`.
 
 ### `perf-check`
 
-Builds the project and reports bundle sizes to catch regressions before deploy.
-
-**Create** `.claude/skills/perf-check/SKILL.md`:
-
-```markdown
----
-name: perf-check
-description: Build and report route bundle sizes; flag regressions
-disable-model-invocation: true
----
-
-Run: pnpm build
-
-Report the "First Load JS" size for every route from the build output.
-Flag any route over 100 kB. Note whether sharp is active for image optimization.
-If sizes grew vs. the last known baseline, suggest where to look (lazy imports, dynamic(), unused deps).
-```
-
-### `content-update`
-
-Keeps portfolio copy consistent with the owner context in AGENTS.md.
-
-**Create** `.claude/skills/content-update/SKILL.md`:
-
-```markdown
----
-name: content-update
-description: Update portfolio copy while staying within the verified metrics and copy rules in AGENTS.md
-user-invocable: false
----
-
-Before writing any copy, re-read AGENTS.md (owner context section) and docs/PRODUCT.md.
-Apply the copy rules: first person, plain language, outcomes before tech, no fabricated metrics unless explicitly asked for a placeholder.
-Use only the verified metrics list from AGENTS.md — do not invent numbers.
-```
+Runs `pnpm build`, reports First Load JS per route, and flags routes over 100 kB with a
+concrete likely cause. Both user-invocable (`/perf-check`) and auto-invoked by Claude before
+declaring bundle-size-relevant work done, per AGENTS.md golden rule 7. See
+`.claude/skills/perf-check/SKILL.md`.
 
 ### `seo-audit`
 
-Reviews page metadata, og tags, and structured data for each route.
+Audits every `page.tsx` for metadata, canonical, OG/Twitter, JSON-LD, heading structure, and
+image/link accessibility, using the homepage's existing implementation as the compliance
+baseline. See `.claude/skills/seo-audit/SKILL.md`.
 
-**Create** `.claude/skills/seo-audit/SKILL.md`:
+### `content-update`
 
-```markdown
----
-name: seo-audit
-description: Audit all App Router pages for missing or weak SEO metadata
----
-
-Check every page.tsx under src/app/ for:
-
-- Exported `metadata` object with title and description
-- Open Graph tags (og:title, og:description, og:image)
-- Twitter card tags
-- Canonical URL
-- Structured data (JSON-LD) where appropriate (home page at minimum)
-
-Report missing or weak metadata per route and suggest fixes based on the owner context in AGENTS.md.
-```
+Enforces the copy rules and verified-metrics list from `AGENTS.md` before any portfolio copy
+is written or edited. Claude applies it automatically; also user-invocable (`/content-update`)
+to spot-check existing copy. See `.claude/skills/content-update/SKILL.md`.
 
 ---
 
@@ -202,7 +150,8 @@ claude mcp add playwright -- npx -y @playwright/mcp
 
 ## Subagents
 
-Subagents live in `.claude/agents/<name>.md`. Claude spawns them automatically for relevant tasks.
+Not yet implemented — `.claude/agents/` exists but is empty. If added, subagents would live
+in `.claude/agents/<name>.md` and Claude would spawn them automatically for relevant tasks.
 
 ---
 

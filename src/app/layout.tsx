@@ -5,6 +5,7 @@ import ThemeSwitcher from "@components/theme-switcher";
 import { fullName } from "@data";
 import { OG_IMAGE, SITE_NAME, SITE_URL } from "@lib/site-config";
 import LenisProvider from "@providers/lenis";
+import "@styles/globals.css";
 import type { Metadata } from "next";
 import {
   Anton,
@@ -15,7 +16,6 @@ import {
 } from "next/font/google";
 import { cookies } from "next/headers";
 import { type PropsWithChildren } from "react";
-import "./styles/globals.css";
 
 const fontDisplay = Anton({
   subsets: ["latin"],

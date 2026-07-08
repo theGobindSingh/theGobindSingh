@@ -75,7 +75,6 @@ const Header = () => {
         </Link>
         <Hamburger />
       </div>
-      {/* <HeaderScrollHandler /> */}
     </FullWidthWrapper>
   );
 };

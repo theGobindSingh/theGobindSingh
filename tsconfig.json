@@ -21,7 +21,7 @@
       "@providers/*": ["./src/providers/*"],
       "@lib/*": ["./src/lib/*"],
       "@/*": ["./src/*"],
-      "@data": ["./data.ts"]
+      "@data": ["./src/data.ts"]
     },
     "noPropertyAccessFromIndexSignature": false,
     "ignoreDeprecations": "5.0",
@@ -35,7 +35,6 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.js",
-    "data.ts",
     "eslint.config.mjs",
     "next.config.js"
   ],

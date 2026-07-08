@@ -29,7 +29,7 @@ Stack: Next.js (App Router) + TypeScript + Tailwind, pnpm, `src/` directory, con
 - Co-locate everything a unit owns inside its folder:
   - `index.tsx` the entry / public surface
   - `types.ts` its types (only if needed)
-  - sub-parts as their own kebab folders or files when split (see 4)
+  - sub-parts as their own kebab folders or files when split (see 5)
   - unit-specific helpers in the same folder
 - Import the unit by its folder; `index` resolves automatically:
   `import { Button } from "@/components/button"`.
@@ -38,22 +38,60 @@ Stack: Next.js (App Router) + TypeScript + Tailwind, pnpm, `src/` directory, con
 
 ```
 src/
-  app/                 # routes (App Router): page.tsx, layout.tsx, route folders
-  components/          # reusable UI units (each a kebab folder with index.tsx)
-  features/            # larger composed sections (e.g. hero, contact, work-list)
-  lib/                 # framework-agnostic helpers (kebab files/folders)
-  hooks/               # use-* hooks (each its own file or folder)
-  styles/              # global.css and style entry points
-  content/             # optional: typed loaders that read /public content
+  app/                   # routes (App Router): page.tsx, layout.tsx, route folders
+    home/                # example route
+      components/        # components local to this route only (e.g. HomeSection)
+      hero/, work/, ...  # one kebab folder per section/module of the route
+      constants.ts       # this route's copy/presentation data, reads from @data
+  components/            # global reusable UI units (kebab folder + index.tsx), used by 2+ routes
+  lib/                    # framework-agnostic helpers (e.g. site-config)
+  providers/              # client context providers (e.g. lenis)
+  utils/                  # small framework-agnostic helpers (e.g. tw, cookies)
+  styles/                 # globals.css, defaults.css, components.css
+  hooks/                  # shared hooks (not populated yet; a hook lives beside its consumer
+                           # in its component folder until a second route needs it)
+  icons/                  # shared icon components (not populated yet)
+  data.ts                 # raw portfolio data (experience, case studies, projects), aliased @data
 public/
-  blogs/               # blog markdown, see 5
-  ...                  # static assets, resume pdf, og images
+  assets/images/          # images
+  blogs/                  # blog markdown, see 4
+  ...                     # resume pdf, og images, other static assets
 ```
 
-Keep `app/` thin: route files compose `features/` and `components/`, they do not hold large
-logic blocks themselves.
+Keep route files thin: a route's `page.tsx`/`layout.tsx` compose its section folders and local
+`components/`, they do not hold large logic blocks themselves.
 
-## 4. Modular code (applies to ALL files, not just components)
+### Route sections vs. route components
+
+A route (e.g. `home`) is built from two kinds of folders:
+
+- **`<route>/<section>/`** — one modular slice of the route (e.g. `hero/`, `work/`,
+  `manifesto/`). Each is a kebab folder with its own `index.tsx` (+ sibling files as needed).
+  This is how a route stays under the 150-LOC rule without becoming one giant file: split by
+  section, not by arbitrary line breaks.
+- **`<route>/components/`** — small pieces reused _within that route only_, across its
+  sections (e.g. `HomeSection`, the shared title/description/link wrapper every homepage
+  section is built on). If a `components/` piece is ever needed by a second route, promote it
+  to the global `src/components/` (see §7 Components).
+
+## 4. Data & content model
+
+Three layers, from raw to rendered:
+
+- **`src/data.ts`** (aliased `@data`) — the single source of raw structured data: experience
+  entries, case studies, project data. No copy/presentation logic, just data.
+- **Per-route `constants.ts`** (e.g. `src/app/home/constants.ts`) — that route's copy and
+  presentation objects (section titles, descriptions, tag lists), built by reading `@data` and
+  adding route-specific framing. Route sections import from their own route's `constants.ts`,
+  not straight from `@data`, unless the data needs no route-specific shaping.
+- **`public/blogs/*.md`** (planned, not yet built) — blog posts as markdown files. **The
+  filename is the slug**: `public/blogs/why-i-shifted-to-next-js.md` serves at
+  `/blog/why-i-shifted-to-next-js`. Frontmatter carries metadata (title, date, tags, excerpt,
+  cover); the slug is never duplicated in frontmatter. Other file-based content (case studies,
+  testimonials) would follow the same pattern in its own `public/<type>/` folder if/when it
+  becomes markdown-driven rather than living in `data.ts`.
+
+## 5. Modular code (applies to ALL files, not just components)
 
 - **Hard rule: if a file passes ~150 lines of code, split it.** This is not a soft target.
   When a file grows past it, break it into smaller files in the same folder and re-export
@@ -66,17 +104,6 @@ logic blocks themselves.
 - Prefer composition (small pieces assembled) over large monoliths everywhere, including
   `lib/`, hooks, and route files.
 
-## 5. Content (blog and other markdown)
-
-- Blog posts are `.md` files in `public/blogs/`. **The filename is the slug.** Example:
-  `public/blogs/why-i-shifted-to-next-js.md` serves at `/blog/why-i-shifted-to-next-js`.
-- Each post starts with frontmatter for metadata (title, date, tags, excerpt, cover, etc.);
-  the body is markdown below it. The slug is never duplicated in frontmatter; it comes from
-  the filename.
-- Other markdown-driven content (case studies, testimonials if file-based) follows the same
-  pattern in its own `public/<type>/` folder, filename = slug. Keep content out of code so
-  adding a post never touches layout.
-
 ## 6. Imports
 
 - **Always prefer the `@` path alias** over relative paths. `@/components/button`, not
@@ -85,6 +112,24 @@ logic blocks themselves.
 - Import order: external packages, then `@/` internal, then relative, then styles/assets.
   Let ESLint enforce and auto-fix ordering.
 - No deep relative chains (`../../..`); if you are tempted, use the alias.
+
+**Alias reference** (`tsconfig.json`):
+
+| Alias                | Resolves to                                         |
+| -------------------- | --------------------------------------------------- |
+| `@app/*`             | `src/app/*`                                         |
+| `@components/*`      | `src/components/*`                                  |
+| `@hooks/*`           | `src/hooks/*` (not populated yet)                   |
+| `@utils/*`           | `src/utils/*`                                       |
+| `@providers/*`       | `src/providers/*`                                   |
+| `@lib/*`             | `src/lib/*`                                         |
+| `@styles/*`          | `src/styles/*`                                      |
+| `@icons`, `@icons/*` | `src/icons/*` (not populated yet - use lucid-react) |
+| `@images/*`          | `public/assets/images/*`                            |
+| `@assets/*`          | `public/assets/*`                                   |
+| `@public/*`          | `public/*`                                          |
+| `@data`              | `src/data.ts`                                       |
+| `@/*`                | `src/*`                                             |
 
 ## 7. Components
 
@@ -96,12 +141,25 @@ logic blocks themselves.
 - Co-locate a component's styles and helpers in its folder. Style only through tokens per
   DESIGN.md.
 
+### Global vs. local components
+
+- **Global** (`src/components/*`) — reusable across any route, no dependency on a specific
+  route's data or `constants.ts`. This is the kit DESIGN.md's component catalog documents
+  (`Button`, `Link`, `FullWidthWrapper`, `JsonLd`, `ThemeSwitcher`, `Hamburger`, ...).
+- **Local** (`<route>/<section>/*`, `<route>/components/*`) — specific to one route, allowed
+  to import that route's `constants.ts` directly. Not meant to be imported by another route.
+- **Promotion rule**: when a local pattern is needed by a second route, move it into
+  `src/components/`, generalize its props (drop the route-specific data dependency), and
+  update both routes to import it from there. Don't cross-import one route's local component
+  into another route.
+
 ## 8. Styling
 
 - Token-driven only, per DESIGN.md. Consume semantic aliases first, then ramp shades, then a
   `--_`-prefixed local for component variants.
-- No inline hex/HSL, no raw px font sizes, no magic numbers. Use the `--fs-*` / `--text-*`
-  type tokens for UI and the monumental `vw` clamp tier for display headings.
+- No inline hex/HSL, no raw px font sizes, no magic numbers. Use `--fs-*` for all UI/body/
+  heading sizing (the hero headline is the one documented exception — see DESIGN.md) and
+  `--text-*` for the button-size scale (`btn-sm`/`btn-lg`).
 - Never add `dark:` color literals; rely on the ramp inversion. Reuse the signature kit and
   component patterns from DESIGN.md instead of inventing new ornament.
 
@@ -113,8 +171,8 @@ logic blocks themselves.
 - A client `ThemeSetter` (mounted in `body`) reconciles on mount with precedence
   **localStorage > cookie > system (`prefers-color-scheme`)**, persists the result to both
   localStorage and the cookie, and toggles the `light`/`dark` class on `documentElement`.
-- `global.css` keys styling off `:root, .light` (light) and `.dark` (inverted ramp). Exactly
-  one of those classes is always present.
+- `src/styles/globals.css` keys styling off `:root, .light` (light) and `.dark` (inverted
+  ramp). Exactly one of those classes is always present.
 - **Components never branch on theme in JS for styling.** They use tokens; the class on
   `<html>` does the rest. Only the theme toggle writes the cookie + localStorage and flips the
   class (reuse the existing client helper, do not re-implement).

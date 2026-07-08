@@ -65,14 +65,14 @@ Active hooks, skills, and subagents — understand these before acting so you do
 - **PostToolUse Edit|Write** → Prettier auto-formats the saved file. Do not run `pnpm lint:fix` manually after edits.
 - **PreToolUse Edit|Write** → Blocks any edit to `.env*` files. Do not attempt to edit them; ask the owner instead.
 
-**Skills** — invoke with `/skill-name` or Claude spawns them automatically:
+**Skills** (`.claude/skills/`) — invoke with `/skill-name`, or Claude spawns them automatically where noted:
 
-- `/new-section` — scaffolds a new App Router page + components + nav wiring. Use this instead of creating files by hand.
-- `/perf-check` — runs `pnpm build` and reports First Load JS per route. Run before declaring any task done if bundle size is relevant.
-- `/seo-audit` — checks every `page.tsx` for metadata, OG, Twitter, JSON-LD gaps.
-- `content-update` (Claude-only, not user-invocable) — enforces copy rules from this file before writing any portfolio copy.
+- `/new-section` — scaffolds a new App Router route, or a new section within an existing route. Use this instead of creating files by hand.
+- `/perf-check` — runs `pnpm build` and reports First Load JS per route. Both user-invocable and auto-run by Claude before declaring bundle-size-relevant work done.
+- `/seo-audit` — checks every `page.tsx` for metadata, OG, Twitter, canonical, and JSON-LD gaps against the homepage's implementation as the baseline.
+- `/content-update` — enforces the copy rules and verified-metrics list from this file. Auto-applied by Claude before writing portfolio copy; also user-invocable to spot-check existing copy.
 
-**Subagents** (`.claude/agents/`) — Claude spawns these for relevant tasks:
+**Subagents** — not yet implemented; `.claude/agents/` exists but is empty.
 
 ---
 
@@ -85,10 +85,11 @@ Active hooks, skills, and subagents — understand these before acting so you do
   or styling any UI.
 - **`docs/CONVENTIONS.md`** how code is structured and written: naming, folders, modularity,
   imports, components, styling, TypeScript, lint, tooling. Read before creating or editing files.
-- **`global.css`** (no need to read the whole file) the literal source of truth for color/type values and atmospheric layers.
+- **`src/styles/globals.css`** (no need to read the whole file) the literal source of truth for color/type values and atmospheric layers.
 - **`docs/reference/`** (if present) the reference HTML and/or screenshots. Treat it as the
   fidelity target for layout, structure, and motion. Match the patterns, but use THIS
-  project's palette (orange/amber/chartreuse tokens) and fonts, not the reference's red.
+  project's palette (neutral greys + one orange accent, per DESIGN.md) and fonts, not the
+  reference's red.
 
 Precedence if anything conflicts: the owner's direct instruction > these docs > defaults.
 Among docs, each owns its domain (PRODUCT = what, DESIGN = look, CONVENTIONS = how).

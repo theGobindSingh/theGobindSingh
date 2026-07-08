@@ -63,6 +63,9 @@ Keep the form short; every extra field costs conversions. No gated content, no p
 Hybrid: a strong single-page home that funnels, plus real routes for depth and SEO. More
 indexable, linkable pages help search; the home stays the highlight reel.
 
+**Status:** `/` (Home) is built and live. `/work`, `/work/[slug]`, `/blog`, `/blog/[slug]`,
+`/about`, and `/contact` are still planned, not yet built.
+
 Sitemap:
 
 - `/` Home (the funnel: hero, intro, selected work, capabilities, GitHub activity, testimonials, latest writing, contact).
