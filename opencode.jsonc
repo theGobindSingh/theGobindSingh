@@ -1,22 +1,31 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "formatter": true,
-  "instructions": ["docs/PRODUCT.md", "docs/DESIGN.md", "docs/CONVENTIONS.md"],
+  "instructions": [
+    "docs/PRODUCT.md",
+    "docs/DESIGN.md",
+    "docs/CONVENTIONS.md"
+  ],
   "permission": {
     "edit": {
       "*": "allow",
       ".env": "deny",
       ".env.*": "deny",
-      ".env.example": "allow",
-    },
+      ".env.example": "allow"
+    }
   },
   "agent": {},
   "lsp": {},
   "mcp": {
     "playwright": {
       "type": "local",
-      "command": ["npx", "-y", "@playwright/mcp@latest", "--isolated"],
-      "enabled": true,
-    },
-  },
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp@latest",
+        "--isolated"
+      ],
+      "enabled": true
+    }
+  }
 }
