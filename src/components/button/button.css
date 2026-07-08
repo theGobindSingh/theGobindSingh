@@ -11,83 +11,86 @@
  *
  * Each variant has sensible defaults for text / hover-text so neither
  * optional var is needed for the typical case.
+ *
+ * Declared with @utility (not @layer components) so Tailwind v4 registers
+ * these as real utility candidates — eslint-plugin-better-tailwindcss then
+ * recognizes them automatically, with no manual ignore-list entries needed.
  */
 
-@layer components {
-  /* ── Base ─────────────────────────────────────────────── */
+/* ── Base ─────────────────────────────────────────────── */
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    border-radius: var(--radius-none);
-    transition: all 300ms ease;
-    cursor: pointer;
-    white-space: nowrap;
-    user-select: none;
-    text-decoration: none;
-    padding: 0.5em 1.25em;
-  }
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-none);
+  transition: all 300ms ease;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  text-decoration: none;
+  padding: 0.5em 1.25em;
 
-  .btn:focus-visible {
+  &:focus-visible {
     outline: 2px solid var(--color-focus);
     outline-offset: 2px;
   }
 
-  .btn:disabled,
-  .btn[aria-disabled="true"] {
+  &:disabled,
+  &[aria-disabled="true"] {
     cursor: not-allowed;
     pointer-events: none;
     opacity: 0.5;
   }
+}
 
-  /* ── Sizes (not applied to text variant) ─────────────── */
+/* ── Sizes (not applied to text variant) ─────────────── */
 
-  .btn-sm {
-    font-size: var(--text-sm);
-  }
-  .btn-lg {
-    font-size: var(--text-lg);
-  }
+@utility btn-sm {
+  font-size: var(--text-sm);
+}
 
-  /* ── Filled ───────────────────────────────────────────── */
+@utility btn-lg {
+  font-size: var(--text-lg);
+}
 
-  .btn-filled {
-    background-color: var(--c);
-    color: var(--c-text, var(--color-grey-50));
-    border: 1px solid var(--c);
-  }
+/* ── Filled ───────────────────────────────────────────── */
 
-  .btn-filled:hover {
+@utility btn-filled {
+  background-color: var(--c);
+  color: var(--c-text, var(--color-grey-50));
+  border: 1px solid var(--c);
+
+  &:hover {
     background-color: var(--c-hover);
     scale: 0.98;
   }
+}
 
-  /* ── Outlined ─────────────────────────────────────────── */
+/* ── Outlined ─────────────────────────────────────────── */
 
-  .btn-outlined {
-    background-color: transparent;
-    color: var(--c-text, var(--c));
-    border: 1px solid var(--c);
-    font-size: var(--fs-3xs);
-  }
+@utility btn-outlined {
+  background-color: transparent;
+  color: var(--c-text, var(--c));
+  border: 1px solid var(--c);
+  font-size: var(--fs-3xs);
 
-  .btn-outlined:hover {
+  &:hover {
     background-color: var(--c-hover);
     border-color: var(--c-hover);
     color: var(--c-hover-text, var(--color-grey-50));
   }
+}
 
-  /* ── Text ─────────────────────────────────────────────── */
+/* ── Text ─────────────────────────────────────────────── */
 
-  .btn-text {
-    background-color: transparent;
-    text-decoration: none;
-    padding: 0;
-  }
+@utility btn-text {
+  background-color: transparent;
+  text-decoration: none;
+  padding: 0;
 
-  .btn-text:hover {
+  &:hover {
     color: var(--c-hover-text, var(--c-hover));
   }
 }

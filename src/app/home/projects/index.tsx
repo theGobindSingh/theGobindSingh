@@ -71,9 +71,19 @@ const HomeProjectsSection = ({
           />
         )}
       </div>
-      <Link href="/work" className="mt-4 font-mono">
-        See all case studies →
+      <hr className="my-8 border-t border-grey-200 not-md:my-4" />
+      <Link
+        href="/work"
+        className="ml-auto px-4 py-0 font-mono font-medium"
+        color="accent"
+        hoverTextColor="grey"
+        hoverTextColorWeight={100}
+        variant="outlined"
+      >
+        <span>See all case studies & projects</span>
+        <span className="text-(size:--fs-m)">↗</span>
       </Link>
+      <hr className="mt-8 border-t border-grey-200 not-md:my-4" />
     </HomeSection>
   );
 };

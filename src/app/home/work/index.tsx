@@ -16,6 +16,10 @@ const HomeWorkSection = ({ titleNumber = "00" }: { titleNumber?: string }) => {
         "aria-label": "Professional experience and work history",
         id: "work",
       }}
+      link={{
+        href: "/work",
+        label: "View all work",
+      }}
     >
       <ul
         className={tw`
@@ -32,8 +36,16 @@ const HomeWorkSection = ({ titleNumber = "00" }: { titleNumber?: string }) => {
       >
         {workSection.experienceData.map(expMapper)}
       </ul>
-      <Link href="/work" className="mt-4 font-mono">
-        View all work →
+      <Link
+        href="/work"
+        className="mt-4 ml-auto px-4 py-0 font-mono font-medium"
+        color="accent"
+        hoverTextColor="grey"
+        hoverTextColorWeight={100}
+        variant="outlined"
+      >
+        <span>View all work </span>
+        <span className="text-(size:--fs-m)">↗</span>
       </Link>
     </HomeSection>
   );

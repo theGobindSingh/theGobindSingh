@@ -118,7 +118,10 @@ const RootLayout = async ({ children }: PropsWithChildren<unknown>) => {
         fontCursive.variable,
       ].join(" ")}
     >
-      <head />
+      <head>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+      </head>
       <body>
         <ThemeSetter />
         <Header />
