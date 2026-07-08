@@ -52,6 +52,7 @@ const HeaderNavItem = ({
         color="grey"
         hoverBgColorWeight={950}
         onClick={clickHandler}
+        className="p-0"
       >
         {text}
       </Link>

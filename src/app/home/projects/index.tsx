@@ -52,6 +52,10 @@ const HomeProjectsSection = ({
         "aria-label": "Case studies and engineering projects",
         id: "projects",
       }}
+      link={{
+        label: "See all case studies & projects",
+        href: "/work",
+      }}
     >
       <div className="flex flex-col gap-4">
         {projectsSection.caseStudies &&
@@ -75,9 +79,9 @@ const HomeProjectsSection = ({
       <Link
         href="/work"
         className="ml-auto px-4 py-0 font-mono font-medium"
-        color="accent"
-        hoverTextColor="grey"
-        hoverTextColorWeight={100}
+        // color="accent"
+        // hoverTextColor="grey"
+        // hoverTextColorWeight={100}
         variant="outlined"
       >
         <span>See all case studies & projects</span>

@@ -24,6 +24,20 @@ export type ColorWeight =
   | 900
   | 950;
 
+// Tailwind's content scanner only detects literal class-name strings, not
+// template-literal interpolation — this map is what makes btn-filled/
+// btn-outlined/btn-text/btn-sm/btn-lg actually get generated in the build.
+const variantClassName: Record<InteractionVariant, string> = {
+  filled: "btn-filled",
+  outlined: "btn-outlined",
+  text: "btn-text",
+};
+
+const sizeClassName: Partial<Record<InteractionSize, string>> = {
+  sm: "btn-sm",
+  lg: "btn-lg",
+};
+
 export const interactionStyles = ({
   variant,
   size = "md",
@@ -33,8 +47,10 @@ export const interactionStyles = ({
   size?: InteractionSize | undefined;
   className?: string | undefined;
 }): string => {
-  const parts = ["btn", `btn-${variant}`];
-  if (variant !== "text") parts.push(`btn-${size}`);
+  const parts = ["btn", variantClassName[variant]];
+  if (variant !== "text" && sizeClassName[size]) {
+    parts.push(sizeClassName[size]);
+  }
   if (className) parts.push(className);
   return parts.join(" ");
 };
