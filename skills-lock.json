@@ -1,11 +1,11 @@
 {
   "version": 1,
   "skills": {
-    "seo": {
-      "source": "affaan-m/ECC",
+    "impeccable": {
+      "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "skillPath": "skills/seo/SKILL.md",
-      "computedHash": "342da0c7fa6235cdc08789e67bac0e8ff770e8aeaa106f32895c17201501b1b0"
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "computedHash": "7d44ebcc7415566fb6e7c10436230a39fa7e743ba97dbaf883432baf76d04e01"
     },
     "stop-slop": {
       "source": "hardikpandya/stop-slop",

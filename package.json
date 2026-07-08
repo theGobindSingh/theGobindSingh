@@ -10,7 +10,8 @@
   "private": true,
   "scripts": {
     "setup:opencode": "node scripts/setup-opencode.js",
-    "prepare": "pnpm run setup:opencode",
+    "setup:skills": "node scripts/skills.js",
+    "prepare": "pnpm run setup:opencode && pnpm run setup:skills",
     "prebuild": "pnpm run lint:fix",
     "dev": "next dev",
     "build": "next build",

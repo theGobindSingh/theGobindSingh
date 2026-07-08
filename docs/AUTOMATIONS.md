@@ -89,35 +89,45 @@ Runs `tsc --noEmit` after TypeScript file edits. Skip if you find it too slow du
 
 ## Skills
 
-Skills live in `.claude/skills/<name>/SKILL.md` and are **implemented** (not just recipes).
-Invoke them with `/<name>` in the Claude Code prompt, or Claude spawns them automatically
-where noted.
+Skills live in `.agents/skills/<name>/SKILL.md` and are **implemented** (not just recipes).
+`.agents/skills/` is the source of truth — `.claude/skills` is a generated symlink to it (see
+[Skill symlink setup](#skill-symlink-setup) below), so **new skills always go into
+`.agents/skills/`, never `.claude/skills/`**. Invoke skills with `/<name>` in the Claude Code
+prompt, or Claude spawns them automatically where noted.
 
 ### `new-section`
 
 Scaffolds a new App Router route, or a new section within an existing route, matching this
 repo's real structure (route sections vs. route-local `components/`, global `@` aliases,
 `FullWidthWrapper`/`HomeSection` reuse, nav wiring). See
-`.claude/skills/new-section/SKILL.md`.
+`.agents/skills/new-section/SKILL.md`.
 
 ### `perf-check`
 
 Runs `pnpm build`, reports First Load JS per route, and flags routes over 100 kB with a
 concrete likely cause. Both user-invocable (`/perf-check`) and auto-invoked by Claude before
 declaring bundle-size-relevant work done, per AGENTS.md golden rule 7. See
-`.claude/skills/perf-check/SKILL.md`.
+`.agents/skills/perf-check/SKILL.md`.
 
 ### `seo-audit`
 
 Audits every `page.tsx` for metadata, canonical, OG/Twitter, JSON-LD, heading structure, and
 image/link accessibility, using the homepage's existing implementation as the compliance
-baseline. See `.claude/skills/seo-audit/SKILL.md`.
+baseline. See `.agents/skills/seo-audit/SKILL.md`.
 
 ### `content-update`
 
 Enforces the copy rules and verified-metrics list from `AGENTS.md` before any portfolio copy
 is written or edited. Claude applies it automatically; also user-invocable (`/content-update`)
-to spot-check existing copy. See `.claude/skills/content-update/SKILL.md`.
+to spot-check existing copy. See `.agents/skills/content-update/SKILL.md`.
+
+### Skill symlink setup
+
+`scripts/skills.js` runs as part of `pnpm install` (via the `prepare` script, `pnpm run
+setup:skills`) and creates `.claude/skills` as a symlink (a junction on Windows) pointing at
+`.agents/skills`. This is what makes skills dropped into `.agents/skills/` show up under
+`.claude/skills/` for tools that only look there — no per-skill setup needed. If the symlink
+is ever missing or stale, re-run `pnpm run setup:skills`.
 
 ---
 
