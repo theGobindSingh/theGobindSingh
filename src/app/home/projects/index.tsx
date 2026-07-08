@@ -1,7 +1,7 @@
-import HomeSection from "@app/home/components/section";
 import { projectsSection } from "@app/home/constants";
 import WorkCard from "@app/home/projects/work-card";
 import { Link } from "@components/link";
+import HomeSection from "@components/section";
 import { WorkItem } from "@data";
 import { Fragment } from "react";
 

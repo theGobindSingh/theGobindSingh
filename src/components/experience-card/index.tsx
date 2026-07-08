@@ -4,7 +4,7 @@ import { tw } from "@utils/tailwind";
 import { CornerLeftUp, MoveLeft } from "lucide-react";
 import { Fragment } from "react";
 
-const HomeWorkCard = ({
+const ExperienceCard = ({
   company,
   dateRange,
   position,
@@ -83,4 +83,4 @@ const HomeWorkCard = ({
   );
 };
 
-export default HomeWorkCard;
+export default ExperienceCard;

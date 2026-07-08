@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import type { HTMLAttributes } from "react";
 import { FC, Fragment, PropsWithChildren } from "react";
 
-interface HomeSectionProps {
+interface SectionProps {
   title: string;
   description?: string | undefined;
   wrapper?: FC<PropsWithChildren<unknown>>;
@@ -17,7 +17,7 @@ interface HomeSectionProps {
   };
 }
 
-const HomeSection = ({
+const Section = ({
   title,
   description,
   wrapper: Wrapper = Fragment,
@@ -26,7 +26,7 @@ const HomeSection = ({
   wrapperClassName,
   wrapperProps,
   link = {} as never,
-}: PropsWithChildren<HomeSectionProps>) => {
+}: PropsWithChildren<SectionProps>) => {
   return (
     <FullWidthWrapper
       className={`flex flex-col gap-4 py-12 ${className ?? ""}`.trim()}
@@ -67,4 +67,4 @@ const HomeSection = ({
   );
 };
 
-export default HomeSection;
+export default Section;

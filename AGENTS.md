@@ -96,7 +96,8 @@ missing or stale, run `pnpm run setup:skills` to relink it.
   layout, motion, the signature technique kit, and the component catalog. Read before building
   or styling any UI.
 - **`docs/CONVENTIONS.md`** how code is structured and written: naming, folders, modularity,
-  imports, components, styling, TypeScript, lint, tooling. Read before creating or editing files.
+  imports, components, styling, TypeScript, lint, tooling. Follow it for every file you create,
+  change, or update — not just a pre-read.
 - **`src/styles/globals.css`** (no need to read the whole file) the literal source of truth for color/type values and atmospheric layers.
 - **`docs/reference/`** (if present) the reference HTML and/or screenshots. Treat it as the
   fidelity target for layout, structure, and motion. Match the patterns, but use THIS

@@ -30,10 +30,7 @@ const WorkCard = ({
       <div className="flex h-full flex-col gap-3">
         <h4 className="font-medium">
           {slug ? (
-            <Link
-              href={`/projects/${slug}`}
-              className="block whitespace-normal"
-            >
+            <Link href={`/work#${slug}`} className="block whitespace-normal">
               {title}
             </Link>
           ) : (
@@ -55,7 +52,7 @@ const WorkCard = ({
               View Live →
             </Link>
           )}
-          {slug && <Link href={`/projects/${slug}`}>Read More →</Link>}
+          {slug && <Link href={`/work#${slug}`}>Read More →</Link>}
         </div>
       </div>
       <div className="flex h-full flex-col gap-3">

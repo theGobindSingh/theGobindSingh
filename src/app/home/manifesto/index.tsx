@@ -1,5 +1,5 @@
-import HomeSection from "@app/home/components/section";
 import { manifestoSection } from "@app/home/constants";
+import HomeSection from "@components/section";
 import { tw } from "@utils/tailwind";
 
 const manifestoItemsMapper = ({

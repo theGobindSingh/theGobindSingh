@@ -1,5 +1,5 @@
-import HomeSection from "@app/home/components/section";
 import { skillsSection } from "@app/home/constants";
+import HomeSection from "@components/section";
 import { PropsWithChildren } from "react";
 
 const skillsListMapper = (skill: string) => {

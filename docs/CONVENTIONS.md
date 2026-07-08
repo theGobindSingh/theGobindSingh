@@ -163,6 +163,22 @@ Three layers, from raw to rendered:
 - Never add `dark:` color literals; rely on the ramp inversion. Reuse the signature kit and
   component patterns from DESIGN.md instead of inventing new ornament.
 
+### Complex CSS as a co-located file
+
+- Simple styling stays inline as Tailwind classes on the element. Once a component's styling
+  is complex enough to want `@utility` blocks, nested selectors, or several related variants
+  (e.g. `Button`'s `btn`/`btn-filled`/`btn-outlined`), pull it into its own `<component>.css`
+  file co-located in that component's folder (e.g. `components/button/button.css`), not inline.
+- Register it with a single `@import` line in `src/styles/components.css`, one line per
+  component file, e.g. `@import "../components/button/button.css";`. `components.css` stays a
+  pure index — no rules of its own.
+- Write rules with `@utility` (not `@layer components`) so Tailwind v4 registers them as real
+  utility candidates; `eslint-plugin-better-tailwindcss` then recognizes them with no manual
+  ignore-list entries needed.
+- Document non-obvious contracts at the top of the file as a comment: required CSS vars (e.g.
+  `--c`/`--c-hover`), optional overrides, and why `@utility` was chosen over `@layer
+components`. See `button/button.css` for the reference example.
+
 ### Theme (light/dark)
 
 - The runtime mechanism is fixed: a `theme` cookie is read server-side in the root layout and
