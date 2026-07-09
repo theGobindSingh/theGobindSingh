@@ -1,7 +1,6 @@
 import ThemeSetter from "@app/theme-setter";
 import Footer from "@components/footer";
 import Header from "@components/header";
-import ThemeSwitcher from "@components/theme-switcher";
 import { fullName } from "@data";
 import { OG_IMAGE, SITE_NAME, SITE_URL } from "@lib/site-config";
 import LenisProvider from "@providers/lenis";
@@ -130,7 +129,6 @@ const RootLayout = async ({ children }: PropsWithChildren<unknown>) => {
             {children}
           </div>
         </LenisProvider>
-        <ThemeSwitcher />
         <Footer />
       </body>
     </html>

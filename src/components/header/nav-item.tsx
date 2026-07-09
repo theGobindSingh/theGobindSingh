@@ -4,6 +4,7 @@ import useGetHeader from "@components/header/use-get-header";
 import { Link } from "@components/link";
 import { headerAndNavData } from "@data";
 import { tw } from "@utils/tailwind";
+import { useLenis } from "lenis/react";
 import { usePathname } from "next/navigation";
 import { MouseEventHandler } from "react";
 
@@ -13,7 +14,9 @@ const HeaderNavItem = ({
 }: (typeof headerAndNavData.links)[number]) => {
   const pathname = usePathname();
   const { getHeader } = useGetHeader();
+  const lenis = useLenis();
   const clickHandler: MouseEventHandler<HTMLAnchorElement> = () => {
+    lenis?.start();
     const header = getHeader();
     if (!header) return;
     const toggleInput = header.querySelector<HTMLInputElement>(
