@@ -40,7 +40,7 @@ Stack: Next.js (App Router) + TypeScript + Tailwind, pnpm, `src/` directory, con
 src/
   app/                   # routes (App Router): page.tsx, layout.tsx, route folders
     home/                # example route
-      components/        # components local to this route only (e.g. HomeSection)
+      components/        # components local to this route only (e.g. about's RailSection)
       hero/, work/, ...  # one kebab folder per section/module of the route
       constants.ts       # this route's copy/presentation data, reads from @data
   components/            # global reusable UI units (kebab folder + index.tsx), used by 2+ routes
@@ -70,9 +70,10 @@ A route (e.g. `home`) is built from two kinds of folders:
   This is how a route stays under the 150-LOC rule without becoming one giant file: split by
   section, not by arbitrary line breaks.
 - **`<route>/components/`** — small pieces reused _within that route only_, across its
-  sections (e.g. `HomeSection`, the shared title/description/link wrapper every homepage
-  section is built on). If a `components/` piece is ever needed by a second route, promote it
-  to the global `src/components/` (see §7 Components).
+  sections (e.g. about's `RailSection`/`ScrollReveal`, work's `WorkItemCard`). If a
+  `components/` piece is ever needed by a second route, promote it to the global
+  `src/components/` (see §7 Components) — this already happened for `Section` (formerly
+  `home/components/section`) and `ExperienceCard`, both now used by 2+ routes.
 
 ## 4. Data & content model
 

@@ -58,50 +58,83 @@ CTA placement: persistent in the nav, a strong block in the hero, the end of eve
 study, and the footer. The contact section repeats all three options with a one-line nudge.
 Keep the form short; every extra field costs conversions. No gated content, no popups.
 
+**Gap:** as built, there is no embedded booking scheduler yet. The header CTA is "Resume", not
+"Book a call"; `/contact` offers a 3-field form (name, email, project) + email/LinkedIn/GitHub
+links, no Cal.com-style widget or WhatsApp link. Close this gap or update this section once a
+scheduler decision is made — don't let the two silently diverge further.
+
 ## 6. Information architecture
 
 Hybrid: a strong single-page home that funnels, plus real routes for depth and SEO. More
 indexable, linkable pages help search; the home stays the highlight reel.
 
-**Status:** `/` (Home) is built and live. `/work`, `/work/[slug]`, `/blog`, `/blog/[slug]`,
-`/about`, and `/contact` are still planned, not yet built.
+**Status:** `/` (Home), `/about`, `/work` (case studies, projects, experience, endorsements),
+`/work/[slug]`, and `/contact` (form + connect links) are built and live. `/blog` and
+`/blog/[slug]` are still planned, not yet built. `sitemap.xml`, `robots.txt`, and a custom 404
+are built (`src/app/sitemap.ts`, `robots.ts`, `not-found.tsx`); RSS for the blog is not (blog
+doesn't exist yet).
 
 Sitemap:
 
-- `/` Home (the funnel: hero, intro, selected work, capabilities, GitHub activity, testimonials, latest writing, contact).
-- `/work` Case study index (all projects, filterable by type: build / rebuild / integration / frontend).
-- `/work/[slug]` Individual case study (detailed).
+- `/` Home (the funnel: hero, work history, engineering manifesto, skills, selected case
+  studies & projects).
+- `/work` Case studies, projects, full experience timeline, and endorsements (testimonials),
+  all on one page. **Gap:** the spec below calls for filtering by type
+  (build/rebuild/integration/frontend); category is shown as a label on each card but no
+  interactive filter UI exists yet.
+- `/work/[slug]` Exists but is a noindexed placeholder ("full write-up coming soon") with a
+  back link to `/work`; the real detail content lives inline on the `/work` index via
+  `id={slug}` anchors on each card. Not yet the full case-study page the spec below describes.
 - `/blog` Article index.
 - `/blog/[slug]` Article.
-- `/about` Longer story, timeline, stack, resume download.
-- `/contact` Standalone contact + booking (also embedded on home).
+- `/about` Portrait/intro, "my approach" statement, values/principles, stack, resume download +
+  contact CTA. No dedicated timeline component; the career narrative lives on `/work` instead.
+- `/contact` Availability status, connect links (email/LinkedIn/GitHub), short form (name,
+  email, project) posting to `/api/contact`, response-time expectation, IST timezone, and a
+  location/closing band. No embedded booking scheduler yet (see §5 gap below).
 - Utility: `/resume` (or direct PDF), `sitemap.xml`, `robots.txt`, RSS for blog, custom 404.
 
-Global nav: Work, Blog, About, plus a persistent "Book a call". Footer carries full nav,
-contact paths, social, status (open for work), and a back-to-top.
+Global nav: Work, Blog, About, plus a persistent "Book a call". **As built (`headerAndNavData`
+in `src/data.ts`), this has drifted:** the live header nav is Home / Design / About / Work /
+Extracurricular / Contact, with a "Resume" button, not "Book a call". "Design" points at
+`/temp` (a dev color/type scratch page, `robots.txt`-disallowed) and "Extracurricular" points
+at `/extracurricular`, which has no route and 404s. Flagged as a bug to fix, not a spec change
+to make — the intended nav is still Work / Blog / About / Contact + a primary CTA. Footer
+carries full nav, contact paths, social, status (open for work), and a back-to-top.
 
 ## 7. Page specs (purpose + must-have content)
 
-- **Home.** Hero with name, one-line positioning, primary CTA, availability status. Short
-  intro framing the three things offered (build, rebuild, integrate) in outcome language.
-  Selected work (3-5 best case studies as monumental rows linking to detail). Capabilities /
-  stack overview. Live GitHub activity. 2-3 testimonials. Latest 2-3 articles. Contact block
-  with all CTAs. The home must let a prospect understand value and reach out without scrolling
-  forever; put a CTA above the fold and again mid-page.
-- **/work index.** Grid or list of all case studies with type tags and one-line outcomes;
-  filter by build / rebuild / integration / frontend so a prospect finds their situation fast.
-- **/work/[slug] case study.** The credibility engine. Structure: problem and context, the
-  goal, what was built and key decisions, the role and stack, outcome with concrete results
-  (metrics where possible), a client quote if available, links (live, repo if public), and a
-  closing CTA. Real screenshots. Keep it skimmable with strong subheads.
+- **Home.** _As built:_ hero (name, positioning line, strongholds tags), work history
+  (`Work`, experience cards), engineering manifesto (principles grid), skills grid, and
+  selected case studies & projects (`Projects`), each linking out to `/work`. No GitHub
+  activity, no testimonials, and no latest-articles block on the home page yet — testimonials
+  live on `/work` (Endorsements) instead; GitHub activity and a blog teaser are still
+  unbuilt. There is no explicit mid-page contact block; contact paths currently live only in
+  the header (Resume) and footer. Revisit this spec once those pieces land, or trim the spec to
+  match intent.
+- **/work index.** _As built:_ one page combining case studies, independent projects, full
+  experience timeline, and endorsements (testimonials), each a `Section`. Cards show a category
+  chip (build/rebuild/integration/frontend) but there is no interactive filter yet — the "filter
+  by type" requirement below is not yet implemented.
+- **/work/[slug] case study.** _As built:_ a noindexed placeholder page (title, description,
+  timeframe, "full write-up coming soon"). The full structure below (problem, decisions,
+  metrics, client quote, screenshots) is not yet implemented — case-study depth currently lives
+  as inline expandable cards (`WorkItemCard`, a `<details>` element) on the `/work` index, not
+  as dedicated per-slug pages.
 - **/blog index + article.** Technical and process writing (Next.js, frontend architecture,
   design systems, performance). Drives SEO and shows how the owner thinks. Articles need a
-  clear title, date, reading time, tags, canonical URL, and a CTA at the end.
-- **/about.** The fuller story, calm and human: how the owner works, the timeline/evolution,
-  the stack, values around quality and communication, and a resume download. Reinforce that
-  this is someone reliable to work with, not only skilled.
-- **/contact.** All three paths, a short form, expected response time, time zone (IST), and
-  current availability.
+  clear title, date, reading time, tags, canonical URL, and a CTA at the end. Not yet built.
+- **/about.** _As built:_ hero (name label + headline), portrait + intro statement, "My
+  Approach" (a statement + two supporting paragraphs), Principles (values around
+  communication/ownership/clarity/reliability), Stack (categorized skills), and a closing
+  accent CTA band (resume download, contact link, LinkedIn, GitHub). There is no dedicated
+  timeline/evolution component; the career narrative lives on `/work`'s Experience section
+  instead, not here.
+- **/contact.** _As built:_ availability status + location in the hero, a headline, a Connect
+  block (email/LinkedIn/GitHub with response-time and availability notes), a 3-field form
+  (name, email, project) posting to `/api/contact` with idle/submitting/success/error states,
+  and a closing image band with coordinates. No WhatsApp link and no embedded scheduler (see §5
+  gap note).
 
 ## 8. Content model (fields agents should assume)
 

@@ -1,6 +1,6 @@
 ---
 name: new-section
-description: Scaffold a new App Router route or a new section within an existing route, following this repo's real structure and conventions (route sections vs. route-local components, global @ aliases, FullWidthWrapper/HomeSection reuse, nav wiring). Use when the user asks to add a new page/route (e.g. "add the /work page") or a new section to an existing route (e.g. "add a testimonials section to the homepage").
+description: Scaffold a new App Router route or a new section within an existing route, following this repo's real structure and conventions (route sections vs. route-local components, global @ aliases, FullWidthWrapper/Section reuse, nav wiring). Use when the user asks to add a new page/route (e.g. "add the /work page") or a new section to an existing route (e.g. "add a testimonials section to the homepage").
 ---
 
 Before generating anything, read `docs/CONVENTIONS.md` §3 (Project structure) and §4 (Data &
@@ -27,13 +27,15 @@ Given a route at `src/app/<route>/` (e.g. `src/app/home/`):
    sibling files in the same folder (e.g. `work-card.tsx`) and import via `@app/<route>/
 <section-name>/<part>` — never relative imports across the unit's own siblings unless it's
    a true one-off; prefer the `@` alias per CONVENTIONS.md §6.
-3. For a section that needs the standard title/description/link layout other homepage
-   sections use, wrap it in `HomeSection` (`src/app/home/components/section`) rather than
-   hand-rolling the header pattern. If this route doesn't have an equivalent shared wrapper
-   yet, check whether one should be added to `<route>/components/` first (see CONVENTIONS.md
-   §3 "Route sections vs. route components").
+3. For a section that needs the standard title/description/link layout most sections use,
+   wrap it in `Section` (`@components/section`, global — used by home, `/work`, and `/contact`)
+   rather than hand-rolling the header pattern. For an editorial/long-form route where a
+   sticky left-rail label reads better while scrolling (the pattern `/about` uses for Approach/
+   Values/Stack), use `RailSection` (`src/app/about/components/rail-section`) instead — or add
+   an equivalent route-local wrapper to `<route>/components/` if neither fits (see
+   CONVENTIONS.md §3 "Route sections vs. route components").
 4. Contain width via `FullWidthWrapper` (`@components/full-width-wrapper`) — directly, or
-   implicitly through `HomeSection`. Don't hand-roll max-width/centering.
+   implicitly through `Section`/`RailSection`. Don't hand-roll max-width/centering.
 5. Any copy/content the section needs goes in that route's `constants.ts`
    (`src/app/<route>/constants.ts`), reading from `@data` (`src/data.ts`) if it needs raw
    experience/case-study/project data. Don't inline copy strings directly in the component

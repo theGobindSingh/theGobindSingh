@@ -13,13 +13,13 @@ still rejects the generic "SaaS-lite" look: no soft shadows, no glassmorphism, n
 containers, no gradients.
 
 Brand personality: **calm, confident, specific.** Prioritize information density and
-structural clarity over decoration. This applies to every page (home today, work/blog/about
-as they're built) — the system should read as one language across all of them.
+structural clarity over decoration. This applies to every page (home, about, work, and contact
+are built; blog is still planned) — the system should read as one language across all of them.
 
 **Key stylistic pillars:**
 
 - **Structural clarity** — hairline borders (`--color-border`) and `<hr>` rules define
-  sections and boundaries instead of shadows or cards. See `HomeSection`'s and the projects
+  sections and boundaries instead of shadows or cards. See `Section`'s and the projects
   section's divider pattern.
 - **Editorial typography** — a display face reserved for the hero, a workhorse sans for
   everything else, and monospace for technical/meta labels. Generous vertical rhythm between
@@ -103,9 +103,10 @@ are dead code slated for removal.** The real system is two pieces working togeth
 2. **`FullWidthWrapper`** (`src/components/full-width-wrapper`) is the width-containment
    primitive: it wraps section content, centers it, and caps it via `containerSize` (default
    `90%`) and `maxContentWidth` (default `1800px`, overridable through a `--max-content-width`
-   CSS var). Every homepage section renders through it (directly, or via `HomeSection`, which
-   wraps it internally). Use it — and Tailwind width/padding utilities on top of it if a
-   section needs a narrower measure — rather than hand-rolling containment per section.
+   CSS var). Every section on every route renders through it (directly, or via `Section`/
+   `RailSection`, which wrap it internally). Use it — and Tailwind width/padding utilities on
+   top of it if a section needs a narrower measure — rather than hand-rolling containment per
+   section.
 
 ## Shape & Elevation
 
@@ -138,9 +139,26 @@ new ornament:
   line and per-item dot markers with `before:`/`after:` pseudo-elements (absolute-positioned,
   no SVG or JS), hidden on mobile (`not-md:before:content-none`). Reuse this pattern for any
   future chronological list rather than introducing a charting/timeline library.
-- **Mono section numbering (`NN // Title`)** — every homepage section title is a hand-written
-  string like `02 // Selected work`, rendered through `HomeSection`'s `title` prop in
-  `font-mono`. The numbering is authored by the caller, not auto-incremented by the component.
+- **Mono slash-prefixed labels** — every heading rendered in `font-mono` uses a slash prefix,
+  but the weight of the prefix scales with the heading's importance; don't default to the
+  numbered form everywhere:
+  - **`NN // Title`** — top-level, page-defining sections only: the `title` passed to `Section`/
+    `RailSection` (e.g. `02 // Selected work`). The number is hand-authored by the caller, not
+    auto-incremented, and signals "this is one of the page's major beats."
+  - **`// Title`** — a named sub-heading inside a section that still wants emphasis but isn't a
+    page-level beat (e.g. manifesto's per-item title, `// ${title}`).
+  - **`/ Title`** — the plain/quiet case: category labels, card sub-headings, list-group
+    headers (skills/stack categories, work-card's "/ The Constraints" / "/ The Approach" / "/
+    The Outcome", projects' "/ Case Studies" / "/ Projects"). This is the default for anything
+    that isn't a top-level section or an emphasized sub-heading.
+- **Scroll-reveal fade-in** — `ScrollReveal` (`src/app/about/components/scroll-reveal`), a
+  client component wrapping an `IntersectionObserver`: content renders fully visible in SSR
+  markup, then a `"use client"` effect adds `opacity-0 translate-y-4` after mount and removes it
+  once the element crosses a `0.15` threshold, transitioning over `--dur-reveal` /
+  `--ease-out`. No-ops entirely under `prefers-reduced-motion` (checked before the classes are
+  ever added, so reduced-motion visitors never see the hidden state). Currently used to wrap
+  each `RailSection`'s content on `/about` (Approach, Values, Stack). Reuse this component for
+  future scroll-triggered reveals rather than writing a new observer.
 - **Lenis smooth scroll** — `LenisProvider` (`src/providers/lenis.tsx`) wraps the app; this is
   the only motion-related dependency in the project. No framer-motion, GSAP, or react-spring —
   don't add one without discussing it first.
@@ -171,9 +189,9 @@ No animation library. The baseline is CSS transitions:
   hover/focus/theme-change state changes by default.
 - Finer control uses the duration tokens (`--dur-fast` 0.2s, `--dur-base` 0.3s, `--dur-slow`
   0.5s, `--dur-reveal` 0.7s) and easing tokens (`--ease-out`, `--ease-inout`) layered on top —
-  e.g. `duration-(--dur-slow)` on `ThemeSwitcher`'s icon cross-fade. `--dur-reveal` and both
-  eases are currently reserved for future scroll-reveal work and aren't wired into any
-  component yet.
+  e.g. `duration-(--dur-slow)` on `ThemeSwitcher`'s icon cross-fade. `--dur-reveal` and
+  `--ease-out` are now wired into `ScrollReveal` (see Signature techniques above), driving the
+  fade/translate-in on `/about`'s `RailSection` content.
 - **`prefers-reduced-motion` must be respected everywhere animation happens**, not just on
   individual components — see AGENTS.md golden rule 8. (As of this doc's writing this is being
   brought up to a global guard in `defaults.css`; if you find a component with a hover/transition
@@ -205,18 +223,43 @@ Two tiers, both real folders with `index.tsx` + `types.ts`/`styles.ts` as needed
 - **`Hamburger`** — mobile nav trigger; morphs via `stroke-dasharray`/`stroke-dashoffset`
   transitions gated on a `group-has-checked:` CSS variant (no JS animation loop), and calls
   `useLenis()` to lock/unlock scroll while the nav overlay is open.
+- **`Section`** (`src/components/section`) — the layout primitive most sections on every route
+  are built on: takes `title` (the `NN // Title` mono string), optional `description`, an
+  optional `wrapper` override (defaults to `Fragment`; home's Skills section uses it to inject a
+  bordered/tinted box), and an optional `link` (renders a right-aligned arrow link, e.g. "View
+  all work"). Wraps its content in `FullWidthWrapper` internally. Promoted here from
+  `src/app/home/components/section` once `/work` and `/contact` started reusing it — do not
+  reintroduce a route-local copy.
+- **`ExperienceCard`** (`src/components/experience-card`) — a single work-history entry
+  (company, date range, position(s), responsibilities) with the pseudo-element timeline dot/
+  line marker (see Signature techniques). Used by both home's `Work` section and `/work`'s
+  `Experience` section; promoted for the same reason as `Section`.
 
-### Page-local patterns — e.g. `src/app/home/*` (specific to one page/section, not meant for reuse elsewhere yet)
+### Page-local patterns — specific to one route, not meant for reuse elsewhere yet
 
-- **`HomeSection`** (`src/app/home/components/section`) — the layout primitive every homepage
-  section is built on: takes `title` (the `NN // Title` mono string), optional `description`,
-  an optional `wrapper` override (defaults to `Fragment`; Skills uses it to inject a bordered/
-  tinted box), and an optional `link` (renders a right-aligned arrow link, e.g. "View all
-  work"). Wraps its content in `FullWidthWrapper` internally.
-- **Hero `LeftSide`/`RightSide`, work-section `HomeWorkCard`, projects-section `WorkCard`,
-  manifesto grid** — each is a one-off composition local to the homepage, built from the
-  global kit + Tailwind, not intended as a generic reusable component. If a pattern here needs
-  to be reused on `/work` or `/about` later, promote it into `src/components/` at that point
-  rather than importing across page boundaries.
+- **Home** (`src/app/home/*`) — Hero `LeftSide`/`RightSide`, projects-section `WorkCard`,
+  manifesto grid: one-off compositions local to the homepage, built from the global kit +
+  Tailwind.
+- **About** (`src/app/about/*`) —
+  - **`RailSection`** (`src/app/about/components/rail-section`) — the sticky-left-rail layout
+    every `/about` content section (Approach, Values, Stack) is built on: a `md:col-span-3`
+    sticky title/description rail (`titleNumber`, `title`, optional `description`) beside an
+    `md:col-span-8` content column. Distinct from `Section` — reach for `RailSection` on
+    editorial/long-form pages where a persistent section label while scrolling reads better
+    than `Section`'s top-of-block header, and for `Section` everywhere else (index/grid pages
+    like home, `/work`).
+  - **`ScrollReveal`** — see Signature techniques above.
+  - Hero title accent-word highlighting, intro portrait/statement split, closing CTA band: one-
+    off compositions local to `/about`.
+- **Work** (`src/app/work/*`) — `WorkItemCard` (`src/app/work/components/work-item-card`), an
+  expandable (`<details>`) case-study/project card with category chip, stack tags, and metrics
+  list; `EndorsementChip` (`src/app/work/endorsements`), a single testimonial. Both local to
+  `/work` for now.
+- **Contact** (`src/app/contact/*`) — `Connect`, `ContactForm` (client component, posts to
+  `/api/contact`, owns idle/submitting/success/error state), hero availability indicator,
+  closing image band: one-off compositions local to `/contact`.
 
-(CONVENTIONS.md covers the global-vs-local component split and folder rules in more detail.)
+If a pattern above needs to be reused by a second route, promote it into `src/components/` at
+that point (as `Section` and `ExperienceCard` were) rather than importing across page
+boundaries. (CONVENTIONS.md covers the global-vs-local component split and folder rules in more
+detail.)

@@ -99,7 +99,7 @@ prompt, or Claude spawns them automatically where noted.
 
 Scaffolds a new App Router route, or a new section within an existing route, matching this
 repo's real structure (route sections vs. route-local `components/`, global `@` aliases,
-`FullWidthWrapper`/`HomeSection` reuse, nav wiring). See
+`FullWidthWrapper`/`Section` reuse, nav wiring). See
 `.agents/skills/new-section/SKILL.md`.
 
 ### `perf-check`

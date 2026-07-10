@@ -24,7 +24,8 @@ For every `page.tsx` under `src/app/`, check:
    `BreadcrumbList` (nested pages), `Article`/`BlogPosting` (blog posts), `CreativeWork`
    (case studies, optional).
 6. **Heading structure** — exactly one `<h1>` per page, logical heading order after it
-   (`<h2>` for section titles, etc. — the homepage uses `HomeSection`'s title as `<h2>`).
+   (`<h2>` for section titles, etc. — most routes render `Section`'s (or `RailSection`'s)
+   `title` as an `<h2>`).
 7. **Images** — every `next/image` usage has a descriptive `alt`; no meaningful image ships
    with an empty or placeholder `alt`.
 8. **Link text** — no "click here"/"read more" as the only accessible name; check for
