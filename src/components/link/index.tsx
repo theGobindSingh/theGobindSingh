@@ -47,7 +47,7 @@ export const Link = ({
   const classes = interactionStyles({ variant, size, className });
   const type = getHrefType(href);
 
-  if (type === "internal") {
+  if (type === "internal" && !download) {
     return (
       <NextLink
         href={href}

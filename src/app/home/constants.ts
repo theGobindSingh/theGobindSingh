@@ -1,4 +1,9 @@
-import { caseStudies, experienceData, projectData } from "@data";
+import {
+  caseStudies,
+  experienceData,
+  projectData,
+  skillCategories,
+} from "@data";
 
 export const heroSection = {
   title: "Building\nsoftware\nis easy.",
@@ -65,30 +70,5 @@ export const projectsSection = {
 
 export const skillsSection = {
   title: "Systems Directory",
-  skills: {
-    frontend: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "TailwindCSS",
-      "Storybook",
-      "Emotion / CSS",
-    ],
-    backend: ["Node.js", "Express", "NestJS", "PostgreSQL", "MongoDB", "Redis"],
-    Architecture: [
-      "Micro-Frontends",
-      "Monorepos",
-      "Event-Driven Systems",
-      "Serverless",
-    ],
-    "Dev Experience": [
-      "Turborepos",
-      "Nx",
-      "Vite",
-      "ESLint",
-      "Prettier",
-      "Husky",
-    ],
-    Infrastructure: ["Docker", "CI/CD Pipelines", "Performance Tuning"],
-  },
+  skills: skillCategories,
 };

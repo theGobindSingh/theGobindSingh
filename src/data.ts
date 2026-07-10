@@ -14,7 +14,7 @@ export const designation = "Full Stack Software Engineer";
 
 export const email = "thesinghgobind@gmail.com";
 
-export const resumeLink = "/assets/pdfs/resume.pdf";
+export const resumeLink = "/resume.pdf";
 
 export enum SOCIAL_KEYS {
   LINKEDIN = "LINKEDIN",
@@ -413,3 +413,23 @@ export const skillsList: string[] = [
   "Docker",
   "CI/CD",
 ];
+
+export const skillCategories: Record<string, string[]> = {
+  frontend: [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "TailwindCSS",
+    "Storybook",
+    "Emotion / CSS",
+  ],
+  backend: ["Node.js", "Express", "NestJS", "PostgreSQL", "MongoDB", "Redis"],
+  Architecture: [
+    "Micro-Frontends",
+    "Monorepos",
+    "Event-Driven Systems",
+    "Serverless",
+  ],
+  "Dev Experience": ["Turborepos", "Nx", "Vite", "ESLint", "Prettier", "Husky"],
+  Infrastructure: ["Docker", "CI/CD Pipelines", "Performance Tuning"],
+};

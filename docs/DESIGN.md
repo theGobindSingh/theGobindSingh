@@ -122,7 +122,8 @@ Flat and structural — depth comes from borders and tonal contrast, never shado
   background (`--color-surface` / `--color-surface-raised`) or add a border — not a shadow.
 - **Accent as indicator, not fill:** use the accent color for small marks (a timeline dot, a
   left-border accent bar on an outcome block, a focus ring) rather than large background
-  fills.
+  fills. **One sanctioned exception:** the closing accent CTA band — see Signature techniques
+  below.
 
 ## Signature techniques
 
@@ -143,6 +144,24 @@ new ornament:
 - **Lenis smooth scroll** — `LenisProvider` (`src/providers/lenis.tsx`) wraps the app; this is
   the only motion-related dependency in the project. No framer-motion, GSAP, or react-spring —
   don't add one without discussing it first.
+- **Closing accent CTA band** — a page's final section is the one place the accent color is
+  allowed as a full-bleed background fill, not just an indicator. See
+  `src/app/about/cta/index.tsx` for the reference implementation. Shape (adapt per page, don't
+  clone verbatim):
+  - Single `FullWidthWrapper` with `bg-accent-600` on `wrapperClassName` — the outer element is
+    already full-width (`w-full flex`), so the fill is full-bleed for free. Leave `containerSize`
+    at its default (`90%`); that's what constrains the inner content column. No nested wrapper
+    needed.
+  - White/`grey-50` text throughout — headline bold at `--fs-3xl`+, body copy at `grey-50/80`.
+  - Primary and secondary actions flip to white-on-accent: filled button uses
+    `color="grey" colorWeight={50} textColor="accent" textColorWeight={600}`; outlined button
+    uses `color="grey" colorWeight={50}` with `hoverTextColor="accent" hoverTextColorWeight={600}`
+    so it stays legible on hover.
+  - One large, low-opacity (`text-grey-50/10`) watermark word or short phrase pulled from the
+    page's own voice (not generic filler), absolutely positioned in a back corner, `aria-hidden`,
+    hidden on mobile (`not-md:hidden`).
+  - This is a one-off, end-of-page moment — never more than one per page, and never used for
+    a mid-page section.
 
 ## Motion
 
