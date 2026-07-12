@@ -1,8 +1,20 @@
+import { getAllCaseStudies } from "@lib/case-studies";
 import { SITE_URL } from "@lib/site-config";
 import type { MetadataRoute } from "next";
 
 const sitemap = (): MetadataRoute.Sitemap => {
   const now = new Date().toISOString();
+
+  const caseStudyEntries: MetadataRoute.Sitemap = getAllCaseStudies().map(
+    (caseStudy) => {
+      return {
+        url: `${SITE_URL}/work/${caseStudy.slug}`,
+        lastModified: caseStudy.timeframe.end ?? now,
+        changeFrequency: "monthly",
+        priority: 0.7,
+      };
+    },
+  );
 
   return [
     {
@@ -17,6 +29,7 @@ const sitemap = (): MetadataRoute.Sitemap => {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    ...caseStudyEntries,
     {
       url: `${SITE_URL}/about`,
       lastModified: now,

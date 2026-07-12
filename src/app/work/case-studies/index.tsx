@@ -1,9 +1,9 @@
-import WorkItemCard from "@app/work/components/work-item-card";
 import { caseStudiesSection } from "@app/work/constants";
+import CaseStudySummaryCard from "@components/case-study-summary-card";
 import Section from "@components/section";
 
 const itemMapper = (item: (typeof caseStudiesSection.items)[number]) => {
-  return <WorkItemCard key={item.slug ?? item.title} {...item} />;
+  return <CaseStudySummaryCard key={item.slug} {...item} />;
 };
 
 const CaseStudies = ({ titleNumber = "00" }: { titleNumber?: string }) => {

@@ -1,9 +1,5 @@
-import {
-  caseStudies,
-  experienceData,
-  projectData,
-  skillCategories,
-} from "@data";
+import { experienceData, projectData, skillCategories } from "@data";
+import { getAllCaseStudies } from "@lib/case-studies";
 
 export const heroSection = {
   title: "Building\nsoftware\nis easy.",
@@ -64,7 +60,7 @@ export const projectsSection = {
   title: "Engineering Challenges Solved",
   description:
     "Case studies and projects that reflect how I think about architecture, constraints, and shipping real systems.",
-  caseStudies,
+  caseStudies: getAllCaseStudies(),
   projects: projectData,
 };
 

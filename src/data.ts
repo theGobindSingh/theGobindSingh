@@ -214,9 +214,18 @@ export const experienceData: {
   },
 ];
 
+export type WorkCategory = "build" | "rebuild" | "integration" | "frontend";
+
+export const CATEGORY_LABELS: Record<WorkCategory, string> = {
+  build: "Build",
+  rebuild: "Rebuild",
+  integration: "Integration",
+  frontend: "Frontend",
+};
+
 export interface WorkItem {
-  type?: "case-study" | "project";
-  category?: "build" | "rebuild" | "integration" | "frontend";
+  type?: "project";
+  category?: WorkCategory;
 
   title: string;
   description: string;
@@ -264,99 +273,6 @@ export const projectData: WorkItem[] = [
       github: "https://github.com/webadeva/kami-ui",
       live: "https://webadeva.github.io/kami-ui/",
     },
-  },
-];
-
-export const caseStudies: WorkItem[] = [
-  {
-    title: "AI-Driven Conversion Optimization Platform",
-    slug: "ai-cro-platform",
-    type: "case-study",
-    category: "rebuild",
-    description:
-      "Built and scaled an AI-powered CRO platform, re-architected the monorepo for independent deployments, and shipped backend APIs supporting high-impact product features.",
-    stack: [
-      "React",
-      "Next.js",
-      "NestJS",
-      "Express",
-      "Prisma",
-      "TypeScript",
-      "PostgreSQL",
-      "Turborepo",
-    ],
-    timeframe: "Jul 2025 - Feb 2026",
-    sortDate: "2025-07",
-    problem:
-      "The platform's monorepo had grown into a tightly coupled codebase where a change in one area risked breaking another. Build times were slow, deployments were monolithic, and teams could not ship independently.",
-    approach:
-      "Separated the monorepo into distinct applications, shared UI components, and data layers. Designed backend APIs with NestJS and Express, backed by Prisma and PostgreSQL. Migrated from App Router to Pages Router for better ecosystem compatibility and routing stability.",
-    outcome:
-      "Independent deployments across the stack. Build cycles improved by ~15-20%. Frontend reliability and routing stability measurably improved through optimized rendering and client-side caching.",
-    metrics: [
-      "~15-20% faster build cycles",
-      "Independent deployments for all apps",
-      "Stable routing and improved rendering performance",
-    ],
-  },
-  {
-    title: "Internal Insurance Portal",
-    slug: "insurance-portal",
-    type: "case-study",
-    category: "rebuild",
-    description:
-      "Led frontend development for a large-scale internal portal enabling hospital-side workflows including agent-assisted discharge and claims processing.",
-    stack: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Emotion",
-      "Nx",
-      "Webpack",
-      "Micro-frontends",
-    ],
-    timeframe: "Jan 2023 - Jul 2025",
-    sortDate: "2023-01",
-    problem:
-      "The internal insurance infrastructure needed a unified, performant portal that hospital staff could rely on for critical workflows. Existing frontends were fragmented across multiple codebases with significant code duplication.",
-    approach:
-      "Owned the portal end-to-end: frontend architecture, state management, and collaboration with backend, DevOps, QA, and product. Consolidated multiple frontends into a single Nx monorepo. Migrated a monolithic app to micro-frontend architecture.",
-    outcome:
-      "Delivered a production-grade portal used daily by hospital teams. Reduced JavaScript bundle size by ~45% and code duplication by ~20%. Release velocity increased through independent micro-frontend deployments.",
-    metrics: [
-      "~45% JS bundle size reduction",
-      "~20% duplicate code reduction",
-      "Faster, independent releases per micro-frontend",
-    ],
-  },
-  {
-    title: "Themeable Design System & Performance Overhaul",
-    slug: "design-system-performance",
-    type: "case-study",
-    category: "rebuild",
-    description:
-      "Built a themeable design system from scratch and lifted Lighthouse scores from ~35 to ~90 through profiling and bundle optimization.",
-    stack: [
-      "Next.js",
-      "TypeScript",
-      "Emotion",
-      "React",
-      "Webpack",
-      "Chrome DevTools",
-    ],
-    timeframe: "Jan 2023 - Jul 2023",
-    sortDate: "2023-01",
-    problem:
-      "The application had no consistent design language. Components were built ad-hoc, performance was poor, and Lighthouse scores sat around 35 — hurting both user experience and SEO.",
-    approach:
-      "Designed and built a themeable component library with Emotion. Profiled the bundle with Chrome DevTools, then applied code splitting, lazy loading, and tree shaking. Established Core Web Vitals as a gate for every release.",
-    outcome:
-      "Lighthouse scores jumped from ~35 to ~90. Bundle size dropped significantly. The design system became the foundation every subsequent feature was built on.",
-    metrics: [
-      "Lighthouse ~35 → ~90",
-      "Themeable design system adopted across the org",
-      "Core Web Vitals green on mobile",
-    ],
   },
 ];
 

@@ -1,10 +1,15 @@
 import {
-  caseStudies,
   experienceData,
   projectData,
   testimonials,
   type WorkItem,
 } from "@data";
+import {
+  getAllCaseStudies,
+  getCaseStudyBySlug,
+  getCaseStudySlugs,
+  type CaseStudyWithSlug,
+} from "@lib/case-studies";
 
 const byMostRecent = <T extends { sortDate: string }>(items: T[]): T[] => {
   return [...items].sort((a, b) => {
@@ -16,7 +21,7 @@ export const caseStudiesSection = {
   title: "Case Studies",
   description:
     "Deeper looks at how I approach architecture, constraints, and shipping real systems.",
-  items: byMostRecent(caseStudies),
+  items: getAllCaseStudies(),
 };
 
 export const projectsSection = {
@@ -44,18 +49,35 @@ export const ctaSection = {
     "I'm currently available for freelance and full-time opportunities. Reach out and let's talk about what you're building.",
 };
 
-const allWorkItems: WorkItem[] = [...caseStudies, ...projectData];
+export type WorkDetailResult =
+  | { kind: "case-study"; data: CaseStudyWithSlug }
+  | { kind: "project"; data: WorkItem };
 
-export const getWorkItemBySlug = (slug: string): WorkItem | undefined => {
-  return allWorkItems.find((item) => {
+export const getWorkItemBySlug = (
+  slug: string,
+): WorkDetailResult | undefined => {
+  const caseStudy = getCaseStudyBySlug(slug);
+  if (caseStudy) {
+    return { kind: "case-study", data: caseStudy };
+  }
+
+  const project = projectData.find((item) => {
     return item.slug === slug;
   });
+  if (project) {
+    return { kind: "project", data: project };
+  }
+
+  return undefined;
 };
 
-export const workItemSlugs: string[] = allWorkItems
-  .map((item) => {
-    return item.slug;
-  })
-  .filter((slug): slug is string => {
-    return Boolean(slug);
-  });
+export const workItemSlugs: string[] = [
+  ...getCaseStudySlugs(),
+  ...projectData
+    .map((item) => {
+      return item.slug;
+    })
+    .filter((slug): slug is string => {
+      return Boolean(slug);
+    }),
+];

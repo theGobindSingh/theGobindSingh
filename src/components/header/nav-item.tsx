@@ -45,7 +45,7 @@ const HeaderNavItem = ({
 
         ${text.toLowerCase().replace(/\s+/g, "-")}
         text-grey-950
-        ${pathname === url ? "opacity-100" : "opacity-50"}
+        ${(url === "/" ? pathname === "/" : pathname.startsWith(url)) ? "opacity-100" : "opacity-50"}
         
         hover:opacity-100
         `}

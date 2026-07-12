@@ -1,0 +1,197 @@
+{
+  "title": "Kami UI",
+  "description": "Architecting a high-performance, design-token-first component library for hyper-growth fintech platforms. Solving the friction between radical brand expression and accessibility standards.",
+  "client": null,
+  "category": "frontend",
+  "role": "Lead Systems Architect",
+  "stack": ["React", "TypeScript", "Next.js", "Emotion", "Storybook"],
+  "timeframe": { "start": "2024-01-01", "end": "2024-11-30" },
+  "coverImage": "/assets/images/case-studies/kami-ui/cover.jpg",
+  "featured": true,
+  "order": 1,
+  "links": {
+    "github": "https://github.com/webadeva/kami-ui",
+    "live": "https://webadeva.github.io/kami-ui/"
+  },
+  "seo": {
+    "title": "Kami UI — Case Study",
+    "description": "How a token-first component library replaced CSS override sprawl with a single source of design truth.",
+    "ogImage": "/assets/images/case-studies/kami-ui/og.jpg"
+  },
+  "sections": [
+    {
+      "sectionTitle": "The Problem",
+      "title": "The friction of scale.",
+      "items": [
+        {
+          "type": "container",
+          "cols": 2,
+          "items": [
+            {
+              "type": "container",
+              "items": [
+                {
+                  "type": "para",
+                  "src": "Existing UI kits prioritized generic 'SaaS' aesthetics over the brutalist, high-contrast identity required by the Kami brand. This led to \"Shadow CSS\" sprawl where engineers were constantly overriding library defaults."
+                },
+                {
+                  "type": "numbered-list",
+                  "src": [
+                    "84% of components had custom CSS overrides.",
+                    "Accessibility scores averaged below 70 due to radical typography.",
+                    "Design-to-Dev handoff took 3x longer than industry benchmark."
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "image",
+              "src": "/assets/images/case-studies/kami-ui/problem-mesh.jpg",
+              "alt": "A brutalist wireframe mesh diagram representing the fragmented component architecture before the rebuild.",
+              "aspect": "square"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionTitle": "The Approach",
+      "title": "Atomic Brutalism.",
+      "variant": "dim",
+      "items": [
+        {
+          "type": "container",
+          "items": [
+            {
+              "type": "eyebrow",
+              "src": "Core Strategy",
+              "icon": "architecture"
+            },
+            { "type": "h3", "src": "Token-First Logic" },
+            {
+              "type": "para",
+              "src": "We abandoned the traditional 'component-first' mentality. Instead, we built a Rust-based engine that generates CSS variables from a single JSON source of truth, ensuring every pixel—from border-radius to motion curves—is governed by the core architecture schema."
+            },
+            {
+              "type": "code",
+              "src": "{ \"tokens\": { \"grid\": \"12-col-swiss\", \"border\": \"1px-solid-sharp\", \"motion\": \"linear-out-expo\" } }",
+              "language": "json"
+            }
+          ]
+        },
+        {
+          "type": "container",
+          "cols": 2,
+          "items": [
+            {
+              "type": "simple-card",
+              "src": {
+                "chip": "Tradeoff A",
+                "title": "Flexibility vs. Integrity",
+                "desc": "We chose to hard-lock layouts into a 12-column Swiss grid. This reduced developer freedom but eliminated 100% of \"off-grid\" design drifts across four separate product teams."
+              }
+            },
+            {
+              "type": "simple-card",
+              "src": {
+                "chip": "Tradeoff B",
+                "title": "Static vs. Dynamic",
+                "desc": "Opted for pre-compiled CSS-in-Rust over runtime CSS-in-JS. Increased build times by 12s, but reduced interaction latency by 45ms—critical for high-frequency trading dashboards."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Challenges",
+      "items": [
+        {
+          "type": "container",
+          "items": [
+            { "type": "eyebrow", "src": "Engineering Hurdle 01" },
+            { "type": "h3", "src": "The \"Monograph\" Problem" },
+            {
+              "type": "para",
+              "src": "The brand demanded editorial typography (120px display text) that needed to remain responsive across mobile viewports without losing its 'expensive' feel. Standard Tailwind utilities failed at these extremes."
+            },
+            {
+              "type": "chip-list",
+              "src": ["FIX: INTERPOLATED CLAMP() LOGIC", "RESULT: 0 BREAKOUTS"]
+            }
+          ]
+        },
+        {
+          "type": "container",
+          "items": [
+            { "type": "eyebrow", "src": "Engineering Hurdle 02" },
+            { "type": "h3", "src": "Color Contrast in Dark Modes" },
+            {
+              "type": "para",
+              "src": "Maintaining the 'Burnt Orange' accent's vibrancy on a #141313 background while passing WCAG AA standards was nearly impossible with traditional hex mapping."
+            },
+            {
+              "type": "chip-list",
+              "src": ["FIX: LCH COLOR SPACE MAPPING", "RESULT: 100% COMPLIANCE"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Impact & Results",
+      "variant": "inverted",
+      "layout": "full-width",
+      "items": [
+        {
+          "type": "container",
+          "cols": 3,
+          "items": [
+            {
+              "type": "stat",
+              "src": {
+                "value": "40%",
+                "label": "Reduction in frontend shipping time"
+              }
+            },
+            {
+              "type": "stat",
+              "src": {
+                "value": "98%",
+                "label": "Component reusability score across pods"
+              }
+            },
+            {
+              "type": "stat",
+              "src": {
+                "value": "0.2s",
+                "label": "Average bundle overhead per page"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Learnings",
+      "items": [
+        {
+          "type": "para",
+          "variant": "lead",
+          "src": "The most valuable architecture is the one that says \"no\" for you."
+        },
+        {
+          "type": "para",
+          "src": "By building strict structural lines and uncompromising grids into the framework, we shifted the engineering culture from \"how do I style this?\" to \"how do I structure this?\". The UI became a byproduct of solid architecture, rather than a decorative layer."
+        },
+        {
+          "type": "signature",
+          "src": {
+            "name": "Lead Product Architect",
+            "role": "Kami UI Initiative"
+          }
+        }
+      ]
+    }
+  ]
+}

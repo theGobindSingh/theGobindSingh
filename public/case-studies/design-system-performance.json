@@ -1,0 +1,190 @@
+{
+  "title": "Themeable Design System & Performance Overhaul",
+  "description": "I built a themeable component library from scratch and lifted Lighthouse scores from roughly 35 to 90 through profiling and bundle optimization.",
+  "client": "Bajaj Finserv Health",
+  "category": "build",
+  "role": "Associate Software Development Engineer, Frontend",
+  "stack": [
+    "Next.js",
+    "TypeScript",
+    "Emotion",
+    "React",
+    "Webpack",
+    "Chrome DevTools"
+  ],
+  "timeframe": { "start": "2023-01-01", "end": "2023-07-31" },
+  "featured": false,
+  "order": 3,
+  "seo": {
+    "title": "Themeable Design System & Performance Overhaul — Case Study",
+    "description": "How I built a themeable component library and lifted Lighthouse scores from roughly 35 to 90 through profiling and bundle optimization."
+  },
+  "sections": [
+    {
+      "sectionTitle": "The Problem",
+      "title": "No design language, and a Lighthouse score to match.",
+      "items": [
+        {
+          "type": "container",
+          "items": [
+            {
+              "type": "para",
+              "src": "The application had no consistent design language. Components were built ad hoc for whatever feature needed them, with no shared theming or accessibility baseline. Performance suffered along with it: Lighthouse scores sat around 35, which meant slow load times and a worse ranking signal on top of the poor user experience."
+            },
+            {
+              "type": "numbered-list",
+              "src": [
+                "No shared component library, so every feature reinvented its own UI.",
+                "No theming layer, making visual consistency and dark mode impossible.",
+                "Lighthouse scores around 35 on key pages, well below a usable baseline."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionTitle": "The Approach",
+      "title": "Build the system, then profile the runtime.",
+      "variant": "dim",
+      "items": [
+        {
+          "type": "container",
+          "items": [
+            {
+              "type": "eyebrow",
+              "src": "Core Strategy",
+              "icon": "architecture"
+            },
+            { "type": "h3", "src": "A themeable library, built once" },
+            {
+              "type": "para",
+              "src": "I designed and built a reusable, themeable component library with Emotion, so every feature team pulled from the same set of primitives instead of writing their own. With that in place, I used Chrome DevTools to profile the bundle and runtime, then applied code splitting, lazy loading, and tree shaking wherever the profiler pointed."
+            }
+          ]
+        },
+        {
+          "type": "container",
+          "cols": 2,
+          "items": [
+            {
+              "type": "simple-card",
+              "src": {
+                "chip": "Decision A",
+                "title": "Shared primitives over per-feature components",
+                "desc": "Every new UI element started from the shared library instead of a fresh implementation, which is what made the theming layer possible in the first place."
+              }
+            },
+            {
+              "type": "simple-card",
+              "src": {
+                "chip": "Decision B",
+                "title": "Profile before optimizing",
+                "desc": "Rather than guessing at slow paths, I used Chrome DevTools to find the actual bottlenecks first, then targeted code splitting and lazy loading at those specific routes."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Challenges",
+      "items": [
+        {
+          "type": "container",
+          "items": [
+            { "type": "eyebrow", "src": "Engineering Hurdle 01" },
+            {
+              "type": "h3",
+              "src": "Retrofitting a theme layer onto existing screens"
+            },
+            {
+              "type": "para",
+              "src": "Existing screens had hardcoded styles baked in throughout, with no theming abstraction to hook into. I introduced Emotion's theming provider incrementally, migrating one screen at a time so the app stayed shippable throughout the rollout."
+            },
+            {
+              "type": "chip-list",
+              "src": [
+                "FIX: INCREMENTAL THEME MIGRATION",
+                "RESULT: NO REGRESSIONS"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "container",
+          "items": [
+            { "type": "eyebrow", "src": "Engineering Hurdle 02" },
+            { "type": "h3", "src": "Finding what was actually slow" },
+            {
+              "type": "para",
+              "src": "A Lighthouse score of 35 doesn't say which part of the app is the problem. I used Chrome DevTools' performance and coverage panels to isolate unused JavaScript and render-blocking resources before touching any code."
+            },
+            {
+              "type": "chip-list",
+              "src": [
+                "FIX: DEVTOOLS PROFILING FIRST",
+                "RESULT: LIGHTHOUSE 35 → 90"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Impact & Results",
+      "variant": "inverted",
+      "layout": "full-width",
+      "items": [
+        {
+          "type": "container",
+          "cols": 3,
+          "items": [
+            {
+              "type": "stat",
+              "src": {
+                "value": "35 → 90",
+                "label": "Lighthouse score after profiling and optimization"
+              }
+            },
+            {
+              "type": "stat",
+              "src": {
+                "value": "1",
+                "label": "Shared component library adopted across the team"
+              }
+            },
+            {
+              "type": "stat",
+              "src": {
+                "value": "0",
+                "label": "Visual regressions during the theme migration"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Learnings",
+      "items": [
+        {
+          "type": "para",
+          "variant": "lead",
+          "src": "A design system is a performance decision, not just a visual one."
+        },
+        {
+          "type": "para",
+          "src": "Building the shared component library first made the performance work easier, not harder: fixing a render pattern once in the library fixed it everywhere the library was used. Design consistency and runtime performance turned out to be the same problem, approached from two angles."
+        },
+        {
+          "type": "signature",
+          "src": {
+            "name": "Gobind Singh",
+            "role": "Associate Software Development Engineer, Frontend"
+          }
+        }
+      ]
+    }
+  ]
+}

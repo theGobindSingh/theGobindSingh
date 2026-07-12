@@ -1,13 +1,6 @@
 import { Link } from "@components/link";
-import type { WorkItem } from "@data";
+import { CATEGORY_LABELS, type WorkItem } from "@data";
 import { Plus } from "lucide-react";
-
-const CATEGORY_LABELS: Record<NonNullable<WorkItem["category"]>, string> = {
-  build: "Build",
-  rebuild: "Rebuild",
-  integration: "Integration",
-  frontend: "Frontend",
-};
 
 const chipMapper = (prefix: string) => {
   return (chip: string, index: number) => {
@@ -49,7 +42,6 @@ const WorkItemCard = ({
   links,
   slug,
   category,
-  type,
 }: WorkItem) => {
   const key = slug ?? title;
 
@@ -144,17 +136,6 @@ const WorkItemCard = ({
                 </Link>
               )}
             </div>
-          )}
-
-          {type === "case-study" && slug && (
-            <Link
-              href={`/work/${slug}`}
-              variant="outlined"
-              color="accent"
-              className="self-end text-(size:--fs-3xs)"
-            >
-              Read full case study →
-            </Link>
           )}
         </div>
       </details>

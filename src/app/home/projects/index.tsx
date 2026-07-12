@@ -1,5 +1,6 @@
 import { projectsSection } from "@app/home/constants";
 import WorkCard from "@app/home/projects/work-card";
+import CaseStudySummaryCard from "@components/case-study-summary-card";
 import { Link } from "@components/link";
 import HomeSection from "@components/section";
 import { WorkItem } from "@data";
@@ -18,24 +19,6 @@ const workItemsMapper = (
         <hr className="my-8 border-t border-grey-200 not-md:my-4" />
       )}
     </Fragment>
-  );
-};
-
-const SingleSection = ({
-  title,
-  workItems,
-}: {
-  title: string;
-  workItems: WorkItem[];
-}) => {
-  return (
-    <>
-      <h3 className="font-mono text-(size:--fs-3xs) font-medium tracking-wider text-grey-700 uppercase">
-        {title}
-      </h3>
-      <hr className="my-8 border-t border-grey-200 not-md:my-4" />
-      <ul className="flex flex-col gap-8">{workItems.map(workItemsMapper)}</ul>
-    </>
   );
 };
 
@@ -60,28 +43,39 @@ const HomeProjectsSection = ({
       <div className="flex flex-col gap-4">
         {projectsSection.caseStudies &&
           projectsSection.caseStudies.length > 0 && (
-            <SingleSection
-              title="/ Case Studies"
-              workItems={projectsSection.caseStudies}
-            />
+            <>
+              <h3 className="font-mono text-(size:--fs-3xs) font-medium tracking-wider text-grey-700 uppercase">
+                {"/ Case Studies"}
+              </h3>
+              <hr className="my-8 border-t border-grey-200 not-md:my-4" />
+              <ul className="flex flex-col gap-4">
+                {projectsSection.caseStudies.map((caseStudy) => {
+                  return (
+                    <CaseStudySummaryCard key={caseStudy.slug} {...caseStudy} />
+                  );
+                })}
+              </ul>
+            </>
           )}
 
         <hr className="my-8 border-t border-grey-200 not-md:my-4" />
 
         {projectsSection.projects && projectsSection.projects.length > 0 && (
-          <SingleSection
-            title="/ Projects"
-            workItems={projectsSection.projects}
-          />
+          <>
+            <h3 className="font-mono text-(size:--fs-3xs) font-medium tracking-wider text-grey-700 uppercase">
+              {"/ Projects"}
+            </h3>
+            <hr className="my-8 border-t border-grey-200 not-md:my-4" />
+            <ul className="flex flex-col gap-8">
+              {projectsSection.projects.map(workItemsMapper)}
+            </ul>
+          </>
         )}
       </div>
       <hr className="my-8 border-t border-grey-200 not-md:my-4" />
       <Link
         href="/work"
         className="ml-auto px-4 py-0 font-mono font-medium"
-        // color="accent"
-        // hoverTextColor="grey"
-        // hoverTextColorWeight={100}
         variant="outlined"
       >
         <span>See all case studies & projects</span>
