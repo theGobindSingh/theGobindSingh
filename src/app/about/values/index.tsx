@@ -1,6 +1,6 @@
-import RailSection from "@app/about/components/rail-section";
-import ScrollReveal from "@app/about/components/scroll-reveal";
 import { principlesSection } from "@app/about/constants";
+import RailSection from "@components/rail-section";
+import ScrollReveal from "@components/scroll-reveal";
 
 const itemMapper = (
   { title, description }: (typeof principlesSection.items)[number],

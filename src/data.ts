@@ -90,7 +90,7 @@ export const headerAndNavData: {
     },
     {
       text: "Design",
-      url: "/temp",
+      url: "/design",
     },
     {
       text: "About",

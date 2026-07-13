@@ -1,6 +1,6 @@
-import RailSection from "@app/about/components/rail-section";
-import ScrollReveal from "@app/about/components/scroll-reveal";
 import { stackSection } from "@app/about/constants";
+import RailSection from "@components/rail-section";
+import ScrollReveal from "@components/scroll-reveal";
 
 const skillsListMapper = (skill: string) => {
   return (

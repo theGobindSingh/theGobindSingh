@@ -5,8 +5,17 @@ import HomeSection from "@components/section";
 import { tw } from "@utils/tailwind";
 
 const HomeWorkSection = ({ titleNumber = "00" }: { titleNumber?: string }) => {
-  const expMapper = (exp: (typeof workSection.experienceData)[number]) => {
-    return <ExperienceCard {...exp} key={exp.company} />;
+  const expMapper = (
+    exp: (typeof workSection.experienceData)[number],
+    index: number,
+  ) => {
+    return (
+      <ExperienceCard
+        {...exp}
+        key={exp.company}
+        defaultExpanded={index === 0}
+      />
+    );
   };
   return (
     <HomeSection

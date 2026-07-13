@@ -1,5 +1,5 @@
 import { freelanceSection } from "@app/work/constants";
-import FreelanceCard from "@app/work/freelance/freelance-card";
+import FreelanceCard from "@components/freelance-card";
 import Section from "@components/section";
 
 const itemMapper = (item: (typeof freelanceSection.items)[number]) => {

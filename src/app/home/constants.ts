@@ -1,4 +1,9 @@
-import { experienceData, projectData, skillCategories } from "@data";
+import {
+  experienceData,
+  freelanceData,
+  projectData,
+  skillCategories,
+} from "@data";
 import { getAllCaseStudies } from "@lib/case-studies";
 
 export const heroSection = {
@@ -56,15 +61,26 @@ export const manifestoSection = {
   ],
 };
 
+const featuredCaseStudy = getAllCaseStudies().find((study) => {
+  return study.featured;
+});
+
 export const projectsSection = {
   title: "Engineering Challenges Solved",
   description:
     "Case studies and projects that reflect how I think about architecture, constraints, and shipping real systems.",
-  caseStudies: getAllCaseStudies(),
-  projects: projectData,
+  caseStudies: featuredCaseStudy ? [featuredCaseStudy] : [],
+  projects: projectData.slice(0, 1),
 };
 
 export const skillsSection = {
   title: "Systems Directory",
   skills: skillCategories,
+};
+
+export const freelanceSection = {
+  title: "Freelance Work",
+  description:
+    "Client projects delivered end to end, from brief to production.",
+  items: freelanceData.slice(0, 1),
 };

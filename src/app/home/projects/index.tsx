@@ -58,11 +58,11 @@ const HomeProjectsSection = ({
             </>
           )}
 
-        <hr className="my-8 border-t border-grey-200 not-md:my-4" />
+        {/* <hr className="my-8 border-t border-grey-200 not-md:my-4" /> */}
 
         {projectsSection.projects && projectsSection.projects.length > 0 && (
           <>
-            <h3 className="font-mono text-(size:--fs-3xs) font-medium tracking-wider text-grey-700 uppercase">
+            <h3 className="mt-16 font-mono text-(size:--fs-3xs) font-medium tracking-wider text-grey-700 uppercase not-md:mt-6">
               {"/ Projects"}
             </h3>
             <hr className="my-8 border-t border-grey-200 not-md:my-4" />
@@ -81,7 +81,7 @@ const HomeProjectsSection = ({
         <span>See all case studies & projects</span>
         <span className="text-(size:--fs-m)">↗</span>
       </Link>
-      <hr className="mt-8 border-t border-grey-200 not-md:my-4" />
+      {/* <hr className="mt-8 border-t border-grey-200 not-md:my-4" /> */}
     </HomeSection>
   );
 };

@@ -3,8 +3,13 @@ import ExperienceCard from "@components/experience-card";
 import Section from "@components/section";
 import { tw } from "@utils/tailwind";
 
-const expMapper = (exp: (typeof experienceSection.items)[number]) => {
-  return <ExperienceCard {...exp} key={exp.company} />;
+const expMapper = (
+  exp: (typeof experienceSection.items)[number],
+  index: number,
+) => {
+  return (
+    <ExperienceCard {...exp} key={exp.company} defaultExpanded={index === 0} />
+  );
 };
 
 const Experience = ({ titleNumber = "00" }: { titleNumber?: string }) => {

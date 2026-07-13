@@ -47,6 +47,12 @@ const sitemap = (): MetadataRoute.Sitemap => {
       priority: 0.7,
     },
     {
+      url: `${SITE_URL}/design`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.4,
+    },
+    {
       url: `${SITE_URL}/blog`,
       lastModified: now,
       changeFrequency: "weekly",

@@ -1,6 +1,6 @@
-import RailSection from "@app/about/components/rail-section";
-import ScrollReveal from "@app/about/components/scroll-reveal";
 import { approachSection } from "@app/about/constants";
+import RailSection from "@components/rail-section";
+import ScrollReveal from "@components/scroll-reveal";
 
 const paragraphMapper = (paragraph: string, index: number) => {
   const key = `approach-paragraph-${index}`;
