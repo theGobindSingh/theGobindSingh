@@ -335,24 +335,15 @@ export const testimonials: {
 }[] = [
   {
     quote:
-      "Gobind re-architected our entire frontend monorepo and cut build times significantly. He thinks in systems, not just components, and always has a clear reason behind every architectural decision.",
-    authorName: "Priya Sharma",
-    role: "Engineering Manager",
-    company: "Bajaj Finserv Health",
+      "Gobind was enthusiastic from the get go and he took up the project as expected and defined the scope and made sure I felt comfortable with him taking lead. He even brought in his team members to help brainstorm the requirements and understand the whole idea for developing a website. Will definitely recommend Gobind for his technical abilities at your company.",
+    authorName: "Badri Narayan Mohan",
+    company: "TakeMyCar",
     featured: true,
+    role: "Founder",
   },
   {
-    quote:
-      "He owned the portal from day one and delivered it end-to-end without hand-holding. Rare to find someone who can handle both the technical depth and the stakeholder conversations with equal clarity.",
-    authorName: "Rahul Mehta",
-    role: "Product Lead",
-    company: "Bajaj Finserv Health",
-    featured: true,
-  },
-  {
-    quote:
-      "The platform went from a monolith to independently deployable apps under his watch. Clean architecture, no drama, and he documented everything so the team could move fast after he left.",
-    authorName: "Vikram Joshi",
+    quote: "...",
+    authorName: "Abhiraj Padhye",
     role: "CTO",
     company: "Optimeleon AI",
     featured: true,

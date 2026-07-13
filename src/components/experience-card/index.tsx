@@ -63,7 +63,7 @@ const ExperienceCard = ({
           items-center justify-between gap-4 text-left
         `}
       >
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-3">
           <h3
             className={tw`
               relative
@@ -89,6 +89,15 @@ const ExperienceCard = ({
               {company}
             </Link>
           </h3>
+          <div className="flex flex-col gap-3 text-(size:--fs-3xs)">
+            <span className="text-accent-600">{position}</span>
+            {otherPositions && otherPositions?.length > 0 && (
+              <div className="flex w-full items-center gap-2 text-grey-500 not-md:overflow-x-auto">
+                <CornerLeftUp className="size-[1em] shrink-0 translate-y-[-37.5%] text-(size:--fs-2xs)" />
+                {otherPositions.map(positionMapper)}
+              </div>
+            )}
+          </div>
           <span className="w-fit bg-grey-100 px-4 py-2 font-mono text-(size:--fs-4xs) tracking-wide text-grey-700">
             {dateRange}
           </span>
@@ -101,15 +110,6 @@ const ExperienceCard = ({
           `}
         />
       </button>
-      <div className="flex flex-col gap-2 text-(size:--fs-3xs)">
-        <span className="text-accent-600">{position}</span>
-        {otherPositions && otherPositions?.length > 0 && (
-          <div className="flex w-full items-center gap-2 text-grey-500 not-md:overflow-x-auto">
-            <CornerLeftUp className="size-[1em] shrink-0 translate-y-[-37.5%] text-(size:--fs-2xs)" />
-            {otherPositions.map(positionMapper)}
-          </div>
-        )}
-      </div>
       <div
         className={tw`
           grid transition-[grid-template-rows] duration-(--dur-base) ease-out

@@ -8,9 +8,9 @@ const itemMapper = (
 ) => {
   const number = String(index + 1).padStart(3, "0");
   return (
-    <div key={title} className="py-8 first:pt-0 last:pb-0">
+    <div key={title} className="group py-8 first:pt-0 last:pb-0">
       <div className="mb-4 flex items-baseline justify-between gap-4">
-        <h3 className="text-(size:--fs-l) font-medium text-grey-900">
+        <h3 className="translate-x-0 text-(size:--fs-l) font-medium text-grey-900 transition-all duration-300 ease-[ease] md:group-hover:translate-x-2 md:group-hover:text-accent-600">
           {title}
         </h3>
         <span className="font-mono text-(size:--fs-4xs) text-grey-500">

@@ -18,7 +18,7 @@ const Endorsements = ({ titleNumber = "00" }: { titleNumber?: string }) => {
         id: "endorsements",
       }}
     >
-      <ul className="flex flex-wrap items-start gap-6">
+      <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {endorsementsSection.testimonials.map(chipMapper)}
       </ul>
     </Section>

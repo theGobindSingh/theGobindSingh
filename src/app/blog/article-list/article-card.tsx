@@ -15,8 +15,14 @@ const ArticleCard = ({ post }: { post: BlogPostMeta }) => {
           </div>
         </div>
         <div className="col-span-12 md:col-span-9">
-          <h3 className="text-(size:--fs-l) leading-tight font-medium text-grey-950">
-            {post.title}
+          <h3 className="translate-x-0 transition-transform duration-(--dur-slow) ease-out md:group-hover:translate-x-2">
+            <Link
+              href={`/blog/${post.slug}`}
+              variant="text"
+              className="p-0 text-(size:--fs-l) leading-normal font-medium"
+            >
+              {post.title}
+            </Link>
           </h3>
           <p className="mt-4 max-w-2xl text-(size:--fs-3xs) text-grey-700">
             {post.excerpt}
