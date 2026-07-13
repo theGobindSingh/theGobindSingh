@@ -1,5 +1,5 @@
 import ArticleList from "@app/blog/article-list";
-import { blogIndexSection } from "@app/blog/constants";
+import { getBlogIndexSection } from "@app/blog/constants";
 import Cta from "@app/blog/cta";
 import Hero from "@app/blog/hero";
 import JsonLd from "@components/json-ld";
@@ -51,24 +51,26 @@ const breadcrumbSchema = {
   ],
 };
 
-const collectionSchema = {
-  "@type": "CollectionPage",
-  name: "Blog",
-  url: `${SITE_URL}/blog`,
-  description:
-    "Technical writing on frontend architecture, Next.js, performance, and design systems.",
-  isPartOf: { "@type": "WebSite", name: fullName, url: SITE_URL },
-  hasPart: blogIndexSection.posts.map((post) => {
-    return {
-      "@type": "BlogPosting",
-      headline: post.title,
-      url: `${SITE_URL}/blog/${post.slug}`,
-      datePublished: post.date,
-    };
-  }),
-};
-
 const BlogPage = () => {
+  const blogIndexSection = getBlogIndexSection();
+
+  const collectionSchema = {
+    "@type": "CollectionPage",
+    name: "Blog",
+    url: `${SITE_URL}/blog`,
+    description:
+      "Technical writing on frontend architecture, Next.js, performance, and design systems.",
+    isPartOf: { "@type": "WebSite", name: fullName, url: SITE_URL },
+    hasPart: blogIndexSection.posts.map((post) => {
+      return {
+        "@type": "BlogPosting",
+        headline: post.title,
+        url: `${SITE_URL}/blog/${post.slug}`,
+        datePublished: post.date,
+      };
+    }),
+  };
+
   return (
     <main>
       <JsonLd data={collectionSchema} />

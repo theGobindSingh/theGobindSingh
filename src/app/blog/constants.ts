@@ -7,9 +7,9 @@ export const blogHero = {
     "Writing on frontend architecture, performance, and design systems, from real work building React and Next.js products.",
 };
 
-export const blogIndexSection = {
-  posts: getAllPosts(),
-  tags: getAllTags(getAllPosts()),
+export const getBlogIndexSection = () => {
+  const posts = getAllPosts();
+  return { posts, tags: getAllTags(posts) };
 };
 
 export const ctaSection = {

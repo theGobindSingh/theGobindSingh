@@ -21,6 +21,12 @@ export interface BlogPostMeta extends BlogFrontmatter {
   readingTime: string;
 }
 
+export interface BlogOutlineItem {
+  id: string;
+  text: string;
+}
+
 export interface BlogPost extends BlogPostMeta {
   html: string;
+  outline: BlogOutlineItem[];
 }

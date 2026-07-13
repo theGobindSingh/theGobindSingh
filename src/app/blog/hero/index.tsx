@@ -16,7 +16,7 @@ const Hero = () => {
         <p className="mb-4 font-mono text-(size:--fs-3xs) font-medium tracking-widest text-accent-600 uppercase">
           {blogHero.eyebrow}
         </p>
-        <h1 className="max-w-[9ch] text-[7rem] leading-[0.95] font-bold tracking-tight text-balance uppercase">
+        <h1 className="max-w-[9ch] text-[clamp(0rem,7.5vw,7.5rem)] leading-[0.95] font-bold tracking-tight text-balance uppercase not-md:text-[17.5vw]">
           {titleLead} <br />
           <span className="text-grey-500 italic">{titleAccent}</span>
         </h1>

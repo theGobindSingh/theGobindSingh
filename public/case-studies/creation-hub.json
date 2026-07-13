@@ -1,6 +1,6 @@
 {
-  "title": "Creation Hub — an AI agent workspace for campaign personalization",
-  "description": "I architected and shipped Creation Hub, the AI-assisted workspace inside Optimeleon's dashboard where marketers generate landing-page hypotheses, variants, and audience segments by talking to an agent. I designed the command-driven protocol that turns a streaming LLM into 16 interactive UI cards, and led the feature from first commit through six months of team delivery.",
+  "title": "Creation Hub — putting an AI assistant inside the product, not next to it",
+  "description": "I architected and shipped Creation Hub, the workspace where our customers plan marketing experiments by talking to an AI assistant. Instead of a chat window that only gives advice, I built one where the AI's answers arrive as working parts of the app — so a user can ask a question, see the numbers, think out loud, and act on the answer without ever leaving the conversation.",
   "client": "Optimeleon",
   "category": "build",
   "role": "Full-Stack Engineer",
@@ -8,10 +8,9 @@
     "TypeScript",
     "React 19",
     "Next.js 15",
-    "Socket.IO",
+    "WebSockets (Socket.IO)",
     "TanStack Query",
     "Emotion",
-    "react-markdown",
     "Prisma",
     "PostgreSQL",
     "ClickHouse",
@@ -25,60 +24,58 @@
   "sections": [
     {
       "sectionTitle": "The Problem",
-      "title": "A chat box is a terrible place to make a decision",
+      "title": "Our users had ideas. The product had no way to hear them.",
       "variant": "default",
       "layout": "standard",
       "items": [
         {
           "type": "para",
           "variant": "lead",
-          "src": "Optimeleon personalizes landing pages: you write a hypothesis about a slice of your traffic, build a page variant for it, and measure whether it converts better than the baseline. The bottleneck was never the measuring. It was everything before it — a marketer staring at a blank hypothesis form with no idea what to write."
+          "src": "Optimeleon helps marketing teams run experiments on their websites: try a different version of a page, show it to the right visitors, see which one wins. Before Creation Hub, the product could execute an experiment beautifully. What it could not do was help you decide what to try."
         },
         {
           "type": "para",
-          "src": "We had an AI agent service that could actually do the thinking: read a customer's Meta or Google ads, extract the core marketing concepts from their site, identify which visitor segments were underperforming. What we didn't have was a way for a marketer to use any of it. The output of an LLM is text, and text is where a workflow goes to die."
+          "src": "The user's actual job — the hard part — happened entirely in their head, or in a spreadsheet, or in a meeting. They would form a hunch about why their page wasn't converting, and then arrive at our app to type the finished conclusion into a form. Every bit of reasoning that led there was thrown away, because the product had nowhere to put it. There was no field for \"here's what I think is going on.\""
         },
         {
           "type": "para",
-          "src": "If the agent proposed six hypotheses, the user had to copy them, one at a time, into a form on another page. If it surfaced a winning variant, they had to go find it themselves. If it suggested an audience segment with eight filter conditions, they had to rebuild it by hand. The intelligence was real and the friction ate all of it."
+          "src": "That mattered more than it sounds. Someone who already knew what to build got a fine tool. Someone staring at a blank form — which is most people, most of the time — got nothing. And answering the questions that would unblock them meant leaving: check the analytics page for the numbers, go to a different screen to see which experiments were winning, come back, and retype it all into the form. The thinking was scattered across five places and the product owned none of it."
         },
         {
           "type": "bullet-list",
           "src": [
-            "Four distinct AI capabilities existed on the backend with no coherent front door.",
-            "Every agent output was prose — nothing was clickable, saveable, or connected to the objects it described.",
-            "The agent leaked internal UUIDs into its answers, so users saw raw variant IDs instead of names.",
-            "Nothing the agent produced could be acted on without leaving the conversation."
+            "Users couldn't express reasoning to the product — only conclusions.",
+            "Getting the data you needed to reason meant leaving the page you were working on.",
+            "We had AI capable of doing real analysis, but nowhere to put it that a user could actually act on."
           ]
         }
       ]
     },
     {
       "sectionTitle": "The Approach",
-      "title": "Treat the model's output as a UI protocol, not a transcript",
+      "title": "Make the conversation the workspace",
       "variant": "dim",
       "layout": "standard",
       "items": [
         {
           "type": "eyebrow",
-          "src": "Core Decision"
+          "src": "The Core Idea"
         },
         {
           "type": "h3",
-          "src": "The agent doesn't send text. It sends commands."
+          "src": "The assistant doesn't just talk back. It hands you the tool."
         },
         {
           "type": "para",
-          "src": "The decision the whole feature rests on: the socket carries two different kinds of message. Prose streams token-by-token over a `chat_response` event and renders as markdown. But when the agent wants the user to *do* something, it emits a `command` event instead — a named string plus a payload — and the client renders a real, interactive React component in the message stream. A hypothesis list becomes a multi-select table with a save button. A set of ads becomes a picker. A proposed segment becomes an editable filter builder that writes straight to the database."
+          "src": "The obvious version of this feature is a chat box that gives advice, which the user then goes and acts on somewhere else in the app. That would have solved nothing — it just adds a sixth place to visit. The thing that makes Creation Hub work is that when the assistant has something for you to act on, it doesn't describe it. It renders it, live, in the conversation."
         },
         {
           "type": "para",
-          "src": "That single indirection is what lets a conversation end in a saved database row instead of a paragraph the user has to retype. It also meant the agent team could ship a new capability without me touching the transport: they emit a new command name, I register a component against it."
+          "src": "Ask why a page is underperforming, and the assistant replies with an actual results table you can read — not a paragraph about the numbers. Ask it for ideas, and the ideas arrive as a checklist you tick and save with one click. Ask which audience to target, and it hands you a working audience builder, pre-filled, that you can adjust and attach. The conversation is not a layer on top of the app. For the length of the task, it *is* the app."
         },
         {
-          "type": "code",
-          "language": "typescript",
-          "src": "// A frozen lookup table is the entire contract between the AI service and the UI.\n// Adding a capability = adding a row. The socket layer never changes.\nexport const TOOL_MAP = Object.freeze({\n  \"display-core-context\": MarketingInsights,\n  \"show-hypothesis\": MultiSelectHypothesis,\n  \"show-variant-generation-button\": GenerateVariantCardInChat,\n  \"show-all-providers\": AdProviders,\n  \"list-ads\": AdList,\n\n  // segment creation and analysis tools\n  \"show-generated-segments\": GeneratedSegmentsDisplay,\n  \"show-table\": ShowTable,\n  \"show-ranking-table\": ShowRankingTable,\n  \"segment-attachment-success\": SegmentAttachmentSuccess,\n\n  // winning variant tools\n  \"show-winning-variants\": WinningVariantsTable,\n  \"show-variant-summary\": ShowVariantSummary,\n} as const);"
+          "type": "para",
+          "src": "To make that possible, I designed the assistant to send the app two different kinds of message: ordinary prose, which streams in word by word so it reads like a real conversation, and instructions to open a specific piece of the app's interface inside the chat. The second kind is what turns advice into work. Building it that way also made the feature cheap to extend — every new capability the AI team added was a new entry in one list, not a new screen."
         },
         {
           "type": "container",
@@ -88,32 +85,32 @@
               "type": "simple-card",
               "src": {
                 "chip": "DECISION",
-                "title": "One transport, four agents",
-                "desc": "Ad-to-Variant, Core Concepts, Clone-From-Winner and Segment Analysis are four completely different guided flows, but they share one socket, one streaming state machine, and one card registry. Each agent is a different conversation over identical plumbing."
+                "title": "One foundation, many conversations",
+                "desc": "The feature supports four different kinds of session — pulling ideas from a customer's existing advertising, from their own website's messaging, from experiments that already won, and from their live traffic data. All four run on the same foundation. Adding the fifth is a day's work, not a project."
               }
             },
             {
               "type": "simple-card",
               "src": {
                 "chip": "DECISION",
-                "title": "A normalization layer between model and props",
-                "desc": "The AI's payloads are heterogeneous and snake_cased, and their shape changed as the agent team iterated. A single transformer module absorbs that churn and emits stable component props — so a schema change on their side is a diff in one file, not fifteen components."
+                "title": "Answers you can act on, in place",
+                "desc": "Every AI output that a user might want to keep — an idea, an audience, a winning result — arrives as something clickable that writes straight into the product. Nothing has to be copied out of the chat and retyped somewhere else. That single rule is the whole feature."
               }
             },
             {
               "type": "simple-card",
               "src": {
                 "chip": "TRADEOFF",
-                "title": "Chat history is deliberately ephemeral",
-                "desc": "Conversations live in memory and are discarded when the panel closes. Persisting them meant reconciling stored history against socket resume and stale variant IDs — real complexity for a flow whose whole purpose is to terminate in a saved hypothesis. The saved artifact is the memory."
+                "title": "The conversation is disposable. The output isn't.",
+                "desc": "Chats aren't saved. It's a deliberate choice: what the user wants to keep is the idea or the audience they created, and that's already saved properly, in the product, where the rest of the app can use it. Storing the transcript too would have added real complexity to preserve something nobody would open twice."
               }
             },
             {
               "type": "simple-card",
               "src": {
                 "chip": "TRADEOFF",
-                "title": "Every card gets its own error boundary",
-                "desc": "The agent is a language model, so a malformed payload isn't an edge case — it's Tuesday. Each rendered card is isolated, so one bad response degrades to a single failed card instead of blanking the entire conversation."
+                "title": "Assume the AI will get it wrong",
+                "desc": "AI output is unpredictable by nature, so I built each piece of the conversation to fail on its own. A bad response from the model breaks one card and nothing else — the user keeps their conversation and simply asks again, instead of watching the screen go blank."
               }
             }
           ]
@@ -131,21 +128,21 @@
           "items": [
             {
               "type": "eyebrow",
-              "src": "Engineering Hurdle 01"
+              "src": "Hurdle 01"
             },
             {
               "type": "h3",
-              "src": "Streaming tokens have no obligation to arrive in order"
+              "src": "Making it feel like a conversation, not a form submission"
             },
             {
               "type": "para",
-              "src": "The agent's response lifecycle is a three-beat protocol — `start`, then a run of `stream` tokens, then `end` — and the naive implementation assumes they arrive in that order. They don't always. A `stream` token can land before its `start`, and the message it belongs to doesn't exist yet. I built the append path to create the message lazily when that happens, tracking the in-flight message by index in a ref so concatenation never races React's batched state updates."
+              "src": "If the user asks a question and the screen sits blank for eight seconds before a wall of text appears, they've stopped trusting it. The whole point was to get people thinking out loud, and people don't think out loud at something that feels like a slow form. So the assistant's replies stream in word by word, the way you'd expect them to. Getting that smooth was harder than it looks — the words don't always arrive in the order they were sent, and a naive implementation drops or duplicates text when that happens. I built the display to tolerate it, so what the user sees is always correct even when the network isn't."
             },
             {
               "type": "chip-list",
               "src": [
-                "FIX: A ref-tracked stream index plus lazy message creation on out-of-order tokens",
-                "RESULT: Streaming survives token reordering without dropping or duplicating text"
+                "FIX: A display layer that reassembles the response correctly regardless of arrival order",
+                "RESULT: Replies feel live and conversational, without dropped or duplicated text"
               ]
             }
           ]
@@ -156,21 +153,21 @@
           "items": [
             {
               "type": "eyebrow",
-              "src": "Engineering Hurdle 02"
+              "src": "Hurdle 02"
             },
             {
               "type": "h3",
-              "src": "The model kept leaking raw UUIDs into its prose"
+              "src": "The AI kept talking to users in database language"
             },
             {
               "type": "para",
-              "src": "The segment agent reasons over variant performance, so it holds variant UUIDs — and it would drop them straight into sentences. Users would read \"variant 3f9a2c1e-… outperformed the baseline\" and have no idea which page that was. Worse, the model sometimes inserted stray whitespace mid-UUID while streaming, so a naive match missed it entirely. I resolve every variant for the session into a lookup map up front, then rewrite the streamed markdown with a whitespace-tolerant UUID pattern, substituting human variant names before the text ever renders."
+              "src": "When the assistant analyzed performance data, it would sometimes refer to a page version by its internal database ID — a meaningless string of characters — instead of the name the user gave it. To the user, that reads as gibberish, and it quietly signals that the thing they're talking to doesn't really understand their business. I made the app translate those references back into the user's own names before the message ever reaches the screen, including when the model garbled the formatting on its way out."
             },
             {
               "type": "chip-list",
               "src": [
-                "FIX: Session-scoped variant map plus whitespace-tolerant UUID substitution over streamed markdown",
-                "RESULT: Users read variant names, not internal identifiers, even when the model formats badly"
+                "FIX: Translate the AI's internal references into the user's own names before rendering",
+                "RESULT: The assistant talks about the user's work using the user's words"
               ]
             }
           ]
@@ -181,21 +178,21 @@
           "items": [
             {
               "type": "eyebrow",
-              "src": "Engineering Hurdle 03"
+              "src": "Hurdle 03"
             },
             {
               "type": "h3",
-              "src": "Buttons in a chat have to speak the agent's language"
+              "src": "Clicking a button had to keep the conversation going"
             },
             {
               "type": "para",
-              "src": "When a user selects three hypotheses and clicks generate, the agent needs to know — but it's a language model mid-conversation, not a state machine with an RPC surface. Structured actions exist for session lifecycle, but mid-flow branching had to re-enter the model's own context. So a click emits a synthetic user turn back over the socket: the UI speaks to the agent in the only interface it truly has. It's an unusual shape, and it's the honest one — the LLM's natural-language interface *is* the API."
+              "src": "The tricky part of putting real controls inside a chat: when the user ticks three ideas and clicks save, the assistant has to know that happened and pick the thread back up — otherwise the conversation forgets what you just did and the illusion collapses. I made every click speak back to the assistant in its own terms, so the AI stays aware of the user's choices and the conversation carries on naturally from them, rather than the app and the assistant keeping two separate, drifting ideas of what's going on."
             },
             {
               "type": "chip-list",
               "src": [
-                "FIX: Card actions emit synthetic user turns, so the model's own context drives the next step",
-                "RESULT: Multi-turn guided flows branch on button clicks without a parallel state machine to keep in sync"
+                "FIX: User actions on in-chat controls feed back into the assistant's own understanding of the conversation",
+                "RESULT: Clicking a button advances the conversation instead of ending it"
               ]
             }
           ]
@@ -206,21 +203,21 @@
           "items": [
             {
               "type": "eyebrow",
-              "src": "Engineering Hurdle 04"
+              "src": "Hurdle 04"
             },
             {
               "type": "h3",
-              "src": "Six months of other people's features landing on my foundation"
+              "src": "Six months of other people building on my foundation"
             },
             {
               "type": "para",
-              "src": "I opened Creation Hub; seven other engineers then shipped into it — segment editing, winning-variant cloning, campaign reports, Google keyword-level ad matching. The architecture had to hold up under contributors who had never read it. The command registry did that work: it made the extension point so obvious that new capabilities landed as a new entry and a new component, without anyone needing to touch the socket lifecycle or the streaming reducer."
+              "src": "I designed and opened Creation Hub, and then seven other engineers shipped features into it for the next six months — new kinds of session, new in-chat tools, richer reporting. That's the real test of an architecture: not whether it works on day one, but whether people who never read your design can extend it safely. The foundation held. Adding a new AI capability meant writing the new piece and registering it, and the core plumbing didn't need to be touched by anyone after the initial build."
             },
             {
               "type": "chip-list",
               "src": [
-                "FIX: A single frozen registry as the one documented extension point",
-                "RESULT: 72 commits from 8 contributors, with the transport layer effectively untouched after the initial build"
+                "FIX: One obvious, documented extension point instead of an architecture you have to understand first",
+                "RESULT: 72 commits from 8 contributors, with the core untouched after the initial build"
               ]
             }
           ]
@@ -239,29 +236,25 @@
             {
               "type": "stat",
               "src": {
-                "value": "16",
-                "label": "AI commands mapped to interactive UI cards"
-              }
-            },
-            {
-              "type": "stat",
-              "src": {
                 "value": "4",
-                "label": "Guided agent flows on one shared transport"
+                "label": "Kinds of guided AI session on one shared foundation"
               }
             },
             {
               "type": "stat",
               "src": {
-                "value": "9.4K",
-                "label": "Lines across 51 files, shipped over 6 months"
+                "value": "16",
+                "label": "Parts of the product the assistant can open inside the chat"
+              }
+            },
+            {
+              "type": "stat",
+              "src": {
+                "value": "8",
+                "label": "Engineers who extended the feature after I designed it"
               }
             }
           ]
-        },
-        {
-          "type": "para",
-          "src": "Every number here is counted from the repository at the close of the period — the command registry, the agent flows, and the module's own line and file count. They measure the shape and reach of what shipped, not its business outcome; adoption and conversion figures live in the product's own analytics and are deliberately not claimed here."
         },
         {
           "type": "container",
@@ -271,21 +264,21 @@
               "type": "stat",
               "src": {
                 "value": "72",
-                "label": "Commits from 8 contributors on the architecture"
+                "label": "Commits shipped into the architecture in six months"
               }
             },
             {
               "type": "stat",
               "src": {
                 "value": "0",
-                "label": "Rewrites of the socket layer after the initial build"
+                "label": "Rewrites of the core after the initial build"
               }
             },
             {
               "type": "stat",
               "src": {
-                "value": "1",
-                "label": "File to change when the AI payload schema moves"
+                "value": "9.4K",
+                "label": "Lines of production code across 51 files"
               }
             }
           ]
@@ -300,20 +293,20 @@
         {
           "type": "para",
           "variant": "lead",
-          "src": "An AI feature is only as good as the thing the user can click at the end of it. The model was never the hard part — the hard part was refusing to let its output stay as text."
+          "src": "An AI feature isn't finished when the model gives a good answer. It's finished when the user can act on that answer without leaving the conversation."
         },
         {
           "type": "para",
-          "src": "The instinct when you wire up an LLM is to render what it says. The better move is to make it say things that render into something actionable — and then design the contract that makes that cheap. The command registry took an afternoon to design and it is the reason seven engineers could extend this feature for six months without anyone touching the transport."
+          "src": "The instinct with AI is to bolt a chat window onto the side of the product and call it done. But a chat window that only gives advice just adds another place the user has to visit. The value showed up the moment the assistant stopped describing things and started handing them over — the numbers, the ideas, the audience builder — right there in the thread. The engineering that mattered wasn't the model. It was refusing to let the model's output stay as text."
         },
         {
           "type": "para",
-          "src": "The other lesson was about where to spend defensive effort. Models produce malformed output; that isn't an exception path, it's the steady state. Error boundaries per card, tolerance for out-of-order tokens, and regexes that expect the model to format badly weren't paranoia. They were the difference between a demo and something a customer uses on a Monday morning."
+          "src": "The other lesson was about designing for a component that gets things wrong. AI output is unpredictable, and that isn't an edge case to handle later — it's the normal condition. Building on the assumption that the model would occasionally return something broken, and making sure that only ever cost the user one card rather than their whole session, was the difference between something that demos well and something people trust on a Monday morning."
         },
         {
           "type": "signature",
           "src": {
-            "name": "Sai Rohit S",
+            "name": "Gobind Singh",
             "role": "Full-Stack Engineer, Optimeleon"
           }
         }

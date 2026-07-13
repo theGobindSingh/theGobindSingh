@@ -1,8 +1,8 @@
 import fs from "fs";
 import matter from "gray-matter";
-import { marked } from "marked";
 import path from "path";
 
+import { renderMarkdown } from "./markdown";
 import type { BlogFrontmatter, BlogPost, BlogPostMeta } from "./types";
 
 const BLOG_DIR = path.join(process.cwd(), "public/blogs");
@@ -32,20 +32,22 @@ export const getPostBySlug = (slug: string): BlogPost | undefined => {
 
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter<BlogFrontmatter>(raw);
+  const { html, outline } = renderMarkdown(content);
 
   return {
     ...data,
     slug,
     readingTime: readingTimeFor(content),
-    html: marked.parse(content, { async: false }),
+    html,
+    outline,
   };
 };
 
 export const getPostMetaBySlug = (slug: string): BlogPostMeta | undefined => {
   const post = getPostBySlug(slug);
   if (!post) return undefined;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- drop html for list views
-  const { html, ...meta } = post;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- drop detail-only fields for list views
+  const { html, outline, ...meta } = post;
   return meta;
 };
 
@@ -71,4 +73,9 @@ export const getAllTags = (posts: BlogPostMeta[]): string[] => {
 };
 
 export { formatBlogDate } from "./format";
-export type { BlogFrontmatter, BlogPost, BlogPostMeta } from "./types";
+export type {
+  BlogFrontmatter,
+  BlogOutlineItem,
+  BlogPost,
+  BlogPostMeta,
+} from "./types";
