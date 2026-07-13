@@ -2,6 +2,7 @@ import CaseStudies from "@app/work/case-studies";
 import Cta from "@app/work/cta";
 import Endorsements from "@app/work/endorsements";
 import Experience from "@app/work/experience";
+import Freelance from "@app/work/freelance";
 import Projects from "@app/work/projects";
 import JsonLd from "@components/json-ld";
 import { fullName } from "@data";
@@ -75,10 +76,11 @@ const WorkPage = () => {
     <main>
       <JsonLd data={collectionSchema} />
       <JsonLd data={breadcrumbSchema} />
-      <CaseStudies titleNumber="01" />
-      <Projects titleNumber="02" />
-      <Experience titleNumber="03" />
-      <Endorsements titleNumber="04" />
+      <Freelance titleNumber="01" />
+      <CaseStudies titleNumber="02" />
+      <Projects titleNumber="03" />
+      <Experience titleNumber="04" />
+      <Endorsements titleNumber="05" />
       <Cta />
     </main>
   );

@@ -187,6 +187,13 @@ Assumed standard scripts (adjust to match `package.json`):
 - `pnpm start` run the build
 - `pnpm lint` / `pnpm lint --fix` lint and auto-fix
 
+**Dev server: never kill and restart one that's already running.** The owner usually has
+`pnpm dev` running in their own terminal while working alongside an agent. Before starting a
+dev server to verify a change, check whether one is already up (e.g. `curl -sf
+http://localhost:3000 >/dev/null` or check for a listener on the port) and reuse it. Only start
+a new one if none is running, and don't kill an existing process to "get a clean start" unless
+the owner asks.
+
 ## Golden rules (distilled, do not violate)
 
 1. **Tokens only.** Style through the tokens in `global.css` / DESIGN.md. No inline hex/HSL,

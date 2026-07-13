@@ -1,0 +1,109 @@
+/*
+ * Typography for markdown-rendered article bodies (public/blogs/*.md → HTML
+ * via `marked`). The markdown source has no class hooks, so this utility
+ * styles raw elements (h2, p, ul, blockquote, code, ...) by selector.
+ *
+ * Declared with @utility (not @layer components) so Tailwind v4 registers it
+ * as a real utility candidate — eslint-plugin-better-tailwindcss then
+ * recognizes it with no manual ignore-list entry needed.
+ */
+
+@utility article-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 68ch;
+  color: var(--color-grey-700);
+  font-size: var(--fs-3xs);
+  line-height: 1.7;
+
+  & h2 {
+    margin-top: 1rem;
+    color: var(--color-grey-950);
+    font-size: var(--fs-1xl);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  & h3 {
+    margin-top: 0.5rem;
+    color: var(--color-grey-950);
+    font-size: var(--fs-l);
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  & p {
+    color: var(--color-grey-700);
+  }
+
+  & strong {
+    color: var(--color-grey-950);
+    font-weight: 600;
+  }
+
+  & a {
+    color: var(--color-accent-600);
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: var(--color-accent-700);
+    }
+  }
+
+  & ul,
+  & ol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 1.5rem;
+  }
+
+  & ul {
+    list-style: disc;
+  }
+
+  & ol {
+    list-style: decimal;
+  }
+
+  & blockquote {
+    border-left: 2px solid var(--color-accent-600);
+    padding-left: 1.5rem;
+    color: var(--color-grey-900);
+    font-family: var(--ff-serif);
+    font-size: var(--fs-s);
+    font-style: italic;
+  }
+
+  & code {
+    border-radius: var(--radius-sm);
+    background-color: var(--color-grey-100);
+    padding: 0.15em 0.4em;
+    color: var(--color-grey-900);
+    font-family: var(--ff-mono);
+    font-size: var(--fs-4xs);
+  }
+
+  & pre {
+    overflow-x: auto;
+    border: 1px solid var(--color-grey-300);
+    background-color: var(--color-grey-100);
+    padding: 1.5rem;
+
+    & code {
+      border-radius: 0;
+      background-color: transparent;
+      padding: 0;
+    }
+  }
+
+  & img {
+    border: 1px solid var(--color-grey-300);
+    width: 100%;
+  }
+
+  & hr {
+    border-color: var(--color-grey-300);
+  }
+}

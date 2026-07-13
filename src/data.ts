@@ -4,6 +4,8 @@ import type { LucideProps } from "lucide-react";
 import { Mail } from "lucide-react";
 
 import LinkedInIcon from "@components/icon-linkedin";
+import cleantankImage from "@images/cleantank.png";
+import type { StaticImageData } from "next/image";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 export const firstName = "Gobind";
@@ -99,8 +101,8 @@ export const headerAndNavData: {
       url: "/work",
     },
     {
-      text: "Extracurricular",
-      url: "/extracurricular",
+      text: "Blogs",
+      url: "/blog",
     },
     {
       text: "Contact",
@@ -214,13 +216,19 @@ export const experienceData: {
   },
 ];
 
-export type WorkCategory = "build" | "rebuild" | "integration" | "frontend";
+export type WorkCategory =
+  | "build"
+  | "rebuild"
+  | "integration"
+  | "frontend"
+  | "freelance";
 
 export const CATEGORY_LABELS: Record<WorkCategory, string> = {
   build: "Build",
   rebuild: "Rebuild",
   integration: "Integration",
   frontend: "Frontend",
+  freelance: "Freelance",
 };
 
 export interface WorkItem {
@@ -245,6 +253,10 @@ export interface WorkItem {
   outcome: string;
 
   slug?: string;
+  image?: {
+    src: StaticImageData;
+    alt: string;
+  };
 }
 
 export const projectData: WorkItem[] = [
@@ -272,6 +284,44 @@ export const projectData: WorkItem[] = [
     links: {
       github: "https://github.com/webadeva/kami-ui",
       live: "https://webadeva.github.io/kami-ui/",
+    },
+  },
+];
+
+export const freelanceData: WorkItem[] = [
+  {
+    title: "CleanTank Services",
+    slug: "cleantank-services",
+    type: "project",
+    category: "freelance",
+    description:
+      "A multi-page marketing site for an industrial water-tank cleaning company operating across India, built to carry both direct service sales and franchise recruitment.",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "GraphQL",
+      "Contentful",
+      "MUI",
+      "TanStack Query",
+    ],
+    timeframe: "2026",
+    sortDate: "2026-03",
+    problem:
+      "The client needed a credible, conversion-focused web presence that could speak to two very different audiences at once: hospitals and government bodies evaluating compliance-grade service providers, and prospective franchise partners evaluating an investment.",
+    approach:
+      "I built a multi-page Next.js site backed by a headless CMS so the team can update copy and imagery without touching code, with typed GraphQL queries via codegen for the content layer. Service and franchise inquiries run through separate lead-capture funnels, each with its own form fields and submission handling, and the visual system leans into the client's clinical, industrial-grade positioning.",
+    outcome:
+      "Shipped a live, production site covering the full service story, franchise recruitment, and lead capture end to end, now serving as the client's primary digital storefront.",
+    metrics: [
+      "CMS-driven content, no code changes needed for copy or image updates",
+      "Separate lead-gen funnels for service quotes and franchise applications",
+    ],
+    links: {
+      live: "https://cleantank.vercel.app/",
+    },
+    image: {
+      src: cleantankImage,
+      alt: "CleanTank Services homepage, showing a technician hydro-jetting an industrial water tank",
     },
   },
 ];

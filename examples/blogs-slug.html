@@ -1,0 +1,841 @@
+<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@100..900&amp;family=Hanken+Grotesk:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      ::selection {
+        background-color: #b73700;
+        color: #ffffff;
+      }
+      .structural-line {
+        border-color: #262626;
+      }
+      .progress-bar-container {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        z-index: 60;
+      }
+      #reading-progress {
+        height: 100%;
+        width: 0%;
+        background-color: #b73700;
+        transition: width 0.1s ease-out;
+      }
+      pre code {
+        font-family: "JetBrains Mono", monospace;
+        counter-reset: line;
+      }
+      .code-line::before {
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block;
+        width: 2rem;
+        margin-right: 1rem;
+        color: #444748;
+        text-align: right;
+      }
+      .editorial-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 32px;
+      }
+      @media (max-width: 767px) {
+        .editorial-grid {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#b73700",
+              "inverse-surface": "#e5e2e1",
+              tertiary: "#ffffff",
+              "secondary-fixed": "#e5e2e1",
+              "on-secondary": "#313030",
+              "on-tertiary": "#5d1800",
+              secondary: "#c9c6c5",
+              "on-primary-fixed": "#1a1c1c",
+              "surface-variant": "#353434",
+              "on-primary-container": "#636565",
+              "inverse-primary": "#5d5f5f",
+              "tertiary-container": "#ffdbd0",
+              "surface-dim": "#141313",
+              "secondary-fixed-dim": "#c9c6c5",
+              "tertiary-fixed": "#ffdbd0",
+              "outline-variant": "#444748",
+              "on-error-container": "#ffdad6",
+              "inverse-on-surface": "#313030",
+              "on-surface-variant": "#c4c7c8",
+              "border-gray": "#262626",
+              "muted-gray": "#888888",
+              "primary-fixed-dim": "#c6c6c7",
+              "surface-container-lowest": "#0e0e0e",
+              "surface-container": "#201f1f",
+              "on-background": "#e5e2e1",
+              outline: "#8e9192",
+              "error-container": "#93000a",
+              "on-error": "#690005",
+              "primary-fixed": "#e2e2e2",
+              "on-secondary-fixed": "#1c1b1b",
+              error: "#ffb4ab",
+              "surface-tint": "#c6c6c7",
+              primary: "#ffffff",
+              "on-secondary-fixed-variant": "#474646",
+              "surface-container-highest": "#353434",
+              "secondary-container": "#4a4949",
+              background: "#141313",
+              "surface-container-high": "#2a2a2a",
+              "on-primary-fixed-variant": "#454747",
+              "surface-bright": "#3a3939",
+              "on-secondary-container": "#bab8b7",
+              "on-primary": "#2f3131",
+              "primary-container": "#e2e2e2",
+              "on-tertiary-fixed": "#390b00",
+              "tertiary-fixed-dim": "#ffb59e",
+              "on-tertiary-fixed-variant": "#842500",
+              surface: "#141313",
+              "on-surface": "#e5e2e1",
+              "surface-container-low": "#1c1b1b",
+              "surface-elevated": "#141414",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              base: "8px",
+              "margin-desktop": "64px",
+              "container-max": "1440px",
+              "section-gap": "160px",
+              gutter: "32px",
+              "margin-mobile": "24px",
+            },
+            fontFamily: {
+              "headline-lg-mobile": ["Epilogue"],
+              "body-lg": ["Hanken Grotesk"],
+              "label-mono": ["JetBrains Mono"],
+              "body-md": ["Hanken Grotesk"],
+              "headline-md": ["Epilogue"],
+              "headline-lg": ["Epilogue"],
+              "display-xl": ["Epilogue"],
+              "display-xl-mobile": ["Epilogue"],
+            },
+            fontSize: {
+              "headline-lg-mobile": [
+                "40px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": ["20px", { lineHeight: "32px", fontWeight: "400" }],
+              "label-mono": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-md": ["16px", { lineHeight: "26px", fontWeight: "400" }],
+              "headline-md": [
+                "32px",
+                { lineHeight: "40px", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "64px",
+                {
+                  lineHeight: "72px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "display-xl": [
+                "120px",
+                {
+                  lineHeight: "110px",
+                  letterSpacing: "-0.04em",
+                  fontWeight: "800",
+                },
+              ],
+              "display-xl-mobile": [
+                "56px",
+                {
+                  lineHeight: "60px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "800",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-on-background selection:bg-on-tertiary-container selection:text-white overflow-x-hidden"
+  >
+    <!-- TopNavBar -->
+    <header
+      class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-margin-desktop h-16 bg-background border-b border-border-gray"
+    >
+      <div
+        class="font-label-mono text-label-mono tracking-tighter font-bold text-primary"
+      >
+        ARCHITECT.EXT
+      </div>
+      <nav class="hidden md:flex gap-8">
+        <a
+          class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors duration-300"
+          href="#"
+          >WORK</a
+        >
+        <a
+          class="font-label-mono text-label-mono text-primary border-b-2 border-on-tertiary-fixed-variant pb-1"
+          href="#"
+          >SYSTEMS</a
+        >
+        <a
+          class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors duration-300"
+          href="#"
+          >WRITING</a
+        >
+        <a
+          class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors duration-300"
+          href="#"
+          >ARCHIVE</a
+        >
+      </nav>
+      <div class="flex items-center gap-6">
+        <span
+          class="hidden md:block font-label-mono text-label-mono text-on-tertiary-fixed-variant"
+          >AVAILABLE NOW</span
+        >
+        <button
+          class="bg-on-tertiary-container text-white px-4 py-2 font-label-mono text-label-mono hover:bg-white hover:text-black transition-colors duration-300"
+        >
+          BOOK A CALL
+        </button>
+      </div>
+    </header>
+    <!-- Reading Progress -->
+    <div class="progress-bar-container">
+      <div id="reading-progress"></div>
+    </div>
+    <main class="pt-32 pb-section-gap">
+      <article class="max-w-container-max mx-auto px-6 md:px-margin-desktop">
+        <!-- Article Header -->
+        <header class="mb-24">
+          <div class="editorial-grid">
+            <div class="col-span-12 md:col-span-4 mb-8 md:mb-0">
+              <div class="flex flex-col gap-4">
+                <span
+                  class="font-label-mono text-label-mono text-on-tertiary-fixed-variant"
+                  >/ SYSTEM_DESIGN / 04</span
+                >
+                <div class="flex flex-col gap-1">
+                  <span class="font-label-mono text-label-mono text-muted-gray"
+                    >PUBLISHED: OCT 12, 2024</span
+                  >
+                  <span class="font-label-mono text-label-mono text-muted-gray"
+                    >READING TIME: 12 MINS</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 md:col-span-8">
+              <h1
+                class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-8 max-w-4xl"
+              >
+                Scalable Architectural Patterns for Modern Distributed Systems.
+              </h1>
+              <p class="font-body-lg text-body-lg text-muted-gray max-w-2xl">
+                An in-depth exploration of fault tolerance, eventual
+                consistency, and high-density data modeling in global-scale
+                infrastructure.
+              </p>
+            </div>
+          </div>
+        </header>
+        <!-- Hero Image -->
+        <div
+          class="w-full h-[614px] mb-24 overflow-hidden border border-border-gray"
+        >
+          <img
+            class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-700 ease-in-out"
+            data-alt="A high-contrast macro photograph of a complex circuit board with glowing orange data paths. The lighting is moody and cinematic, emphasizing the intricate geometric patterns of the silicon components. The aesthetic is futuristic and technical, using a palette of deep blacks and sharp metallic greys with burnt orange accents."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3qOCsls-2lotp8dZtQ669KRKk-U0bXgJGusR4d7zL_T3apfQK4D7dwdfuVtP3UKZEbk99Q6w3iFx6g4tlTEPHGHIBIo2ozNTbgKraf3HQ0b2_Nb00EPShjnRuuccrP4CTLo1xEs2-RlOVjTTYof_q2FbpLM_LRwtL_pvAyiUEYaQcRyhTHRJiDMPDkrAe4wPNa9g9oXs1Ur-NCaAN5xeir8gwFTIiXEPix-C3LO4PUeJgK6gs99huEdCSCXfp5ACqVmzh1iRK4Ek"
+          />
+        </div>
+        <!-- Content Section -->
+        <div class="editorial-grid">
+          <!-- Side Meta / Table of Contents -->
+          <aside
+            class="hidden md:flex md:col-span-4 flex-col gap-12 sticky top-32 h-fit"
+          >
+            <div class="flex flex-col gap-4">
+              <h4
+                class="font-label-mono text-label-mono text-primary uppercase"
+              >
+                Outline
+              </h4>
+              <ul class="flex flex-col gap-3">
+                <li>
+                  <a
+                    class="font-label-mono text-label-mono text-on-tertiary-fixed-variant hover:text-primary transition-colors"
+                    href="#intro"
+                    >01. Introduction</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors"
+                    href="#core"
+                    >02. Core Architecture</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors"
+                    href="#data"
+                    >03. Data Integrity</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors"
+                    href="#visual"
+                    >04. Visualizing Flow</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors"
+                    href="#summary"
+                    >05. Implementation</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="p-6 bg-surface-container border border-border-gray">
+              <p
+                class="font-label-mono text-[10px] text-muted-gray mb-4 uppercase"
+              >
+                Technical Specs
+              </p>
+              <div class="flex flex-col gap-2">
+                <div
+                  class="flex justify-between border-b border-border-gray pb-2"
+                >
+                  <span class="font-label-mono text-[11px] text-primary"
+                    >COMPLEXITY</span
+                  >
+                  <span
+                    class="font-label-mono text-[11px] text-on-tertiary-fixed-variant"
+                    >HIGH</span
+                  >
+                </div>
+                <div
+                  class="flex justify-between border-b border-border-gray pb-2"
+                >
+                  <span class="font-label-mono text-[11px] text-primary"
+                    >REVISION</span
+                  >
+                  <span
+                    class="font-label-mono text-[11px] text-on-tertiary-fixed-variant"
+                    >v2.4.0</span
+                  >
+                </div>
+              </div>
+            </div>
+          </aside>
+          <!-- Body Content -->
+          <div class="col-span-12 md:col-span-8 flex flex-col gap-16">
+            <!-- Intro -->
+            <section id="intro">
+              <p
+                class="font-body-lg text-body-lg text-on-surface leading-relaxed mb-8"
+              >
+                In the rapidly evolving landscape of product engineering, the
+                distinction between a "working system" and a "scalable
+                architecture" has never been more critical. As we push the
+                boundaries of real-time collaboration and global availability,
+                our approach to state management must shift from centralized
+                control to decentralized resilience.
+              </p>
+              <blockquote
+                class="border-l-4 border-on-tertiary-fixed-variant pl-8 py-4 my-12 italic"
+              >
+                <p class="font-headline-md text-headline-md text-primary">
+                  "Architecture is not just about the lines we draw, but the
+                  failures we anticipate."
+                </p>
+                <cite
+                  class="font-label-mono text-label-mono text-muted-gray mt-4 block"
+                  >— Lead Architect, ARCHITECT.EXT</cite
+                >
+              </blockquote>
+            </section>
+            <!-- Core Architecture -->
+            <section class="flex flex-col gap-8" id="core">
+              <h2 class="font-headline-md text-headline-md text-primary">
+                02. Core Architecture
+              </h2>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                Modern distributed systems rely on the orchestration of multiple
+                services, each operating under its own set of constraints. The
+                fundamental challenge lies in maintaining a coherent user
+                experience while the underlying data might be in flux.
+              </p>
+              <div
+                class="bg-surface-container-lowest border border-border-gray p-8 my-4 overflow-x-auto"
+              >
+                <pre
+                  class="text-on-primary-container"
+                ><code class="font-label-mono text-[13px]">
+<span class="code-line text-muted-gray">// Initializing Scalable Node Interface</span>
+<span class="code-line"><span class="text-on-tertiary-fixed-variant">interface</span> <span class="text-primary">ArchitectureNode</span> {</span>
+<span class="code-line">  id: <span class="text-secondary">string</span>;</span>
+<span class="code-line">  latency: <span class="text-secondary">number</span>;</span>
+<span class="code-line">  redundancy: <span class="text-secondary">boolean</span>;</span>
+<span class="code-line">  <span class="text-on-tertiary-fixed-variant">sync</span>(packet: <span class="text-primary">DataPacket</span>): <span class="text-secondary">Promise<void></void></span>;</span>
+<span class="code-line">}</span>
+                            </code></pre>
+              </div>
+            </section>
+            <!-- Table Section -->
+            <section class="flex flex-col gap-8" id="data">
+              <h3
+                class="font-headline-md text-headline-md text-primary underline decoration-on-tertiary-fixed-variant underline-offset-8"
+              >
+                03. Data Integrity
+              </h3>
+              <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-border-gray">
+                  <thead>
+                    <tr class="bg-surface-container-high">
+                      <th
+                        class="border border-border-gray p-4 text-left font-label-mono text-label-mono text-primary"
+                      >
+                        MODEL
+                      </th>
+                      <th
+                        class="border border-border-gray p-4 text-left font-label-mono text-label-mono text-primary"
+                      >
+                        LATENCY
+                      </th>
+                      <th
+                        class="border border-border-gray p-4 text-left font-label-mono text-label-mono text-primary"
+                      >
+                        CONSISTENCY
+                      </th>
+                      <th
+                        class="border border-border-gray p-4 text-left font-label-mono text-label-mono text-primary"
+                      >
+                        RISK
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="font-body-md text-body-md">
+                    <tr>
+                      <td class="border border-border-gray p-4 text-on-surface">
+                        ACID Transactions
+                      </td>
+                      <td class="border border-border-gray p-4 text-on-surface">
+                        High
+                      </td>
+                      <td class="border border-border-gray p-4 text-on-surface">
+                        Strong
+                      </td>
+                      <td
+                        class="border border-border-gray p-4 text-on-tertiary-fixed-variant"
+                      >
+                        Low
+                      </td>
+                    </tr>
+                    <tr class="bg-surface-container-low">
+                      <td class="border border-border-gray p-4 text-on-surface">
+                        Eventual Consistency
+                      </td>
+                      <td class="border border-border-gray p-4 text-on-surface">
+                        Low
+                      </td>
+                      <td class="border border-border-gray p-4 text-on-surface">
+                        Weak
+                      </td>
+                      <td
+                        class="border border-border-gray p-4 text-on-tertiary-fixed-variant"
+                      >
+                        Medium
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border border-border-gray p-4 text-on-surface">
+                        CRDT Arrays
+                      </td>
+                      <td class="border border-border-gray p-4 text-on-surface">
+                        Ultra-Low
+                      </td>
+                      <td class="border border-border-gray p-4 text-on-surface">
+                        Eventual
+                      </td>
+                      <td
+                        class="border border-border-gray p-4 text-on-tertiary-fixed-variant"
+                      >
+                        Complexity
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+            <!-- Technical Diagram -->
+            <section class="flex flex-col gap-8" id="visual">
+              <h2 class="font-headline-md text-headline-md text-primary">
+                04. Visualizing Flow
+              </h2>
+              <div
+                class="relative w-full aspect-video bg-surface-container border border-border-gray flex items-center justify-center group overflow-hidden"
+              >
+                <!-- SVG Diagram Placeholder -->
+                <svg
+                  fill="none"
+                  height="80%"
+                  viewBox="0 0 400 200"
+                  width="80%"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    height="60"
+                    stroke="#262626"
+                    stroke-width="1"
+                    width="80"
+                    x="20"
+                    y="70"
+                  ></rect>
+                  <text
+                    fill="#888888"
+                    font-family="JetBrains Mono"
+                    font-size="8"
+                    x="35"
+                    y="105"
+                  >
+                    CLIENT
+                  </text>
+                  <path
+                    d="M100 100 H150"
+                    stroke="#b73700"
+                    stroke-dasharray="4 2"
+                    stroke-width="1"
+                  ></path>
+                  <rect
+                    fill="#1c1b1b"
+                    height="120"
+                    stroke="#262626"
+                    stroke-width="1"
+                    width="100"
+                    x="150"
+                    y="40"
+                  ></rect>
+                  <text
+                    fill="#ffffff"
+                    font-family="JetBrains Mono"
+                    font-size="8"
+                    x="175"
+                    y="105"
+                  >
+                    GATEWAY
+                  </text>
+                  <path
+                    d="M250 80 H300"
+                    stroke="#262626"
+                    stroke-width="1"
+                  ></path>
+                  <path
+                    d="M250 120 H300"
+                    stroke="#262626"
+                    stroke-width="1"
+                  ></path>
+                  <rect
+                    height="40"
+                    stroke="#262626"
+                    stroke-width="1"
+                    width="60"
+                    x="300"
+                    y="50"
+                  ></rect>
+                  <text
+                    fill="#888888"
+                    font-family="JetBrains Mono"
+                    font-size="8"
+                    x="310"
+                    y="75"
+                  >
+                    NODE_A
+                  </text>
+                  <rect
+                    height="40"
+                    stroke="#262626"
+                    stroke-width="1"
+                    width="60"
+                    x="300"
+                    y="110"
+                  ></rect>
+                  <text
+                    fill="#888888"
+                    font-family="JetBrains Mono"
+                    font-size="8"
+                    x="310"
+                    y="135"
+                  >
+                    NODE_B
+                  </text>
+                </svg>
+                <div class="absolute bottom-4 right-4 flex items-center gap-2">
+                  <span class="font-label-mono text-[10px] text-muted-gray"
+                    >DIAGRAM_04A: REQUEST LIFECYCLE</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-muted-gray text-sm"
+                    style="font-variation-settings: &quot;FILL&quot; 1"
+                    >info</span
+                  >
+                </div>
+              </div>
+            </section>
+            <!-- Conclusion -->
+            <section class="flex flex-col gap-8" id="summary">
+              <h2 class="font-headline-md text-headline-md text-primary">
+                05. Implementation Strategy
+              </h2>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                To implement these patterns, we must first audit our existing
+                state primitives. Transitioning to a distributed-first mindset
+                requires significant investment in observability and automated
+                recovery paths.
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+                <div
+                  class="p-8 bg-surface-container-high border-l-4 border-on-tertiary-fixed-variant"
+                >
+                  <h4 class="font-label-mono text-label-mono text-primary mb-2">
+                    PROS
+                  </h4>
+                  <p class="font-body-md text-body-md text-muted-gray">
+                    Infinite scalability, high fault tolerance, and geographic
+                    distribution.
+                  </p>
+                </div>
+                <div
+                  class="p-8 bg-surface-container-high border-l-4 border-border-gray"
+                >
+                  <h4 class="font-label-mono text-label-mono text-primary mb-2">
+                    CONS
+                  </h4>
+                  <p class="font-body-md text-body-md text-muted-gray">
+                    Increased operational complexity and synchronization
+                    overhead.
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </article>
+    </main>
+    <!-- Related Articles Section -->
+    <section
+      class="bg-surface-container-lowest border-t border-border-gray py-section-gap"
+    >
+      <div class="max-w-container-max mx-auto px-6 md:px-margin-desktop">
+        <div class="flex justify-between items-end mb-16">
+          <h2 class="font-headline-md text-headline-md text-primary">
+            Related Reading
+          </h2>
+          <a
+            class="font-label-mono text-label-mono text-on-tertiary-fixed-variant hover:text-primary transition-colors flex items-center gap-2"
+            href="#"
+            >VIEW ALL
+            <span class="material-symbols-outlined text-sm"
+              >arrow_forward</span
+            ></a
+          >
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Related Article 1 -->
+          <a class="group flex flex-col gap-6" href="#">
+            <div class="aspect-video border border-border-gray overflow-hidden">
+              <img
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                data-alt="A futuristic digital data visualization with flowing lines of light against a deep black void. The lines are colored in electric blue and warm orange, intersecting to create a dense network of information. The image is sharp and cinematic, maintaining the brand's architectural and technical feel."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBolJddil3S4RJU67U5OoIy_BHrJztX6lJVvyweVFbZ349J3WqkJwzueQwzZ13PVGo-IbqDkeQ1LJTAl7k0R6GsmclV3P4C67B9I3Y0H-mCJxtyzIjezHauBUtnAb4KgFpMzrJfIToCR8lzB0snpaSzjKpc618pmOBK0M1PrhVMacWg4KWLajBMUIcorNbHPECWQzf491zMR55aO_SV085-g0zIR_gDHzGN9aiqrn6hCUn7wRIlTM0bssV-TXcYFcCHUXkTC8XVN1c"
+              />
+            </div>
+            <div class="flex flex-col gap-3">
+              <span
+                class="font-label-mono text-[10px] text-on-tertiary-fixed-variant uppercase"
+                >Infrastructure</span
+              >
+              <h3
+                class="font-headline-md text-2xl text-primary group-hover:text-on-tertiary-fixed-variant transition-colors"
+              >
+                The Future of Edge Computing.
+              </h3>
+            </div>
+          </a>
+          <!-- Related Article 2 -->
+          <a class="group flex flex-col gap-6" href="#">
+            <div class="aspect-video border border-border-gray overflow-hidden">
+              <img
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                data-alt="A close-up shot of server racks in a data center, illuminated by harsh white and orange LEDs. The perspective is from a low angle, making the equipment look monolithic and grand. The aesthetic is clean, technical, and high-contrast, fitting the Swiss Brutalism design system."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1DHfsw4-wSWGrPlNnQEHK-4dzlsPzuUCSvLWK33W3d17ES3LaTgDhJO8au4WbTepEZB-Zuys-HqjgnPNpcb5RKY8gEq3z9peuslnl4VnOgPz1BBVvmolR6Ka0jM467hP1X_gIQqamdZp5z3_trZZW0cMckg9v8dumXZI7ECWUUISvf2JcpQkWbqwjiFPsLVWbcMXvsV2QSt2P1vBn3ASaCRa0Z1FsFCg0RRxG9VtR63wIYOKgCWVpibrk2XJqYNzkvjT9iCXGzow"
+              />
+            </div>
+            <div class="flex flex-col gap-3">
+              <span
+                class="font-label-mono text-[10px] text-on-tertiary-fixed-variant uppercase"
+                >Performance</span
+              >
+              <h3
+                class="font-headline-md text-2xl text-primary group-hover:text-on-tertiary-fixed-variant transition-colors"
+              >
+                Optimizing RTT in Global Stacks.
+              </h3>
+            </div>
+          </a>
+          <!-- Related Article 3 -->
+          <a class="group flex flex-col gap-6" href="#">
+            <div class="aspect-video border border-border-gray overflow-hidden">
+              <img
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                data-alt="Abstract generative art featuring mathematical equations and geometric formulas rendered in fine white lines on a dark, textured background. Burnt orange highlights punctuate key variables. The style is cerebral and technical, mimicking an architectural monograph's interior pages."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2GQ1DDeg7D43OD2WyQP35YC6hYQA25ZUBY7fdk5nfhA3SEmdUC5cgefaG1NWI-wnyiqYEVlAKNq9CU-uaAHYk_PRWUOIw_cSXt9GgcA_18BjSvFPHFU-AxZcQCkIYQjA4uLRLxeDfClx6_HyPWlwwUsXlbEQIOGF-1WDPSDiRGgTtKioUIMihQWrW4-NPEoAY9Is1T722WVcc6qomeno0fNqXe7l5n4hRbe8h2RmpQUtSpNoSakmkaSkDOFKT5VFjfcgCsSemlkM"
+              />
+            </div>
+            <div class="flex flex-col gap-3">
+              <span
+                class="font-label-mono text-[10px] text-on-tertiary-fixed-variant uppercase"
+                >Algorithms</span
+              >
+              <h3
+                class="font-headline-md text-2xl text-primary group-hover:text-on-tertiary-fixed-variant transition-colors"
+              >
+                Distributed Consensus 101.
+              </h3>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer
+      class="w-full py-section-gap px-6 md:px-margin-desktop bg-background border-t border-border-gray"
+    >
+      <div class="max-w-container-max mx-auto flex flex-col gap-16">
+        <div
+          class="flex flex-col md:flex-row justify-between items-start md:items-end gap-12"
+        >
+          <div class="flex flex-col gap-4">
+            <div
+              class="font-headline-md text-headline-md font-bold text-primary"
+            >
+              ARCHITECT.EXT
+            </div>
+            <p class="font-body-md text-muted-gray max-w-sm">
+              Designing the infrastructure for the next generation of web-scale
+              applications.
+            </p>
+          </div>
+          <div class="flex gap-8">
+            <a
+              class="font-label-mono text-label-mono text-muted-gray hover:text-on-tertiary-fixed-variant transition-colors"
+              href="#"
+              >GITHUB</a
+            >
+            <a
+              class="font-label-mono text-label-mono text-muted-gray hover:text-on-tertiary-fixed-variant transition-colors"
+              href="#"
+              >LINKEDIN</a
+            >
+            <a
+              class="font-label-mono text-label-mono text-muted-gray hover:text-on-tertiary-fixed-variant transition-colors"
+              href="#"
+              >READ.CV</a
+            >
+            <a
+              class="font-label-mono text-label-mono text-muted-gray hover:text-on-tertiary-fixed-variant transition-colors"
+              href="#"
+              >EMAIL</a
+            >
+          </div>
+        </div>
+        <div class="pt-8 border-t border-border-gray">
+          <p class="font-label-mono text-label-mono text-muted-gray">
+            © 2024 SENIOR PRODUCT ARCHITECT. BUILT FOR SCALE.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Reading Progress Logic
+      window.addEventListener("scroll", () => {
+        const winScroll =
+          document.body.scrollTop || document.documentElement.scrollTop;
+        const height =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById("reading-progress").style.width =
+          scrolled + "%";
+      });
+
+      // Simple smooth scroll for sidebar
+      document.querySelectorAll("aside a").forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href").substring(1);
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 100,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

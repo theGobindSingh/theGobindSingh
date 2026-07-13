@@ -95,10 +95,8 @@ Sitemap:
 - Utility: `/resume` (or direct PDF), `sitemap.xml`, `robots.txt`, RSS for blog, custom 404.
 
 Global nav: Work, Blog, About, plus a persistent "Book a call". **As built (`headerAndNavData`
-in `src/data.ts`), this has drifted:** the live header nav is Home / Design / About / Work /
-Extracurricular / Contact, with a "Resume" button, not "Book a call". "Design" points at
-`/temp` (a dev color/type scratch page, `robots.txt`-disallowed) and "Extracurricular" points
-at `/extracurricular`, which has no route and 404s. Flagged as a bug to fix, not a spec change
+in `src/data.ts`), this has drifted:** the live header nav is Home / Design / About / Work / Contact, with a "Resume" button, not "Book a call". "Design" points at
+`/temp` (a dev color/type scratch page, `robots.txt`-disallowed), which has no route and 404s. Flagged as a bug to fix, not a spec change
 to make — the intended nav is still Work / Blog / About / Contact + a primary CTA. Footer
 carries full nav, contact paths, social, status (open for work), and a back-to-top.
 

@@ -5,6 +5,20 @@ const nextConfig = {
     remotePatterns: [],
   },
   allowedDevOrigins: ["192.168.1.11"],
+  async redirects() {
+    return [
+      {
+        source: "/blogs",
+        destination: "/blog",
+        permanent: true,
+      },
+      {
+        source: "/blogs/:slug",
+        destination: "/blog/:slug",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

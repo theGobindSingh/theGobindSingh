@@ -1,0 +1,658 @@
+<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #141313;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #262626;
+      }
+      ::selection {
+        background: #b73700;
+        color: #ffffff;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-container": "#b73700",
+              "inverse-surface": "#e5e2e1",
+              tertiary: "#ffffff",
+              "secondary-fixed": "#e5e2e1",
+              "on-secondary": "#313030",
+              "on-tertiary": "#5d1800",
+              secondary: "#c9c6c5",
+              "on-primary-fixed": "#1a1c1c",
+              "surface-variant": "#353434",
+              "on-primary-container": "#636565",
+              "inverse-primary": "#5d5f5f",
+              "tertiary-container": "#ffdbd0",
+              "surface-dim": "#141313",
+              "secondary-fixed-dim": "#c9c6c5",
+              "tertiary-fixed": "#ffdbd0",
+              "outline-variant": "#444748",
+              "on-error-container": "#ffdad6",
+              "inverse-on-surface": "#313030",
+              "on-surface-variant": "#c4c7c8",
+              "border-gray": "#262626",
+              "muted-gray": "#888888",
+              "primary-fixed-dim": "#c6c6c7",
+              "surface-container-lowest": "#0e0e0e",
+              "surface-container": "#201f1f",
+              "on-background": "#e5e2e1",
+              outline: "#8e9192",
+              "error-container": "#93000a",
+              "on-error": "#690005",
+              "primary-fixed": "#e2e2e2",
+              "on-secondary-fixed": "#1c1b1b",
+              error: "#ffb4ab",
+              "surface-tint": "#c6c6c7",
+              primary: "#ffffff",
+              "on-secondary-fixed-variant": "#474646",
+              "surface-container-highest": "#353434",
+              "secondary-container": "#4a4949",
+              background: "#141313",
+              "surface-container-high": "#2a2a2a",
+              "on-primary-fixed-variant": "#454747",
+              "surface-bright": "#3a3939",
+              "on-secondary-container": "#bab8b7",
+              "on-primary": "#2f3131",
+              "primary-container": "#e2e2e2",
+              "on-tertiary-fixed": "#390b00",
+              "tertiary-fixed-dim": "#ffb59e",
+              "on-tertiary-fixed-variant": "#842500",
+              surface: "#141313",
+              "on-surface": "#e5e2e1",
+              "surface-container-low": "#1c1b1b",
+              "surface-elevated": "#141414",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              base: "8px",
+              "margin-desktop": "64px",
+              "container-max": "1440px",
+              "section-gap": "160px",
+              gutter: "32px",
+              "margin-mobile": "24px",
+            },
+            fontFamily: {
+              "headline-lg-mobile": ["Epilogue"],
+              "body-lg": ["Hanken Grotesk"],
+              "label-mono": ["JetBrains Mono"],
+              "body-md": ["Hanken Grotesk"],
+              "headline-md": ["Epilogue"],
+              "headline-lg": ["Epilogue"],
+              "display-xl": ["Epilogue"],
+              "display-xl-mobile": ["Epilogue"],
+            },
+            fontSize: {
+              "headline-lg-mobile": [
+                "40px",
+                {
+                  lineHeight: "44px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": ["20px", { lineHeight: "32px", fontWeight: "400" }],
+              "label-mono": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-md": ["16px", { lineHeight: "26px", fontWeight: "400" }],
+              "headline-md": [
+                "32px",
+                { lineHeight: "40px", fontWeight: "600" },
+              ],
+              "headline-lg": [
+                "64px",
+                {
+                  lineHeight: "72px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "display-xl": [
+                "120px",
+                {
+                  lineHeight: "110px",
+                  letterSpacing: "-0.04em",
+                  fontWeight: "800",
+                },
+              ],
+              "display-xl-mobile": [
+                "56px",
+                {
+                  lineHeight: "60px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "800",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-primary selection:bg-on-tertiary-container selection:text-white overflow-x-hidden"
+  >
+    <!-- TopNavBar -->
+    <header
+      class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-desktop h-16 bg-background border-b border-border-gray"
+    >
+      <div
+        class="font-label-mono text-label-mono tracking-tighter font-bold text-primary"
+      >
+        ARCHITECT.EXT
+      </div>
+      <nav class="hidden md:flex gap-gutter">
+        <a
+          class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors duration-300"
+          href="#"
+          >WORK</a
+        >
+        <a
+          class="font-label-mono text-label-mono text-primary border-b-2 border-on-tertiary-fixed-variant pb-1"
+          href="#"
+          >WRITING</a
+        >
+        <a
+          class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors duration-300"
+          href="#"
+          >SYSTEMS</a
+        >
+        <a
+          class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors duration-300"
+          href="#"
+          >ARCHIVE</a
+        >
+      </nav>
+      <div class="flex items-center gap-4">
+        <span
+          class="font-label-mono text-[10px] text-on-tertiary-container animate-pulse hidden sm:inline"
+          >AVAILABLE NOW</span
+        >
+        <button
+          class="bg-on-tertiary-container text-white px-4 py-2 font-label-mono text-label-mono hover:bg-white hover:text-black transition-all"
+        >
+          BOOK A CALL
+        </button>
+      </div>
+    </header>
+    <main
+      class="pt-32 pb-section-gap max-w-container-max mx-auto px-margin-desktop"
+    >
+      <!-- Hero Section -->
+      <section class="grid grid-cols-12 gap-gutter mb-section-gap">
+        <div class="col-span-12 md:col-span-8">
+          <div
+            class="font-label-mono text-label-mono text-on-tertiary-container mb-4 uppercase tracking-widest"
+          >
+            Selected Journal
+          </div>
+          <h1
+            class="font-display-xl text-display-xl-mobile md:text-display-xl tracking-tighter leading-none mb-12"
+          >
+            THOUGHTS ON <br />
+            <span class="text-muted-gray italic">BUILDING</span>
+          </h1>
+        </div>
+        <div class="col-span-12 md:col-span-4 flex flex-col justify-end pb-8">
+          <p
+            class="font-body-lg text-body-lg text-muted-gray border-l-2 border-border-gray pl-6"
+          >
+            A deep dive into the technical craft of product architecture,
+            high-performance systems, and editorial design for the digital age.
+          </p>
+        </div>
+      </section>
+      <!-- Category Filter -->
+      <div
+        class="border-y border-border-gray py-6 mb-24 sticky top-16 bg-background z-40"
+      >
+        <div class="flex flex-wrap items-center gap-x-12 gap-y-4">
+          <span
+            class="font-label-mono text-label-mono text-on-tertiary-container"
+            >CATEGORIES:</span
+          >
+          <a
+            class="font-label-mono text-label-mono hover:text-on-tertiary-container transition-colors"
+            href="#"
+            >ALL</a
+          >
+          <a
+            class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors"
+            href="#"
+            >ENGINEERING</a
+          >
+          <a
+            class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors"
+            href="#"
+            >ARCHITECTURE</a
+          >
+          <a
+            class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors"
+            href="#"
+            >FRONTEND</a
+          >
+          <a
+            class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors"
+            href="#"
+            >PERFORMANCE</a
+          >
+          <a
+            class="font-label-mono text-label-mono text-muted-gray hover:text-primary transition-colors"
+            href="#"
+            >PRODUCT DEVELOPMENT</a
+          >
+        </div>
+      </div>
+      <!-- Article List -->
+      <div class="space-y-0">
+        <!-- Article 1 -->
+        <article
+          class="group relative grid grid-cols-12 gap-gutter py-12 border-b border-border-gray hover:bg-surface-elevated transition-colors duration-500"
+        >
+          <div class="col-span-12 md:col-span-3 lg:col-span-2">
+            <div class="font-label-mono text-label-mono text-muted-gray mb-1">
+              01 / MAR 2024
+            </div>
+            <div
+              class="font-label-mono text-label-mono text-on-tertiary-container uppercase"
+            >
+              Performance
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-9 lg:col-span-7">
+            <a class="block" href="#">
+              <h2
+                class="font-headline-lg text-[40px] md:text-headline-lg leading-tight group-hover:translate-x-4 transition-transform duration-700"
+              >
+                The Anatomy of Ultra-Thin Runtimes
+              </h2>
+              <p
+                class="mt-6 font-body-md text-body-md text-muted-gray max-w-xl"
+              >
+                Exploring the architectural decisions behind minimal JS engines
+                and the push for sub-10ms cold starts in serverless
+                environments.
+              </p>
+            </a>
+          </div>
+          <div class="hidden lg:flex col-span-3 items-center justify-end">
+            <div
+              class="w-48 h-32 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-700 grayscale hover:grayscale-0"
+            >
+              <img
+                class="w-full h-full object-cover"
+                data-alt="A high-contrast macro shot of a complex circuit board with glowing orange neon pathways cutting through dark metallic textures. The image has a sharp, brutalist editorial feel with shallow depth of field and dramatic lighting that highlights the precision engineering of the microchips. The atmosphere is tech-noir and professional."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_wJy29hkMp8wTmWdq5-4BYer80yJULHm4TGRd8w5R4KT2q3QUMu7jo17tKK4QAxuuK31iIm7SWCULl4Zwk5_8EmcOggE1AkUZ1yr0C-eNLqAhnrR2Mep7fN-7zG5Cm5qu2sBG68mcqTQwoY4I96PH0EHcrGDJRPgHpAruV7gSLPfHhNKYly2Y0mnOsZ9OtNZTWy6RIVW27_EsxOtT3WZzPWQ-SnozVreygL7EaN6K_xJY1UtwYK6W-uqUc39TU-rQRn3XfZdnuKI"
+              />
+            </div>
+          </div>
+        </article>
+        <!-- Article 2 -->
+        <article
+          class="group relative grid grid-cols-12 gap-gutter py-12 border-b border-border-gray hover:bg-surface-elevated transition-colors duration-500"
+        >
+          <div class="col-span-12 md:col-span-3 lg:col-span-2">
+            <div class="font-label-mono text-label-mono text-muted-gray mb-1">
+              02 / FEB 2024
+            </div>
+            <div
+              class="font-label-mono text-label-mono text-on-tertiary-container uppercase"
+            >
+              Architecture
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-9 lg:col-span-7">
+            <a class="block" href="#">
+              <h2
+                class="font-headline-lg text-[40px] md:text-headline-lg leading-tight group-hover:translate-x-4 transition-transform duration-700"
+              >
+                Scaling for the 1%: Edge Cases are the Grid
+              </h2>
+              <p
+                class="mt-6 font-body-md text-body-md text-muted-gray max-w-xl"
+              >
+                Why standard scalability patterns fail at extreme volumes and
+                how we re-engineered our core state machine to handle non-linear
+                growth.
+              </p>
+            </a>
+          </div>
+          <div class="hidden lg:flex col-span-3 items-center justify-end">
+            <div
+              class="w-48 h-32 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-700 grayscale hover:grayscale-0"
+            >
+              <img
+                class="w-full h-full object-cover"
+                data-alt="A low-angle perspective shot of a modern glass and steel skyscraper reaching into a dark moody sky. The architectural lines are sharp and aggressive, reflecting the Swiss brutalism style with strong vertical columns and repetitive geometric patterns. The lighting is cold, emphasizing the scale and permanence of the structure."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyjkZd6D461Jz0LlOLBLLF1lVTT_wqyS0hjQjSaiMQMG9A9bdLct3QKKRX_WZ4PKoJpsA11PLTdD9eV3V0sVNTK4oQiAybxpNdRFIlhkZCUfh6qa9HCPwvbqpIwzKHVVM9x6vYGntHl6Y7tnwER29zdGEfvNkwHTvuv4CrTMXgQhZ75KAmqOKRvQWaxGDhblU22o6-LjUXQHIFNGTxCe-zz528hsTxS6CzjefM37SzxpIvB1JGT8AbqU0oLKLenqJ8MfPRPTScB6s"
+              />
+            </div>
+          </div>
+        </article>
+        <!-- Article 3 -->
+        <article
+          class="group relative grid grid-cols-12 gap-gutter py-12 border-b border-border-gray hover:bg-surface-elevated transition-colors duration-500"
+        >
+          <div class="col-span-12 md:col-span-3 lg:col-span-2">
+            <div class="font-label-mono text-label-mono text-muted-gray mb-1">
+              03 / JAN 2024
+            </div>
+            <div
+              class="font-label-mono text-label-mono text-on-tertiary-container uppercase"
+            >
+              Frontend
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-9 lg:col-span-7">
+            <a class="block" href="#">
+              <h2
+                class="font-headline-lg text-[40px] md:text-headline-lg leading-tight group-hover:translate-x-4 transition-transform duration-700"
+              >
+                Design Systems as Technical Debt
+              </h2>
+              <p
+                class="mt-6 font-body-md text-body-md text-muted-gray max-w-xl"
+              >
+                An honest reflection on the overhead of monolithic UI libraries
+                and the move toward lightweight, utility-first headless
+                components.
+              </p>
+            </a>
+          </div>
+          <div class="hidden lg:flex col-span-3 items-center justify-end">
+            <div
+              class="w-48 h-32 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-700 grayscale hover:grayscale-0"
+            >
+              <img
+                class="w-full h-full object-cover"
+                data-alt="A minimalist layout of Swiss design posters pinned to a dark grey wall. The posters feature bold black typography and structured grids with small orange accents. The lighting is soft and directional, creating a sophisticated editorial studio atmosphere that celebrates graphic discipline and visual hierarchy."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNAtnxzSXrmH3AnucV9U2gicjZpp474S2zz-C0tGZtR6hBl3yYvSwz2K9O1o-M6hShy99tbQhprGCA8XMlcSrbC_Wov6zMMcdfTpStEP9wTXwiL323aZf4S5NZ8S1_OOWqTBePPOVUkRKeA0DxO-xBPcIK21Ntqyws--VrfC09D86dA16QK8Fm7RJZmA05MqTej6e43u5WATVzOItw69GCecOIBJaazTD9w2ITfLTVqU5C6_folcMZVx7hDypVx2EYh_z2oGTtaCU"
+              />
+            </div>
+          </div>
+        </article>
+        <!-- Article 4 -->
+        <article
+          class="group relative grid grid-cols-12 gap-gutter py-12 border-b border-border-gray hover:bg-surface-elevated transition-colors duration-500"
+        >
+          <div class="col-span-12 md:col-span-3 lg:col-span-2">
+            <div class="font-label-mono text-label-mono text-muted-gray mb-1">
+              04 / DEC 2023
+            </div>
+            <div
+              class="font-label-mono text-label-mono text-on-tertiary-container uppercase"
+            >
+              Engineering
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-9 lg:col-span-7">
+            <a class="block" href="#">
+              <h2
+                class="font-headline-lg text-[40px] md:text-headline-lg leading-tight group-hover:translate-x-4 transition-transform duration-700"
+              >
+                Deterministic UI Testing
+              </h2>
+              <p
+                class="mt-6 font-body-md text-body-md text-muted-gray max-w-xl"
+              >
+                Moving beyond flakiness. Implementing mathematical certainty in
+                frontend integration tests using state machine modeling.
+              </p>
+            </a>
+          </div>
+          <div class="hidden lg:flex col-span-3 items-center justify-end">
+            <div
+              class="w-48 h-32 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-700 grayscale hover:grayscale-0"
+            >
+              <img
+                class="w-full h-full object-cover"
+                data-alt="A clean, scientific photograph of a liquid experiment where perfect concentric circles are forming in a dark basin. The ripples are illuminated by a single sharp overhead light, creating a high-contrast monochromatic scene that feels controlled, precise, and mathematical. The mood is one of extreme focus and technical accuracy."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAscy2y-G6NbrX_fdPxqLyM4U_cOXcuK2jvSPWw3BCsBpRLgleCe064L5TnUykxHO1E3fVF1t3_InTbXuc4CusKQnMzng1ihWriBvx_Hcx0CfjDkgF1qaaYG21wRA1E_vMnxu89h1jX9j_Z1dp26viKmG_8YJMLedTBpLPCPoOTNqXKiU1xYC_Ljz5Qi1HaEdr73kWINsQrFd2_YCvBZqY6xxWA7z_1LWF8CYXF3sfFqS-yR0TL8F5FT4I34nPfIkTOTJ0NgKqAGwU"
+              />
+            </div>
+          </div>
+        </article>
+      </div>
+      <!-- Featured Section (Bentoish) -->
+      <section class="mt-section-gap">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-px bg-border-gray border border-border-gray"
+        >
+          <div
+            class="bg-background p-12 flex flex-col justify-between aspect-square md:aspect-auto"
+          >
+            <div>
+              <div
+                class="font-label-mono text-label-mono text-on-tertiary-container mb-6"
+              >
+                FEATURED CASE STUDY
+              </div>
+              <h3 class="font-headline-md text-headline-md mb-8">
+                Architecting the Global Edge for Fintech
+              </h3>
+            </div>
+            <div class="font-body-md text-body-md text-muted-gray">
+              A retrospective on building a low-latency transaction engine that
+              handles $2B+ in monthly volume across 12 regions.
+              <div class="mt-8">
+                <a
+                  class="font-label-mono text-label-mono text-primary flex items-center gap-2 group"
+                  href="#"
+                >
+                  VIEW CASE STUDY
+                  <span
+                    class="text-on-tertiary-container group-hover:translate-x-2 transition-transform"
+                    >→</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="relative bg-surface-container overflow-hidden h-[400px] md:h-auto"
+          >
+            <img
+              class="w-full h-full object-cover grayscale opacity-50"
+              data-alt="An abstract visualization of global data networks represented as glowing white and orange filaments interconnected in a deep black space. The image is rendered with a high-fidelity aesthetic, featuring subtle lens flares and a sense of immense scale and technical complexity. It conveys the feeling of a powerful, borderless digital infrastructure."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0Z1HbJGuZIqtbT8Fj4nUw5CvWuAIE5hC8p2Ix5qT0whSi6-Y8BubTAzR6Gefb_XVPPKxXStd4ARk_Fr37KJkDs_IO_BZ3zygLOiu1VIp0JFiAyE--QxaJD07wHX4o8q57GumXPfSIja1o1YjHJItfHp3oMTDWTfZ8v2gltD0sk5dYUU1hqaXAYoi6I4knpPuFRREwiMDnftNimxeAc4SxSoduaCFoFgXMOInmGrZh8i5mUCIjf1NwXyYEqaO4iC3MaHKvvdV0TZ0"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"
+            ></div>
+          </div>
+        </div>
+      </section>
+      <!-- Newsletter Nudge -->
+      <section class="mt-section-gap grid grid-cols-12 gap-gutter">
+        <div class="col-span-12 md:col-span-6">
+          <h4 class="font-headline-md text-headline-md mb-4">
+            Stay Synchronized.
+          </h4>
+          <p class="font-body-md text-body-md text-muted-gray">
+            Infrequent updates on architecture, performance, and engineering
+            leadership. No fluff.
+          </p>
+        </div>
+        <div class="col-span-12 md:col-span-6 flex items-end">
+          <div class="w-full relative">
+            <input
+              class="w-full bg-transparent border-0 border-b border-border-gray py-4 font-label-mono text-label-mono focus:ring-0 focus:border-on-tertiary-container transition-colors placeholder:text-muted-gray/30"
+              placeholder="EMAIL ADDRESS"
+              type="email"
+            />
+            <button
+              class="absolute right-0 bottom-4 font-label-mono text-label-mono text-on-tertiary-container hover:text-primary transition-colors"
+            >
+              JOIN →
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="w-full py-section-gap px-margin-desktop border-t border-border-gray"
+    >
+      <div class="max-w-container-max mx-auto flex flex-col gap-gutter">
+        <div class="grid grid-cols-12 gap-gutter">
+          <div class="col-span-12 lg:col-span-6">
+            <div
+              class="font-headline-md text-headline-md font-bold text-primary mb-8"
+            >
+              ARCHITECT.EXT
+            </div>
+            <p class="font-body-lg text-body-lg text-muted-gray max-w-md">
+              Building digital foundations for scale. Designing interfaces for
+              the next generation of technical products.
+            </p>
+          </div>
+          <div
+            class="col-span-12 lg:col-span-6 grid grid-cols-2 md:grid-cols-4 gap-8"
+          >
+            <div class="flex flex-col gap-4">
+              <span
+                class="font-label-mono text-label-mono text-on-tertiary-container"
+                >NETWORK</span
+              >
+              <a
+                class="font-label-mono text-label-mono text-muted-gray hover:text-on-tertiary-fixed-variant transition-colors"
+                href="#"
+                >GITHUB</a
+              >
+              <a
+                class="font-label-mono text-label-mono text-muted-gray hover:text-on-tertiary-fixed-variant transition-colors"
+                href="#"
+                >LINKEDIN</a
+              >
+            </div>
+            <div class="flex flex-col gap-4">
+              <span
+                class="font-label-mono text-label-mono text-on-tertiary-container"
+                >RESOURCES</span
+              >
+              <a
+                class="font-label-mono text-label-mono text-muted-gray hover:text-on-tertiary-fixed-variant transition-colors"
+                href="#"
+                >READ.CV</a
+              >
+              <a
+                class="font-label-mono text-label-mono text-muted-gray hover:text-on-tertiary-fixed-variant transition-colors"
+                href="#"
+                >LIBRARY</a
+              >
+            </div>
+            <div class="flex flex-col gap-4">
+              <span
+                class="font-label-mono text-label-mono text-on-tertiary-container"
+                >CONTACT</span
+              >
+              <a
+                class="font-label-mono text-label-mono text-muted-gray hover:text-on-tertiary-fixed-variant transition-colors"
+                href="#"
+                >EMAIL</a
+              >
+              <a
+                class="font-label-mono text-label-mono text-muted-gray hover:text-on-tertiary-fixed-variant transition-colors"
+                href="#"
+                >TELEGRAM</a
+              >
+            </div>
+            <div class="flex flex-col gap-4">
+              <span
+                class="font-label-mono text-label-mono text-on-tertiary-container"
+                >SYSTEM</span
+              >
+              <a
+                class="font-label-mono text-label-mono text-muted-gray hover:text-on-tertiary-fixed-variant transition-colors"
+                href="#"
+                >STATUS</a
+              >
+              <a
+                class="font-label-mono text-label-mono text-muted-gray hover:text-on-tertiary-fixed-variant transition-colors"
+                href="#"
+                >RSS</a
+              >
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-16 pt-8 border-t border-border-gray flex flex-col md:flex-row justify-between gap-4"
+        >
+          <div
+            class="font-label-mono text-[10px] text-muted-gray tracking-widest uppercase"
+          >
+            © 2024 SENIOR PRODUCT ARCHITECT. BUILT FOR SCALE.
+          </div>
+          <div
+            class="font-label-mono text-[10px] text-muted-gray tracking-widest uppercase"
+          >
+            40.7128° N, 74.0060° W
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Micro-interaction Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const articles = document.querySelectorAll("article");
+        articles.forEach((article) => {
+          article.addEventListener("mouseenter", () => {
+            // Could add dynamic sound or subtle background shifts here
+          });
+        });
+
+        // Smooth parallax for scroll
+        window.addEventListener("scroll", () => {
+          const scrolled = window.pageYOffset;
+          const hero = document.querySelector("h1");
+          if (hero) {
+            hero.style.transform = `translateY(${scrolled * 0.1}px)`;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

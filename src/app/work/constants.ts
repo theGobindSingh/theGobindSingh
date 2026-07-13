@@ -1,5 +1,6 @@
 import {
   experienceData,
+  freelanceData,
   projectData,
   testimonials,
   type WorkItem,
@@ -15,6 +16,13 @@ const byMostRecent = <T extends { sortDate: string }>(items: T[]): T[] => {
   return [...items].sort((a, b) => {
     return b.sortDate.localeCompare(a.sortDate);
   });
+};
+
+export const freelanceSection = {
+  title: "Freelance Work",
+  description:
+    "Client projects delivered end to end, from brief to production.",
+  items: byMostRecent(freelanceData),
 };
 
 export const caseStudiesSection = {
