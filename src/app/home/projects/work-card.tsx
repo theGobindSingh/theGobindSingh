@@ -43,16 +43,33 @@ const WorkCard = ({
         </div>
         <div className="mt-auto flex w-full flex-col items-start gap-2 pt-6">
           {links?.github && (
-            <Link href={links.github} target="_blank" rel="noopener noreferrer">
+            <Link
+              href={links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View repository for ${title}`}
+            >
               View Repository →
             </Link>
           )}
           {links?.live && (
-            <Link href={links.live} target="_blank" rel="noopener noreferrer">
+            <Link
+              href={links.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View live site for ${title}`}
+            >
               View Live →
             </Link>
           )}
-          {slug && <Link href={`/work#${slug}`}>Read More →</Link>}
+          {slug && (
+            <Link
+              href={`/work#${slug}`}
+              aria-label={`Read more about ${title}`}
+            >
+              Read More →
+            </Link>
+          )}
         </div>
       </div>
       <div className="flex h-full flex-col gap-3">

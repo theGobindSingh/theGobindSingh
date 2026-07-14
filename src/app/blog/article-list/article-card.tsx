@@ -35,6 +35,7 @@ const ArticleCard = ({ post }: { post: BlogPostMeta }) => {
               href={`/blog/${post.slug}`}
               variant="text"
               className="p-0 text-(size:--fs-3xs)"
+              aria-label={`Read article: ${post.title}`}
             >
               Read article →
             </Link>

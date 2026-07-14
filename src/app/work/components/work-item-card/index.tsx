@@ -120,6 +120,7 @@ const WorkItemCard = ({
                   rel="noopener noreferrer"
                   variant="text"
                   className="p-0 font-mono"
+                  aria-label={`View repository for ${title}`}
                 >
                   View Repository →
                 </Link>
@@ -131,6 +132,7 @@ const WorkItemCard = ({
                   rel="noopener noreferrer"
                   variant="text"
                   className="p-0 font-mono"
+                  aria-label={`View live site for ${title}`}
                 >
                   View Live →
                 </Link>

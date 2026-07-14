@@ -73,18 +73,20 @@ const AccentCta = ({
           >
             {secondaryAction.label}
           </Link>
-          {textLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="text"
-              className="text-grey-50 hover:text-grey-200"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {textLinks.map((link) => {
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="text"
+                className="text-grey-50 hover:text-grey-200"
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
       </div>
       <p

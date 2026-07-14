@@ -12,7 +12,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Gobind Singh — Full Stack Developer | React, Next.js & TypeScript",
   description:
-    "Full stack developer based in Punjab, India. I build, rebuild, and integrate performant web apps using React, Next.js, TypeScript, and Node.js. 3+ years shipping production systems for startups and enterprises.",
+    "Full stack developer based in Punjab, India. I build, rebuild, and integrate performant web apps using React, Next.js, TypeScript, and Node.js.",
   keywords: [
     "full stack developer",
     "React developer",

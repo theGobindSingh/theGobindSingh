@@ -76,6 +76,7 @@ const WorkPage = () => {
     <main>
       <JsonLd data={collectionSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <h1 className="sr-only">Work — Case Studies, Projects & Track Record</h1>
       <Freelance titleNumber="01" />
       <CaseStudies titleNumber="02" />
       <Projects titleNumber="03" />
