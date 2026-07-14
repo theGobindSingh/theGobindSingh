@@ -8,11 +8,33 @@ Brand: asymmetric compositions, fluid spacing with `clamp()`, intentional grid-b
 
 Product: predictable grids, consistent densities, familiar navigation patterns. Responsive behavior is structural (collapse sidebar, responsive table), not fluid typography. Consistency IS an affordance.
 
+Native (`ios` / `android` / `adaptive`): structure follows the Layout section of [ios.md](ios.md) / [android.md](android.md) (read it first if Setup hasn't already): platform navigation, insets, and touch targets, never the CSS tooling below.
+
+---
+
+## Two isolated assessments (required)
+
+Spawn two parallel sub-agents whenever a sub-agent/Task tool is exposed: one for the layout assessment, one for the mechanical pre-scan. If the harness needs explicit user permission for sub-agents, stop and ask before proceeding. Isolation is the point: detector output anchors visual judgment toward what the scan can see, so neither sub-agent gets the other's output. Each assessment runs in its own sub-agent; running either one in this context when a sub-agent tool exists is not permitted, even when it is faster; the fallback below is only for sessions with no sub-agent tool. Give each a self-contained prompt (target files, register, documented spacing scale when present, and its instructions below); do not assume it can read this file.
+
+**Sub-agent A (layout assessment)**: give it the full [Assess Current Layout](#assess-current-layout) checklist below, verbatim, in its prompt. It works through every item and returns per-item findings citing file, selector, or value.
+
+**Sub-agent B (mechanical pre-scan)**: run the bundled detector scoped to layout:
+
+```bash
+node .agents/skills/impeccable/scripts/detect.mjs --json --scope layout [target files or dirs]
+```
+
+A missing `node` on PATH is not permission to skip: hunt for a runtime (`command -v node`, nvm or Homebrew paths, the harness's own bundled node) and run it by full path. If none exists, halt the scan and report that Node must be installed (the parent relays this to the user); do **not** substitute grep for the detector or proceed unscanned. The detector abstains on arbitrary Tailwind spacing (`gap-[13px]`, `p-[7px]`) and ad-hoc `z-index` stacks, so when the project documents a spacing scale, also grep `gap-\[`, `p[trblxy]?-\[`, `m[trblxy]?-\[`, `z-\[` and judge those hits against it. Return the findings JSON plus the grep verdicts.
+
+**If no sub-agent tool is exposed (or the user declined)**: run both yourself, assessment first, pre-scan second, so the deterministic findings can't anchor the visual judgment. Keep that order even when the scan feels quicker to start with.
+
+**Synthesize** once both are done: merge into a single findings list, noting where they agree and what each caught alone. Fix every finding, or list it as a deliberate exception for the user to accept. A clean scan is a floor, not a verdict: a monotone grid with uniform spacing passes every detector rule, which is exactly what the assessment exists to catch. State in your final summary which path ran (parallel sub-agents or single-context fallback).
+
 ---
 
 ## Assess Current Layout
 
-Analyze what's weak about the current spatial design:
+This checklist is sub-agent A's brief (on the fallback path, work through it yourself before the pre-scan). Analyze what's weak about the current spatial design:
 
 1. **Spacing**:
    - Is spacing consistent or arbitrary? (Random padding/margin values)
@@ -74,17 +96,10 @@ Create a systematic plan:
 - Use **container queries** for components, viewport queries for page layouts. A card in a narrow sidebar can stay compact while the same card in a main content area expands automatically:
 
 ```css
-.card-container {
-  container-type: inline-size;
-}
-.card {
-  display: grid;
-  gap: var(--space-md);
-}
+.card-container { container-type: inline-size; }
+.card { display: grid; gap: var(--space-md); }
 @container (min-width: 400px) {
-  .card {
-    grid-template-columns: 120px 1fr;
-  }
+  .card { grid-template-columns: 120px 1fr; }
 }
 ```
 
@@ -99,13 +114,13 @@ Create a systematic plan:
 - Use the fewest dimensions needed for clear hierarchy. Space alone can be enough; generous whitespace around an element draws the eye. Some of the most polished designs achieve rhythm with just space and weight. Add color or size contrast only when simpler means aren't sufficient.
 - The best hierarchy combines 2–3 dimensions at once. A heading that's larger, bolder, AND has more space above it reads as primary without trying:
 
-| Tool         | Strong Hierarchy          | Weak Hierarchy    |
-| ------------ | ------------------------- | ----------------- |
-| **Size**     | 3:1 ratio or more         | <2:1 ratio        |
-| **Weight**   | Bold vs Regular           | Medium vs Regular |
-| **Color**    | High contrast             | Similar tones     |
-| **Position** | Top/left (primary)        | Bottom/right      |
-| **Space**    | Surrounded by white space | Crowded           |
+| Tool | Strong Hierarchy | Weak Hierarchy |
+|------|------------------|----------------|
+| **Size** | 3:1 ratio or more | <2:1 ratio |
+| **Weight** | Bold vs Regular | Medium vs Regular |
+| **Color** | High contrast | Similar tones |
+| **Position** | Top/left (primary) | Bottom/right |
+| **Space** | Surrounded by white space | Crowded |
 
 - Be aware of reading flow: in LTR languages, the eye naturally scans top-left to bottom-right, but primary action placement depends on context (e.g., bottom-right in dialogs, top in navigation).
 - Create clear content groupings through proximity and separation.
@@ -122,20 +137,13 @@ Create a systematic plan:
 - Touch targets must be 44×44px minimum even when the visual element is smaller. Expand the hit area with padding or a pseudo-element:
 
 ```css
-.icon-button {
-  width: 24px;
-  height: 24px;
-  position: relative;
-}
+.icon-button { width: 24px; height: 24px; position: relative; }
 .icon-button::before {
-  content: "";
-  position: absolute;
-  inset: -10px;
+  content: ''; position: absolute; inset: -10px;
 }
 ```
 
 **NEVER**:
-
 - Use arbitrary spacing values outside your scale
 - Make all spacing equal (variety creates hierarchy)
 - Wrap everything in cards (not everything needs a container)
@@ -152,6 +160,8 @@ Create a systematic plan:
 - **Consistency**: Is the spacing system applied uniformly?
 - **Responsiveness**: Does the layout adapt gracefully across screen sizes?
 
+Answer each item above by citing the file, selector, or value that satisfies it; never a bare yes. Then re-run the pre-scan and fix until the count of unresolved items and unaccepted findings is zero.
+
 When the rhythm and hierarchy land, hand off to `$impeccable polish` for the final pass.
 
 ## Live-mode signature params
@@ -159,31 +169,17 @@ When the rhythm and hierarchy land, hand off to `$impeccable polish` for the fin
 Each variant MUST declare a `density` param. Drive all spacing tokens in the variant's scoped CSS through `calc(var(--p-density, 1) * <base>)`: paddings, gaps, column widths. Users slide from airy to packed and see layout re-breathe with no regeneration.
 
 ```json
-{
-  "id": "density",
-  "kind": "range",
-  "min": 0.6,
-  "max": 1.4,
-  "step": 0.05,
-  "default": 1,
-  "label": "Density"
-}
+{"id":"density","kind":"range","min":0.6,"max":1.4,"step":0.05,"default":1,"label":"Density"}
 ```
 
 For variants whose topology genuinely changes (stacked vs. side-by-side, grid vs. bento), use a `steps` param whose scoped CSS branches via `:scope[data-p-structure="X"]`. One structure param + one density param is a powerful combo; resist adding a third.
 
 ```json
-{
-  "id": "structure",
-  "kind": "steps",
-  "default": "grid",
-  "label": "Structure",
-  "options": [
-    { "value": "stacked", "label": "Stacked" },
-    { "value": "grid", "label": "Grid" },
-    { "value": "bento", "label": "Bento" }
-  ]
-}
+{"id":"structure","kind":"steps","default":"grid","label":"Structure","options":[
+  {"value":"stacked","label":"Stacked"},
+  {"value":"grid","label":"Grid"},
+  {"value":"bento","label":"Bento"}
+]}
 ```
 
 See `reference/live.md` for the full params contract.

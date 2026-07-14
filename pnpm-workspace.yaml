@@ -3,6 +3,7 @@ allowBuilds:
   esbuild: true
   sharp: true
   unrs-resolver: true
+  workerd: true
 
 overrides:
   rimraf: ^6.1.3

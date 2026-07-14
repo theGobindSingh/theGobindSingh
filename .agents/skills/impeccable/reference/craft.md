@@ -60,7 +60,6 @@ Based on the design brief's "Recommended References" section, consult the releva
 - [typeset.md](typeset.md) for type hierarchy, font selection, web font loading, OpenType features (Reference Material section)
 
 Then add references based on the brief's needs:
-
 - Complex interactions or forms? Consult [interaction-design.md](interaction-design.md)
 - Animation or transitions? Consult [animate.md](animate.md) (Reference Material covers motion materials, durations, easing, perceived performance)
 - Color-heavy or themed? Consult [colorize.md](colorize.md) (Reference Material covers OKLCH, palette structure, dark mode, contrast)
@@ -116,7 +115,6 @@ Detector or QA output is defect evidence only; never proof the work is finished.
 ## Step 6: Present
 
 Present the result to the user:
-
 - Show the feature in its primary state
 - Summarize the browser/viewports checked and the most important fixes made after inspection
 - Walk through the key states (empty, error, responsive)

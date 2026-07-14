@@ -10,9 +10,29 @@ Product: system fonts and familiar sans stacks are legitimate here. One well-tun
 
 ---
 
+## Two isolated assessments (required)
+
+Spawn two parallel sub-agents whenever a sub-agent/Task tool is exposed: one for the typography assessment, one for the mechanical pre-scan. If the harness needs explicit user permission for sub-agents, stop and ask before proceeding. Isolation is the point: detector output anchors visual judgment toward what the scan can see, so neither sub-agent gets the other's output. Each assessment runs in its own sub-agent; running either one in this context when a sub-agent tool exists is not permitted, even when it is faster; the fallback below is only for sessions with no sub-agent tool. Give each a self-contained prompt (target files, register, **DESIGN.md** content when present, and its instructions below); do not assume it can read this file.
+
+**Sub-agent A (typography assessment)**: give it the full [Assess Current Typography](#assess-current-typography) checklist below, verbatim, in its prompt. It works through every item and returns per-item findings citing file, selector, or value.
+
+**Sub-agent B (mechanical pre-scan)**: run the bundled detector scoped to type:
+
+```bash
+node .agents/skills/impeccable/scripts/detect.mjs --json --scope type [target files or dirs]
+```
+
+A missing `node` on PATH is not permission to skip: hunt for a runtime (`command -v node`, nvm or Homebrew paths, the harness's own bundled node) and run it by full path. If none exists, halt the scan and report that Node must be installed (the parent relays this to the user); do **not** substitute grep for the detector or proceed unscanned. The scan checks literal font sizes against the **DESIGN.md** ramp but abstains on `em`, `%`, `clamp()`, and line-heights, so also grep `font-size\s*:`, `fontSize`, `text-\[`, `leading-\[` and judge those hits against the spec. Return the findings JSON plus the grep verdicts.
+
+**If no sub-agent tool is exposed (or the user declined)**: run both yourself, assessment first, pre-scan second, so the deterministic findings can't anchor the visual judgment. Keep that order even when the scan feels quicker to start with.
+
+**Synthesize** once both are done: merge into a single findings list, noting where they agree and what each caught alone. Fix every finding, or list it as a deliberate exception for the user to accept. A clean scan is a floor, not a verdict: a generic font stack at a flat scale passes every detector rule, which is exactly what the assessment exists to catch. State in your final summary which path ran (parallel sub-agents or single-context fallback).
+
+---
+
 ## Assess Current Typography
 
-Analyze what's weak or generic about the current type:
+This checklist is sub-agent A's brief (on the fallback path, work through it yourself before the pre-scan). Analyze what's weak or generic about the current type:
 
 1. **Font choices**:
    - Are we using invisible defaults? (Inter, Roboto, Arial, Open Sans, system defaults)
@@ -57,7 +77,6 @@ Create a systematic plan:
 ### Font Selection
 
 If fonts need replacing:
-
 - Choose fonts that reflect the brand personality
 - Pair with genuine contrast (serif + sans, geometric + humanist), or use a single family in multiple weights
 - Ensure web font loading doesn't cause layout shift (`font-display: swap`, metric-matched fallbacks)
@@ -65,7 +84,6 @@ If fonts need replacing:
 ### Establish Hierarchy
 
 Build a clear type scale:
-
 - **5 sizes cover most needs**: caption, secondary, body, subheading, heading
 - **Use a consistent ratio** between levels (1.25, 1.333, or 1.5)
 - **Combine dimensions**: Size + weight + color + space for strong hierarchy. Don't rely on size alone
@@ -93,7 +111,6 @@ Build a clear type scale:
 - Load only the weights you actually use (each weight adds to page load)
 
 **NEVER**:
-
 - Use more than 2-3 font families
 - Pick sizes arbitrarily; commit to a scale
 - Set body text below 16px
@@ -112,6 +129,8 @@ Build a clear type scale:
 - **Performance**: Are web fonts loading efficiently without layout shift?
 - **Accessibility**: Does text meet WCAG contrast ratios? Is it zoomable to 200%?
 
+Answer each item above by citing the file, selector, or value that satisfies it; never a bare yes. Then re-run the pre-scan and fix until the count of unresolved items and unaccepted findings is zero.
+
 When the type carries the hierarchy on its own, hand off to `$impeccable polish` for the final pass.
 
 ## Live-mode signature params
@@ -119,15 +138,7 @@ When the type carries the hierarchy on its own, hand off to `$impeccable polish`
 Each variant MUST declare a `scale` param controlling the hierarchy ratio. Express all font sizes in the variant's scoped CSS through `calc(var(--p-scale, 1) * <base>)` or, better, scale the type ramp via `clamp(min, calc(var(--p-scale, 1) * Npx), max)`. Users slide from subdued to commanding.
 
 ```json
-{
-  "id": "scale",
-  "kind": "range",
-  "min": 0.85,
-  "max": 1.3,
-  "step": 0.05,
-  "default": 1,
-  "label": "Scale"
-}
+{"id":"scale","kind":"range","min":0.85,"max":1.3,"step":0.05,"default":1,"label":"Scale"}
 ```
 
 Where the variant riffs on a specific pairing, expose the pairing choice as a `steps` param (e.g. "serif display + sans body" vs. "mono display + sans body" vs. "all-sans"). Each branch routes through `:scope[data-p-pairing="X"]` selectors in scoped CSS.
@@ -154,13 +165,13 @@ The common mistake: too many font sizes that are too close together (14px, 15px,
 
 **Use fewer sizes with more contrast.** A 5-size system covers most needs:
 
-| Role | Typical Ratio | Use Case               |
-| ---- | ------------- | ---------------------- |
-| xs   | 0.75rem       | Captions, legal        |
-| sm   | 0.875rem      | Secondary UI, metadata |
-| base | 1rem          | Body text              |
-| lg   | 1.25-1.5rem   | Subheadings, lead text |
-| xl+  | 2-4rem        | Headlines, hero text   |
+| Role | Typical Ratio | Use Case |
+|------|---------------|----------|
+| xs | 0.75rem | Captions, legal |
+| sm | 0.875rem | Secondary UI, metadata |
+| base | 1rem | Body text |
+| lg | 1.25-1.5rem | Subheadings, lead text |
+| xl+ | 2-4rem | Headlines, hero text |
 
 Popular ratios: 1.25 (major third), 1.333 (perfect fourth), 1.5 (perfect fifth). Pick one and commit.
 
@@ -190,7 +201,6 @@ The tactical selection procedure and the reflex-reject list live in [reference/b
 **The non-obvious truth**: You often don't need a second font. One well-chosen font family in multiple weights creates cleaner hierarchy than two competing typefaces. Only add a second font when you need genuine contrast (e.g., display headlines + body serif).
 
 When pairing, contrast on multiple axes:
-
 - Serif + Sans (structure contrast)
 - Geometric + Humanist (personality contrast)
 - Condensed display + Wide body (proportion contrast)
@@ -202,23 +212,23 @@ The layout shift problem: fonts load late, text reflows, and users see content j
 ```css
 /* 1. Use font-display: swap for visibility */
 @font-face {
-  font-family: "CustomFont";
-  src: url("font.woff2") format("woff2");
+  font-family: 'CustomFont';
+  src: url('font.woff2') format('woff2');
   font-display: swap;
 }
 
 /* 2. Match fallback metrics to minimize shift */
 @font-face {
-  font-family: "CustomFont-Fallback";
-  src: local("Arial");
-  size-adjust: 105%; /* Scale to match x-height */
-  ascent-override: 90%; /* Match ascender height */
-  descent-override: 20%; /* Match descender depth */
-  line-gap-override: 10%; /* Match line spacing */
+  font-family: 'CustomFont-Fallback';
+  src: local('Arial');
+  size-adjust: 105%;        /* Scale to match x-height */
+  ascent-override: 90%;     /* Match ascender height */
+  descent-override: 20%;    /* Match descender depth */
+  line-gap-override: 10%;   /* Match line spacing */
 }
 
 body {
-  font-family: "CustomFont", "CustomFont-Fallback", sans-serif;
+  font-family: 'CustomFont', 'CustomFont-Fallback', sans-serif;
 }
 ```
 
@@ -250,24 +260,16 @@ Most developers don't know these exist. Use them for polish:
 
 ```css
 /* Proper fractions */
-.recipe-amount {
-  font-variant-numeric: diagonal-fractions;
-}
+.recipe-amount { font-variant-numeric: diagonal-fractions; }
 
 /* Small caps for abbreviations */
-abbr {
-  font-variant-caps: all-small-caps;
-}
+abbr { font-variant-caps: all-small-caps; }
 
 /* Disable ligatures in code */
-code {
-  font-variant-ligatures: none;
-}
+code { font-variant-ligatures: none; }
 
 /* Enable kerning (usually on by default, but be explicit) */
-body {
-  font-kerning: normal;
-}
+body { font-kerning: normal; }
 ```
 
 Check what features your font supports at [Wakamai Fondue](https://wakamaifondue.com/).
@@ -276,9 +278,7 @@ Check what features your font supports at [Wakamai Fondue](https://wakamaifondue
 
 ```css
 /* Variable fonts: pick the right optical-size master automatically */
-body {
-  font-optical-sizing: auto;
-}
+body { font-optical-sizing: auto; }
 ```
 
 **ALL-CAPS tracking**: capitals sit too close at default spacing. Add 5–12% letter-spacing (`letter-spacing: 0.05em` to `0.12em`) to short all-caps labels, eyebrows, and small headings. Real small caps (via `font-variant-caps`) need the same treatment, slightly gentler.

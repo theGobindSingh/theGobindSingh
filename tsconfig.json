@@ -8,20 +8,51 @@
     "target": "es2017",
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@app/*": ["./src/app/(app)/*"],
-      "@assets/*": ["./public/assets/*"],
-      "@images/*": ["./public/assets/images/*"],
-      "@public/*": ["./public/*"],
-      "@components/*": ["./src/components/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@styles/*": ["./src/styles/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@icons": ["./src/icons/index.ts"],
-      "@icons/*": ["./src/icons/*"],
-      "@providers/*": ["./src/providers/*"],
-      "@lib/*": ["./src/lib/*"],
-      "@/*": ["./src/*"],
-      "@data": ["./src/data.ts"]
+      "@app/*": [
+        "./src/app/(app)/*"
+      ],
+      "@assets/*": [
+        "./public/assets/*"
+      ],
+      "@images/*": [
+        "./public/assets/images/*"
+      ],
+      "@public/*": [
+        "./public/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@styles/*": [
+        "./src/styles/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@icons": [
+        "./src/icons/index.ts"
+      ],
+      "@icons/*": [
+        "./src/icons/*"
+      ],
+      "@providers/*": [
+        "./src/providers/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ],
+      "@/*": [
+        "./src/*"
+      ],
+      "@data": [
+        "./src/data.ts"
+      ],
+      "@payload-config": [
+        "./src/payload.config.ts"
+      ]
     },
     "noPropertyAccessFromIndexSignature": false,
     "ignoreDeprecations": "5.0",
@@ -38,5 +69,7 @@
     "eslint.config.mjs",
     "next.config.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
