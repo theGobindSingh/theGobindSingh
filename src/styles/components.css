@@ -1,3 +1,3 @@
 @import "../components/button/button.css";
-@import "../app/work/components/work-item-card/work-item-card.css";
-@import "../app/blog/[slug]/components/article-body/article-body.css";
+@import "../app/(app)/work/components/work-item-card/work-item-card.css";
+@import "../app/(app)/blog/[slug]/components/article-body/article-body.css";
