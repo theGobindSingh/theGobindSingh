@@ -1,4 +1,3 @@
-import config from "@/payload.config";
 import HomeFreelance from "@app/home/freelance";
 import Hero from "@app/home/hero";
 import HomeManifesto from "@app/home/manifesto";
@@ -9,9 +8,6 @@ import JsonLd from "@components/json-ld";
 import { email, fullName, SOCIAL_KEYS, socialLinks } from "@data";
 import { OG_IMAGE, SITE_URL } from "@lib/site-config";
 import type { Metadata } from "next";
-import { headers as getHeaders } from "next/headers.js";
-import { getPayload } from "payload";
-import { fileURLToPath } from "url";
 
 export const metadata: Metadata = {
   title: "Gobind Singh — Full Stack Developer | React, Next.js & TypeScript",
@@ -114,16 +110,9 @@ const websiteSchema = {
   },
 };
 
-const HomePage = async () => {
-  const headers = await getHeaders();
-  const payloadConfig = await config;
-  const payload = await getPayload({ config: payloadConfig });
-  const { user } = await payload.auth({ headers });
-
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`;
+const HomePage = () => {
   return (
     <main>
-      <div>{JSON.stringify({ user, fileURL }, null, 2)}</div>
       <JsonLd data={personSchema} />
       <JsonLd data={websiteSchema} />
       <Hero />
