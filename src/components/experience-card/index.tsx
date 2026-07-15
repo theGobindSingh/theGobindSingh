@@ -4,7 +4,7 @@ import { Link } from "@components/link";
 import {
   formatExperienceTimeframe,
   type ExperienceItem,
-} from "@lib/experience";
+} from "@lib/experience/format";
 import { tw } from "@utils/tailwind";
 import { ChevronDown, CornerLeftUp, MoveLeft } from "lucide-react";
 import { Fragment, useState } from "react";

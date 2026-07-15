@@ -177,6 +177,30 @@ These guidelines are working if diffs shrink to what was asked, fewer rewrites h
 overcomplication, and clarifying questions land before implementation rather than after a
 mistake.
 
+## Database changes (Payload/Postgres): migrations only
+
+Drizzle's dev-mode `push` (auto schema sync) is **disabled** (`push: false` in
+`src/payload.config.ts`). Any change to a collection/global's fields — add, rename, remove,
+retype — must go through a migration:
+
+1. Edit the collection/global config.
+2. `pnpm run migrate:create <short-name>` — generates the SQL diff into `src/migrations/`.
+3. **Read the generated migration file.** For a rename, Payload/Drizzle can't tell "rename" from
+   "drop + create" on its own — verify the SQL does what you intend (`ALTER TABLE ... RENAME
+COLUMN` vs a destructive drop) and hand-edit it if it guessed wrong, especially when a column
+   also needs a type change or a data backfill the generator can't know about.
+4. `pnpm run migrate` to apply it locally, then `pnpm run migrate:status` to confirm.
+5. Commit the migration file(s) alongside the config change, in the same commit/PR.
+
+Never hand-edit the database schema directly (no ad hoc `ALTER TABLE`, no re-enabling `push`
+to "just get dev working") — that's exactly how schema drift and hung interactive prompts
+happen. If `pnpm dev` ever prompts about schema drift, stop and write a migration instead of
+answering the prompt.
+
+Other commands: `pnpm run migrate:down` (roll back last batch), `pnpm run migrate:status`
+(what's applied). Production deploys must run `pnpm run migrate` before `pnpm build`/`pnpm
+start` picks up a schema change.
+
 ## Commands (pnpm)
 
 Assumed standard scripts (adjust to match `package.json`):
@@ -212,6 +236,8 @@ the owner asks.
    every animation no-ops under `prefers-reduced-motion`.
 9. **Reuse the kit.** Use DESIGN.md's signature techniques and component catalog; do not invent
    parallel ornament.
+10. **Migrations only for DB schema changes.** Never rely on Drizzle push or hand-edit the
+    database; see "Database changes" above.
 
 ## Definition of done
 
@@ -228,3 +254,5 @@ the owner asks.
 - Leave ESLint red or disable rules to silence them without a clear reason.
 - Create monolithic files, bare component files, or deep relative imports.
 - Add pricing, packages, popups, or gated content (out of scope per PRODUCT.md).
+- Edit the Postgres schema directly, re-enable Drizzle `push`, or blindly accept a schema-push
+  prompt. Write a migration instead (see "Database changes" above).

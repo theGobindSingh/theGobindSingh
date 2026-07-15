@@ -16,6 +16,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "payload": "payload",
+    "migrate:create": "payload migrate:create",
+    "migrate": "payload migrate",
+    "migrate:status": "payload migrate:status",
+    "migrate:down": "payload migrate:down",
     "lint": "prettier --config .prettierrc \"src/**/*.{ts,js,tsx,jsx}\" --check && eslint \"src/**/*.{ts,js,tsx,jsx}\"",
     "lint:fix": "prettier --config .prettierrc \"src/**/*.{ts,js,tsx,jsx}\" --write && eslint \"src/**/*.{ts,js,tsx,jsx}\" --fix"
   },
