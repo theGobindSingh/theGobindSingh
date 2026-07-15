@@ -3,10 +3,11 @@ import { getAllCaseStudies } from "@lib/case-studies";
 import { SITE_URL } from "@lib/site-config";
 import type { MetadataRoute } from "next";
 
-const sitemap = (): MetadataRoute.Sitemap => {
+const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const now = new Date().toISOString();
 
-  const caseStudyEntries: MetadataRoute.Sitemap = getAllCaseStudies().map(
+  const caseStudies = await getAllCaseStudies();
+  const caseStudyEntries: MetadataRoute.Sitemap = caseStudies.map(
     (caseStudy) => {
       return {
         url: `${SITE_URL}/work/${caseStudy.slug}`,
@@ -17,7 +18,8 @@ const sitemap = (): MetadataRoute.Sitemap => {
     },
   );
 
-  const blogEntries: MetadataRoute.Sitemap = getAllPosts().map((post) => {
+  const posts = await getAllPosts();
+  const blogEntries: MetadataRoute.Sitemap = posts.map((post) => {
     return {
       url: `${SITE_URL}/blog/${post.slug}`,
       lastModified: post.updated ?? post.date,

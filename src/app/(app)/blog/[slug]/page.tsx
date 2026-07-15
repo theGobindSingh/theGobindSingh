@@ -19,8 +19,9 @@ interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export const generateStaticParams = () => {
-  return getPostSlugs().map((slug) => {
+export const generateStaticParams = async () => {
+  const slugs = await getPostSlugs();
+  return slugs.map((slug) => {
     return { slug };
   });
 };
@@ -29,7 +30,7 @@ export const generateMetadata = async ({
   params,
 }: BlogPostPageProps): Promise<Metadata> => {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return { title: "Blog", robots: { index: false, follow: true } };
@@ -94,13 +95,13 @@ const getRelatedPosts = (
 
 const BlogPostPage = async ({ params }: BlogPostPageProps) => {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
-  const allPosts = getAllPosts();
+  const allPosts = await getAllPosts();
   const relatedPosts = getRelatedPosts(post, allPosts);
 
   const articleSchema = {

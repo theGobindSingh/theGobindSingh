@@ -1,10 +1,6 @@
-import {
-  experienceData,
-  freelanceData,
-  projectData,
-  skillCategories,
-} from "@data";
+import { freelanceData, projectData, skillCategories } from "@data";
 import { getAllCaseStudies } from "@lib/case-studies";
+import { getAllExperience } from "@lib/experience";
 
 export const heroSection = {
   title: "Building\nsoftware\nis easy.",
@@ -23,11 +19,13 @@ export const heroSection = {
   ],
 };
 
-export const workSection = {
-  title: "Track Record",
-  description:
-    "Complexity is inevitable. Confusion is optional. I structure systems that teams can actually understand and scale.",
-  experienceData,
+export const getWorkSection = async () => {
+  return {
+    title: "Track Record",
+    description:
+      "Complexity is inevitable. Confusion is optional. I structure systems that teams can actually understand and scale.",
+    experienceData: await getAllExperience(),
+  };
 };
 
 export const manifestoSection = {
@@ -61,16 +59,18 @@ export const manifestoSection = {
   ],
 };
 
-const featuredCaseStudy = getAllCaseStudies().find((study) => {
-  return study.featured;
-});
+export const getProjectsSection = async () => {
+  const featuredCaseStudy = (await getAllCaseStudies()).find((study) => {
+    return study.featured;
+  });
 
-export const projectsSection = {
-  title: "Engineering Challenges Solved",
-  description:
-    "Case studies and projects that reflect how I think about architecture, constraints, and shipping real systems.",
-  caseStudies: featuredCaseStudy ? [featuredCaseStudy] : [],
-  projects: projectData.slice(0, 1),
+  return {
+    title: "Engineering Challenges Solved",
+    description:
+      "Case studies and projects that reflect how I think about architecture, constraints, and shipping real systems.",
+    caseStudies: featuredCaseStudy ? [featuredCaseStudy] : [],
+    projects: projectData.slice(0, 1),
+  };
 };
 
 export const skillsSection = {

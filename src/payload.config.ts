@@ -1,10 +1,14 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { resendAdapter } from "@payloadcms/email-resend";
+import { mcpPlugin } from "@payloadcms/plugin-mcp";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import path from "path";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
+import { Blogs } from "./collections/Blogs";
+import { CaseStudies } from "./collections/CaseStudies";
+import { Experience } from "./collections/Experience";
 import { Media } from "./collections/Media";
 import { Users } from "./collections/Users";
 
@@ -23,7 +27,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Blogs, CaseStudies, Experience],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? "",
   typescript: {
@@ -35,5 +39,22 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    mcpPlugin({
+      collections: {
+        blogs: {
+          enabled: true,
+        },
+        "case-studies": {
+          enabled: true,
+        },
+        experience: {
+          enabled: true,
+        },
+        media: {
+          enabled: true,
+        },
+      },
+    }),
+  ],
 });

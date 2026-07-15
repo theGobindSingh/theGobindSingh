@@ -1,49 +1,63 @@
-import fs from "fs";
-import path from "path";
+// eslint-disable-next-line camelcase -- next/cache exports this name
+import { unstable_cache } from "next/cache";
 
-import type { CaseStudy } from "./types";
+import { mapCaseStudy } from "./map";
+import { getCaseStudyPayload } from "./payload-client";
+import type { CaseStudy, CaseStudyWithSlug } from "./types";
 
-const CASE_STUDIES_DIR = path.join(process.cwd(), "public/case-studies");
-
-export type CaseStudyWithSlug = CaseStudy & { slug: string };
-
-export const getCaseStudySlugs = (): string[] => {
-  return fs
-    .readdirSync(CASE_STUDIES_DIR)
-    .filter((file) => {
-      return file.endsWith(".json");
-    })
-    .map((file) => {
-      return file.replace(/\.json$/, "");
+export const getCaseStudySlugs = unstable_cache(
+  async (): Promise<string[]> => {
+    const payload = await getCaseStudyPayload();
+    const result = await payload.find({
+      collection: "case-studies",
+      limit: 0,
+      pagination: false,
+      depth: 0,
     });
-};
-
-export const getCaseStudyBySlug = (
-  slug: string,
-): CaseStudyWithSlug | undefined => {
-  const filePath = path.join(CASE_STUDIES_DIR, `${slug}.json`);
-
-  if (!fs.existsSync(filePath)) {
-    return undefined;
-  }
-
-  const raw = fs.readFileSync(filePath, "utf-8");
-  return { ...(JSON.parse(raw) as CaseStudy), slug };
-};
-
-export const getAllCaseStudies = (): CaseStudyWithSlug[] => {
-  return getCaseStudySlugs()
-    .map(getCaseStudyBySlug)
-    .filter((study): study is CaseStudyWithSlug => {
-      return Boolean(study);
-    })
-    .sort((a, b) => {
-      return (
-        (a.order ?? Number.MAX_SAFE_INTEGER) -
-        (b.order ?? Number.MAX_SAFE_INTEGER)
-      );
+    return result.docs.map((doc) => {
+      return doc.slug;
     });
+  },
+  ["case-study-slugs"],
+  { tags: ["case-studies"] },
+);
+
+export const getCaseStudyBySlug = unstable_cache(
+  async (slug: string): Promise<CaseStudyWithSlug | undefined> => {
+    const payload = await getCaseStudyPayload();
+    const result = await payload.find({
+      collection: "case-studies",
+      where: { slug: { equals: slug } },
+      limit: 1,
+      depth: 2,
+    });
+    const doc = result.docs[0];
+    return doc ? mapCaseStudy(doc) : undefined;
+  },
+  ["case-study-by-slug"],
+  { tags: ["case-studies"] },
+);
+
+const byOrder = (a: CaseStudyWithSlug, b: CaseStudyWithSlug): number => {
+  return (
+    (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER)
+  );
 };
+
+export const getAllCaseStudies = unstable_cache(
+  async (): Promise<CaseStudyWithSlug[]> => {
+    const payload = await getCaseStudyPayload();
+    const result = await payload.find({
+      collection: "case-studies",
+      limit: 0,
+      pagination: false,
+      depth: 2,
+    });
+    return result.docs.map(mapCaseStudy).sort(byOrder);
+  },
+  ["case-study-all"],
+  { tags: ["case-studies"] },
+);
 
 export const formatCaseStudyTimeframe = (
   timeframe: CaseStudy["timeframe"],
@@ -60,4 +74,9 @@ export const formatCaseStudyTimeframe = (
   return `${start} — ${end}`;
 };
 
-export type { Block, CaseStudy, CaseStudySection } from "./types";
+export type {
+  Block,
+  CaseStudy,
+  CaseStudySection,
+  CaseStudyWithSlug,
+} from "./types";

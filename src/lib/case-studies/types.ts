@@ -1,9 +1,9 @@
 /**
- * Case study content model. Every case study is a static JSON file at
- * `public/case-studies/<slug>.json`. The filename (without extension) is the
- * slug — never duplicated inside the file. `sections` is a small recursive
- * block AST: a fixed set of primitive `Block` types composed via `container`,
- * so new layouts are new compositions, not new block types.
+ * Case study content model, backed by the Payload `case-studies` collection
+ * (see src/collections/CaseStudies.ts and src/lib/case-studies/map.ts for the
+ * mapping). `sections` is a small recursive block AST: a fixed set of
+ * primitive `Block` types composed via `container`, so new layouts are new
+ * compositions, not new block types.
  */
 
 export type Block =
@@ -53,6 +53,8 @@ export interface CaseStudyTimeframe {
   /** ISO date, or null if ongoing/present. */
   end: string | null;
 }
+
+export type CaseStudyWithSlug = CaseStudy & { slug: string };
 
 export interface CaseStudy {
   title: string;

@@ -1,19 +1,23 @@
 /**
- * Blog post content model. Every post is a static markdown file at
- * `public/blogs/<slug>.md`. The filename (without extension) is the
- * slug — never duplicated in frontmatter. Frontmatter carries metadata;
- * the body is the article content, parsed as markdown to HTML at build time.
+ * Blog post content model. Posts live in the Payload `blogs` collection;
+ * this shape is what the Payload docs get mapped into for rendering.
  */
 
 export interface BlogFrontmatter {
   title: string;
   date: string;
-  updated?: string;
+  updated?: string | undefined;
   tags: string[];
   excerpt: string;
-  cover?: string;
-  featured?: boolean;
-  seo?: { title?: string; description?: string; ogImage?: string };
+  cover?: string | undefined;
+  featured?: boolean | undefined;
+  seo?:
+    | {
+        title?: string | undefined;
+        description?: string | undefined;
+        ogImage?: string | undefined;
+      }
+    | undefined;
 }
 
 export interface BlogPostMeta extends BlogFrontmatter {

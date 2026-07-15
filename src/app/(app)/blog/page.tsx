@@ -51,8 +51,8 @@ const breadcrumbSchema = {
   ],
 };
 
-const BlogPage = () => {
-  const blogIndexSection = getBlogIndexSection();
+const BlogPage = async () => {
+  const blogIndexSection = await getBlogIndexSection();
 
   const collectionSchema = {
     "@type": "CollectionPage",

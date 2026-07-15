@@ -1,10 +1,16 @@
-import { workSection } from "@app/home/constants";
+import { getWorkSection } from "@app/home/constants";
 import ExperienceCard from "@components/experience-card";
 import { Link } from "@components/link";
 import HomeSection from "@components/section";
 import { tw } from "@utils/tailwind";
 
-const HomeWorkSection = ({ titleNumber = "00" }: { titleNumber?: string }) => {
+const HomeWorkSection = async ({
+  titleNumber = "00",
+}: {
+  titleNumber?: string;
+}) => {
+  const workSection = await getWorkSection();
+
   const expMapper = (
     exp: (typeof workSection.experienceData)[number],
     index: number,

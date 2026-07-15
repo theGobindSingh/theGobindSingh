@@ -1,20 +1,23 @@
 "use client";
 
 import { Link } from "@components/link";
-import { experienceData } from "@data";
+import {
+  formatExperienceTimeframe,
+  type ExperienceItem,
+} from "@lib/experience";
 import { tw } from "@utils/tailwind";
 import { ChevronDown, CornerLeftUp, MoveLeft } from "lucide-react";
 import { Fragment, useState } from "react";
 
 const ExperienceCard = ({
   company,
-  dateRange,
+  timeframe,
   position,
   responsibilities,
   website,
   otherPositions,
   defaultExpanded = false,
-}: (typeof experienceData)[number] & { defaultExpanded?: boolean }) => {
+}: ExperienceItem & { defaultExpanded?: boolean }) => {
   const [expanded, setExpanded] = useState(defaultExpanded);
 
   const positionMapper = (pos: string, index: number, arr: string[]) => {
@@ -99,7 +102,7 @@ const ExperienceCard = ({
             )}
           </div>
           <span className="w-fit bg-grey-100 px-4 py-2 font-mono text-(size:--fs-4xs) tracking-wide text-grey-700">
-            {dateRange}
+            {formatExperienceTimeframe(timeframe)}
           </span>
         </div>
         <ChevronDown

@@ -1,12 +1,14 @@
-import { caseStudiesSection } from "@app/work/constants";
+import { getCaseStudiesSection } from "@app/work/constants";
 import CaseStudySummaryCard from "@components/case-study-summary-card";
 import Section from "@components/section";
 
-const itemMapper = (item: (typeof caseStudiesSection.items)[number]) => {
-  return <CaseStudySummaryCard key={item.slug} {...item} />;
-};
+const CaseStudies = async ({
+  titleNumber = "00",
+}: {
+  titleNumber?: string;
+}) => {
+  const caseStudiesSection = await getCaseStudiesSection();
 
-const CaseStudies = ({ titleNumber = "00" }: { titleNumber?: string }) => {
   return (
     <Section
       title={`${titleNumber} // ${caseStudiesSection.title}`}
@@ -17,7 +19,9 @@ const CaseStudies = ({ titleNumber = "00" }: { titleNumber?: string }) => {
       }}
     >
       <ul className="flex flex-col gap-4">
-        {caseStudiesSection.items.map(itemMapper)}
+        {caseStudiesSection.items.map((item) => {
+          return <CaseStudySummaryCard key={item.slug} {...item} />;
+        })}
       </ul>
     </Section>
   );

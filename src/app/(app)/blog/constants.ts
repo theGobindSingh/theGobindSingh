@@ -7,8 +7,8 @@ export const blogHero = {
     "Writing on frontend architecture, performance, and design systems, from real work building React and Next.js products.",
 };
 
-export const getBlogIndexSection = () => {
-  const posts = getAllPosts();
+export const getBlogIndexSection = async () => {
+  const posts = await getAllPosts();
   return { posts, tags: getAllTags(posts) };
 };
 

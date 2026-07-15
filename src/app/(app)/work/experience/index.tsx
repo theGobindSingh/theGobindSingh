@@ -1,18 +1,24 @@
-import { experienceSection } from "@app/work/constants";
+import { getExperienceSection } from "@app/work/constants";
 import ExperienceCard from "@components/experience-card";
 import Section from "@components/section";
 import { tw } from "@utils/tailwind";
 
-const expMapper = (
-  exp: (typeof experienceSection.items)[number],
-  index: number,
-) => {
-  return (
-    <ExperienceCard {...exp} key={exp.company} defaultExpanded={index === 0} />
-  );
-};
+const Experience = async ({ titleNumber = "00" }: { titleNumber?: string }) => {
+  const experienceSection = await getExperienceSection();
 
-const Experience = ({ titleNumber = "00" }: { titleNumber?: string }) => {
+  const expMapper = (
+    exp: (typeof experienceSection.items)[number],
+    index: number,
+  ) => {
+    return (
+      <ExperienceCard
+        {...exp}
+        key={exp.company}
+        defaultExpanded={index === 0}
+      />
+    );
+  };
+
   return (
     <Section
       title={`${titleNumber} // ${experienceSection.title}`}

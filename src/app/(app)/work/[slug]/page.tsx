@@ -1,9 +1,9 @@
 import CaseStudyContent from "@app/work/components/case-study";
 import NextCaseStudy from "@app/work/components/case-study/next-case-study";
 import {
-  caseStudiesSection,
+  getCaseStudiesSection,
   getWorkItemBySlug,
-  workItemSlugs,
+  getWorkItemSlugs,
 } from "@app/work/constants";
 import FullWidthWrapper from "@components/full-width-wrapper";
 import JsonLd from "@components/json-ld";
@@ -17,8 +17,9 @@ interface WorkDetailPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export const generateStaticParams = () => {
-  return workItemSlugs.map((slug) => {
+export const generateStaticParams = async () => {
+  const slugs = await getWorkItemSlugs();
+  return slugs.map((slug) => {
     return { slug };
   });
 };
@@ -27,7 +28,7 @@ export const generateMetadata = async ({
   params,
 }: WorkDetailPageProps): Promise<Metadata> => {
   const { slug } = await params;
-  const result = getWorkItemBySlug(slug);
+  const result = await getWorkItemBySlug(slug);
 
   if (!result) {
     return { title: "Work", robots: { index: false, follow: true } };
@@ -74,7 +75,7 @@ export const generateMetadata = async ({
 
 const WorkDetailPage = async ({ params }: WorkDetailPageProps) => {
   const { slug } = await params;
-  const result = getWorkItemBySlug(slug);
+  const result = await getWorkItemBySlug(slug);
 
   if (!result) {
     notFound();
@@ -110,6 +111,7 @@ const WorkDetailPage = async ({ params }: WorkDetailPageProps) => {
   }
 
   const caseStudy = result.data;
+  const caseStudiesSection = await getCaseStudiesSection();
   const currentIndex = caseStudiesSection.items.findIndex((item) => {
     return item.slug === slug;
   });

@@ -1,4 +1,4 @@
-import { projectsSection } from "@app/home/constants";
+import { getProjectsSection } from "@app/home/constants";
 import WorkCard from "@app/home/projects/work-card";
 import CaseStudySummaryCard from "@components/case-study-summary-card";
 import { Link } from "@components/link";
@@ -22,11 +22,13 @@ const workItemsMapper = (
   );
 };
 
-const HomeProjectsSection = ({
+const HomeProjectsSection = async ({
   titleNumber = "00",
 }: {
   titleNumber?: string;
 }) => {
+  const projectsSection = await getProjectsSection();
+
   return (
     <HomeSection
       title={`${titleNumber} // ${projectsSection.title}`}

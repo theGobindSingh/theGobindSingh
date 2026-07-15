@@ -1,16 +1,11 @@
-import {
-  experienceData,
-  freelanceData,
-  projectData,
-  testimonials,
-  type WorkItem,
-} from "@data";
+import { freelanceData, projectData, testimonials, type WorkItem } from "@data";
 import {
   getAllCaseStudies,
   getCaseStudyBySlug,
   getCaseStudySlugs,
   type CaseStudyWithSlug,
 } from "@lib/case-studies";
+import { getAllExperience } from "@lib/experience";
 
 const byMostRecent = <T extends { sortDate: string }>(items: T[]): T[] => {
   return [...items].sort((a, b) => {
@@ -25,11 +20,13 @@ export const freelanceSection = {
   items: byMostRecent(freelanceData),
 };
 
-export const caseStudiesSection = {
-  title: "Case Studies",
-  description:
-    "Deeper looks at how I approach architecture, constraints, and shipping real systems.",
-  items: getAllCaseStudies(),
+export const getCaseStudiesSection = async () => {
+  return {
+    title: "Case Studies",
+    description:
+      "Deeper looks at how I approach architecture, constraints, and shipping real systems.",
+    items: await getAllCaseStudies(),
+  };
 };
 
 export const projectsSection = {
@@ -38,11 +35,13 @@ export const projectsSection = {
   items: byMostRecent(projectData),
 };
 
-export const experienceSection = {
-  title: "Experience",
-  description:
-    "Complexity is inevitable. Confusion is optional. I structure systems that teams can actually understand and scale.",
-  items: byMostRecent(experienceData),
+export const getExperienceSection = async () => {
+  return {
+    title: "Experience",
+    description:
+      "Complexity is inevitable. Confusion is optional. I structure systems that teams can actually understand and scale.",
+    items: await getAllExperience(),
+  };
 };
 
 export const endorsementsSection = {
@@ -61,10 +60,10 @@ export type WorkDetailResult =
   | { kind: "case-study"; data: CaseStudyWithSlug }
   | { kind: "project"; data: WorkItem };
 
-export const getWorkItemBySlug = (
+export const getWorkItemBySlug = async (
   slug: string,
-): WorkDetailResult | undefined => {
-  const caseStudy = getCaseStudyBySlug(slug);
+): Promise<WorkDetailResult | undefined> => {
+  const caseStudy = await getCaseStudyBySlug(slug);
   if (caseStudy) {
     return { kind: "case-study", data: caseStudy };
   }
@@ -79,13 +78,15 @@ export const getWorkItemBySlug = (
   return undefined;
 };
 
-export const workItemSlugs: string[] = [
-  ...getCaseStudySlugs(),
-  ...projectData
-    .map((item) => {
-      return item.slug;
-    })
-    .filter((slug): slug is string => {
-      return Boolean(slug);
-    }),
-];
+export const getWorkItemSlugs = async (): Promise<string[]> => {
+  return [
+    ...(await getCaseStudySlugs()),
+    ...projectData
+      .map((item) => {
+        return item.slug;
+      })
+      .filter((slug): slug is string => {
+        return Boolean(slug);
+      }),
+  ];
+};

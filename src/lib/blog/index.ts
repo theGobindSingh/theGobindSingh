@@ -1,66 +1,103 @@
-import fs from "fs";
-import matter from "gray-matter";
-import path from "path";
+// eslint-disable-next-line camelcase -- next/cache exports this name
+import { unstable_cache } from "next/cache";
 
-import { renderMarkdown } from "./markdown";
-import type { BlogFrontmatter, BlogPost, BlogPostMeta } from "./types";
+import type { Blog, Media } from "@/payload-types";
+import { getBlogPayload } from "./payload-client";
+import { readingTimeFor, renderLexicalContent } from "./render";
+import type { BlogPost, BlogPostMeta } from "./types";
 
-const BLOG_DIR = path.join(process.cwd(), "public/blogs");
-const WORDS_PER_MINUTE = 200;
-
-const readingTimeFor = (markdown: string): string => {
-  const words = markdown.trim().split(/\s+/).length;
-  const minutes = Math.max(1, Math.round(words / WORDS_PER_MINUTE));
-  return `${minutes} min read`;
+const mediaUrl = (value?: (number | null) | Media): string | undefined => {
+  if (value && typeof value === "object") return value.url ?? undefined;
+  return undefined;
 };
 
-export const getPostSlugs = (): string[] => {
-  if (!fs.existsSync(BLOG_DIR)) return [];
-  return fs
-    .readdirSync(BLOG_DIR)
-    .filter((file) => {
-      return file.endsWith(".md");
-    })
-    .map((file) => {
-      return file.replace(/\.md$/, "");
-    });
-};
-
-export const getPostBySlug = (slug: string): BlogPost | undefined => {
-  const filePath = path.join(BLOG_DIR, `${slug}.md`);
-  if (!fs.existsSync(filePath)) return undefined;
-
-  const raw = fs.readFileSync(filePath, "utf-8");
-  const { data, content } = matter<BlogFrontmatter>(raw);
-  const { html, outline } = renderMarkdown(content);
-
+const toMeta = (doc: Blog, plainText: string): BlogPostMeta => {
   return {
-    ...data,
-    slug,
-    readingTime: readingTimeFor(content),
-    html,
-    outline,
+    title: doc.title,
+    date: doc.publishedDate,
+    updated: doc.updatedDate ?? undefined,
+    tags: doc.tags ?? [],
+    excerpt: doc.excerpt,
+    cover: mediaUrl(doc.cover),
+    featured: doc.featured ?? undefined,
+    seo: doc.seo
+      ? {
+          title: doc.seo.title ?? undefined,
+          description: doc.seo.description ?? undefined,
+          ogImage: mediaUrl(doc.seo.ogImage),
+        }
+      : undefined,
+    slug: doc.slug,
+    readingTime: readingTimeFor(plainText),
   };
 };
 
-export const getPostMetaBySlug = (slug: string): BlogPostMeta | undefined => {
-  const post = getPostBySlug(slug);
+const toPost = (doc: Blog): BlogPost => {
+  const { html, outline, plainText } = renderLexicalContent(doc.content);
+  return { ...toMeta(doc, plainText), html, outline };
+};
+
+export const getPostSlugs = unstable_cache(
+  async (): Promise<string[]> => {
+    const payload = await getBlogPayload();
+    const result = await payload.find({
+      collection: "blogs",
+      limit: 0,
+      pagination: false,
+      depth: 0,
+    });
+    return result.docs.map((doc) => {
+      return doc.slug;
+    });
+  },
+  ["blog-slugs"],
+  { tags: ["blogs"] },
+);
+
+export const getPostBySlug = unstable_cache(
+  async (slug: string): Promise<BlogPost | undefined> => {
+    const payload = await getBlogPayload();
+    const result = await payload.find({
+      collection: "blogs",
+      where: { slug: { equals: slug } },
+      limit: 1,
+      depth: 2,
+    });
+    const doc = result.docs[0];
+    return doc ? toPost(doc) : undefined;
+  },
+  ["blog-by-slug"],
+  { tags: ["blogs"] },
+);
+
+export const getPostMetaBySlug = async (
+  slug: string,
+): Promise<BlogPostMeta | undefined> => {
+  const post = await getPostBySlug(slug);
   if (!post) return undefined;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- drop detail-only fields for list views
   const { html, outline, ...meta } = post;
   return meta;
 };
 
-export const getAllPosts = (): BlogPostMeta[] => {
-  return getPostSlugs()
-    .map(getPostMetaBySlug)
-    .filter((post): post is BlogPostMeta => {
-      return Boolean(post);
-    })
-    .sort((a, b) => {
-      return b.date.localeCompare(a.date);
+export const getAllPosts = unstable_cache(
+  async (): Promise<BlogPostMeta[]> => {
+    const payload = await getBlogPayload();
+    const result = await payload.find({
+      collection: "blogs",
+      limit: 0,
+      pagination: false,
+      depth: 2,
+      sort: "-publishedDate",
     });
-};
+    return result.docs.map((doc) => {
+      const { plainText } = renderLexicalContent(doc.content);
+      return toMeta(doc, plainText);
+    });
+  },
+  ["blog-all-posts"],
+  { tags: ["blogs"] },
+);
 
 export const getAllTags = (posts: BlogPostMeta[]): string[] => {
   const tags = new Set<string>();
