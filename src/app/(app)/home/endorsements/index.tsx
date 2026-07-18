@@ -1,5 +1,5 @@
-import { endorsementsSection } from "@app/work/constants";
-import EndorsementChip from "@app/work/endorsements/endorsement-chip";
+import { endorsementsSection } from "@app/home/constants";
+import EndorsementChip from "@app/home/endorsements/endorsement-chip";
 import Section from "@components/section";
 
 const chipMapper = (
@@ -18,7 +18,8 @@ const Endorsements = ({ titleNumber = "00" }: { titleNumber?: string }) => {
         id: "endorsements",
       }}
     >
-      <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {/* Two per row at md+, stacked on mobile. */}
+      <ul className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {endorsementsSection.testimonials.map(chipMapper)}
       </ul>
     </Section>

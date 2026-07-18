@@ -3,14 +3,24 @@ import Hr from "@components/hr";
 import { Link } from "@components/link";
 import { footerData } from "@data";
 import { tw } from "@utils/tailwind";
+import { Fragment } from "react";
 
 // md:hover:bg-[hsla(var(--color-grey-50-base),0.625)]!
 
-const mapper = ({ label, url }: (typeof footerData.links)[number]) => {
+const mapper = (
+  { label, url }: (typeof footerData.links)[number],
+  index: number,
+  arr: typeof footerData.links,
+) => {
   return (
-    <Link key={url} href={url}>
-      {label}
-    </Link>
+    <Fragment key={url}>
+      <Link href={url}>{label}</Link>
+      {index < arr.length - 1 && (
+        <span aria-hidden="true" className="text-accent-600 select-none">
+          ·
+        </span>
+      )}
+    </Fragment>
   );
 };
 
@@ -34,23 +44,41 @@ const Footer = () => {
         id: "app-footer",
       }}
     >
-      <span className="font-cursive text-(size:--fs-1xl) font-semibold text-grey-950 uppercase">
+      <span className="font-display text-(size:--fs-2xl) font-medium text-grey-950">
         {footerData.title}
       </span>
       <div className="flex w-full justify-between gap-8 text-(size:--fs-3xs) not-md:flex-col">
         <span className="max-w-[50ch]">{footerData.description}</span>
-        <div className="flex flex-col items-end justify-center gap-2 not-md:my-4 not-md:items-start not-md:gap-1">
-          <span className="text-grey-900">
-            If your product has outgrown quick fixes, let's talk.
-          </span>
-          <nav className="flex gap-2 font-mono">
+        <div className="flex flex-col items-end justify-center gap-5 not-md:my-4 not-md:items-start not-md:gap-4">
+          {/* Only the rule moves on hover — translating the whole link dragged
+              the text with it. */}
+          <Link
+            href="/contact"
+            variant="text"
+            className={tw`
+              relative w-fit pb-1 text-grey-900
+              after:absolute after:inset-x-0 after:bottom-0 after:h-px
+              after:bg-accent-600
+              after:transition-transform after:duration-(--dur-fast)
+              after:ease-out
+              hover:after:translate-y-1
+            `}
+          >
+            If your product has outgrown quick fixes, let's talk →
+          </Link>
+          <nav className="flex flex-wrap gap-x-2 gap-y-1 font-mono not-md:justify-start md:justify-end">
             {footerData.links.map(mapper)}
           </nav>
         </div>
       </div>
       <Hr bgColor="bg-grey-200" marginTop="mt-8" />
-      <span className="font-mono text-(size:--fs-3xs)">
-        {footerData.footNote}
+      <span className="font-mono text-(size:--fs-3xs) uppercase">
+        {footerData.footNote.prefix}{" "}
+        <span className="text-accent-600">{footerData.footNote.name}</span>
+        <span aria-hidden="true" className="text-accent-600">
+          {" · "}
+        </span>
+        {footerData.footNote.suffix}
       </span>
     </FullWidthWrapper>
   );

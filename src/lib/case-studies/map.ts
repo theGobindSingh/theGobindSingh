@@ -89,7 +89,9 @@ const mapBlock = (block: AnyPayloadBlock): Block | undefined => {
   if (block.blockType === "container") {
     const items = block.items
       .map(mapLeafBlock)
-      .filter((item): item is Block => Boolean(item));
+      .filter((item): item is Block => {
+        return Boolean(item);
+      });
     return {
       type: "container",
       ...(block.cols ? { cols: Number(block.cols) as 1 | 2 | 3 } : {}),
@@ -105,9 +107,9 @@ const mapSection = (section: PayloadCaseStudySection): CaseStudySection => {
     ...(section.title ? { title: section.title } : {}),
     ...(section.variant ? { variant: section.variant } : {}),
     ...(section.layout ? { layout: section.layout } : {}),
-    items: section.items
-      .map(mapBlock)
-      .filter((item): item is Block => Boolean(item)),
+    items: section.items.map(mapBlock).filter((item): item is Block => {
+      return Boolean(item);
+    }),
   };
 };
 

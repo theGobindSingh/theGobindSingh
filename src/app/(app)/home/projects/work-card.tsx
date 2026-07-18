@@ -1,94 +1,73 @@
 import { Link } from "@components/link";
 import { WorkItem } from "@data";
 
-const WorkCard = ({
-  approach,
-  description,
-  outcome,
-  problem,
-  stack,
-  title,
-  links,
-  slug,
-}: WorkItem) => {
-  //
-
-  const stackMapper = (stack: string) => {
-    const key = `${title} stack-${stack}`;
+// A teaser, not the write-up: the Constraints/Architecture/Outcome prose lives
+// on /work, where the card expands. Repeating it here made the homepage denser
+// than the page it links to.
+const WorkCard = ({ description, stack, title, links, slug }: WorkItem) => {
+  const stackMapper = (tech: string) => {
     return (
       <span
-        key={key}
-        className="bg-grey-200 px-2 py-1 font-mono text-(size:--fs-4xs) font-medium tracking-wider uppercase"
+        key={`${title} stack-${tech}`}
+        className="bg-grey-100 px-2 py-1 font-mono text-(size:--fs-4xs) font-medium tracking-wide text-grey-700"
       >
-        {stack}
+        {tech}
       </span>
     );
   };
 
   return (
-    <li className="grid grid-cols-3 items-start justify-center gap-8 not-md:grid-cols-1">
-      <div className="flex h-full flex-col gap-3">
-        <h4 className="font-medium">
-          {slug ? (
-            <Link href={`/work#${slug}`} className="block whitespace-normal">
-              {title}
-            </Link>
-          ) : (
-            title
-          )}
-        </h4>
-        <p className="text-(size:--fs-3xs) text-grey-700">{description}</p>
-        <div className="flex flex-wrap items-center gap-2">
+    <li id={slug} className="scroll-mt-24 border border-grey-300 p-6">
+      <span className="font-mono text-(size:--fs-4xs) font-medium tracking-wider text-accent-600 uppercase">
+        Project
+      </span>
+      <h4 className="mt-3 text-(size:--fs-l) font-medium">
+        {slug ? <Link href={`/work#${slug}`}>{title}</Link> : title}
+      </h4>
+      <p className="mt-2 max-w-2xl text-(size:--fs-3xs) text-grey-700">
+        {description}
+      </p>
+      {stack.length > 0 && (
+        <div className="mt-4 flex flex-wrap items-center gap-2">
           {stack.map(stackMapper)}
         </div>
-        <div className="mt-auto flex w-full flex-col items-start gap-2 pt-6">
-          {links?.github && (
-            <Link
-              href={links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View repository for ${title}`}
-            >
-              View Repository →
-            </Link>
-          )}
-          {links?.live && (
-            <Link
-              href={links.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`View live site for ${title}`}
-            >
-              View Live →
-            </Link>
-          )}
-          {slug && (
-            <Link
-              href={`/work#${slug}`}
-              aria-label={`Read more about ${title}`}
-            >
-              Read More →
-            </Link>
-          )}
-        </div>
-      </div>
-      <div className="flex h-full flex-col gap-3">
-        <h4 className="font-mono text-grey-700">{"/ The Constraints"}</h4>
-        <p className="text-(size:--fs-3xs) leading-6.5">{problem}</p>
-      </div>
-      <div className="flex h-full flex-col gap-3">
-        <div className="flex h-full flex-col gap-3">
-          <h4 className="font-mono text-grey-700">{"/ The Architecture"}</h4>
-          <p className="text-(size:--fs-3xs) leading-6.5 text-grey-700">
-            {approach}
-          </p>
-        </div>
-        <div className="flex h-full flex-col gap-3">
-          <h4 className="sr-only">{"/ The Outcome"}</h4>
-          <p className="relative pl-4 text-(size:--fs-3xs) leading-5.75 before:absolute before:top-0 before:left-0 before:h-full before:w-1 before:bg-accent-500">
-            {"Result: " + outcome}
-          </p>
-        </div>
+      )}
+      <div className="mt-6 flex flex-wrap items-center gap-6">
+        {slug && (
+          <Link
+            href={`/work#${slug}`}
+            variant="outlined"
+            color="accent"
+            className="text-(size:--fs-3xs)"
+            aria-label={`Read more about ${title}`}
+          >
+            Read more →
+          </Link>
+        )}
+        {links?.live && (
+          <Link
+            href={links.live}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="text"
+            className="p-0 font-mono text-(size:--fs-3xs)"
+            aria-label={`View live site for ${title}`}
+          >
+            View Live →
+          </Link>
+        )}
+        {links?.github && (
+          <Link
+            href={links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="text"
+            className="p-0 font-mono text-(size:--fs-3xs)"
+            aria-label={`View repository for ${title}`}
+          >
+            View Repository →
+          </Link>
+        )}
       </div>
     </li>
   );

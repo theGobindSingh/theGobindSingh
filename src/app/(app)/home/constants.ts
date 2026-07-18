@@ -1,6 +1,17 @@
-import { freelanceData, projectData, skillCategories } from "@data";
+import {
+  freelanceData,
+  projectData,
+  skillCategories,
+  testimonials,
+} from "@data";
 import { getAllCaseStudies } from "@lib/case-studies";
 import { getAllExperience } from "@lib/experience";
+
+export const endorsementsSection = {
+  title: "Endorsements",
+  description: "What people I've worked with have to say.",
+  testimonials,
+};
 
 export const heroSection = {
   title: "Building\nsoftware\nis easy.",
@@ -13,7 +24,7 @@ export const heroSection = {
   ],
   impactTags: [
     ["3+", "Years in Production"],
-    ["4", "Companies Shipped"],
+    ["4", "Companies Shipped For"],
     ["18+", "Technologies"],
     ["2", "Industry Domains"],
   ],
@@ -22,8 +33,7 @@ export const heroSection = {
 export const getWorkSection = async () => {
   return {
     title: "Track Record",
-    description:
-      "Complexity is inevitable. Confusion is optional. I structure systems that teams can actually understand and scale.",
+    description: "Where I've worked, and what I shipped there.",
     experienceData: await getAllExperience(),
   };
 };

@@ -3,47 +3,73 @@
 import useGetHeader from "@components/header/use-get-header";
 import { tw } from "@utils/tailwind";
 import { useLenis } from "lenis/react";
-import { ChangeEventHandler, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+const NAV_ID = "app-header-nav";
 
 const Hamburger = () => {
   const lenis = useLenis();
   const { getHeader } = useGetHeader();
-  const onChangeHandler: ChangeEventHandler<
-    HTMLInputElement,
-    HTMLInputElement
-  > = useCallback(
-    (e) => {
-      const header = getHeader();
-      if (!header) return;
-      const nav = header.querySelector<HTMLDivElement>("nav");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const applyNavState = useCallback(
+    (open: boolean) => {
+      const nav = getHeader()?.querySelector<HTMLElement>(`#${NAV_ID}`);
       if (!nav) return;
-      const isActive = e.target.checked;
-      if (isActive) {
-        nav.classList.remove("not-md:translate-x-full");
-        lenis?.stop();
-      } else {
-        nav.classList.add("not-md:translate-x-full");
-        lenis?.start();
-      }
+      nav.classList.toggle("not-md:translate-x-full", !open);
+      if (open) lenis?.stop();
+      else lenis?.start();
     },
-    [lenis, getHeader],
+    [getHeader, lenis],
   );
+
+  const setOpen = useCallback(
+    (open: boolean) => {
+      setIsOpen(open);
+      applyNavState(open);
+    },
+    [applyNavState],
+  );
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    // Following a link leaves the menu open over the new page otherwise.
+    const onNavClick = (event: MouseEvent) => {
+      if ((event.target as HTMLElement).closest("a")) setOpen(false);
+    };
+
+    const nav = getHeader()?.querySelector<HTMLElement>(`#${NAV_ID}`);
+    window.addEventListener("keydown", onKeyDown);
+    nav?.addEventListener("click", onNavClick);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      nav?.removeEventListener("click", onNavClick);
+    };
+  }, [isOpen, setOpen, getHeader]);
+
   return (
-    <label
+    <button
+      type="button"
+      onClick={() => {
+        setOpen(!isOpen);
+      }}
+      aria-label={isOpen ? "Close menu" : "Open menu"}
+      aria-expanded={isOpen}
+      aria-controls={NAV_ID}
+      data-open={isOpen}
       className="group z-2 cursor-pointer md:hidden"
-      htmlFor="app-header-hamburger-toggle"
     >
-      <input
-        type="checkbox"
-        className="hidden"
-        onChange={onChangeHandler}
-        id="app-header-hamburger-toggle"
-      />
       <svg
+        aria-hidden="true"
         viewBox="0 0 32 32"
         className={tw`
           h-[2em] transition-transform duration-600 ease-in-out
-          group-has-checked:-rotate-45
+          group-data-[open=true]:-rotate-45
         `}
       >
         <path
@@ -53,8 +79,8 @@ const Hamburger = () => {
             transition-[stroke-dasharray,stroke-dashoffset] duration-600
             ease-in-out [stroke-dasharray:12_63] [stroke-linecap:round]
             [stroke-linejoin:round]
-            group-has-checked:[stroke-dasharray:20_300]
-            group-has-checked:[stroke-dashoffset:-32.42]
+            group-data-[open=true]:[stroke-dasharray:20_300]
+            group-data-[open=true]:[stroke-dashoffset:-32.42]
             `}
         />
         <path
@@ -66,7 +92,7 @@ const Hamburger = () => {
             `}
         />
       </svg>
-    </label>
+    </button>
   );
 };
 

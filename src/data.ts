@@ -4,7 +4,8 @@ import type { LucideProps } from "lucide-react";
 import { Mail } from "lucide-react";
 
 import LinkedInIcon from "@components/icon-linkedin";
-import cleantankImage from "@images/cleantank.png";
+import cleantankMobileImage from "@images/cleantank-mobile.jpg";
+import cleantankImage from "@images/cleantank-site.jpg";
 import type { StaticImageData } from "next/image";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
@@ -89,10 +90,6 @@ export const headerAndNavData: {
       url: "/",
     },
     {
-      text: "Design",
-      url: "/design",
-    },
-    {
       text: "About",
       url: "/about",
     },
@@ -101,7 +98,7 @@ export const headerAndNavData: {
       url: "/work",
     },
     {
-      text: "Blogs",
+      text: "Blog",
       url: "/blog",
     },
     {
@@ -127,26 +124,24 @@ export const headerAndNavData: {
   ],
 };
 
+// The footer renders label + url only, so it takes a plain link shape rather
+// than SocialLink — which would force a fake `logo` on non-social entries.
 export const footerData: {
   title: string;
   description: string;
-  footNote: string;
-  links: SocialLink[];
+  footNote: { prefix: string; name: string; suffix: string };
+  links: { url: string; label: string }[];
 } = {
   title: fullName,
   description:
     "Full-stack engineer specializing in React, Next.js, and Node. Building fast, maintainable systems that ship and stay shipped.",
-  footNote: "DESIGNED AND BUILT BY GOBIND SINGH · 2026",
+  footNote: { prefix: "Designed and built by", name: fullName, suffix: "2026" },
   links: [
-    ...Object.values(socialLinks),
-    {
-      url: resumeLink,
-      label: "Resume",
-      logo: (() => {
-        return null;
-      }) as unknown as IconType,
-      userName: undefined,
-    },
+    ...Object.values(socialLinks).map(({ url, label }) => {
+      return { url, label };
+    }),
+    { url: resumeLink, label: "Resume" },
+    { url: "/design", label: "Design System" },
   ],
 };
 
@@ -188,6 +183,12 @@ export interface WorkItem {
 
   slug?: string;
   image?: {
+    src: StaticImageData;
+    alt: string;
+  };
+  // Optional companion shot: paired with `image` it shows the site is
+  // responsive without needing a second card.
+  imageMobile?: {
     src: StaticImageData;
     alt: string;
   };
@@ -255,7 +256,11 @@ export const freelanceData: WorkItem[] = [
     },
     image: {
       src: cleantankImage,
-      alt: "CleanTank Services homepage, showing a technician hydro-jetting an industrial water tank",
+      alt: "The CleanTank Services homepage I built on desktop, showing the hero, the certification stats bar, and the five-step Precision Protocol section",
+    },
+    imageMobile: {
+      src: cleantankMobileImage,
+      alt: "The same CleanTank homepage on a phone, with the navigation collapsed and the hero stacked",
     },
   },
 ];
@@ -280,6 +285,14 @@ export const testimonials: {
     authorName: "Abhiraj Padhye",
     role: "CTO",
     company: "Optimeleon AI",
+    featured: true,
+  },
+  {
+    quote:
+      "I worked closely with Gobind at Optimeleon and reviewed a lot of his code. What stands out most is how much thought he puts into designing systems before writing code — he thinks through how things will scale and adapt as requirements and teams change, so the solutions he builds tend to last instead of needing a rewrite months later. His coding standards are among the best I've seen, and he fixes problems because they should be fixed, not because someone asked or there's recognition attached.",
+    authorName: "Sai Rohit",
+    role: "Founding Engineer",
+    company: "Optimeleon",
     featured: true,
   },
 ];

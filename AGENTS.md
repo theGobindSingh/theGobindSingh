@@ -67,6 +67,8 @@ Active hooks, skills, and subagents — understand these before acting so you do
 
 **Skills** — invoke with `/skill-name`, or Claude spawns them automatically where noted:
 
+- **Always invoke the `ponytail` skill/plugin before touching any file in the code.** This
+  applies to every edit, add, refactor, or fix — no exceptions for "trivial" changes.
 - `/new-section` — scaffolds a new App Router route, or a new section within an existing route. Use this instead of creating files by hand.
 - `/perf-check` — runs `pnpm build` and reports First Load JS per route. Both user-invocable and auto-run by Claude before declaring bundle-size-relevant work done.
 - `/seo-audit` — checks every `page.tsx` for metadata, OG, Twitter, canonical, and JSON-LD gaps against the homepage's implementation as the baseline.

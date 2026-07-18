@@ -89,9 +89,12 @@ const AccentCta = ({
           })}
         </div>
       </div>
+      {/* Sized to fit the container: the longest watermark is 18 monospace
+          chars (~10.8em), so anything above ~7vw gets clipped by the wrapper's
+          overflow-hidden and reads as a broken word rather than a bleed. */}
       <p
         aria-hidden="true"
-        className="pointer-events-none absolute -right-4 -bottom-10 font-mono text-[12rem] leading-none font-bold whitespace-nowrap text-grey-50/10 select-none not-md:hidden"
+        className="pointer-events-none absolute right-0 -bottom-8 font-mono text-[clamp(3rem,7vw,8rem)] leading-none font-bold whitespace-nowrap text-grey-50/10 select-none not-md:hidden"
       >
         {watermark}
       </p>

@@ -35,11 +35,15 @@ const Header = () => {
         id: "app-header",
       }}
     >
-      <div className="custom:backdrop pointer-events-none absolute top-0 left-0 z-[-1] size-full backdrop-blur-[6px]"></div>
+      {/* Tinted with the page background rather than left transparent: over the
+          dark page it is imperceptible, but over the accent CTA bands it keeps
+          the nav above 4.5:1 instead of grey-on-orange. */}
+      <div className="custom:backdrop pointer-events-none absolute top-0 left-0 z-[-1] size-full bg-[hsla(var(--color-grey-50-base),0.85)] backdrop-blur-[6px]"></div>
       <Link href="/" className="font-display text-(size:--fs-s) font-medium">
         {headerAndNavData.logoText}
       </Link>
       <nav
+        id="app-header-nav"
         className={tw`
         transition-all
         duration-500
@@ -48,7 +52,7 @@ const Header = () => {
         not-md:right-0
         not-md:h-screen
         not-md:w-screen not-md:translate-x-full
-        not-md:bg-[hsla(var(--color-accent-200-base),0.75)]
+        not-md:bg-[hsla(var(--color-grey-50-base),0.94)]
         not-md:backdrop-blur-lg
         `}
       >
@@ -62,6 +66,16 @@ const Header = () => {
           `}
         >
           {headerAndNavData.links.map(linksMapper)}
+          <li className="mt-4 md:hidden">
+            <Link
+              href="/resume.pdf"
+              variant="outlined"
+              color="accent"
+              className="font-mono"
+            >
+              Resume
+            </Link>
+          </li>
         </ul>
       </nav>
       <div className="flex items-center gap-4">

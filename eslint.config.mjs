@@ -31,6 +31,10 @@ export default [
     },
   },
   {
-    ignores: ["src/payload-types.ts", "src/app/(payload)/admin/importMap.js"],
+    ignores: [
+      "src/payload-types.ts",
+      "src/app/(payload)/admin/importMap.js",
+      "src/migrations/*",
+    ],
   },
 ];

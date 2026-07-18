@@ -20,8 +20,11 @@ const Cta = () => {
       title={ctaSection.title}
       description={ctaSection.description}
       watermark="BUILT / SHIPPED"
-      primaryAction={{ href: `mailto:${email}`, label: "Email me" }}
-      secondaryAction={{ href: "/contact", label: "Go to contact page" }}
+      primaryAction={{ href: "/contact", label: "Start a conversation" }}
+      secondaryAction={{
+        href: `mailto:${email}`,
+        label: "Or email me directly",
+      }}
       textLinks={textLinks}
     />
   );

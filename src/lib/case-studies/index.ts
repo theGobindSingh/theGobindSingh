@@ -74,6 +74,19 @@ export const formatCaseStudyTimeframe = (
   return `${start} — ${end}`;
 };
 
+// CMS titles arrive as "Name — thesis". The thesis earns its place inside the
+// case study but buries the subject on a card, so split it into a heading plus
+// a subtitle. Titles without a dash come back unchanged and subtitle-less.
+export const splitCaseStudyTitle = (
+  title: string,
+): { heading: string; subtitle: string | null } => {
+  const [heading, ...rest] = title.split(/\s+[—–-]\s+/);
+  return {
+    heading: heading ?? title,
+    subtitle: rest.length > 0 ? rest.join(" — ") : null,
+  };
+};
+
 export type {
   Block,
   CaseStudy,

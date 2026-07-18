@@ -1,6 +1,10 @@
 import { MigrateDownArgs, MigrateUpArgs, sql } from "@payloadcms/db-postgres";
 
-export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
+export const up = async ({
+  db,
+  payload,
+  req,
+}: MigrateUpArgs): Promise<void> => {
   await db.execute(sql`
    CREATE TYPE "public"."enum_case_studies_blocks_para_variant" AS ENUM('body', 'lead');
   CREATE TYPE "public"."enum_case_studies_blocks_image_aspect" AS ENUM('square', 'video');
@@ -450,13 +454,13 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "payload_preferences_rels_payload_mcp_api_keys_id_idx" ON "payload_preferences_rels" USING btree ("payload_mcp_api_keys_id");
   CREATE INDEX "payload_migrations_updated_at_idx" ON "payload_migrations" USING btree ("updated_at");
   CREATE INDEX "payload_migrations_created_at_idx" ON "payload_migrations" USING btree ("created_at");`);
-}
+};
 
-export async function down({
+export const down = async ({
   db,
   payload,
   req,
-}: MigrateDownArgs): Promise<void> {
+}: MigrateDownArgs): Promise<void> => {
   await db.execute(sql`
    DROP TABLE "users_sessions" CASCADE;
   DROP TABLE "users" CASCADE;
@@ -493,4 +497,4 @@ export async function down({
   DROP TYPE "public"."enum_case_studies_blocks_section_variant";
   DROP TYPE "public"."enum_case_studies_blocks_section_layout";
   DROP TYPE "public"."enum_case_studies_category";`);
-}
+};

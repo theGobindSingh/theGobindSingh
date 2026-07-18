@@ -1,3 +1,4 @@
+import Endorsements from "@app/home/endorsements";
 import HomeFreelance from "@app/home/freelance";
 import Hero from "@app/home/hero";
 import HomeManifesto from "@app/home/manifesto";
@@ -121,6 +122,7 @@ const HomePage = () => {
       <HomeSkills titleNumber="04" />
       <HomeFreelance titleNumber="05" />
       <HomeProjectsSection titleNumber="06" />
+      <Endorsements titleNumber="07" />
     </main>
   );
 };

@@ -1,4 +1,4 @@
-import { freelanceData, projectData, testimonials, type WorkItem } from "@data";
+import { freelanceData, projectData, type WorkItem } from "@data";
 import {
   getAllCaseStudies,
   getCaseStudyBySlug,
@@ -38,16 +38,17 @@ export const projectsSection = {
 export const getExperienceSection = async () => {
   return {
     title: "Experience",
-    description:
-      "Complexity is inevitable. Confusion is optional. I structure systems that teams can actually understand and scale.",
+    description: "Where I've worked, and what I shipped there.",
     items: await getAllExperience(),
   };
 };
 
-export const endorsementsSection = {
-  title: "Endorsements",
-  description: "What people I've worked with have to say.",
-  testimonials,
+export const workHero = {
+  eyebrow: "Selected Work",
+  titleLead: "Built to",
+  titleAccent: "stay shipped.",
+  description:
+    "Client projects, case studies, and the track record behind them. Made to hold up after launch, not just through it.",
 };
 
 export const ctaSection = {

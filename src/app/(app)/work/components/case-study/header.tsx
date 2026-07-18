@@ -2,10 +2,13 @@ import FullWidthWrapper from "@components/full-width-wrapper";
 import { CATEGORY_LABELS } from "@data";
 import {
   formatCaseStudyTimeframe,
+  splitCaseStudyTitle,
   type CaseStudyWithSlug,
 } from "@lib/case-studies";
 
 const CaseStudyHeader = ({ caseStudy }: { caseStudy: CaseStudyWithSlug }) => {
+  const { heading, subtitle } = splitCaseStudyTitle(caseStudy.title);
+
   return (
     <FullWidthWrapper
       element="header"
@@ -17,8 +20,13 @@ const CaseStudyHeader = ({ caseStudy }: { caseStudy: CaseStudyWithSlug }) => {
           {caseStudy.client ? ` // ${caseStudy.client}` : ""}
         </span>
         <h1 className="text-(size:--fs-4xl) leading-[0.95] font-extrabold tracking-[-0.02em] text-balance text-grey-900 not-md:text-(size:--fs-2xl)">
-          {caseStudy.title}
+          {heading}
         </h1>
+        {subtitle && (
+          <p className="max-w-md text-(size:--fs-1xs) text-balance text-grey-500">
+            {subtitle}
+          </p>
+        )}
       </div>
       <div className="flex flex-col justify-end gap-8 md:col-span-6 md:col-start-7">
         <p className="max-w-xl text-(size:--fs-s) text-grey-700">

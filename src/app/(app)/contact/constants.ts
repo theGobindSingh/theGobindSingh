@@ -9,6 +9,18 @@ export const heroSection = {
     "Send a few details below, or reach out directly. I usually reply within a day.",
 };
 
+// The rest of the site leads with micro-frontends and monorepos, which reads as
+// "too big for my project" to someone who wants a small site. This lists the
+// small end first so they don't self-disqualify, without dropping the depth.
+export const scopeSection = {
+  label: "What I take on",
+  items: [
+    "Landing pages and marketing sites",
+    "Frontend work on a product you already run",
+    "Full builds, architecture through production",
+  ],
+};
+
 export const connectSection = {
   title: "Connect",
   items: [SOCIAL_KEYS.EMAIL, SOCIAL_KEYS.LINKEDIN, SOCIAL_KEYS.GITHUB]

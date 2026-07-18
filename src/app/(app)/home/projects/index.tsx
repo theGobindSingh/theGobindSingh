@@ -4,22 +4,9 @@ import CaseStudySummaryCard from "@components/case-study-summary-card";
 import { Link } from "@components/link";
 import HomeSection from "@components/section";
 import { WorkItem } from "@data";
-import { Fragment } from "react";
 
-const workItemsMapper = (
-  workItem: WorkItem,
-  index: number,
-  arr: WorkItem[],
-) => {
-  const key = `${workItem.type}-${workItem.title}`;
-  return (
-    <Fragment key={key}>
-      <WorkCard {...workItem} />
-      {index < arr.length - 1 && (
-        <hr className="my-8 border-t border-grey-200 not-md:my-4" />
-      )}
-    </Fragment>
-  );
+const workItemsMapper = (workItem: WorkItem) => {
+  return <WorkCard key={`${workItem.type}-${workItem.title}`} {...workItem} />;
 };
 
 const HomeProjectsSection = async ({
@@ -46,10 +33,9 @@ const HomeProjectsSection = async ({
         {projectsSection.caseStudies &&
           projectsSection.caseStudies.length > 0 && (
             <>
-              <h3 className="font-mono text-(size:--fs-3xs) font-medium tracking-wider text-grey-700 uppercase">
+              <h3 className="mb-4 font-mono text-(size:--fs-3xs) font-medium tracking-wider text-grey-700 uppercase">
                 {"/ Case Studies"}
               </h3>
-              <hr className="my-8 border-t border-grey-200 not-md:my-4" />
               <ul className="flex flex-col gap-4">
                 {projectsSection.caseStudies.map((caseStudy) => {
                   return (
@@ -64,11 +50,10 @@ const HomeProjectsSection = async ({
 
         {projectsSection.projects && projectsSection.projects.length > 0 && (
           <>
-            <h3 className="mt-16 font-mono text-(size:--fs-3xs) font-medium tracking-wider text-grey-700 uppercase not-md:mt-6">
+            <h3 className="mt-12 mb-4 font-mono text-(size:--fs-3xs) font-medium tracking-wider text-grey-700 uppercase not-md:mt-8">
               {"/ Projects"}
             </h3>
-            <hr className="my-8 border-t border-grey-200 not-md:my-4" />
-            <ul className="flex flex-col gap-8">
+            <ul className="flex flex-col gap-4">
               {projectsSection.projects.map(workItemsMapper)}
             </ul>
           </>

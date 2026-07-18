@@ -34,7 +34,7 @@ const Section = ({
       {...(wrapperProps ? { wrapperProps } : {})}
     >
       <Wrapper>
-        <div className="flex items-end justify-between">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-0">
           <div>
             <h2 className="font-mono text-(size:--fs-2xs) font-medium text-accent-600">
               {title}
@@ -48,7 +48,7 @@ const Section = ({
           {link?.href && link?.label && (
             <Link
               href={link.href}
-              className="group flex items-end justify-center gap-1 p-0 font-mono tracking-wide text-grey-900 hover:text-accent-600"
+              className="group flex items-end justify-center gap-1 self-start p-0 font-mono tracking-wide text-grey-900 hover:text-accent-600 md:self-auto"
               variant="text"
             >
               <span className="text-(size:--fs-3xs)">{link.label}</span>

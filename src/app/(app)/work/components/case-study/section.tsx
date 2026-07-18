@@ -64,10 +64,10 @@ const CaseStudySection = ({ section, index }: CaseStudySectionProps) => {
         </>
       ) : (
         <>
-          <div className="md:sticky md:top-24 md:col-span-3 md:h-fit">
+          <div className="md:sticky md:top-24 md:col-span-2 md:h-fit">
             {label}
           </div>
-          <div className="flex flex-col gap-8 md:col-span-8 md:col-start-5">
+          <div className="flex flex-col gap-8 md:col-span-9 md:col-start-4">
             {section.title && (
               <h2 className="text-(size:--fs-2xl) leading-tight font-bold text-balance">
                 {section.title}

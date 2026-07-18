@@ -63,7 +63,7 @@ const ExperienceCard = ({
         aria-expanded={expanded}
         className={tw`
           flex w-full
-          items-center justify-between gap-4 text-left
+          cursor-pointer items-center justify-between gap-4 text-left
         `}
       >
         <div className="flex flex-col gap-3">
@@ -95,7 +95,7 @@ const ExperienceCard = ({
           <div className="flex flex-col gap-3 text-(size:--fs-3xs)">
             <span className="text-accent-600">{position}</span>
             {otherPositions && otherPositions?.length > 0 && (
-              <div className="flex w-full items-center gap-2 text-grey-500 not-md:overflow-x-auto">
+              <div className="flex w-full items-center gap-2 text-grey-500 not-md:flex-wrap">
                 <CornerLeftUp className="size-[1em] shrink-0 translate-y-[-37.5%] text-(size:--fs-2xs)" />
                 {otherPositions.map(positionMapper)}
               </div>

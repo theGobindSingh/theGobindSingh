@@ -12,7 +12,6 @@
     "setup:opencode": "node scripts/setup-opencode.js",
     "setup:skills": "node scripts/skills.js",
     "prepare": "pnpm skills update --project && pnpm run setup:opencode && pnpm run setup:skills",
-    "prebuild": "pnpm run lint:fix",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
