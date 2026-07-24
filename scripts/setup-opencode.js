@@ -57,31 +57,41 @@ const writeConfig = () => {
   fs.writeFileSync(configPath, JSON.stringify(CONFIG, null, 2) + "\n", "utf-8");
 };
 
-console.log("🔍 Checking prerequisites...");
-const issues = verifyPrerequisites();
-if (issues.length > 0) {
-  console.log("⚠️  Issues found:");
-  for (const i of issues) console.log(`   • ${i}`);
-} else {
-  console.log("✅ All prerequisites met");
-}
+const main = () => {
+  try {
+    console.log("🔍 Checking prerequisites...");
+    const issues = verifyPrerequisites();
+    if (issues.length > 0) {
+      console.log("⚠️  Issues found:");
+      for (const i of issues) console.log(`   • ${i}`);
+    } else {
+      console.log("✅ All prerequisites met");
+    }
 
-console.log("");
-console.log("📝 Checking opencode.jsonc...");
-if (needsUpdate()) {
-  writeConfig();
-  console.log("✅ opencode.jsonc updated");
-} else {
-  console.log("✅ opencode.jsonc is up to date");
-}
+    console.log("");
+    console.log("📝 Checking opencode.jsonc...");
+    if (needsUpdate()) {
+      writeConfig();
+      console.log("✅ opencode.jsonc updated");
+    } else {
+      console.log("✅ opencode.jsonc is up to date");
+    }
 
-console.log("");
-console.log("📋 Setup summary:");
-console.log("   • Formatter: prettier (auto-formats on file write)");
-console.log("   • Instructions: docs/PRODUCT.md, DESIGN.md, CONVENTIONS.md");
-console.log("   • .env edits: blocked (reads blocked by default)");
-console.log("   • MCP: Playwright");
-console.log("   • Skills: auto-discovered from .claude/skills/");
-console.log("");
-console.log("Next steps:");
-console.log("   pnpm install   # if prettier is missing");
+    console.log("");
+    console.log("📋 Setup summary:");
+    console.log("   • Formatter: prettier (auto-formats on file write)");
+    console.log(
+      "   • Instructions: docs/PRODUCT.md, DESIGN.md, CONVENTIONS.md",
+    );
+    console.log("   • .env edits: blocked (reads blocked by default)");
+    console.log("   • MCP: Playwright");
+    console.log("   • Skills: auto-discovered from .claude/skills/");
+    console.log("");
+    console.log("Next steps:");
+    console.log("   pnpm install   # if prettier is missing");
+  } catch {
+    //
+  }
+};
+
+main();
