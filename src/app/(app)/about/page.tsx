@@ -12,7 +12,7 @@ import {
   SOCIAL_KEYS,
   socialLinks,
 } from "@data";
-import { OG_IMAGE, SITE_URL } from "@lib/site-config";
+import { SITE_URL } from "@lib/site-config";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -27,20 +27,11 @@ export const metadata: Metadata = {
     description: "Background, approach, stack, and values.",
     type: "website",
     url: `${SITE_URL}/about`,
-    images: [
-      {
-        url: OG_IMAGE.url,
-        width: OG_IMAGE.width,
-        height: OG_IMAGE.height,
-        alt: OG_IMAGE.alt,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `About | ${fullName}`,
     description: "Background, approach, stack, and values.",
-    images: [OG_IMAGE.url],
   },
 };
 

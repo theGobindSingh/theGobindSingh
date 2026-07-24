@@ -1,7 +1,7 @@
 import DesignBrowser from "@app/design/browser";
 import JsonLd from "@components/json-ld";
 import { fullName } from "@data";
-import { OG_IMAGE, SITE_URL } from "@lib/site-config";
+import { SITE_URL } from "@lib/site-config";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,21 +17,12 @@ export const metadata: Metadata = {
       "Color ramps, type scale, spacing, elevation, motion, and layout tokens, browsable and searchable.",
     type: "website",
     url: `${SITE_URL}/design`,
-    images: [
-      {
-        url: OG_IMAGE.url,
-        width: OG_IMAGE.width,
-        height: OG_IMAGE.height,
-        alt: OG_IMAGE.alt,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `Design system | ${fullName}`,
     description:
       "Color ramps, type scale, spacing, elevation, motion, and layout tokens, browsable and searchable.",
-    images: [OG_IMAGE.url],
   },
 };
 

@@ -6,7 +6,7 @@ import Hero from "@app/contact/hero";
 import JsonLd from "@components/json-ld";
 import Section from "@components/section";
 import { fullName } from "@data";
-import { OG_IMAGE, SITE_URL } from "@lib/site-config";
+import { SITE_URL } from "@lib/site-config";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -22,21 +22,12 @@ export const metadata: Metadata = {
       "Get in touch for freelance web development, full-time roles, or project inquiries. Based in Punjab, India, available remotely.",
     type: "website",
     url: `${SITE_URL}/contact`,
-    images: [
-      {
-        url: OG_IMAGE.url,
-        width: OG_IMAGE.width,
-        height: OG_IMAGE.height,
-        alt: OG_IMAGE.alt,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `Contact | ${fullName}`,
     description:
       "Get in touch for freelance web development, full-time roles, or project inquiries.",
-    images: [OG_IMAGE.url],
   },
 };
 

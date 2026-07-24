@@ -7,7 +7,7 @@ import HomeSkills from "@app/home/skills";
 import HomeWorkSection from "@app/home/work";
 import JsonLd from "@components/json-ld";
 import { email, fullName, SOCIAL_KEYS, socialLinks } from "@data";
-import { OG_IMAGE, SITE_URL } from "@lib/site-config";
+import { SITE_URL } from "@lib/site-config";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -37,21 +37,12 @@ export const metadata: Metadata = {
       "I build, rebuild, and integrate performant web apps. React, Next.js, TypeScript, and Node.js specialist with 3+ years of production experience.",
     type: "website",
     url: SITE_URL,
-    images: [
-      {
-        url: OG_IMAGE.url,
-        width: OG_IMAGE.width,
-        height: OG_IMAGE.height,
-        alt: OG_IMAGE.alt,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Gobind Singh — Full Stack Developer | React, Next.js & TypeScript",
     description:
       "I build, rebuild, and integrate performant web apps. React, Next.js, TypeScript, and Node.js specialist.",
-    images: [OG_IMAGE.url],
   },
 };
 

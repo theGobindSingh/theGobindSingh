@@ -38,7 +38,7 @@ export const generateMetadata = async ({
 
   const title = post.seo?.title ?? post.title;
   const description = post.seo?.description ?? post.excerpt;
-  const ogImage = post.seo?.ogImage ?? post.cover ?? OG_IMAGE.url;
+  const ogImage = post.seo?.ogImage ?? post.cover;
 
   return {
     title,
@@ -52,20 +52,24 @@ export const generateMetadata = async ({
       publishedTime: post.date,
       ...(post.updated ? { modifiedTime: post.updated } : {}),
       tags: post.tags,
-      images: [
-        {
-          url: ogImage,
-          width: OG_IMAGE.width,
-          height: OG_IMAGE.height,
-          alt: post.title,
-        },
-      ],
+      ...(ogImage
+        ? {
+            images: [
+              {
+                url: ogImage,
+                width: OG_IMAGE.width,
+                height: OG_IMAGE.height,
+                alt: post.title,
+              },
+            ],
+          }
+        : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: `${title} | ${fullName}`,
       description,
-      images: [ogImage],
+      ...(ogImage ? { images: [ogImage] } : {}),
     },
   };
 };

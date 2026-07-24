@@ -44,7 +44,7 @@ export const generateMetadata = async ({
   const caseStudy = result.data;
   const title = caseStudy.seo?.title ?? `${caseStudy.title} — Case Study`;
   const description = caseStudy.seo?.description ?? caseStudy.description;
-  const ogImage = caseStudy.seo?.ogImage ?? OG_IMAGE.url;
+  const ogImage = caseStudy.seo?.ogImage ?? caseStudy.coverImage;
 
   return {
     title,
@@ -55,20 +55,24 @@ export const generateMetadata = async ({
       description,
       type: "article",
       url: `${SITE_URL}/work/${slug}`,
-      images: [
-        {
-          url: ogImage,
-          width: OG_IMAGE.width,
-          height: OG_IMAGE.height,
-          alt: caseStudy.title,
-        },
-      ],
+      ...(ogImage
+        ? {
+            images: [
+              {
+                url: ogImage,
+                width: OG_IMAGE.width,
+                height: OG_IMAGE.height,
+                alt: caseStudy.title,
+              },
+            ],
+          }
+        : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: `${title} | ${fullName}`,
       description,
-      images: [ogImage],
+      ...(ogImage ? { images: [ogImage] } : {}),
     },
   };
 };

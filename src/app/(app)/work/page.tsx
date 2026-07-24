@@ -7,7 +7,7 @@ import Hero from "@app/work/hero";
 import Projects from "@app/work/projects";
 import JsonLd from "@components/json-ld";
 import { fullName } from "@data";
-import { OG_IMAGE, SITE_URL } from "@lib/site-config";
+import { SITE_URL } from "@lib/site-config";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -23,21 +23,12 @@ export const metadata: Metadata = {
       "Case studies, shipped projects, and career track record. See how I approach architecture, constraints, and shipping real systems.",
     type: "website",
     url: `${SITE_URL}/work`,
-    images: [
-      {
-        url: OG_IMAGE.url,
-        width: OG_IMAGE.width,
-        height: OG_IMAGE.height,
-        alt: OG_IMAGE.alt,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `Work — Case Studies, Projects & Track Record | ${fullName}`,
     description:
       "Case studies, shipped projects, and career track record. See how I approach architecture, constraints, and shipping real systems.",
-    images: [OG_IMAGE.url],
   },
 };
 
