@@ -35,8 +35,7 @@ const LeftSide = () => {
     <div className="w-full max-w-210 not-md:w-full">
       <h1 className="flex w-full flex-col gap-4 not-md:gap-2">
         <span className="sr-only">
-          ${fullName} — Full Stack Developer specializing in React, Next.js,
-          TypeScript, and Node.js
+          {`${fullName} — Full Stack Developer specializing in React, Next.js, TypeScript, and Node.js. `}
         </span>
         <span
           className={tw`

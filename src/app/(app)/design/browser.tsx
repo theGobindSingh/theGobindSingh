@@ -6,6 +6,7 @@ import {
   BORDERS,
   ctaSection,
   DISPLAY_TYPE_SCALE,
+  downloadSection,
   FONTS,
   type FontSpec,
   heroSection,
@@ -414,6 +415,40 @@ const DesignBrowser = () => {
             {filteredLayout.map(([l, r]) => {
               return <Row key={l} left={l} right={r} />;
             })}
+          </ScrollReveal>
+        </RailSection>
+      )}
+
+      {/* ── Download ── */}
+      {!query && (
+        <RailSection
+          titleNumber="07"
+          title="Source"
+          description="For anyone who'd rather read it than click through it."
+          wrapperProps={{
+            "aria-label": "Download the design doc",
+            id: "download",
+          }}
+        >
+          <ScrollReveal className="flex flex-col gap-6 border border-grey-300 bg-grey-100 p-8 sm:flex-row sm:items-center sm:justify-between">
+            <div className="max-w-xl">
+              <h3 className="mb-2 text-(size:--fs-s) font-semibold text-grey-900">
+                {downloadSection.title}
+              </h3>
+              <p className="text-(size:--fs-1xs) text-grey-700">
+                {downloadSection.description}
+              </p>
+            </div>
+            <Link
+              href="/api/design-doc"
+              download="DESIGN.md"
+              variant="outlined"
+              size="lg"
+              color="accent"
+              className="shrink-0 font-mono"
+            >
+              Download DESIGN.md
+            </Link>
           </ScrollReveal>
         </RailSection>
       )}

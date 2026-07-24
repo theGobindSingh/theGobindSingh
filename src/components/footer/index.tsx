@@ -3,6 +3,7 @@ import Hr from "@components/hr";
 import { Link } from "@components/link";
 import { footerData } from "@data";
 import { tw } from "@utils/tailwind";
+import { ArrowUpRight } from "lucide-react";
 import { Fragment } from "react";
 
 // md:hover:bg-[hsla(var(--color-grey-50-base),0.625)]!
@@ -32,10 +33,10 @@ const Footer = () => {
       wrapperClassName={tw`
         text-grey-700
         py-8
-        border 
-        border-(--color-grey-100) 
-        border-t-transparent 
-        border-l-transparent 
+        border
+        border-(--color-grey-100)
+        border-t-transparent
+        border-l-transparent
         border-r-transparent
         transition-all
         bg-[hsla(var(--color-grey-100-base),0.5)]
@@ -48,7 +49,24 @@ const Footer = () => {
         {footerData.title}
       </span>
       <div className="flex w-full justify-between gap-8 text-(size:--fs-3xs) not-md:flex-col">
-        <span className="max-w-[50ch]">{footerData.description}</span>
+        <div className="flex max-w-[50ch] flex-col gap-3">
+          <span>{footerData.description}</span>
+          <Link
+            href="/design"
+            variant="text"
+            className="group inline-flex w-fit items-end gap-1 text-grey-600"
+          >
+            {footerData.designSystemCta.prefix}{" "}
+            <span className="text-accent-600">
+              {footerData.designSystemCta.name}
+            </span>
+            <ArrowUpRight
+              className="text-(size:--fs-m) transition-transform duration-(--dur-fast) ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              height="1em"
+              width="1em"
+            />
+          </Link>
+        </div>
         <div className="flex flex-col items-end justify-center gap-5 not-md:my-4 not-md:items-start not-md:gap-4">
           {/* Only the rule moves on hover — translating the whole link dragged
               the text with it. */}
@@ -75,9 +93,7 @@ const Footer = () => {
       <span className="font-mono text-(size:--fs-3xs) uppercase">
         {footerData.footNote.prefix}{" "}
         <span className="text-accent-600">{footerData.footNote.name}</span>
-        <span aria-hidden="true" className="text-accent-600">
-          {" · "}
-        </span>
+        <span aria-hidden="true">{" · "}</span>
         {footerData.footNote.suffix}
       </span>
     </FullWidthWrapper>

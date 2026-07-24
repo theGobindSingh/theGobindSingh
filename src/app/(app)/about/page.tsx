@@ -5,7 +5,13 @@ import Intro from "@app/about/intro";
 import Stack from "@app/about/stack";
 import Values from "@app/about/values";
 import JsonLd from "@components/json-ld";
-import { email, fullName, SOCIAL_KEYS, socialLinks } from "@data";
+import {
+  email,
+  fullName,
+  professionalPhoto,
+  SOCIAL_KEYS,
+  socialLinks,
+} from "@data";
 import { OG_IMAGE, SITE_URL } from "@lib/site-config";
 import type { Metadata } from "next";
 
@@ -46,7 +52,7 @@ const personSchema = {
   jobTitle: "Full Stack Developer",
   description:
     "Full stack developer who designs and ships polished, performant web apps using React, Next.js, TypeScript, and Node.js.",
-  image: `${SITE_URL}/assets/images/me.jpeg`,
+  image: `${SITE_URL}${professionalPhoto.src}`,
   sameAs: [
     socialLinks[SOCIAL_KEYS.LINKEDIN]?.url,
     socialLinks[SOCIAL_KEYS.GITHUB]?.url,

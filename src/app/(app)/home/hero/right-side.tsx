@@ -27,6 +27,7 @@ const RightSide = () => {
         alt="Gobind Singh, full stack developer based in Punjab, India"
         priority
         loading="eager"
+        quality={100}
         className={tw`
             aspect-3/4 h-auto
             w-full

@@ -2,8 +2,17 @@ import { freelanceSection } from "@app/work/constants";
 import FreelanceCard from "@components/freelance-card";
 import Section from "@components/section";
 
-const itemMapper = (item: (typeof freelanceSection.items)[number]) => {
-  return <FreelanceCard key={item.slug ?? item.title} {...item} />;
+const itemMapper = (
+  item: (typeof freelanceSection.items)[number],
+  index: number,
+) => {
+  return (
+    <FreelanceCard
+      key={item.slug ?? item.title}
+      {...item}
+      priority={index === 0}
+    />
+  );
 };
 
 const Freelance = ({ titleNumber = "00" }: { titleNumber?: string }) => {

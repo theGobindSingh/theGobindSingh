@@ -140,6 +140,12 @@ export const LAYOUT: [string, string][] = [
   ["--tracking-display", "-0.02em"],
 ];
 
+export const downloadSection = {
+  title: "Take the source.",
+  description:
+    "The full DESIGN.md that this page renders: brand voice, color and type rationale, spacing and motion principles, written for anyone extending the system without guessing.",
+};
+
 export const ctaSection = {
   title: "Read the system in the wild.",
   description:

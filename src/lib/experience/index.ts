@@ -14,6 +14,7 @@ const toItem = (doc: Experience): ExperienceItem => {
     timeframe: {
       start: doc.timeframeStart,
       end: doc.timeframeEnd ?? null,
+      ongoing: doc.ongoing ?? false,
     },
     responsibilities: doc.responsibilities,
     ...(doc.otherPositions && doc.otherPositions.length > 0

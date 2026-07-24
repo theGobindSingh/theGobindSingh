@@ -46,7 +46,16 @@ export const Experience: CollectionConfig = {
       name: "timeframeEnd",
       type: "date",
       admin: {
-        description: 'Leave blank if still working here ("Present").',
+        description: "Leave blank if there is no end date.",
+      },
+    },
+    {
+      name: "ongoing",
+      type: "checkbox",
+      defaultValue: false,
+      admin: {
+        description:
+          'Still working here — shows "Present" as the end date, even if an end date is set above.',
       },
     },
     {

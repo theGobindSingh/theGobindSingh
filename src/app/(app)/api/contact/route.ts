@@ -30,6 +30,34 @@ const escapeHtml = (value: string): string => {
     .replace(/"/g, "&quot;");
 };
 
+const GOOGLE_FORM_RESPONSE_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSeTUtYEulxNKji0aL5wXAcg8yowTf_BEoZYhxX-V8HFSH_pqA/formResponse";
+
+// Google Forms has no public write API; POSTing to the viewform's formResponse
+// endpoint with its entry.* field IDs is the documented workaround. Best-effort:
+// a dropped log entry isn't worth losing a real enquiry over, so failures here
+// are logged, not thrown.
+const logToGoogleForm = async (
+  name: string,
+  email: string,
+  message: string,
+) => {
+  try {
+    await fetch(GOOGLE_FORM_RESPONSE_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        "entry.87773612": name,
+        "entry.704820590": email,
+        "entry.1903692069": message,
+      }),
+    });
+  } catch (error) {
+    // eslint-disable-next-line no-console -- best-effort log, worth a trace
+    console.error("[contact] google form log failed", error);
+  }
+};
+
 export const POST = async (request: NextRequest) => {
   let payloadBody: ContactPayload;
 
@@ -60,12 +88,14 @@ export const POST = async (request: NextRequest) => {
     );
   }
 
+  await logToGoogleForm(name, email, message);
+
   try {
     const payload = await getPayload({ config: configPromise });
 
     await payload.sendEmail({
       from: FROM_ADDRESS,
-      to: ownerEmail,
+      to: [ownerEmail, "android.gobind@gmail.com"],
       replyTo: email,
       subject: `Portfolio enquiry from ${name}`,
       html: [

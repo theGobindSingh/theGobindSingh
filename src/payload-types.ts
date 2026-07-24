@@ -454,9 +454,13 @@ export interface Experience {
   website: string;
   timeframeStart: string;
   /**
-   * Leave blank if still working here ("Present").
+   * Leave blank if there is no end date.
    */
   timeframeEnd?: string | null;
+  /**
+   * Still working here — shows "Present" as the end date, even if an end date is set above.
+   */
+  ongoing?: boolean | null;
   responsibilities: string[];
   updatedAt: string;
   createdAt: string;
@@ -935,6 +939,7 @@ export interface ExperienceSelect<T extends boolean = true> {
   website?: T;
   timeframeStart?: T;
   timeframeEnd?: T;
+  ongoing?: T;
   responsibilities?: T;
   updatedAt?: T;
   createdAt?: T;

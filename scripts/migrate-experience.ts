@@ -63,7 +63,7 @@ const experienceData: {
     ],
   },
   {
-    company: "Itaitech",
+    company: "Iraitech",
     position: "Web Development Intern",
     website: "https://www.linkedin.com/company/iraitech-innovations/",
     timeframeStart: "2022-04-01",

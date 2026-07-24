@@ -11,8 +11,12 @@ export const formatExperienceTimeframe = (
   };
 
   const start = format(timeframe.start);
-  const end = timeframe.end ? format(timeframe.end) : "Present";
-  return `${start} - ${end}`;
+  const end = timeframe.ongoing
+    ? "Present"
+    : timeframe.end
+      ? format(timeframe.end)
+      : "";
+  return end ? `${start} - ${end}` : start;
 };
 
 export type { ExperienceItem, ExperienceTimeframe } from "./types";

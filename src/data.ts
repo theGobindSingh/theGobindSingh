@@ -4,14 +4,20 @@ import type { LucideProps } from "lucide-react";
 import { Mail } from "lucide-react";
 
 import LinkedInIcon from "@components/icon-linkedin";
-import cleantankMobileImage from "@images/cleantank-mobile.jpg";
-import cleantankImage from "@images/cleantank-site.jpg";
+import cleantankMobileImage from "@images/cleantank-mobile.png";
+import cleantankImage from "@images/cleantank-site.png";
+import mySuitPhoto from "@images/me.jpg";
 import type { StaticImageData } from "next/image";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 export const firstName = "Gobind";
 export const lastName = "Singh";
 export const fullName = `${firstName} ${lastName}`;
+
+export const professionalPhoto = {
+  src: "/assets/images/me.jpg",
+  img: mySuitPhoto,
+};
 
 export const designation = "Full Stack Software Engineer";
 
@@ -130,18 +136,22 @@ export const footerData: {
   title: string;
   description: string;
   footNote: { prefix: string; name: string; suffix: string };
+  designSystemCta: { prefix: string; name: string };
   links: { url: string; label: string }[];
 } = {
   title: fullName,
   description:
     "Full-stack engineer specializing in React, Next.js, and Node. Building fast, maintainable systems that ship and stay shipped.",
   footNote: { prefix: "Designed and built by", name: fullName, suffix: "2026" },
+  designSystemCta: {
+    prefix: "Like this portfolio's design? Here's the",
+    name: "design system",
+  },
   links: [
     ...Object.values(socialLinks).map(({ url, label }) => {
       return { url, label };
     }),
     { url: resumeLink, label: "Resume" },
-    { url: "/design", label: "Design System" },
   ],
 };
 
@@ -230,7 +240,7 @@ export const freelanceData: WorkItem[] = [
     type: "project",
     category: "freelance",
     description:
-      "A multi-page marketing site for an industrial water-tank cleaning company operating across India, built to carry both direct service sales and franchise recruitment.",
+      "I built a multi-page Next.js site for an industrial water-tank cleaning company serving hospitals, government bodies, and franchise partners across India. Service quotes and franchise applications run through separate lead funnels, and the content is pulled from Contentful so the team can update copy and photos without a deploy.",
     stack: [
       "Next.js",
       "TypeScript",
