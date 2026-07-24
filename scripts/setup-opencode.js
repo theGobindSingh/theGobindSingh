@@ -89,8 +89,11 @@ const main = () => {
     console.log("");
     console.log("Next steps:");
     console.log("   pnpm install   # if prettier is missing");
-  } catch {
-    //
+  } catch (err) {
+    console.warn(
+      "⚠️  setup-opencode.js: skipping due to unexpected error:",
+      err.message,
+    );
   }
 };
 

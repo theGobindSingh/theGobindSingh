@@ -47,11 +47,11 @@ const main = () => {
         fs.unlinkSync(linkPath);
         console.log("   • removed stale symlink");
       } else {
-        console.error(
-          "❌ .claude/skills exists as a real directory/file, not a symlink.\n" +
+        console.warn(
+          "⚠️  .claude/skills exists as a real directory/file, not a symlink. Skipping.\n" +
             "   Move any skills inside it into .agents/skills, then delete .claude/skills and re-run `pnpm install`.",
         );
-        process.exit(1);
+        return;
       }
     }
 
@@ -66,15 +66,18 @@ const main = () => {
       console.log("✅ .claude/skills -> .agents/skills");
     } catch (err) {
       if (process.platform === "win32" && err.code === "EPERM") {
-        console.error(
-          "❌ Could not create symlink/junction on Windows. Enable Developer Mode or run this install as Administrator.",
+        console.warn(
+          "⚠️  Could not create symlink/junction on Windows. Enable Developer Mode or run this install as Administrator. Skipping.",
         );
-        process.exit(1);
+        return;
       }
       throw err;
     }
-  } catch {
-    //
+  } catch (err) {
+    console.warn(
+      "⚠️  skills.js: skipping due to unexpected error:",
+      err.message,
+    );
   }
 };
 
