@@ -3,6 +3,8 @@ import { getAllCaseStudies } from "@lib/case-studies";
 import { SITE_URL } from "@lib/site-config";
 import type { MetadataRoute } from "next";
 
+// Must live at the app root, not in the (app) route group — Next does not resolve
+// sitemap.ts inside a route group, and it silently 404s rather than erroring.
 const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const now = new Date().toISOString();
 

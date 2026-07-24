@@ -4,8 +4,9 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [],
+    qualities: [75, 100],
   },
-  allowedDevOrigins: ["192.168.1.11"],
+  allowedDevOrigins: [],
   async redirects() {
     return [
       {
