@@ -25,8 +25,8 @@ const Cta = () => {
   return (
     <FullWidthWrapper
       element="section"
-      className="relative flex h-80 w-full flex-col items-end justify-center gap-4 not-md:h-125 md:h-100"
-      wrapperClassName={tw`relative`}
+      className="relative flex h-80 w-full flex-col items-end justify-center gap-4 not-md:h-125 not-md:justify-end not-md:pb-8 md:h-100"
+      wrapperClassName={tw`relative overflow-hidden`}
       wrapperProps={{
         "aria-label": "Availability and location",
       }}
