@@ -66,7 +66,7 @@ const FreelanceCard = ({
             sizes="100vw"
             priority={priority}
             loading={priority ? "eager" : "lazy"}
-            className="absolute top-[25%] right-[55%] w-[40%] not-md:w-[40%]"
+            className="absolute top-[25%] w-[40%] not-md:left-0 not-md:w-[50%] md:right-[42.5%]"
           />
         )}
       </div>
