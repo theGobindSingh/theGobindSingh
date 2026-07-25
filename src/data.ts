@@ -4,8 +4,6 @@ import type { LucideProps } from "lucide-react";
 import { Mail } from "lucide-react";
 
 import LinkedInIcon from "@components/icon-linkedin";
-import cleantankMobileImage from "@images/cleantank-mobile.png";
-import cleantankImage from "@images/cleantank-site.png";
 import mySuitPhoto from "@images/me.jpg";
 import type { StaticImageData } from "next/image";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
@@ -204,76 +202,9 @@ export interface WorkItem {
   };
 }
 
-export const projectData: WorkItem[] = [
-  {
-    title: "Kami UI",
-    slug: "kami-ui",
-    type: "project",
-    category: "build",
-    description:
-      "A minimalist, accessible component library designed for rapid high-fidelity prototyping. Focused on strict architectural precision and developer ergonomics.",
-    stack: ["React", "TypeScript", "Next.js", "Emotion", "Storybook"],
-    timeframe: "2024",
-    sortDate: "2024-01",
-    problem:
-      "Most component libraries prioritize flexibility over consistency, leading to fragmented design systems and slow prototyping cycles.",
-    approach:
-      "Built a themeable, accessible component library with strict architectural precision. Implemented reusable components, theming support, and accessibility best practices from the ground up.",
-    outcome:
-      "A production-ready component library that enables rapid high-fidelity prototyping with consistent, accessible user interfaces.",
-    metrics: [
-      "Themeable design system",
-      "Accessibility best practices baked in",
-      "Rapid prototyping workflow",
-    ],
-    links: {
-      github: "https://github.com/webadeva/kami-ui",
-      live: "https://webadeva.github.io/kami-ui/",
-    },
-  },
-];
-
-export const freelanceData: WorkItem[] = [
-  {
-    title: "CleanTank Services",
-    slug: "cleantank-services",
-    type: "project",
-    category: "freelance",
-    description:
-      "I built a multi-page Next.js site for an industrial water-tank cleaning company serving hospitals, government bodies, and franchise partners across India. Service quotes and franchise applications run through separate lead funnels, and the content is pulled from Contentful so the team can update copy and photos without a deploy.",
-    stack: [
-      "Next.js",
-      "TypeScript",
-      "GraphQL",
-      "Contentful",
-      "MUI",
-      "TanStack Query",
-    ],
-    timeframe: "2026",
-    sortDate: "2026-03",
-    problem:
-      "The client needed a credible, conversion-focused web presence that could speak to two very different audiences at once: hospitals and government bodies evaluating compliance-grade service providers, and prospective franchise partners evaluating an investment.",
-    approach:
-      "I built a multi-page Next.js site backed by a headless CMS so the team can update copy and imagery without touching code, with typed GraphQL queries via codegen for the content layer. Service and franchise inquiries run through separate lead-capture funnels, each with its own form fields and submission handling, and the visual system leans into the client's clinical, industrial-grade positioning.",
-    outcome:
-      "Shipped a live, production site covering the full service story, franchise recruitment, and lead capture end to end, now serving as the client's primary digital storefront.",
-    metrics: [
-      "CMS-driven content, no code changes needed for copy or image updates",
-      "Separate lead-gen funnels for service quotes and franchise applications",
-    ],
-    links: {
-      live: "https://cleantank.vercel.app/",
-    },
-    image: {
-      src: cleantankImage,
-      alt: "The CleanTank Services homepage I built on desktop, showing the hero, the certification stats bar, and the five-step Precision Protocol section",
-    },
-    imageMobile: {
-      src: cleantankMobileImage,
-      alt: "The same CleanTank homepage on a phone, with the navigation collapsed and the hero stacked",
-    },
-  },
-];
+// Project and freelance-work content live in Payload (see src/lib/projects
+// and src/lib/freelance) — this WorkItem type is the shared shape both are
+// mapped into.
 
 export const testimonials: {
   quote: string;

@@ -1,11 +1,8 @@
-import {
-  freelanceData,
-  projectData,
-  skillCategories,
-  testimonials,
-} from "@data";
+import { skillCategories, testimonials } from "@data";
 import { getAllCaseStudies } from "@lib/case-studies";
 import { getAllExperience } from "@lib/experience";
+import { getAllFreelance } from "@lib/freelance";
+import { getAllProjects } from "@lib/projects";
 
 export const endorsementsSection = {
   title: "Endorsements",
@@ -73,13 +70,14 @@ export const getProjectsSection = async () => {
   const featuredCaseStudy = (await getAllCaseStudies()).find((study) => {
     return study.featured;
   });
+  const projects = await getAllProjects();
 
   return {
     title: "Engineering Challenges Solved",
     description:
       "Case studies and projects that reflect how I think about architecture, constraints, and shipping real systems.",
     caseStudies: featuredCaseStudy ? [featuredCaseStudy] : [],
-    projects: projectData.slice(0, 1),
+    projects: projects.slice(0, 1),
   };
 };
 
@@ -88,9 +86,13 @@ export const skillsSection = {
   skills: skillCategories,
 };
 
-export const freelanceSection = {
-  title: "Freelance Work",
-  description:
-    "Client projects delivered end to end, from brief to production.",
-  items: freelanceData.slice(0, 1),
+export const getFreelanceSection = async () => {
+  const freelance = await getAllFreelance();
+
+  return {
+    title: "Freelance Work",
+    description:
+      "Client projects delivered end to end, from brief to production.",
+    items: freelance.slice(0, 1),
+  };
 };

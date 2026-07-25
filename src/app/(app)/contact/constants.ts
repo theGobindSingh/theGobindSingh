@@ -60,9 +60,3 @@ export const formSection = {
   errorMessage:
     "That didn't go through. Try again, or email me directly below.",
 };
-
-export const closingSection = {
-  label: "Open to remote work — worldwide",
-  coordinates: "30.7046° N, 76.7179° E",
-  caption: "Punjab, India · IST (UTC+5:30)",
-};

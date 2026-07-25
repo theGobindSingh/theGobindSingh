@@ -1,4 +1,5 @@
 import { fullName, skillCategories } from "@data";
+import { getPageCta } from "@lib/page-cta";
 
 export const heroSection = {
   nameLabel: fullName,
@@ -55,8 +56,6 @@ export const stackSection = {
   skills: skillCategories,
 };
 
-export const ctaSection = {
-  title: "Want the fuller picture in one document?",
-  description:
-    "Download my resume, or reach out directly. I'm currently open to freelance and full-time work.",
+export const getAboutCta = async () => {
+  return getPageCta("about");
 };

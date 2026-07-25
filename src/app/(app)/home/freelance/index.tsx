@@ -1,9 +1,15 @@
-import { freelanceSection } from "@app/home/constants";
+import { getFreelanceSection } from "@app/home/constants";
 import FreelanceCard from "@components/freelance-card";
 import { Link } from "@components/link";
 import HomeSection from "@components/section";
 
-const HomeFreelance = ({ titleNumber = "00" }: { titleNumber?: string }) => {
+const HomeFreelance = async ({
+  titleNumber = "00",
+}: {
+  titleNumber?: string;
+}) => {
+  const freelanceSection = await getFreelanceSection();
+
   return (
     <HomeSection
       title={`${titleNumber} // ${freelanceSection.title}`}

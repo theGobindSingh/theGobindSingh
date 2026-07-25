@@ -1,4 +1,5 @@
 import { getAllPosts, getAllTags } from "@lib/blog";
+import { getPageCta } from "@lib/page-cta";
 
 export const blogHero = {
   eyebrow: "Selected Journal",
@@ -12,8 +13,6 @@ export const getBlogIndexSection = async () => {
   return { posts, tags: getAllTags(posts) };
 };
 
-export const ctaSection = {
-  title: "Have something like this in mind?",
-  description:
-    "I'm currently available for freelance and full-time opportunities. Reach out and let's talk about what you're building.",
+export const getBlogCta = async () => {
+  return getPageCta("blog");
 };

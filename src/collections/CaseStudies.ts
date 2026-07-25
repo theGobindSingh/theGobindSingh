@@ -3,13 +3,7 @@ import type { Block, CollectionConfig } from "payload";
 
 import { caseStudyBlocks } from "@/blocks/case-study";
 
-const slugify = (value: string): string => {
-  return value
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-");
-};
+import { slugField } from "./shared/slugify";
 
 const sectionBlock: Block = {
   slug: "section",
@@ -57,26 +51,7 @@ export const CaseStudies: CollectionConfig = {
       type: "text",
       required: true,
     },
-    {
-      name: "slug",
-      type: "text",
-      required: true,
-      unique: true,
-      index: true,
-      admin: {
-        description:
-          "Used in the URL: /work/<slug>. Leave blank to generate from title.",
-      },
-      hooks: {
-        beforeValidate: [
-          ({ value, data }) => {
-            if (value) return slugify(value);
-            if (data?.title) return slugify(data.title as string);
-            return value;
-          },
-        ],
-      },
-    },
+    slugField("/work/<slug>"),
     {
       name: "description",
       type: "textarea",

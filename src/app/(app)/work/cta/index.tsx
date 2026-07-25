@@ -1,8 +1,10 @@
-import { ctaSection } from "@app/work/constants";
+import { getWorkCta } from "@app/work/constants";
 import AccentCta from "@components/accent-cta";
 import { email, SOCIAL_KEYS, socialLinks } from "@data";
 
-const Cta = () => {
+const Cta = async () => {
+  const ctaSection = await getWorkCta();
+
   const textLinks = [
     socialLinks[SOCIAL_KEYS.LINKEDIN]?.url && {
       href: socialLinks[SOCIAL_KEYS.LINKEDIN].url,
@@ -17,8 +19,8 @@ const Cta = () => {
   return (
     <AccentCta
       ariaLabel="Get in touch"
-      title={ctaSection.title}
-      description={ctaSection.description}
+      title={ctaSection.title ?? ""}
+      description={ctaSection.description ?? ""}
       watermark="BUILT / SHIPPED"
       primaryAction={{ href: "/contact", label: "Start a conversation" }}
       secondaryAction={{

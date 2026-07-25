@@ -1,12 +1,15 @@
 import WorkItemCard from "@app/work/components/work-item-card";
-import { projectsSection } from "@app/work/constants";
+import { getProjectsSection } from "@app/work/constants";
 import Section from "@components/section";
+import type { ProjectItem } from "@lib/projects";
 
-const itemMapper = (item: (typeof projectsSection.items)[number]) => {
+const itemMapper = (item: ProjectItem) => {
   return <WorkItemCard key={item.slug ?? item.title} {...item} />;
 };
 
-const Projects = ({ titleNumber = "00" }: { titleNumber?: string }) => {
+const Projects = async ({ titleNumber = "00" }: { titleNumber?: string }) => {
+  const projectsSection = await getProjectsSection();
+
   return (
     <Section
       title={`${titleNumber} // ${projectsSection.title}`}

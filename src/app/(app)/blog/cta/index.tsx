@@ -1,13 +1,15 @@
-import { ctaSection } from "@app/blog/constants";
+import { getBlogCta } from "@app/blog/constants";
 import AccentCta from "@components/accent-cta";
 import { email } from "@data";
 
-const Cta = () => {
+const Cta = async () => {
+  const ctaSection = await getBlogCta();
+
   return (
     <AccentCta
       ariaLabel="Get in touch"
-      title={ctaSection.title}
-      description={ctaSection.description}
+      title={ctaSection.title ?? ""}
+      description={ctaSection.description ?? ""}
       watermark="WRITTEN / SHIPPED"
       primaryAction={{ href: "/contact", label: "Start a conversation" }}
       secondaryAction={{

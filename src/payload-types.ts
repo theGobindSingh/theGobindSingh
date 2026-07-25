@@ -73,6 +73,9 @@ export interface Config {
     blogs: Blog;
     'case-studies': CaseStudy;
     experience: Experience;
+    projects: Project;
+    freelance: Freelance;
+    'page-ctas': PageCta;
     'payload-mcp-api-keys': PayloadMcpApiKey;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -86,6 +89,9 @@ export interface Config {
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
     experience: ExperienceSelect<false> | ExperienceSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    freelance: FreelanceSelect<false> | FreelanceSelect<true>;
+    'page-ctas': PageCtasSelect<false> | PageCtasSelect<true>;
     'payload-mcp-api-keys': PayloadMcpApiKeysSelect<false> | PayloadMcpApiKeysSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -466,6 +472,115 @@ export interface Experience {
   createdAt: string;
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: number;
+  title: string;
+  /**
+   * Used in the URL: /work/<slug>. Leave blank to generate from title.
+   */
+  slug: string;
+  category?: ('build' | 'rebuild' | 'integration' | 'frontend') | null;
+  description: string;
+  stack: string[];
+  metrics?: string[] | null;
+  /**
+   * Display label, e.g. "2024" or "2026".
+   */
+  timeframe: string;
+  /**
+   * Sort key, "YYYY-MM" (e.g. "2026-03").
+   */
+  sortDate: string;
+  problem: string;
+  approach: string;
+  outcome: string;
+  links?: {
+    github?: string | null;
+    live?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "freelance".
+ */
+export interface Freelance {
+  id: number;
+  title: string;
+  /**
+   * Used in the URL: /work/<slug>. Leave blank to generate from title.
+   */
+  slug: string;
+  description: string;
+  stack: string[];
+  metrics?: string[] | null;
+  /**
+   * Display label, e.g. "2024" or "2026".
+   */
+  timeframe: string;
+  /**
+   * Sort key, "YYYY-MM" (e.g. "2026-03").
+   */
+  sortDate: string;
+  problem: string;
+  approach: string;
+  outcome: string;
+  links?: {
+    github?: string | null;
+    live?: string | null;
+  };
+  image?: {
+    /**
+     * Filename in public/assets/images (e.g. cleantank-site.png). Must also be registered in src/lib/freelance/images.ts.
+     */
+    fileName?: string | null;
+    alt?: string | null;
+  };
+  imageMobile?: {
+    /**
+     * Filename in public/assets/images (e.g. cleantank-site.png). Must also be registered in src/lib/freelance/images.ts.
+     */
+    fileName?: string | null;
+    alt?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-ctas".
+ */
+export interface PageCta {
+  id: number;
+  page: 'about' | 'work' | 'blog' | 'contact';
+  /**
+   * Used by about/work/blog.
+   */
+  title?: string | null;
+  /**
+   * Used by about/work/blog.
+   */
+  description?: string | null;
+  /**
+   * Used by contact only.
+   */
+  label?: string | null;
+  /**
+   * Used by contact only.
+   */
+  coordinates?: string | null;
+  /**
+   * Used by contact only.
+   */
+  caption?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * API keys control which collections, resources, tools, and prompts MCP clients can access
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -557,6 +672,60 @@ export interface PayloadMcpApiKey {
      */
     delete?: boolean | null;
   };
+  projects?: {
+    /**
+     * Allow clients to find projects.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create projects.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update projects.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete projects.
+     */
+    delete?: boolean | null;
+  };
+  freelance?: {
+    /**
+     * Allow clients to find freelance.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create freelance.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update freelance.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete freelance.
+     */
+    delete?: boolean | null;
+  };
+  pageCtas?: {
+    /**
+     * Allow clients to find page-ctas.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create page-ctas.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update page-ctas.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete page-ctas.
+     */
+    delete?: boolean | null;
+  };
   updatedAt: string;
   createdAt: string;
   enableAPIKey?: boolean | null;
@@ -607,6 +776,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'experience';
         value: number | Experience;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'freelance';
+        value: number | Freelance;
+      } | null)
+    | ({
+        relationTo: 'page-ctas';
+        value: number | PageCta;
       } | null)
     | ({
         relationTo: 'payload-mcp-api-keys';
@@ -946,6 +1127,81 @@ export interface ExperienceSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  category?: T;
+  description?: T;
+  stack?: T;
+  metrics?: T;
+  timeframe?: T;
+  sortDate?: T;
+  problem?: T;
+  approach?: T;
+  outcome?: T;
+  links?:
+    | T
+    | {
+        github?: T;
+        live?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "freelance_select".
+ */
+export interface FreelanceSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  stack?: T;
+  metrics?: T;
+  timeframe?: T;
+  sortDate?: T;
+  problem?: T;
+  approach?: T;
+  outcome?: T;
+  links?:
+    | T
+    | {
+        github?: T;
+        live?: T;
+      };
+  image?:
+    | T
+    | {
+        fileName?: T;
+        alt?: T;
+      };
+  imageMobile?:
+    | T
+    | {
+        fileName?: T;
+        alt?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-ctas_select".
+ */
+export interface PageCtasSelect<T extends boolean = true> {
+  page?: T;
+  title?: T;
+  description?: T;
+  label?: T;
+  coordinates?: T;
+  caption?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-mcp-api-keys_select".
  */
 export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
@@ -977,6 +1233,30 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
         delete?: T;
       };
   media?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  projects?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  freelance?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  pageCtas?:
     | T
     | {
         find?: T;

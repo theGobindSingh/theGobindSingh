@@ -9,7 +9,10 @@ import { fileURLToPath } from "url";
 import { Blogs } from "./collections/Blogs";
 import { CaseStudies } from "./collections/CaseStudies";
 import { Experience } from "./collections/Experience";
+import { Freelance } from "./collections/Freelance";
 import { Media } from "./collections/Media";
+import { PageCtas } from "./collections/PageCtas";
+import { Projects } from "./collections/Projects";
 import { Users } from "./collections/Users";
 
 const filename = fileURLToPath(import.meta.url);
@@ -27,14 +30,22 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Blogs, CaseStudies, Experience],
+  collections: [
+    Users,
+    Media,
+    Blogs,
+    CaseStudies,
+    Experience,
+    Projects,
+    Freelance,
+    PageCtas,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? "",
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   db: postgresAdapter({
-    push: false,
     pool: {
       connectionString: process.env.DATABASE_URL ?? "",
     },
@@ -53,6 +64,15 @@ export default buildConfig({
           enabled: true,
         },
         media: {
+          enabled: true,
+        },
+        projects: {
+          enabled: true,
+        },
+        freelance: {
+          enabled: true,
+        },
+        "page-ctas": {
           enabled: true,
         },
       },

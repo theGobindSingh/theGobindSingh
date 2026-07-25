@@ -1,6 +1,6 @@
-import { closingSection } from "@app/contact/constants";
 import FullWidthWrapper from "@components/full-width-wrapper";
 import goldenTemple from "@images/harmandar_sahib.jpg";
+import { getPageCta } from "@lib/page-cta";
 import { tw } from "@utils/tailwind";
 import Image from "next/image";
 
@@ -21,7 +21,9 @@ const Img = (
   </>
 );
 
-const Cta = () => {
+const Cta = async () => {
+  const closingSection = await getPageCta("contact");
+
   return (
     <FullWidthWrapper
       element="section"

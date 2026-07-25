@@ -1,11 +1,9 @@
-import { freelanceSection } from "@app/work/constants";
+import { getFreelanceSection } from "@app/work/constants";
 import FreelanceCard from "@components/freelance-card";
 import Section from "@components/section";
+import type { FreelanceItem } from "@lib/freelance";
 
-const itemMapper = (
-  item: (typeof freelanceSection.items)[number],
-  index: number,
-) => {
+const itemMapper = (item: FreelanceItem, index: number) => {
   return (
     <FreelanceCard
       key={item.slug ?? item.title}
@@ -15,7 +13,9 @@ const itemMapper = (
   );
 };
 
-const Freelance = ({ titleNumber = "00" }: { titleNumber?: string }) => {
+const Freelance = async ({ titleNumber = "00" }: { titleNumber?: string }) => {
+  const freelanceSection = await getFreelanceSection();
+
   return (
     <Section
       title={`${titleNumber} // ${freelanceSection.title}`}
