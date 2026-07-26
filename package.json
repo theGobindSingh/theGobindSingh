@@ -1,60 +1,70 @@
 {
   "name": "gobind-singh-portfolio",
-  "version": "2.0.0",
+  "version": "3.0.0",
+  "type": "module",
+  "author": {
+    "name": "Gobind Singh",
+    "email": "thesinghgobind@gmail.com",
+    "url": "https://github.com/theGobindSingh/"
+  },
   "private": true,
   "scripts": {
+    "setup:opencode": "node scripts/setup-opencode.js",
+    "setup:skills": "node scripts/skills.js",
+    "prepare": "pnpm skills update --project && pnpm run setup:opencode && pnpm run setup:skills",
     "dev": "next dev",
-    "prebuild": "pnpm lint:fix",
     "build": "next build",
     "start": "next start",
-    "lint": "prettier --config .prettierrc \"{components,hooks,modules,pages,public,styles,icons}/**/*.{ts,js,tsx,jsx}\" --write && eslint \"{components,hooks,modules,pages,public,styles,icons}/**/*.{ts,js,tsx,jsx}\"",
-    "lint:fix": "prettier --config .prettierrc \"{components,hooks,modules,pages,public,styles,icons}/**/*.{ts,js,tsx,jsx}\" --write && eslint \"{components,hooks,modules,pages,public,styles,icons}/**/*.{ts,js,tsx,jsx}\" --fix"
+    "payload": "payload",
+    "lint": "prettier --config .prettierrc \"src/**/*.{ts,js,tsx,jsx}\" --check && eslint \"src/**/*.{ts,js,tsx,jsx}\"",
+    "lint:fix": "prettier --config .prettierrc \"src/**/*.{ts,js,tsx,jsx}\" --write && eslint \"src/**/*.{ts,js,tsx,jsx}\" --fix"
   },
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.11.5",
-    "@icons-pack/react-simple-icons": "^13.8.0",
-    "@kami-ui/next-theme": "^0.0.22",
-    "@kami-ui/react-components": "^0.0.3",
-    "@kami-ui/types": "^0.0.3",
-    "@tanstack/react-query": "^5.90.17",
-    "@types/node": "^25.0.3",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
-    "axios": "^1.13.2",
-    "cloudinary": "^2.8.0",
-    "embla-carousel": "^8.6.0",
-    "embla-carousel-react": "^8.6.0",
-    "lenis": "^1.3.17",
-    "lucide-react": "^0.562.0",
-    "next": "^16.1.1",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "sharp": "^0.34.5"
+    "@icons-pack/react-simple-icons": "^13.13.0",
+    "@payloadcms/db-postgres": "^3.86.0",
+    "@payloadcms/email-resend": "^3.86.0",
+    "@payloadcms/next": "^3.86.0",
+    "@payloadcms/richtext-lexical": "^3.86.0",
+    "graphql": "^16.14.2",
+    "gray-matter": "^4.0.3",
+    "lenis": "^1.3.23",
+    "lucide-react": "^1.18.0",
+    "next": "^16.2.9",
+    "payload": "^3.86.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "sharp": "^0.35.1"
   },
   "devDependencies": {
-    "@kami-ui/eslint-config": "^0.0.4",
-    "@tsconfig/next": "^2.0.5",
+    "@kami-ui/eslint-config": "^0.0.6",
+    "@lexical/headless": "0.41.0",
+    "@payloadcms/plugin-mcp": "^3.86.0",
+    "@tailwindcss/postcss": "^4.3.1",
+    "@tsconfig/next": "^2.0.6",
     "@tsconfig/strictest": "^2.0.8",
-    "eslint": "9.39.2",
-    "prettier": "^3.7.4",
+    "@types/node": "^25.9.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.5",
+    "eslint-plugin-better-tailwindcss": "^4.6.0",
+    "glob": "^13.0.6",
+    "globals": "^17.6.0",
+    "lexical": "0.41.0",
+    "prettier": "^3.8.4",
     "prettier-plugin-organize-imports": "^4.3.0",
-    "typescript": "^5.9.3"
+    "rimraf": "^6.1.3",
+    "skills": "^1.5.15",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^6.0.3",
+    "typescript-language-server": "^5.3.0",
+    "vscode-langservers-extracted": "^4.10.0"
   },
   "resolutions": {
-    "rimraf": "^4",
-    "glob": "^10",
-    "eslint": "9.39.2"
+    "rimraf": "^6.1.3",
+    "glob": "^13.0.6"
   },
-  "pnpm": {
-    "overrides": {
-      "eslint": "9.39.2"
-    },
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp",
-      "unrs-resolver"
-    ]
+  "engines": {
+    "node": ">=24"
   },
-  "packageManager": "pnpm@10.26.2"
+  "packageManager": "pnpm@11.8.0"
 }

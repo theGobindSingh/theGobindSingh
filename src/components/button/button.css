@@ -1,0 +1,96 @@
+/*
+ * Shared styles for Button and Link primitives.
+ *
+ * Two required CSS vars (set via inline style on the element):
+ *   --c        base color     e.g. var(--color-accent-500)
+ *   --c-hover  hover color    e.g. var(--color-accent-600)
+ *
+ * Two optional overrides (only added when the caller passes explicit props):
+ *   --c-text        resting text color
+ *   --c-hover-text  hover text color
+ *
+ * Each variant has sensible defaults for text / hover-text so neither
+ * optional var is needed for the typical case.
+ *
+ * Declared with @utility (not @layer components) so Tailwind v4 registers
+ * these as real utility candidates — eslint-plugin-better-tailwindcss then
+ * recognizes them automatically, with no manual ignore-list entries needed.
+ */
+
+/* ── Base ─────────────────────────────────────────────── */
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: var(--radius-none);
+  transition: all 300ms ease;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  text-decoration: none;
+  padding: 0.5em 1.25em;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  &:disabled,
+  &[aria-disabled="true"] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+/* ── Sizes (not applied to text variant) ─────────────── */
+
+@utility btn-sm {
+  font-size: var(--text-sm);
+}
+
+@utility btn-lg {
+  font-size: var(--text-lg);
+}
+
+/* ── Filled ───────────────────────────────────────────── */
+
+@utility btn-filled {
+  background-color: var(--c);
+  color: var(--c-text, var(--color-grey-50));
+  border: 1px solid var(--c);
+
+  &:hover {
+    background-color: var(--c-hover);
+    scale: 0.98;
+  }
+}
+
+/* ── Outlined ─────────────────────────────────────────── */
+
+@utility btn-outlined {
+  background-color: transparent;
+  color: var(--c-text, var(--c));
+  border: 1px solid var(--c);
+  font-size: var(--fs-3xs);
+
+  &:hover {
+    background-color: var(--c-hover);
+    border-color: var(--c-hover);
+    color: var(--c-hover-text, var(--color-grey-50));
+  }
+}
+
+/* ── Text ─────────────────────────────────────────────── */
+
+@utility btn-text {
+  background-color: transparent;
+  text-decoration: none;
+  padding: 0;
+
+  &:hover {
+    color: var(--c-hover-text, var(--c-hover));
+  }
+}

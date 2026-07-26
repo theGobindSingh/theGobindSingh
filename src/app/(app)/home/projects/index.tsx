@@ -1,0 +1,76 @@
+import { getProjectsSection } from "@app/home/constants";
+import WorkCard from "@app/home/projects/work-card";
+import CaseStudySummaryCard from "@components/case-study-summary-card";
+import { Link } from "@components/link";
+import HomeSection from "@components/section";
+import { WorkItem } from "@data";
+
+const workItemsMapper = (workItem: WorkItem) => {
+  return <WorkCard key={`${workItem.type}-${workItem.title}`} {...workItem} />;
+};
+
+const HomeProjectsSection = async ({
+  titleNumber = "00",
+}: {
+  titleNumber?: string;
+}) => {
+  const projectsSection = await getProjectsSection();
+
+  return (
+    <HomeSection
+      title={`${titleNumber} // ${projectsSection.title}`}
+      description={projectsSection.description}
+      wrapperProps={{
+        "aria-label": "Case studies and engineering projects",
+        id: "projects",
+      }}
+      link={{
+        label: "See all case studies & projects",
+        href: "/work",
+      }}
+    >
+      <div className="flex flex-col gap-4">
+        {projectsSection.caseStudies &&
+          projectsSection.caseStudies.length > 0 && (
+            <>
+              <h3 className="mb-4 font-mono text-(size:--fs-3xs) font-medium tracking-wider text-grey-700 uppercase">
+                {"/ Case Studies"}
+              </h3>
+              <ul className="flex flex-col gap-4">
+                {projectsSection.caseStudies.map((caseStudy) => {
+                  return (
+                    <CaseStudySummaryCard key={caseStudy.slug} {...caseStudy} />
+                  );
+                })}
+              </ul>
+            </>
+          )}
+
+        {/* <hr className="my-8 border-t border-grey-200 not-md:my-4" /> */}
+
+        {projectsSection.projects && projectsSection.projects.length > 0 && (
+          <>
+            <h3 className="mt-12 mb-4 font-mono text-(size:--fs-3xs) font-medium tracking-wider text-grey-700 uppercase not-md:mt-8">
+              {"/ Projects"}
+            </h3>
+            <ul className="flex flex-col gap-4">
+              {projectsSection.projects.map(workItemsMapper)}
+            </ul>
+          </>
+        )}
+      </div>
+      <hr className="my-8 border-t border-grey-200 not-md:my-4" />
+      <Link
+        href="/work"
+        className="ml-auto px-4 py-0 font-mono font-medium"
+        variant="outlined"
+      >
+        <span>See all case studies & projects</span>
+        <span className="text-(size:--fs-m)">↗</span>
+      </Link>
+      {/* <hr className="mt-8 border-t border-grey-200 not-md:my-4" /> */}
+    </HomeSection>
+  );
+};
+
+export default HomeProjectsSection;

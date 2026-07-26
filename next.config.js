@@ -1,13 +1,42 @@
+import { withPayload } from "@payloadcms/next/withPayload";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    // domains: ['res.cloudinary.com'],
-    remotePatterns: [new URL('https://res.cloudinary.com/**')],
+    remotePatterns: [],
+    qualities: [75, 100],
   },
-  compiler: {
-    emotion: true,
+  allowedDevOrigins: [],
+  async redirects() {
+    return [
+      {
+        source: "/blogs",
+        destination: "/blog",
+        permanent: true,
+      },
+      {
+        source: "/blogs/:slug",
+        destination: "/blog/:slug",
+        permanent: true,
+      },
+    ];
+  },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+    ];
   },
 };
 
-module.exports = nextConfig;
+export default withPayload(nextConfig);

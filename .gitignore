@@ -26,7 +26,8 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # local env files
-.env*.local
+.env*
+!.env.sample
 
 # vercel
 .vercel
@@ -38,10 +39,10 @@ next-env.d.ts
 yarn.lock
 package-lock.json
 *.log
-*.css
 *.map
 
-*.tldr
+pnpm-lock.yaml
 
-*.env
-!.env.sample
+docs/superpowers
+.claude/skills
+.playwright-mcp

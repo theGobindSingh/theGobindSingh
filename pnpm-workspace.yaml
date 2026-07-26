@@ -1,0 +1,10 @@
+allowBuilds:
+  core-js: true
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  workerd: true
+
+overrides:
+  rimraf: ^6.1.3
+  glob: ^13.0.6

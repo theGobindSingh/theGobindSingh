@@ -31,16 +31,6 @@ Outside of engineering, I value continuous learning, clear communication, and wo
 
 ---
 
-## 🚀 Projects & OSS
-
-- [**Kami-UI**](https://github.com/webadeva/kami-ui)  
-  Open-source TypeScript based React component library with modular architecture.
-
-- [**Use Easy Google Form**](https://github.com/webadeva/use-easy-google-form)  
-  React hook + Chrome extension that converts Google Forms into React components.
-
----
-
 ## 📫 Let’s Connect
 
 [![GitHub](https://img.shields.io/badge/GitHub-0D1117?style=for-the-badge&logo=github&logoColor=white)](https://github.com/theGobindSingh)
@@ -52,7 +42,7 @@ Outside of engineering, I value continuous learning, clear communication, and wo
 
 ## 📄 Resume
 
-👉 [View Resume](/public/assets/pdfs/resume.pdf)
+👉 [View Resume](/public/resume.pdf)
 
 ---
 

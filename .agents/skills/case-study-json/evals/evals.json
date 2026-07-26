@@ -1,0 +1,26 @@
+{
+  "skill_name": "case-study-json",
+  "evals": [
+    {
+      "id": 0,
+      "name": "rich-evidence-portfolio",
+      "prompt": "Turn the case-study JSON system we just built (public/case-studies/*.json, src/lib/case-studies/, and the plan in docs/plans/case-study-pages.md) into a portfolio case study about building that system itself. Investigate the repo directly. If you'd normally ask me a clarifying question, there's no one available right now to answer during this test run — instead, list any open questions clearly at the end of your response and proceed with your best-supported draft for everything else.",
+      "expected_output": "A schema-valid case-study JSON file describing the case-study system build itself, sourced from real repo evidence (docs/plans/case-study-pages.md, git log, the types file), with category 'build', client null, and no fabricated stats.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "sparse-evidence-ask-dont-fabricate",
+      "prompt": "Turn the feature in /tmp/claude-1000/-home-rimuru-programming-theGobindSingh/e36de2fc-e1fa-4547-86a7-b92523b3808d/scratchpad/fixtures/sparse-feature into a portfolio case study. That's the whole repo - just one file (a token-bucket rate limiter) and one commit, no README, no docs, no metrics. If you'd normally ask me a clarifying question, there's no one available right now to answer during this test run — instead, list any open questions clearly at the end of your response and proceed with your best-supported draft for everything else.",
+      "expected_output": "A draft that only includes what's actually derivable from the single file and commit message (e.g. stack, a plausible category, a Problem/Approach/Challenges narrative grounded in the code) and explicitly flags in its final questions list that it cannot determine client, role, timeframe, or any Impact & Results stats rather than inventing them.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "company-repo-client-derivable",
+      "prompt": "Turn the feature in /tmp/claude-1000/-home-rimuru-programming-theGobindSingh/e36de2fc-e1fa-4547-86a7-b92523b3808d/scratchpad/fixtures/company-feature into a portfolio case study. It's a small internal tool repo with a README and one component. If you'd normally ask me a clarifying question, there's no one available right now to answer during this test run — instead, list any open questions clearly at the end of your response and proceed with your best-supported draft for everything else.",
+      "expected_output": "A draft that correctly derives the client name ('Acme Health Insurance') and the gist of the problem/approach from the README and component code, but flags in its final questions list that it has no sourced Impact & Results metrics and no role/timeframe information rather than inventing plausible-sounding numbers.",
+      "files": []
+    }
+  ]
+}

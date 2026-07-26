@@ -1,0 +1,630 @@
+@import "tailwindcss";
+@import "./defaults.css";
+@import "./components.css";
+
+/*
+ * ═══════════════════════════════════════════════════════════════════════════════
+ *  TOKEN ARCHITECTURE — globals.css is the single source of truth for this project.
+ *  Every color, spacing, radius, type scale, z-index, and motion value lives here.
+ *  Do not add ad-hoc colors or magic numbers in components. The defaults.css file 
+ *  on the other hand, contains the base styles for the project, for example the 
+ *  body, scrollbar, and noise grain.
+ * ═══════════════════════════════════════════════════════════════════════════════
+ *
+ *  LAYERS (top to bottom):
+ *    1. PRIMITIVES  — raw HSL values in `:root, .light` and `.dark` blocks
+ *    2. SEMANTIC    — role-based aliases (@  line ~210) that point into the ramps
+ *    3. @theme      — Tailwind v4 registration, making tokens available as utilities
+ *    4. BASE STYLES — resets, body, grain, scrollbar (@ line ~640)
+ *
+ *  COLOR SYSTEM — ramp-based, 7 families × 11 stops (50…950) + -base for alpha:
+ *
+ *    --color-{family}-{stop}-base: {H}, {S}%, {L}%;   ← raw numbers for hsl()
+ *    --color-{family}-{stop}: hsl(var(--color-{family}-{stop}-base));
+ *
+ *    Families: grey | primary | secondary | accent | success | caution | info | error
+ *    Stops:    50 (lightest) → 950 (darkest) in light mode
+ *
+ *    To use a color at alpha:  hsl(var(--color-grey-900-base) / 0.15)
+ *    To use a solid color:     var(--color-grey-900)
+ *
+ *  DARK MODE — the `.dark` block only redefines the -base values by reversing the
+ *    light ramp (50↔950, 100↔900, …, 500↔500).  Solid --color-*-* variables
+ *    inherit from :root and resolve dynamically.  No hand-tuned dark-only colors.
+ *    Semantics stay: grey-50 = background, grey-950 = ink in both modes.
+ *
+ *  SEMANTIC ROLES — use these in preference to raw ramp numbers:
+ *    --color-bg             page background (grey-50)
+ *    --color-surface        muted panels (grey-200)
+ *    --color-surface-raised cards / elevated (grey-400)
+ *    --color-text           primary ink (grey-950)
+ *    --color-text-muted     secondary text (grey-800)
+ *    --color-text-subtle    captions (grey-700)
+ *    --color-text-inverse   text on dark fills (grey-50)
+ *    --color-border         hairline rules (grey-700 at 30% alpha)
+ *    --color-border-strong  solid borders (grey-700)
+ *    --color-focus          focus ring (accent-500)
+ *
+ *  PALETTE (dark mode anchor hex values):
+ *    Surface:  #0e0e0e → #141313 → #1c1b1b → #201f1f → #2a2a2a → #353434 → #3a3939
+ *    On-surface: #e5e2e1    Outline: #8e9192    Outline-variant: #444748
+ *    Accent (peach/orange, ~hue 16°, used sparingly for CTAs): #b73700 → #ffdbd0
+ *
+ *  TYPOGRAPHY — raw fs-* scale (line ~245) + display clamps; fonts wired via next/font
+ *    into @theme as --font-display / --font-sans / --font-mono.
+ *
+ *  HOW TO CONSUME (in components):
+ *    1. Prefer semantic roles:      var(--color-text), var(--color-bg)
+ *    2. For tints, use ramp stops:  var(--color-grey-500), var(--color-accent-700)
+ *    3. For alpha, use -base:       hsl(var(--color-grey-900-base) / 0.1)
+ *    4. Tailwind utilities:         bg-grey-50, text-accent-500, bg-accent-muted
+ *
+ *  DO NOT:
+ *    - Add raw hex, HSL, rgb(), or dark: literals in components
+ *    - Add new color families without updating this file + @theme + semantic roles
+ *    - Use ramp stops directly when a semantic role already covers the intent
+ */
+
+:root,
+.light {
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --shadow-hsl: 16 100% 50%;
+
+  /* grey */
+  --color-grey-50-base: 210, 12%, 97%;
+  --color-grey-50: hsl(var(--color-grey-50-base));
+  --color-grey-100-base: 210, 13%, 91%;
+  --color-grey-100: hsl(var(--color-grey-100-base));
+  --color-grey-200-base: 210, 13%, 82%;
+  --color-grey-200: hsl(var(--color-grey-200-base));
+  --color-grey-300-base: 208, 14%, 76%;
+  --color-grey-300: hsl(var(--color-grey-300-base));
+  --color-grey-400-base: 211, 14%, 68%;
+  --color-grey-400: hsl(var(--color-grey-400-base));
+  --color-grey-500-base: 211, 11%, 59%;
+  --color-grey-500: hsl(var(--color-grey-500-base));
+  --color-grey-600-base: 209, 9%, 50%;
+  --color-grey-600: hsl(var(--color-grey-600-base));
+  --color-grey-700-base: 209, 12%, 38%;
+  --color-grey-700: hsl(var(--color-grey-700-base));
+  --color-grey-800-base: 209, 14%, 25%;
+  --color-grey-800: hsl(var(--color-grey-800-base));
+  --color-grey-900-base: 210, 22%, 15%;
+  --color-grey-900: hsl(var(--color-grey-900-base));
+  --color-grey-950-base: 210, 17.5%, 5%;
+  --color-grey-950: hsl(var(--color-grey-950-base));
+
+  /* primary */
+  --color-primary-50-base: 0, 1%, 95%;
+  --color-primary-50: hsl(var(--color-primary-50-base));
+  --color-primary-100-base: 0, 0%, 91%;
+  --color-primary-100: hsl(var(--color-primary-100-base));
+  --color-primary-200-base: 180, 3%, 86%;
+  --color-primary-200: hsl(var(--color-primary-200-base));
+  --color-primary-300-base: 180, 2%, 81%;
+  --color-primary-300: hsl(var(--color-primary-300-base));
+  --color-primary-400-base: 180, 2%, 73%;
+  --color-primary-400: hsl(var(--color-primary-400-base));
+  --color-primary-500-base: 180, 1%, 63%;
+  --color-primary-500: hsl(var(--color-primary-500-base));
+  --color-primary-600-base: 180, 1%, 43%;
+  --color-primary-600: hsl(var(--color-primary-600-base));
+  --color-primary-700-base: 180, 1%, 23%;
+  --color-primary-700: hsl(var(--color-primary-700-base));
+  --color-primary-800-base: 0, 0%, 11%;
+  --color-primary-800: hsl(var(--color-primary-800-base));
+  --color-primary-900-base: 0, 0%, 5%;
+  --color-primary-900: hsl(var(--color-primary-900-base));
+  --color-primary-950-base: 0, 0%, 0%;
+  --color-primary-950: hsl(var(--color-primary-950-base));
+
+  /* secondary */
+  --color-secondary-50-base: 0, 1%, 95%;
+  --color-secondary-50: hsl(var(--color-secondary-50-base));
+  --color-secondary-100-base: 0, 1%, 90%;
+  --color-secondary-100: hsl(var(--color-secondary-100-base));
+  --color-secondary-200-base: 0, 1%, 81%;
+  --color-secondary-200: hsl(var(--color-secondary-200-base));
+  --color-secondary-300-base: 0, 1%, 72%;
+  --color-secondary-300: hsl(var(--color-secondary-300-base));
+  --color-secondary-400-base: 0, 1%, 71%;
+  --color-secondary-400: hsl(var(--color-secondary-400-base));
+  --color-secondary-500-base: 0, 1%, 55%;
+  --color-secondary-500: hsl(var(--color-secondary-500-base));
+  --color-secondary-600-base: 20, 2%, 28%;
+  --color-secondary-600: hsl(var(--color-secondary-600-base));
+  --color-secondary-700-base: 15, 4%, 22%;
+  --color-secondary-700: hsl(var(--color-secondary-700-base));
+  --color-secondary-800-base: 15, 7%, 11%;
+  --color-secondary-800: hsl(var(--color-secondary-800-base));
+  --color-secondary-900-base: 15, 7%, 6%;
+  --color-secondary-900: hsl(var(--color-secondary-900-base));
+  --color-secondary-950-base: 15, 7%, 2%;
+  --color-secondary-950: hsl(var(--color-secondary-950-base));
+
+  /* accent */
+  --color-accent-50-base: 15, 100%, 95%;
+  --color-accent-50: hsl(var(--color-accent-50-base));
+  --color-accent-100-base: 15, 100%, 88%;
+  --color-accent-100: hsl(var(--color-accent-100-base));
+  --color-accent-200-base: 16, 100%, 82%;
+  --color-accent-200: hsl(var(--color-accent-200-base));
+  --color-accent-300-base: 17, 100%, 74%;
+  --color-accent-300: hsl(var(--color-accent-300-base));
+  --color-accent-400-base: 18, 100%, 64%;
+  --color-accent-400: hsl(var(--color-accent-400-base));
+  --color-accent-500-base: 16, 100%, 47%;
+  --color-accent-500: hsl(var(--color-accent-500-base));
+  --color-accent-600-base: 15, 100%, 40.75%;
+  --color-accent-600: hsl(var(--color-accent-600-base));
+  --color-accent-700-base: 14, 100%, 19%;
+  --color-accent-700: hsl(var(--color-accent-700-base));
+  --color-accent-800-base: 14, 100%, 9%;
+  --color-accent-800: hsl(var(--color-accent-800-base));
+  --color-accent-900-base: 14, 100%, 4%;
+  --color-accent-900: hsl(var(--color-accent-900-base));
+  --color-accent-950-base: 14, 100%, 2%;
+  --color-accent-950: hsl(var(--color-accent-950-base));
+
+  /* success */
+  --color-success-50-base: 145, 88%, 98%;
+  --color-success-50: hsl(var(--color-success-50-base));
+  --color-success-100-base: 145, 88%, 96%;
+  --color-success-100: hsl(var(--color-success-100-base));
+  --color-success-200-base: 145, 88%, 93%;
+  --color-success-200: hsl(var(--color-success-200-base));
+  --color-success-300-base: 145, 88%, 85%;
+  --color-success-300: hsl(var(--color-success-300-base));
+  --color-success-400-base: 145, 88%, 70%;
+  --color-success-400: hsl(var(--color-success-400-base));
+  --color-success-500-base: 145, 88%, 56%;
+  --color-success-500: hsl(var(--color-success-500-base));
+  --color-success-600-base: 145, 88%, 42%;
+  --color-success-600: hsl(var(--color-success-600-base));
+  --color-success-700-base: 145, 88%, 28%;
+  --color-success-700: hsl(var(--color-success-700-base));
+  --color-success-800-base: 145, 88%, 14%;
+  --color-success-800: hsl(var(--color-success-800-base));
+  --color-success-900-base: 145, 88%, 5%;
+  --color-success-900: hsl(var(--color-success-900-base));
+  --color-success-950-base: 145, 88%, 2%;
+  --color-success-950: hsl(var(--color-success-950-base));
+
+  /* caution */
+  --color-caution-50-base: 30, 88%, 98%;
+  --color-caution-50: hsl(var(--color-caution-50-base));
+  --color-caution-100-base: 30, 88%, 96%;
+  --color-caution-100: hsl(var(--color-caution-100-base));
+  --color-caution-200-base: 30, 88%, 93%;
+  --color-caution-200: hsl(var(--color-caution-200-base));
+  --color-caution-300-base: 30, 88%, 85%;
+  --color-caution-300: hsl(var(--color-caution-300-base));
+  --color-caution-400-base: 30, 88%, 70%;
+  --color-caution-400: hsl(var(--color-caution-400-base));
+  --color-caution-500-base: 30, 88%, 56%;
+  --color-caution-500: hsl(var(--color-caution-500-base));
+  --color-caution-600-base: 30, 88%, 42%;
+  --color-caution-600: hsl(var(--color-caution-600-base));
+  --color-caution-700-base: 30, 88%, 28%;
+  --color-caution-700: hsl(var(--color-caution-700-base));
+  --color-caution-800-base: 30, 88%, 14%;
+  --color-caution-800: hsl(var(--color-caution-800-base));
+  --color-caution-900-base: 30, 88%, 5%;
+  --color-caution-900: hsl(var(--color-caution-900-base));
+  --color-caution-950-base: 30, 88%, 2%;
+  --color-caution-950: hsl(var(--color-caution-950-base));
+
+  /* info */
+  --color-info-50-base: 200, 88%, 98%;
+  --color-info-50: hsl(var(--color-info-50-base));
+  --color-info-100-base: 200, 88%, 96%;
+  --color-info-100: hsl(var(--color-info-100-base));
+  --color-info-200-base: 200, 88%, 93%;
+  --color-info-200: hsl(var(--color-info-200-base));
+  --color-info-300-base: 200, 88%, 85%;
+  --color-info-300: hsl(var(--color-info-300-base));
+  --color-info-400-base: 200, 88%, 70%;
+  --color-info-400: hsl(var(--color-info-400-base));
+  --color-info-500-base: 200, 88%, 56%;
+  --color-info-500: hsl(var(--color-info-500-base));
+  --color-info-600-base: 200, 88%, 42%;
+  --color-info-600: hsl(var(--color-info-600-base));
+  --color-info-700-base: 200, 88%, 28%;
+  --color-info-700: hsl(var(--color-info-700-base));
+  --color-info-800-base: 200, 88%, 14%;
+  --color-info-800: hsl(var(--color-info-800-base));
+  --color-info-900-base: 200, 88%, 5%;
+  --color-info-900: hsl(var(--color-info-900-base));
+  --color-info-950-base: 200, 88%, 2%;
+  --color-info-950: hsl(var(--color-info-950-base));
+
+  /* error */
+  --color-error-50-base: 357, 100%, 95%;
+  --color-error-50: hsl(var(--color-error-50-base));
+  --color-error-100-base: 357, 100%, 86%;
+  --color-error-100: hsl(var(--color-error-100-base));
+  --color-error-200-base: 357, 100%, 79%;
+  --color-error-200: hsl(var(--color-error-200-base));
+  --color-error-300-base: 356, 100%, 71%;
+  --color-error-300: hsl(var(--color-error-300-base));
+  --color-error-400-base: 357, 100%, 60%;
+  --color-error-400: hsl(var(--color-error-400-base));
+  --color-error-500-base: 4, 100%, 50%;
+  --color-error-500: hsl(var(--color-error-500-base));
+  --color-error-600-base: 6, 100%, 33%;
+  --color-error-600: hsl(var(--color-error-600-base));
+  --color-error-700-base: 6, 100%, 16%;
+  --color-error-700: hsl(var(--color-error-700-base));
+  --color-error-800-base: 6, 100%, 8%;
+  --color-error-800: hsl(var(--color-error-800-base));
+  --color-error-900-base: 6, 100%, 4%;
+  --color-error-900: hsl(var(--color-error-900-base));
+  --color-error-950-base: 6, 100%, 2%;
+  --color-error-950: hsl(var(--color-error-950-base));
+
+  /* ---- semantic roles (map to the ramp; auto-invert in dark, define once) ---- */
+  --color-bg: var(--color-grey-50);
+  --color-surface: var(--color-grey-200);
+  --color-surface-raised: var(--color-grey-400);
+  --color-text: var(--color-grey-950);
+  --color-text-muted: var(--color-grey-800);
+  --color-text-subtle: var(--color-grey-700);
+  --color-text-inverse: var(--color-grey-50);
+  --color-border: hsl(var(--color-grey-700-base) / 0.3);
+  --color-border-strong: var(--color-grey-700);
+  --color-grid-line: hsl(var(--color-grey-700-base) / 0.12);
+  --color-crosshair: hsl(var(--color-grey-700-base) / 0.35);
+  --color-overlay: hsl(var(--color-grey-50-base) / 0.85);
+  --color-focus: var(--color-accent-500);
+
+  /* ---- type scale (UI/body tier; shrinks on small screens below) ---- */
+  --fs-4xs: 0.75rem;
+  --fs-3xs: 0.875rem;
+  --fs-2xs: 1rem;
+  --fs-1xs: 1.125rem;
+  --fs-s: 1.25rem;
+  --fs-m: 1.5rem;
+  --fs-l: 1.875rem;
+  --fs-1xl: 2.25rem;
+  --fs-2xl: 2.75rem;
+  --fs-3xl: 3.25rem;
+  --fs-4xl: 3.75rem;
+
+  /* ---- monumental display tier (hero + section headers; clamp in vw) ---- */
+  --fs-display-section: clamp(2.5rem, 8vw, 9rem);
+  --fs-display-hero: clamp(3rem, 14vw, 16rem);
+  --leading-display: 0.8;
+  --tracking-display: -0.02em;
+
+  /* ---- spacing (4px base) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ---- layout ---- */
+  --container-max: 1800px;
+  --content-max: 1400px;
+  --gutter: clamp(1.5rem, 4vw, 3rem);
+  --section-pad-y: clamp(6rem, 12vw, 12rem);
+
+  /* ---- radius (brutalist = sharp; pill only for chips) ---- */
+  --radius-none: 0px;
+  --radius-sm: 2px;
+  --radius-pill: 9999px;
+
+  /* ---- borders ---- */
+  --border-hairline: 1px;
+  --border-strong: 2px;
+
+  /* ---- z-index ladder ---- */
+  --z-grid: 0;
+  --z-content: 10;
+  --z-overlay: 40;
+  --z-nav: 50;
+  --z-wipe: 9998;
+  --z-cursor: 9999;
+
+  /* ---- motion ---- */
+  --dur-fast: 0.2s;
+  --dur-base: 0.3s;
+  --dur-slow: 0.5s;
+  --dur-reveal: 0.7s;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/*
+ *  DARK MODE — pure reversal of the light ramp.
+ *  Only -base values are redefined; solid --color-*-* variables inherit from
+ *  :root and resolve dynamically against the reversed bases.  Semantics stay
+ *  identical (e.g. grey-50 is always "background", grey-950 is always "ink").
+ *
+ *  Mapping: dark-N = light-(1050-N)  i.e. 50↔950, 100↔900, …, 500↔500.
+ */
+.dark {
+  --color-black: #ffffff;
+  --color-white: #000000;
+
+  --shadow-hsl: 16 100% 50%;
+
+  /* grey */
+  --color-grey-50-base: 204, 17.5%, 5%;
+  --color-grey-100-base: 210, 22%, 15%;
+  --color-grey-200-base: 209, 14%, 25%;
+  --color-grey-300-base: 209, 12%, 38%;
+  --color-grey-400-base: 209, 9%, 50%;
+  --color-grey-500-base: 211, 11%, 59%;
+  --color-grey-600-base: 211, 14%, 68%;
+  --color-grey-700-base: 208, 14%, 76%;
+  --color-grey-800-base: 210, 13%, 82%;
+  --color-grey-900-base: 210, 13%, 91%;
+  --color-grey-950-base: 210, 12%, 97%;
+
+  /* primary */
+  --color-primary-50-base: 15, 7%, 2%;
+  --color-primary-100-base: 0, 0%, 5%;
+  --color-primary-200-base: 0, 0%, 11%;
+  --color-primary-300-base: 180, 1%, 23%;
+  --color-primary-400-base: 180, 1%, 43%;
+  --color-primary-500-base: 180, 1%, 63%;
+  --color-primary-600-base: 180, 2%, 73%;
+  --color-primary-700-base: 180, 2%, 81%;
+  --color-primary-800-base: 180, 3%, 86%;
+  --color-primary-900-base: 0, 0%, 91%;
+  --color-primary-950-base: 0, 0%, 95%;
+
+  /* secondary */
+  --color-secondary-50-base: 15, 7%, 2%;
+  --color-secondary-100-base: 15, 7%, 6%;
+  --color-secondary-200-base: 15, 7%, 11%;
+  --color-secondary-300-base: 15, 4%, 22%;
+  --color-secondary-400-base: 20, 2%, 28%;
+  --color-secondary-500-base: 0, 1%, 55%;
+  --color-secondary-600-base: 0, 1%, 71%;
+  --color-secondary-700-base: 0, 1%, 72%;
+  --color-secondary-800-base: 0, 1%, 81%;
+  --color-secondary-900-base: 0, 1%, 90%;
+  --color-secondary-950-base: 0, 1%, 95%;
+
+  /* accent */
+  --color-accent-50-base: 14, 100%, 2%;
+  --color-accent-100-base: 14, 100%, 4%;
+  --color-accent-200-base: 14, 100%, 9%;
+  --color-accent-300-base: 14, 100%, 19%;
+  --color-accent-400-base: 14, 100%, 29%;
+  --color-accent-500-base: 16, 100%, 47%;
+  --color-accent-600-base: 18, 100%, 64%;
+  --color-accent-700-base: 17, 100%, 74%;
+  --color-accent-800-base: 16, 100%, 82%;
+  --color-accent-900-base: 15, 100%, 88%;
+  --color-accent-950-base: 15, 100%, 95%;
+
+  /* success */
+  --color-success-50-base: 145, 88%, 2%;
+  --color-success-100-base: 145, 88%, 5%;
+  --color-success-200-base: 145, 88%, 14%;
+  --color-success-300-base: 145, 88%, 28%;
+  --color-success-400-base: 145, 88%, 42%;
+  --color-success-500-base: 145, 88%, 56%;
+  --color-success-600-base: 145, 88%, 70%;
+  --color-success-700-base: 145, 88%, 85%;
+  --color-success-800-base: 145, 88%, 93%;
+  --color-success-900-base: 145, 88%, 96%;
+  --color-success-950-base: 145, 88%, 98%;
+
+  /* caution */
+  --color-caution-50-base: 30, 88%, 2%;
+  --color-caution-100-base: 30, 88%, 5%;
+  --color-caution-200-base: 30, 88%, 14%;
+  --color-caution-300-base: 30, 88%, 28%;
+  --color-caution-400-base: 30, 88%, 42%;
+  --color-caution-500-base: 30, 88%, 56%;
+  --color-caution-600-base: 30, 88%, 70%;
+  --color-caution-700-base: 30, 88%, 85%;
+  --color-caution-800-base: 30, 88%, 93%;
+  --color-caution-900-base: 30, 88%, 96%;
+  --color-caution-950-base: 30, 88%, 98%;
+
+  /* info */
+  --color-info-50-base: 200, 88%, 2%;
+  --color-info-100-base: 200, 88%, 5%;
+  --color-info-200-base: 200, 88%, 14%;
+  --color-info-300-base: 200, 88%, 28%;
+  --color-info-400-base: 200, 88%, 42%;
+  --color-info-500-base: 200, 88%, 56%;
+  --color-info-600-base: 200, 88%, 70%;
+  --color-info-700-base: 200, 88%, 85%;
+  --color-info-800-base: 200, 88%, 93%;
+  --color-info-900-base: 200, 88%, 96%;
+  --color-info-950-base: 200, 88%, 98%;
+
+  /* error */
+  --color-error-50-base: 6, 100%, 2%;
+  --color-error-100-base: 6, 100%, 4%;
+  --color-error-200-base: 6, 100%, 8%;
+  --color-error-300-base: 6, 100%, 16%;
+  --color-error-400-base: 6, 100%, 33%;
+  --color-error-500-base: 4, 100%, 50%;
+  --color-error-600-base: 357, 100%, 60%;
+  --color-error-700-base: 356, 100%, 71%;
+  --color-error-800-base: 357, 100%, 79%;
+  --color-error-900-base: 357, 100%, 86%;
+  --color-error-950-base: 357, 100%, 95%;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --fs-4xs: 0.6875rem;
+    --fs-3xs: 0.75rem;
+    --fs-2xs: 0.875rem;
+    --fs-1xs: 1rem;
+    --fs-s: 1.125rem;
+    --fs-m: 1.25rem;
+    --fs-l: 1.5rem;
+    --fs-1xl: 1.875rem;
+    --fs-2xl: 2.25rem;
+    --fs-3xl: 2.75rem;
+    --fs-4xl: 3.25rem;
+  }
+}
+
+@theme {
+  /*
+    fonts: role-based raw vars (--ff-*) are produced by next/font. Assign any family to a role
+    in the font loader; nothing here changes. To swap a font later, edit only the loader.
+  */
+  --font-display: var(--ff-display);
+  --font-sans: var(--ff-sans);
+  --font-serif: var(--ff-serif);
+  --font-mono: var(--ff-mono);
+  --font-cursive: var(--ff-cursive);
+
+  --color-grey-50: var(--color-grey-50);
+  --color-grey-100: var(--color-grey-100);
+  --color-grey-200: var(--color-grey-200);
+  --color-grey-300: var(--color-grey-300);
+  --color-grey-400: var(--color-grey-400);
+  --color-grey-500: var(--color-grey-500);
+  --color-grey-600: var(--color-grey-600);
+  --color-grey-700: var(--color-grey-700);
+  --color-grey-800: var(--color-grey-800);
+  --color-grey-900: var(--color-grey-900);
+  --color-grey-950: var(--color-grey-950);
+  --color-grey: var(--color-grey-500);
+  --color-grey-deep: var(--color-grey-700);
+  --color-grey-muted: var(--color-grey-100);
+
+  --color-primary-50: var(--color-primary-50);
+  --color-primary-100: var(--color-primary-100);
+  --color-primary-200: var(--color-primary-200);
+  --color-primary-300: var(--color-primary-300);
+  --color-primary-400: var(--color-primary-400);
+  --color-primary-500: var(--color-primary-500);
+  --color-primary-600: var(--color-primary-600);
+  --color-primary-700: var(--color-primary-700);
+  --color-primary-800: var(--color-primary-800);
+  --color-primary-900: var(--color-primary-900);
+  --color-primary-950: var(--color-primary-950);
+  --color-primary: var(--color-primary-500);
+  --color-primary-deep: var(--color-primary-700);
+  --color-primary-muted: var(--color-primary-100);
+
+  --color-secondary-50: var(--color-secondary-50);
+  --color-secondary-100: var(--color-secondary-100);
+  --color-secondary-200: var(--color-secondary-200);
+  --color-secondary-300: var(--color-secondary-300);
+  --color-secondary-400: var(--color-secondary-400);
+  --color-secondary-500: var(--color-secondary-500);
+  --color-secondary-600: var(--color-secondary-600);
+  --color-secondary-700: var(--color-secondary-700);
+  --color-secondary-800: var(--color-secondary-800);
+  --color-secondary-900: var(--color-secondary-900);
+  --color-secondary-950: var(--color-secondary-950);
+  --color-secondary: var(--color-secondary-500);
+  --color-secondary-deep: var(--color-secondary-700);
+  --color-secondary-muted: var(--color-secondary-100);
+
+  --color-accent-50: var(--color-accent-50);
+  --color-accent-100: var(--color-accent-100);
+  --color-accent-200: var(--color-accent-200);
+  --color-accent-300: var(--color-accent-300);
+  --color-accent-400: var(--color-accent-400);
+  --color-accent-500: var(--color-accent-500);
+  --color-accent-600: var(--color-accent-600);
+  --color-accent-700: var(--color-accent-700);
+  --color-accent-800: var(--color-accent-800);
+  --color-accent-900: var(--color-accent-900);
+  --color-accent-950: var(--color-accent-950);
+  --color-accent: var(--color-accent-500);
+  --color-accent-deep: var(--color-accent-700);
+  --color-accent-muted: var(--color-accent-100);
+
+  --color-success-50: var(--color-success-50);
+  --color-success-100: var(--color-success-100);
+  --color-success-200: var(--color-success-200);
+  --color-success-300: var(--color-success-300);
+  --color-success-400: var(--color-success-400);
+  --color-success-500: var(--color-success-500);
+  --color-success-600: var(--color-success-600);
+  --color-success-700: var(--color-success-700);
+  --color-success-800: var(--color-success-800);
+  --color-success-900: var(--color-success-900);
+  --color-success-950: var(--color-success-950);
+  --color-success: var(--color-success-500);
+  --color-success-deep: var(--color-success-700);
+  --color-success-muted: var(--color-success-100);
+
+  --color-caution-50: var(--color-caution-50);
+  --color-caution-100: var(--color-caution-100);
+  --color-caution-200: var(--color-caution-200);
+  --color-caution-300: var(--color-caution-300);
+  --color-caution-400: var(--color-caution-400);
+  --color-caution-500: var(--color-caution-500);
+  --color-caution-600: var(--color-caution-600);
+  --color-caution-700: var(--color-caution-700);
+  --color-caution-800: var(--color-caution-800);
+  --color-caution-900: var(--color-caution-900);
+  --color-caution-950: var(--color-caution-950);
+  --color-caution: var(--color-caution-500);
+  --color-caution-deep: var(--color-caution-700);
+  --color-caution-muted: var(--color-caution-100);
+
+  --color-info-50: var(--color-info-50);
+  --color-info-100: var(--color-info-100);
+  --color-info-200: var(--color-info-200);
+  --color-info-300: var(--color-info-300);
+  --color-info-400: var(--color-info-400);
+  --color-info-500: var(--color-info-500);
+  --color-info-600: var(--color-info-600);
+  --color-info-700: var(--color-info-700);
+  --color-info-800: var(--color-info-800);
+  --color-info-900: var(--color-info-900);
+  --color-info-950: var(--color-info-950);
+  --color-info: var(--color-info-500);
+  --color-info-deep: var(--color-info-700);
+  --color-info-muted: var(--color-info-100);
+
+  --color-error-50: var(--color-error-50);
+  --color-error-100: var(--color-error-100);
+  --color-error-200: var(--color-error-200);
+  --color-error-300: var(--color-error-300);
+  --color-error-400: var(--color-error-400);
+  --color-error-500: var(--color-error-500);
+  --color-error-600: var(--color-error-600);
+  --color-error-700: var(--color-error-700);
+  --color-error-800: var(--color-error-800);
+  --color-error-900: var(--color-error-900);
+  --color-error-950: var(--color-error-950);
+  --color-error: var(--color-error-500);
+  --color-error-deep: var(--color-error-700);
+  --color-error-muted: var(--color-error-100);
+
+  --color-black: var(--color-black);
+  --color-white: var(--color-white);
+
+  --text-headline: var(--fs-1xl);
+  --text-title: var(--fs-m);
+
+  --text-xs: 0.625rem;
+  --text-sm: 0.6875rem;
+  --text-base: 0.75rem;
+  --text-lg: 0.875rem;
+  --text-xl: 1rem;
+  --text-2xl: 1.125rem;
+  --text-3xl: 1.25rem;
+  --text-4xl: 1.5rem;
+  --text-5xl: 1.875rem;
+  --text-6xl: 2.25rem;
+  --text-7xl: 3rem;
+  --text-8xl: 3.75rem;
+  --text-9xl: 4.5rem;
+}

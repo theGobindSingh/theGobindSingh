@@ -1,0 +1,67 @@
+/*
+ * Disclosure mechanics for WorkItemCard's <details>/<summary>.
+ *
+ * Native <details> toggling bypasses ordinary CSS transitions: the
+ * browser applies the [open] mutation and reflows synchronously, with no
+ * intervening painted frame to interpolate from. interpolate-size +
+ * ::details-content is the browser-native fix, purpose-built for this
+ * exact case. Unsupported browsers fall back to the default instant
+ * toggle — still semantic, still keyboard-accessible, no JS involved
+ * either way.
+ *
+ * Declared with @utility (not @layer components) so Tailwind v4 registers
+ * these as real utility candidates — eslint-plugin-better-tailwindcss then
+ * recognizes them automatically, with no manual ignore-list entries needed.
+ */
+
+@utility work-card-details {
+  interpolate-size: allow-keywords;
+}
+
+@supports (interpolate-size: allow-keywords) {
+  .work-card-details::details-content {
+    height: 0;
+    overflow: clip;
+    transition:
+      height var(--dur-slow) ease,
+      content-visibility var(--dur-slow) ease allow-discrete;
+  }
+
+  .work-card-details[open]::details-content {
+    height: auto;
+  }
+}
+
+@utility work-card-summary {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  list-style: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  outline: none;
+  transition: background-color var(--dur-base) ease-out;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-surface);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: -2px;
+  }
+}
+
+@utility work-card-icon {
+  transition: transform var(--dur-slow) ease;
+
+  .work-card-details[open] & {
+    transform: rotate(45deg);
+  }
+}
