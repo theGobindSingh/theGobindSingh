@@ -95,7 +95,7 @@ export const POST = async (request: NextRequest) => {
 
     await payload.sendEmail({
       from: FROM_ADDRESS,
-      to: [ownerEmail, "android.gobind@gmail.com"],
+      to: ownerEmail,
       replyTo: email,
       subject: `Portfolio enquiry from ${name}`,
       html: [
