@@ -1,5 +1,9 @@
 import type { IconType } from "@icons-pack/react-simple-icons";
-import { SiGithub, SiInstagram } from "@icons-pack/react-simple-icons";
+import {
+  SiDiscord,
+  SiGithub,
+  SiInstagram,
+} from "@icons-pack/react-simple-icons";
 import type { LucideProps } from "lucide-react";
 import { Mail } from "lucide-react";
 
@@ -28,6 +32,7 @@ export enum SOCIAL_KEYS {
   GITHUB = "GITHUB",
   EMAIL = "EMAIL",
   INSTAGRAM = "INSTAGRAM",
+  DISCORD = "DISCORD",
 }
 
 interface SocialLink {
@@ -60,12 +65,19 @@ export const socialLinks: {
     url: `mailto:${email}`,
     label: "Email",
     logo: Mail,
+    userName: email,
   },
   [SOCIAL_KEYS.INSTAGRAM]: {
     url: "https://www.instagram.com/thegobindsingh",
     label: "Instagram",
     logo: SiInstagram,
     userName: "theGobindSingh",
+  },
+  [SOCIAL_KEYS.DISCORD]: {
+    url: "https://discord.gg/w9yVSBkFXc",
+    label: "Discord",
+    logo: SiDiscord,
+    userName: "thegobindsingh",
   },
 };
 
@@ -135,7 +147,7 @@ export const footerData: {
   description: string;
   footNote: { prefix: string; name: string; suffix: string };
   designSystemCta: { prefix: string; name: string };
-  links: { url: string; label: string }[];
+  links: { url: string; label: string; secondary?: string | undefined }[];
 } = {
   title: fullName,
   description:
@@ -146,8 +158,8 @@ export const footerData: {
     name: "design system",
   },
   links: [
-    ...Object.values(socialLinks).map(({ url, label }) => {
-      return { url, label };
+    ...Object.values(socialLinks).map(({ url, label, userName }) => {
+      return { url, label, secondary: userName };
     }),
     { url: resumeLink, label: "Resume" },
   ],

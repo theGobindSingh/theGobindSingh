@@ -1,4 +1,5 @@
 import { connectSection } from "@app/contact/constants";
+import HoverSwapText from "@components/hover-swap-text";
 import { Link } from "@components/link";
 import { ArrowUpRight } from "lucide-react";
 
@@ -13,6 +14,9 @@ const itemMapper = (item: (typeof connectSection.items)[number]) => {
       >
         <Icon className="size-4 shrink-0 text-grey-500 group-hover:text-accent-600" />
         {item.label}
+        {item.userName && (
+          <HoverSwapText label={item.label} secondary={item.userName} />
+        )}
         <ArrowUpRight
           className="size-4 shrink-0 text-grey-400 transition-transform duration-(--dur-fast) ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent-600"
           aria-hidden="true"

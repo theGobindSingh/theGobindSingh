@@ -23,7 +23,13 @@ export const scopeSection = {
 
 export const connectSection = {
   title: "Connect",
-  items: [SOCIAL_KEYS.EMAIL, SOCIAL_KEYS.LINKEDIN, SOCIAL_KEYS.GITHUB]
+  items: [
+    SOCIAL_KEYS.EMAIL,
+    SOCIAL_KEYS.LINKEDIN,
+    SOCIAL_KEYS.GITHUB,
+    SOCIAL_KEYS.DISCORD,
+    SOCIAL_KEYS.INSTAGRAM,
+  ]
     .map((key) => {
       const link = socialLinks[key];
       return link ? { key, ...link } : null;

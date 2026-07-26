@@ -1,4 +1,5 @@
 import FullWidthWrapper from "@components/full-width-wrapper";
+import HoverSwapText from "@components/hover-swap-text";
 import Hr from "@components/hr";
 import { Link } from "@components/link";
 import { footerData } from "@data";
@@ -9,13 +10,16 @@ import { Fragment } from "react";
 // md:hover:bg-[hsla(var(--color-grey-50-base),0.625)]!
 
 const mapper = (
-  { label, url }: (typeof footerData.links)[number],
+  { label, url, secondary }: (typeof footerData.links)[number],
   index: number,
   arr: typeof footerData.links,
 ) => {
   return (
     <Fragment key={url}>
-      <Link href={url}>{label}</Link>
+      <Link href={url}>
+        {label}
+        {secondary && <HoverSwapText label={label} secondary={secondary} />}
+      </Link>
       {index < arr.length - 1 && (
         <span aria-hidden="true" className="text-accent-600 select-none">
           ·
