@@ -5,6 +5,7 @@ import { fullName } from "@data";
 import { SITE_NAME, SITE_URL } from "@lib/site-config";
 import LenisProvider from "@providers/lenis";
 import "@styles/globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import {
   Anton,
@@ -21,24 +22,28 @@ const fontDisplay = Anton({
   variable: "--ff-display",
   display: "swap",
 });
+
 const fontSans = Epilogue({
   subsets: ["latin", "latin-ext"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   variable: "--ff-sans",
   display: "swap",
 });
+
 const fontMono = JetBrainsMono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--ff-mono",
   display: "swap",
 });
+
 const fontSerif = Newsreader({
   subsets: ["latin"],
   style: ["normal", "italic"],
   variable: "--ff-serif",
   display: "swap",
 });
+
 const fontCursive = ReenieBeanie({
   subsets: ["latin"],
   weight: ["400"],
@@ -84,17 +89,7 @@ export const metadata: Metadata = {
   },
 };
 
-// const getTheme = async () => {
-//   try {
-//     const cookieStore = await cookies();
-//     return cookieStore.get("theme")?.value ?? null;
-//   } catch {
-//     return null;
-//   }
-// };
-
 const RootLayout = ({ children }: PropsWithChildren<unknown>) => {
-  // const theme = await getTheme();
   return (
     <html
       lang="en"
@@ -120,6 +115,7 @@ const RootLayout = ({ children }: PropsWithChildren<unknown>) => {
           </div>
         </LenisProvider>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
