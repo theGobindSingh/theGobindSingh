@@ -6,7 +6,7 @@ const nextConfig = {
     remotePatterns: [],
     qualities: [75, 100],
   },
-  allowedDevOrigins: [],
+  allowedDevOrigins: ["192.168.1.69"],
   async redirects() {
     return [
       {

@@ -12,17 +12,7 @@ export type ColorFamily =
   | "info"
   | "error";
 export type ColorWeight =
-  | 50
-  | 100
-  | 200
-  | 300
-  | 400
-  | 500
-  | 600
-  | 700
-  | 800
-  | 900
-  | 950;
+  50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950;
 
 // Tailwind's content scanner only detects literal class-name strings, not
 // template-literal interpolation — this map is what makes btn-filled/

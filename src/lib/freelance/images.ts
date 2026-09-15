@@ -1,5 +1,7 @@
 import cleantankMobileImage from "@images/cleantank-mobile.png";
 import cleantankImage from "@images/cleantank-site.png";
+import cranbakeryMobileImage from "@images/cranbakery-mobile.png";
+import cranbakeryImage from "@images/cranbakery-site.png";
 import type { StaticImageData } from "next/image";
 
 // ponytail: Payload's Freelance docs store an image *filename*, resolved here
@@ -9,4 +11,6 @@ import type { StaticImageData } from "next/image";
 export const freelanceImages: Record<string, StaticImageData> = {
   "cleantank-site.png": cleantankImage,
   "cleantank-mobile.png": cleantankMobileImage,
+  "cranbakery-site.png": cranbakeryImage,
+  "cranbakery-mobile.png": cranbakeryMobileImage,
 };
