@@ -1,8 +1,10 @@
 import type { IconType } from "@icons-pack/react-simple-icons";
 import {
   SiDiscord,
+  SiFiverr,
   SiGithub,
   SiInstagram,
+  SiUpwork,
 } from "@icons-pack/react-simple-icons";
 import type { LucideProps } from "lucide-react";
 import { Mail } from "lucide-react";
@@ -33,6 +35,8 @@ export enum SOCIAL_KEYS {
   EMAIL = "EMAIL",
   INSTAGRAM = "INSTAGRAM",
   DISCORD = "DISCORD",
+  FIVERR = "FIVERR",
+  UPWORK = "UPWORK",
 }
 
 interface SocialLink {
@@ -78,6 +82,17 @@ export const socialLinks: {
     label: "Discord",
     logo: SiDiscord,
     userName: "thegobindsingh",
+  },
+  [SOCIAL_KEYS.FIVERR]: {
+    url: "https://www.fiverr.com/gobind_singh_",
+    label: "Fiverr",
+    logo: SiFiverr,
+    userName: "gobind_singh_",
+  },
+  [SOCIAL_KEYS.UPWORK]: {
+    url: "https://www.upwork.com/freelancers/~01e716252a0122c220",
+    label: "Upwork",
+    logo: SiUpwork,
   },
 };
 
@@ -230,10 +245,19 @@ export const testimonials: {
     role: "Founder",
   },
   {
-    quote: "...",
+    quote:
+      "Gobind has been a key contributor to Optimeleon's early product. He did a great job helping us rebuild our app while continuing to maintain the existing one. He is a highly resilient problem solver. He's also just a great guy to have around; always collaborative and bringing a motivating energy to the team. He will be a great asset to his next team.",
     authorName: "Abhiraj Padhye",
-    role: "CTO",
+    role: "Founder & CTO",
     company: "Optimeleon AI",
+    featured: true,
+  },
+  {
+    quote:
+      "I had the pleasure of working with Gobind, and he's an exceptional frontend developer. His expertise in JavaScript and React is outstanding, and he's a true CSS maestro with an incredible eye for building clean, responsive, and pixel-perfect UIs. He is also a great teammate, very collaborative, dependable, and always willing to help. I'd highly recommend them to any team looking for a skilled frontend engineer who consistently delivers high-quality work.",
+    authorName: "Saheel Das",
+    role: "SDE 2",
+    company: "Concentrix",
     featured: true,
   },
   {

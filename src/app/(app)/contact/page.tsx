@@ -2,6 +2,7 @@ import Connect from "@app/contact/connect";
 import { formSection } from "@app/contact/constants";
 import Cta from "@app/contact/cta";
 import ContactForm from "@app/contact/form";
+import Freelance from "@app/contact/freelance";
 import Hero from "@app/contact/hero";
 import JsonLd from "@components/json-ld";
 import Section from "@components/section";
@@ -63,8 +64,9 @@ const ContactPage = () => {
         }}
       >
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
+          <div className="flex flex-col gap-12 md:col-span-4">
             <Connect />
+            <Freelance />
           </div>
           <div className="md:col-span-8 md:border-l md:border-grey-300 md:pl-12">
             <ContactForm />

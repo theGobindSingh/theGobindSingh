@@ -44,6 +44,19 @@ export const connectSection = {
   },
 };
 
+export const freelanceSection = {
+  title: "Hire me on",
+  description: "Prefer to work through a platform? Find me here too.",
+  items: [SOCIAL_KEYS.FIVERR, SOCIAL_KEYS.UPWORK]
+    .map((key) => {
+      const link = socialLinks[key];
+      return link ? { key, ...link } : null;
+    })
+    .filter((item): item is NonNullable<typeof item> => {
+      return Boolean(item);
+    }),
+};
+
 export const formSection = {
   title: "Get in touch",
   description: "A few lines on what you're building is enough to start.",
