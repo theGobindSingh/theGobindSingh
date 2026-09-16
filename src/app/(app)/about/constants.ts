@@ -11,7 +11,7 @@ export const introSection = {
   title:
     "I architect systems that bridge the gap between technical rigor and human experience.",
   paragraph:
-    "I got into programming somewhere between a fascination with how things break and a stubborn need to fix them properly instead of patching the symptom. That instinct has stuck. I care less about shipping something that works today, and more about whether it still works, and still makes sense to the next engineer, a year from now.",
+    "I'm Gobind Singh, a full stack developer based in Punjab, India. I got into programming somewhere between a fascination with how things break and a stubborn need to fix them properly instead of patching the symptom. That instinct has stuck. I care less about shipping something that works today, and more about whether it still works, and still makes sense to the next engineer, a year from now.",
 };
 
 export const approachSection = {

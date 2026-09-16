@@ -1,17 +1,14 @@
 import Approach from "@app/about/approach";
 import Cta from "@app/about/cta";
+import Faq from "@app/about/faq";
+import { faqSection } from "@app/about/faq/constants";
 import Hero from "@app/about/hero";
 import Intro from "@app/about/intro";
 import Stack from "@app/about/stack";
 import Values from "@app/about/values";
 import JsonLd from "@components/json-ld";
-import {
-  email,
-  fullName,
-  professionalPhoto,
-  SOCIAL_KEYS,
-  socialLinks,
-} from "@data";
+import { fullName } from "@data";
+import { PERSON_ID, personSchema, websiteSchema } from "@lib/schema";
 import { SITE_URL } from "@lib/site-config";
 import type { Metadata } from "next";
 
@@ -35,36 +32,20 @@ export const metadata: Metadata = {
   },
 };
 
-const personSchema = {
-  "@type": "Person",
-  name: fullName,
-  url: `${SITE_URL}/about`,
-  email,
-  jobTitle: "Full Stack Developer",
-  description:
-    "Full stack developer who designs and ships polished, performant web apps using React, Next.js, TypeScript, and Node.js.",
-  image: `${SITE_URL}${professionalPhoto.src}`,
-  sameAs: [
-    socialLinks[SOCIAL_KEYS.LINKEDIN]?.url,
-    socialLinks[SOCIAL_KEYS.GITHUB]?.url,
-  ].filter(Boolean),
-  address: {
-    "@type": "PostalAddress",
-    addressRegion: "Punjab",
-    addressCountry: "IN",
-  },
+const profilePageSchema = {
+  "@type": "ProfilePage",
+  mainEntity: { "@id": PERSON_ID },
 };
 
-const websiteSchema = {
-  "@type": "WebSite",
-  name: fullName,
-  url: SITE_URL,
-  description:
-    "Portfolio of Gobind Singh, a full stack developer specializing in React, Next.js, TypeScript, and Node.js.",
-  publisher: {
-    "@type": "Person",
-    name: fullName,
-  },
+const faqPageSchema = {
+  "@type": "FAQPage",
+  mainEntity: faqSection.items.map(({ question, answer }) => {
+    return {
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer },
+    };
+  }),
 };
 
 const breadcrumbSchema = {
@@ -90,12 +71,15 @@ const AboutPage = () => {
     <main>
       <JsonLd data={personSchema} />
       <JsonLd data={websiteSchema} />
+      <JsonLd data={profilePageSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={faqPageSchema} />
       <Hero />
       <Intro />
       <Approach titleNumber="01" />
       <Values titleNumber="02" />
       <Stack titleNumber="03" />
+      <Faq titleNumber="04" />
       <Cta />
     </main>
   );

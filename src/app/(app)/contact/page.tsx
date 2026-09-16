@@ -7,6 +7,7 @@ import Hero from "@app/contact/hero";
 import JsonLd from "@components/json-ld";
 import Section from "@components/section";
 import { fullName } from "@data";
+import { PERSON_ID, personSchema } from "@lib/schema";
 import { SITE_URL } from "@lib/site-config";
 import type { Metadata } from "next";
 
@@ -50,9 +51,16 @@ const breadcrumbSchema = {
   ],
 };
 
+const contactPageSchema = {
+  "@type": "ContactPage",
+  mainEntity: { "@id": PERSON_ID },
+};
+
 const ContactPage = () => {
   return (
     <main>
+      <JsonLd data={personSchema} />
+      <JsonLd data={contactPageSchema} />
       <JsonLd data={breadcrumbSchema} />
       <Hero />
       <Section

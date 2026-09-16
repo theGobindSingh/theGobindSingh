@@ -1,4 +1,4 @@
-import { Link } from "@components/link";
+import NotFoundLinks from "@components/not-found-links";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,9 +16,9 @@ const NotFound = () => {
         404
       </h1>
       <p className="max-w-md text-(size:--fs-s) text-grey-700">
-        The page you are looking for does not exist or has been moved.
+        This page does not exist or has moved — here are the pages that do.
       </p>
-      <Link href="/">Back to home</Link>
+      <NotFoundLinks />
     </main>
   );
 };

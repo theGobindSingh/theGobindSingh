@@ -2,7 +2,7 @@ import ThemeSetter from "@app/theme-setter";
 import Footer from "@components/footer";
 import Header from "@components/header";
 import { fullName } from "@data";
-import { SITE_NAME, SITE_URL } from "@lib/site-config";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@lib/site-config";
 import LenisProvider from "@providers/lenis";
 import "@styles/globals.css";
 import { Analytics } from "@vercel/analytics/next";
@@ -57,8 +57,7 @@ export const metadata: Metadata = {
     default: "Gobind Singh — Full Stack Developer",
     template: "%s — Gobind Singh",
   },
-  description:
-    "Full stack developer who designs and ships polished, performant web apps. I build, rebuild, and integrate web products for startups and enterprises.",
+  description: SITE_DESCRIPTION,
   authors: [{ name: fullName, url: SITE_URL }],
   creator: fullName,
   publisher: fullName,
@@ -102,10 +101,6 @@ const RootLayout = ({ children }: PropsWithChildren<unknown>) => {
         fontCursive.variable,
       ].join(" ")}
     >
-      <head>
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-      </head>
       <body>
         <ThemeSetter />
         <Header />

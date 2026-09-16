@@ -145,27 +145,29 @@ const BlogPostPage = async ({ params }: BlogPostPageProps) => {
       <JsonLd data={articleSchema} />
       <JsonLd data={breadcrumbSchema} />
       <ReadingProgress />
-      <FullWidthWrapper
-        className="flex flex-col gap-12 pt-8"
-        wrapperClassName="max-w-none"
-      >
-        <Link href="/blog" variant="text" className="w-fit p-0 font-mono">
-          ← Back to blogs
-        </Link>
-        <ArticleHeader post={post} />
-      </FullWidthWrapper>
-      <FullWidthWrapper className="pt-10" wrapperClassName="max-w-none">
-        <ArticleHero post={post} />
-      </FullWidthWrapper>
-      <FullWidthWrapper className="flex gap-12 py-16 not-md:flex-col">
-        <aside className="flex w-[25vw] max-w-90 min-w-50 shrink-0 flex-col gap-12 md:sticky md:top-[calc(var(--header-height)+2rem)] md:h-fit">
-          {hasOutline && <ArticleOutline outline={post.outline} />}
-          <ArticleFacts post={post} />
-        </aside>
-        <div className="w-full">
-          <ArticleBody html={post.html} />
-        </div>
-      </FullWidthWrapper>
+      <article>
+        <FullWidthWrapper
+          className="flex flex-col gap-12 pt-8"
+          wrapperClassName="max-w-none"
+        >
+          <Link href="/blog" variant="text" className="w-fit p-0 font-mono">
+            ← Back to blogs
+          </Link>
+          <ArticleHeader post={post} />
+        </FullWidthWrapper>
+        <FullWidthWrapper className="pt-10" wrapperClassName="max-w-none">
+          <ArticleHero post={post} />
+        </FullWidthWrapper>
+        <FullWidthWrapper className="flex gap-12 py-16 not-md:flex-col">
+          <aside className="flex w-[25vw] max-w-90 min-w-50 shrink-0 flex-col gap-12 md:sticky md:top-[calc(var(--header-height)+2rem)] md:h-fit">
+            {hasOutline && <ArticleOutline outline={post.outline} />}
+            <ArticleFacts post={post} />
+          </aside>
+          <div className="w-full">
+            <ArticleBody html={post.html} />
+          </div>
+        </FullWidthWrapper>
+      </article>
       {relatedPosts.length > 0 && <RelatedArticles posts={relatedPosts} />}
     </main>
   );

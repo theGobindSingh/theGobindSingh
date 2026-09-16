@@ -13,7 +13,7 @@ export const endorsementsSection = {
 export const heroSection = {
   title: "Building\nsoftware\nis easy.",
   subtitle: "Keeping it reliable as complexity grows is where the work begins.",
-  desc: `I'm a full-stack developer specializing in React, Next.js, TypeScript, and Node.js. I build, rebuild, and integrate production web apps for startups and enterprises — from micro-frontend architectures to AI-driven platforms — with a focus on performance, clean architecture, and shipping systems that hold up in production.`,
+  desc: `I'm Gobind Singh, a full-stack developer based in Punjab, India, specializing in React, Next.js, TypeScript, and Node.js. I build, rebuild, and integrate production web apps for startups and enterprises — from micro-frontend architectures to AI-driven platforms — with a focus on performance, clean architecture, and shipping systems that hold up in production.`,
   tags: [
     "MICRO-FRONTENDS & MONOREPOS",
     "REACT / NEXT.JS / NODE.JS",

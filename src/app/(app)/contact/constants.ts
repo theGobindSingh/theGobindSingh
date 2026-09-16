@@ -6,7 +6,7 @@ export const heroSection = {
   title:
     "Tell me what you're building, and I'll tell you honestly if I can help.",
   description:
-    "Send a few details below, or reach out directly. I usually reply within a day.",
+    "I'm Gobind Singh, a full stack developer based in Punjab, India. Send a few details below, or reach out directly, and I usually reply within a day.",
 };
 
 // The rest of the site leads with micro-frontends and monorepos, which reads as
