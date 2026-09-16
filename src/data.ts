@@ -54,7 +54,7 @@ export const socialLinks: {
   [key in SOCIAL_KEYS]?: SocialLink;
 } = {
   [SOCIAL_KEYS.GITHUB]: {
-    url: "https://www.github.com/theGobindSingh",
+    url: "https://github.com/theGobindSingh",
     label: "GitHub",
     logo: SiGithub,
     userName: "theGobindSingh",
@@ -145,12 +145,12 @@ export const headerAndNavData: {
     {
       id: SOCIAL_KEYS.LINKEDIN,
       text: "LinkedIn",
-      url: "https://www.linkedin.com/in/thegobindsingh/",
+      url: "https://www.linkedin.com/in/thegobindsingh",
     },
     {
       id: SOCIAL_KEYS.GITHUB,
       text: "GitHub",
-      url: "https://www.github.com/theGobindSingh",
+      url: "https://github.com/theGobindSingh",
     },
   ],
 };

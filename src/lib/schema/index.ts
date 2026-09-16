@@ -21,7 +21,9 @@ const personDescription =
 
 const sameAs = (Object.entries(socialLinks) as [SOCIAL_KEYS, { url: string }][])
   .filter(([key]) => {
-    return key !== SOCIAL_KEYS.EMAIL;
+    // sameAs must be profile pages that identify the person. Email is not a
+    // URL and the Discord link is a server invite, not a profile.
+    return key !== SOCIAL_KEYS.EMAIL && key !== SOCIAL_KEYS.DISCORD;
   })
   .map(([, link]) => {
     return link.url;
