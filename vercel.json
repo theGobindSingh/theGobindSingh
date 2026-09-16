@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "portfolio-gobindsingh.vercel.app" }],
+      "destination": "https://www.thegobindsingh.com/:path*",
+      "permanent": true
+    }
+  ]
+}
