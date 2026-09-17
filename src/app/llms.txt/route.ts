@@ -1,4 +1,5 @@
 import { faqSection } from "@app/about/faq/constants";
+import { pageMetadata } from "@app/hire-me/constants";
 import { designation, email, fullName, SOCIAL_KEYS, socialLinks } from "@data";
 import { getAllPosts } from "@lib/blog";
 import { getAllCaseStudies } from "@lib/case-studies";
@@ -37,6 +38,11 @@ const pages = [
     title: "Contact",
     description:
       "Get in touch with Gobind Singh for freelance web development, full-time roles, or project inquiries. Based in Punjab, India, available remotely.",
+  },
+  {
+    url: `${SITE_URL}/hire-me`,
+    title: pageMetadata.title,
+    description: pageMetadata.description,
   },
   {
     url: `${SITE_URL}/design`,

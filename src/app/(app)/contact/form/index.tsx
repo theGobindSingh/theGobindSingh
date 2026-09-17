@@ -26,7 +26,7 @@ const labelClassName = tw`
   text-grey-500 uppercase
 `;
 
-const ContactForm = () => {
+const ContactForm = ({ source }: { source?: string | undefined }) => {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -38,6 +38,7 @@ const ContactForm = () => {
       name: getFieldValue(formData, "name"),
       email: getFieldValue(formData, "email"),
       message: getFieldValue(formData, "message"),
+      ...(source ? { source } : {}),
     };
 
     setStatus("submitting");
@@ -162,7 +163,7 @@ const ContactForm = () => {
           color="accent"
           size="lg"
           disabled={isSubmitting}
-          className="flex shrink-0 items-center gap-2"
+          className="flex min-h-11 shrink-0 items-center gap-2"
         >
           {isSubmitting ? (
             <LoaderCircle

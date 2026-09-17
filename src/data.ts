@@ -181,7 +181,11 @@ export const footerData: {
 };
 
 export type WorkCategory =
-  "build" | "rebuild" | "integration" | "frontend" | "freelance";
+  | "build"
+  | "rebuild"
+  | "integration"
+  | "frontend"
+  | "freelance";
 
 export const CATEGORY_LABELS: Record<WorkCategory, string> = {
   build: "Build",

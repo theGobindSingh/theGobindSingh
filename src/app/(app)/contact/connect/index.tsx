@@ -48,6 +48,13 @@ const Connect = () => {
         <p className="text-(size:--fs-3xs) text-grey-700">
           {connectSection.meta.responseTime}
         </p>
+        <Link
+          href="/hire-me"
+          variant="text"
+          className="mt-2 inline-block text-(size:--fs-3xs) font-medium text-accent-600"
+        >
+          See how I work with clients →
+        </Link>
       </div>
     </div>
   );

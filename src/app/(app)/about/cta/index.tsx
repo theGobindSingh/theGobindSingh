@@ -14,6 +14,7 @@ const Cta = async () => {
       href: socialLinks[SOCIAL_KEYS.GITHUB].url,
       label: "GitHub ↗",
     },
+    { href: "/hire-me", label: "Looking to hire me?" },
   ].filter(Boolean) as { href: string; label: string }[];
 
   return (
