@@ -13,8 +13,12 @@ const FreelanceCard = ({
   category,
   slug,
   priority = false,
+  tagline,
+  chips,
 }: WorkItem & {
   priority?: boolean;
+  tagline?: string;
+  chips?: readonly string[];
 }) => {
   return (
     <li
@@ -33,13 +37,32 @@ const FreelanceCard = ({
           </span>
         </div>
         <h3 className="text-(size:--fs-l) font-medium">{title}</h3>
+        {tagline && (
+          <p className="max-w-2xl text-(size:--fs-2xs) text-balance text-grey-500">
+            {tagline}
+          </p>
+        )}
         <p className="text-(size:--fs-3xs) text-grey-700">{description}</p>
+        {chips && chips.length > 0 && (
+          <ul className="flex flex-wrap items-center gap-2">
+            {chips.map((chip) => {
+              return (
+                <li
+                  key={chip}
+                  className="border border-grey-300 px-2 py-1 font-mono text-(size:--fs-4xs) font-medium tracking-wide text-grey-700"
+                >
+                  {chip}
+                </li>
+              );
+            })}
+          </ul>
+        )}
         {links?.live && (
           <Link
             href={links.live}
             variant="outlined"
             color="accent"
-            className="mt-3 w-fit text-(size:--fs-3xs) not-md:ml-auto"
+            className="mt-3 flex min-h-11 w-fit items-center text-(size:--fs-3xs) not-md:ml-auto"
           >
             Visit Live →
           </Link>

@@ -28,8 +28,7 @@ const nextConfig = {
       ["/about-me", "/about"],
       ["/bio", "/about"],
       ["/contact-me", "/contact"],
-      ["/hire", "/contact"],
-      ["/hire-me", "/contact"],
+      ["/hire", "/hire-me"],
       ["/resume", "/resume.pdf"],
       ["/cv", "/resume.pdf"],
     ];

@@ -92,6 +92,9 @@ Sitemap:
 - `/contact` Availability status, connect links (email/LinkedIn/GitHub), short form (name,
   email, project) posting to `/api/contact`, response-time expectation, IST timezone, and a
   location/closing band. No embedded booking scheduler yet (see §5 gap below).
+- `/hire-me` Paid-search landing page for freelance enquiries: services, process, selected work,
+  testimonials, engagement models (no prices), FAQ, and a contact section (form + email, WhatsApp,
+  Upwork, Fiverr). Indexed and self-canonical.
 - Utility: `/resume` (or direct PDF), `sitemap.xml`, `robots.txt`, RSS for blog, custom 404.
 
 Global nav: Work, Blog, About, plus a persistent "Book a call". **As built (`headerAndNavData`

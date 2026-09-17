@@ -7,6 +7,7 @@ interface ContactPayload {
   name?: string;
   email?: string;
   message?: string;
+  source?: string;
 }
 
 // Resend only sends from a domain you have verified, so the config's
@@ -73,6 +74,8 @@ export const POST = async (request: NextRequest) => {
   const name = payloadBody.name?.trim();
   const email = payloadBody.email?.trim();
   const message = payloadBody.message?.trim();
+  const source =
+    payloadBody.source?.trim() === "hire-me" ? "hire-me" : undefined;
 
   if (!name || !email || !message) {
     return NextResponse.json(
@@ -97,7 +100,7 @@ export const POST = async (request: NextRequest) => {
       from: FROM_ADDRESS,
       to: ownerEmail,
       replyTo: email,
-      subject: `Portfolio enquiry from ${name}`,
+      subject: `Portfolio enquiry from ${name}${source ? ` (${source})` : ""}`,
       html: [
         `<p><strong>From:</strong> ${escapeHtml(name)} (${escapeHtml(email)})</p>`,
         `<p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>`,

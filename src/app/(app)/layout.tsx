@@ -102,10 +102,20 @@ const RootLayout = ({ children }: PropsWithChildren<unknown>) => {
       ].join(" ")}
     >
       <body>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-(--z-cursor) focus:bg-grey-900 focus:px-4 focus:py-2 focus:text-(size:--fs-3xs) focus:text-grey-50 focus:outline-2 focus:outline-(--color-focus)"
+        >
+          Skip to content
+        </a>
         <ThemeSetter />
         <Header />
         <LenisProvider>
-          <div className="relative h-auto w-full pt-(--header-height)">
+          <div
+            id="main-content"
+            tabIndex={-1}
+            className="relative h-auto w-full pt-(--header-height)"
+          >
             {children}
           </div>
         </LenisProvider>
